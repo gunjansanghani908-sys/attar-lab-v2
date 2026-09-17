@@ -417,7 +417,7 @@
       whiteMusk:    { name: "White Musk", color: "#27ae60" },
       whiteHope:    { name: "White Hope", color: "#2ecc71" },
       dove:         { name: "Dove", color: "#1abc9c" },
-      krupali:      { name: "કૃપાલી (Krupali)", color: "#16a085" }
+      fawaki:       { name: "FAWAKI", color: "#16a085" }
     };
 
     const I18N = {
@@ -429,13 +429,21 @@
         orderBtnText: "Order on WhatsApp (ऑर्डर करें)",
         roles: ["Base Note (मुख्य आधार)", "Heart Note (हार्ट नोट)", "Top Note (टॉप नोट)"],
         verdictText: (p, s, t) => `<strong>फ़ॉर्मूलेशन विश्लेषण:</strong> आपकी पसंद के आधार पर यह विशेष 3-अत्तर ब्लेंड तैयार किया गया है। इसमें <strong>${p.name}</strong> का <strong>${p.percent}%</strong> मुख्य बेस है जो खुशबू को टिकाऊपन और गहराई देता है। <strong>${s.percent}% ${s.name}</strong> इसकी आंतरिक कशिश (Heart) को संभालता है, और <strong>${t.percent}% ${t.name}</strong> पहले स्प्रे में तुरंत आकर्षित करने वाली ताज़गी छोड़ता है।`,
-        wtsTemplate: (code, p, s, t) => `नमस्ते! मैंने आपके कस्टम अत्तर लैब पर अपना 3-अत्तर ब्लेंड तैयार किया है:%0A%0A*फ़ॉर्मूलेशन कोड:* ${code}%0A*1. बेस नोट (50%):* ${p.name}%0A*2. हार्ट नोट (30%):* ${s.name}%0A*3. टॉप नोट (20%):* ${t.name}%0A%0Aकृपया मुझे इस कस्टम ब्लेंड की बॉटल तैयार करवाने की कीमत और डिलीवरी प्रक्रिया बताएं।`,
+        wtsTemplate: (code, p, s, t) => 
+`नमस्ते! मैंने आपके कस्टम अत्तर लैब पर अपना 3-अत्तर ब्लेंड तैयार किया है:
+
+*फ़ॉर्मूलेशन कोड:* ${code}
+*1. बेस नोट (${p.percent}%):* ${p.name}
+*2. हार्ट नोट (${s.percent}%):* ${s.name}
+*3. टॉप नोट (${t.percent}%):* ${t.name}
+
+कृपया मुझे इस कस्टम ब्लेंड की बॉटल तैयार करवाने की कीमत और डिलीवरी प्रक्रिया बताएं।`,
         rootQuestion: {
           q: "1. आप यह अत्तर किस मक़सद के लिए तैयार करवाना चाहते हैं?",
           options: [
             { text: "💼 Work & Professional — गंभीर, शार्प और ऑफिस में वजनदार रुतबा", segment: "work", seedPicks: ["classic", "copper"] },
             { text: "❤️ Attraction & Romance — चुंबकीय खिंचाव, मदहोशी और दिलकश महक", segment: "attraction", seedPicks: ["xChocolate", "frenchRose"] },
-            { text: "🌿 Family & Peace — सुकून, सादगी और अपनों के बीच पवित्रता का एहसास", segment: "family", seedPicks: ["whiteMusk", "krupali"] }
+            { text: "🌿 Family & Peace — सुकून, सादगी और अपनों के बीच पवित्रता का एहसास", segment: "family", seedPicks: ["whiteMusk", "fawaki"] }
           ]
         },
         branchTrees: {
@@ -503,21 +511,21 @@
             {
               q: "2. आप घर और अपनों के बीच किस तरह का माहौल सबसे ज्यादा पसंद करते हैं?",
               options: [
-                { text: "सुबह की सात्विक पूजा-पाठ, शांति और सकारात्मक ऊर्जा", picks: ["krupali", "whiteMusk"] },
+                { text: "सुबह की सात्विक पूजा-पाठ, शांति और सकारात्मक ऊर्जा", picks: ["fawaki", "whiteMusk"] },
                 { text: "हँसी-मज़ाक, चाय की चुस्कियां और शाम की बेफिक्र बातें", picks: ["whiteHope", "dove"] }
               ]
             },
             {
               q: "3. आपके मन को भीतर तक शांत करने वाली कौन सी महक सबसे ज्यादा छूती है?",
               options: [
-                { text: "पहली बारिश से महकती सौंधी मिट्टी और हल्का चंदन", picks: ["krupali", "whiteHope"] },
+                { text: "पहली बारिश से महकती सौंधी मिट्टी और हल्का चंदन", picks: ["fawaki", "whiteHope"] },
                 { text: "सफ़ेद कस्तूरी (Musk) और एकदम ताज़ी, साफ-सुथरी पवित्र खुशबू", picks: ["whiteMusk", "dove"] }
               ]
             },
             {
               q: "4. दिनभर की थकान या तनाव के बाद आपकी रूह को किस चीज़ से आराम मिलता है?",
               options: [
-                { text: "अपनों के साथ शांति से बैठना और एक सुकून भरी ठंडी हवा महसूस करना", picks: ["whiteMusk", "krupali"] },
+                { text: "अपनों के साथ शांति से बैठना और एक सुकून भरी ठंडी हवा महसूस करना", picks: ["whiteMusk", "fawaki"] },
                 { text: "एक ताज़ा स्नान और बिना किसी चिंता या बोझ के गहरी नींद", picks: ["dove", "whiteHope"] }
               ]
             },
@@ -525,7 +533,7 @@
               q: "5. इस अत्तर की शीशी से आपकी सबसे बड़ी उम्मीद क्या है?",
               options: [
                 { text: "मन को हर तरह के तनाव से मुक्त और शांत रखना", picks: ["whiteMusk", "dove"] },
-                { text: "घर के हर कोने में अपनापन, शुचिता और दुआओं का असर घोलना", picks: ["krupali", "whiteHope"] }
+                { text: "घर के हर कोने में अपनापन, शुचिता और दुआओं का असर घोलना", picks: ["fawaki", "whiteHope"] }
               ]
             }
           ]
@@ -539,13 +547,21 @@
         orderBtnText: "Order on WhatsApp (ઓર્ડર કરો)",
         roles: ["Base Note (મુખ્ય આધાર)", "Heart Note (હાર્ટ નોટ)", "Top Note (ટોપ નોટ)"],
         verdictText: (p, s, t) => `<strong>ફોર્મ્યુલેશન વિશ્લેષણ:</strong> તમારી પસંદગી મુજબ આ ખાસ ૩-અત્તર બ્લૅન્ડ તૈયાર કરાયું છે. જેમાં <strong>${p.name}</strong> નું <strong>${p.percent}%</strong> મુખ્ય બેઝ છે જે સુગંધને સ્થિરતા અને દીર્ઘાયુ આપે છે. <strong>${s.percent}% ${s.name}</strong> આંતરિક કશિશ (Heart) સંભાળે છે, અને <strong>${t.percent}% ${t.name}</strong> પહેલા સ્પ્રેમાં તુરંત આકર્ષિત કરતી તાજગી આપે છે.`,
-        wtsTemplate: (code, p, s, t) => `નમસ્તે! મેં તમારી કસ્ટમ અત્તર લેબ પર મારું ૩-અત્તર બ્લૅન્ડ તૈયાર કર્યું છે:%0A%0A*ફોર્મ્યુલેશન કોડ:* ${code}%0A*1. બેઝ નોટ (50%):* ${p.name}%0A*2. હાર્ટ નોટ (30%):* ${s.name}%0A*3. ટોપ નોટ (20%):* ${t.name}%0A%0Aકૃપા કરીને મને આ કસ્ટમ બોટલ તૈયાર કરાવવાની કિંમત અને ડિલિવરી પ્રક્રિયા જણાવો.`,
+        wtsTemplate: (code, p, s, t) => 
+`નમસ્તે! મેં તમારી કસ્ટમ અત્તર લેબ પર મારું ૩-અત્તર બ્લૅન્ડ તૈયાર કર્યું છે:
+
+*ફોર્મ્યુલેશન કોડ:* ${code}
+*1. બેઝ નોટ (${p.percent}%):* ${p.name}
+*2. હાર્ટ નોટ (${s.percent}%):* ${s.name}
+*3. ટોપ નોટ (${t.percent}%):* ${t.name}
+
+કૃપા કરીને મને આ કસ્ટમ બોટલ તૈયાર કરાવવાની કિંમત અને ડિલિવરી પ્રક્રિયા જણાવો.`,
         rootQuestion: {
           q: "૧. તમે આ અત્તર કયા મકસદ (Purpose) માટે તૈયાર કરાવવા માંગો છો?",
           options: [
             { text: "💼 Work & Professional — ગંભીર, શાર્પ અને ઓફિસમાં વજનદાર રુઆબ", segment: "work", seedPicks: ["classic", "copper"] },
             { text: "❤️ Attraction & Romance — ચુંબકીય ખેંચાણ, મદહોશી અને આકર્ષક સુગંધ", segment: "attraction", seedPicks: ["xChocolate", "frenchRose"] },
-            { text: "🌿 Family & Peace — શાંતિ, સાદગી અને સ્વજનો વચ્ચે પવિત્રતાનો અહેસાસ", segment: "family", seedPicks: ["whiteMusk", "krupali"] }
+            { text: "🌿 Family & Peace — શાંતિ, સાદગી અને સ્વજનો વચ્ચે પવિત્રતાનો અહેસાસ", segment: "family", seedPicks: ["whiteMusk", "fawaki"] }
           ]
         },
         branchTrees: {
@@ -613,21 +629,21 @@
             {
               q: "૨. તમે પરિવાર વચ્ચે કેવું વાતાવરણ સૌથી વધુ પસંદ કરો છો?",
               options: [
-                { text: "સવારની સાત્વિક પૂજા, શાંતિ અને પોઝિટિવ એનર્જી", picks: ["krupali", "whiteMusk"] },
+                { text: "સવારની સાત્વિક પૂજા, શાંતિ અને પોઝિટિવ એનર્જી", picks: ["fawaki", "whiteMusk"] },
                 { text: "હસી-મજાક, ચાની ચુસ્કીઓ અને સાંજની હળવી વાતો", picks: ["whiteHope", "dove"] }
               ]
             },
             {
               q: "૩. તમારા મનને ઊંડે સુધી શાંત કરનારી કઈ સુગંધ સૌથી વધુ સ્પર્શે છે?",
               options: [
-                { text: "પહેલા વરસાદ પછીની ભીની માટી અને શીતળ ચંદન", picks: ["krupali", "whiteHope"] },
+                { text: "પહેલા વરસાદ પછીની ભીની માટી અને શીતળ ચંદન", picks: ["fawaki", "whiteHope"] },
                 { text: "સફેદ કસ્તુરી (Musk) અને એકદમ ચોખ્ખી પવિત્ર સુગંધ", picks: ["whiteMusk", "dove"] }
               ]
             },
             {
               q: "૪. દિવસભરના થાક પછી તમારા મનને કઈ વાતથી શાંતિ મળે છે?",
               options: [
-                { text: "સ્વજનો સાથે શાંતિથી બેસીને ઠંડી હવાની લહેર અનુભવવી", picks: ["whiteMusk", "krupali"] },
+                { text: "સ્વજનો સાથે શાંતિથી બેસીને ઠંડી હવાની લહેર અનુભવવી", picks: ["whiteMusk", "fawaki"] },
                 { text: "તાજગીભર્યું સ્નાન અને કોઈ પણ ચિંતા વિનાની ગાઢ ઊંઘ", picks: ["dove", "whiteHope"] }
               ]
             },
@@ -635,7 +651,7 @@
               q: "૫. આ અત્તરની શીશી પાસેથી તમારી સૌથી મોટી અપેક્ષા કઈ છે?",
               options: [
                 { text: "મનને તમામ પ્રકારના તણાવથી મુક્ત અને શાંત રાખવું", picks: ["whiteMusk", "dove"] },
-                { text: "ઘરના દરેક ખૂણામાં સ્નેહ, શુદ્ધતા અને આશીર્વાદ ઘોળવા", picks: ["krupali", "whiteHope"] }
+                { text: "ઘરના દરેક ખૂણામાં સ્નેહ, શુદ્ધતા અને આશીર્વાદ ઘોળવા", picks: ["fawaki", "whiteHope"] }
               ]
             }
           ]
@@ -804,8 +820,9 @@
         if (!this.finalBlend) return;
         const dict = I18N[this.lang];
         const [p, s, t] = this.finalBlend;
-        const message = dict.wtsTemplate(this.formulationCode, p, s, t);
-        const url = `https://wa.me/${this.whatsappNumber}?text=${message}`;
+        const rawMessage = dict.wtsTemplate(this.formulationCode, p, s, t);
+        const encodedMessage = encodeURIComponent(rawMessage);
+        const url = `https://api.whatsapp.com/send?phone=${this.whatsappNumber}&text=${encodedMessage}`;
         window.open(url, '_blank');
       }
     }
