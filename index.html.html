@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Attar Blend Lab | કસ્ટમ અત્તર લેબ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Noto+Sans+Devanagari:wght@400;600;700;800&family=Noto+Sans+Gujarati:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #09090c;
+      --card-bg: rgba(18, 18, 24, 0.95);
+      --gold: #d4af37;
+      --gold-light: #f5cf62;
+      --gold-glow: rgba(212, 175, 55, 0.35);
+      --text-main: #ffffff;
+      --text-sub: #d0d0d8;
+      --border-color: rgba(212, 175, 55, 0.3);
+      --whatsapp-red: #d63031;
+      --whatsapp-red-hover: #b71c1c;
+      --red-glow: rgba(214, 48, 49, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Noto Sans Devanagari', 'Noto Sans Gujarati', sans-serif;
+      background: radial-gradient(circle at top, #1c1c28 0%, var(--bg) 100%);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 760px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 32px 24px;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(20px);
+      position: relative;
+    }
+
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 3px;
+      gap: 4px;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-sub);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 6px 14px;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .lang-btn.active {
+      background: var(--gold);
+      color: #0c0b0e;
+    }
+
+    .step-counter {
+      font-size: 0.95rem;
+      color: var(--gold-light);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 7px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      margin-bottom: 26px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 20%;
+      background: linear-gradient(90deg, var(--gold), #f39c12);
+      transition: width 0.35s ease;
+    }
+
+    h2.question-text {
+      font-size: 1.45rem;
+      line-height: 1.5;
+      font-weight: 700;
+      margin-bottom: 26px;
+      color: #ffffff;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .option-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 18px 20px;
+      color: #ffffff;
+      font-size: 1.05rem;
+      line-height: 1.5;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: inherit;
+    }
+
+    .option-btn:hover {
+      border-color: var(--gold);
+      background: rgba(212, 175, 55, 0.12);
+      transform: translateX(4px);
+    }
+
+    .opt-icon {
+      font-size: 1.1rem;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .blending-screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 40px 10px;
+      gap: 20px;
+    }
+
+    .beaker-loader {
+      width: 74px;
+      height: 105px;
+      border: 3.5px solid var(--gold);
+      border-top: none;
+      border-radius: 0 0 22px 22px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 25px var(--gold-glow);
+    }
+
+    .liquid {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(180deg, var(--gold), #b58932);
+      animation: fillFlask 2.4s forwards ease-in-out;
+    }
+
+    @keyframes fillFlask {
+      0% { height: 0%; }
+      100% { height: 85%; }
+    }
+
+    .blending-screen h2 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--gold-light);
+    }
+
+    .blending-screen p {
+      font-size: 1rem;
+      color: var(--text-sub);
+    }
+
+    .result-screen {
+      display: none;
+      text-align: center;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .custom-code {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+      color: var(--text-sub);
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+
+    .stacked-bar-container {
+      width: 100%;
+      height: 42px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 21px;
+      display: flex;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      margin-bottom: 28px;
+    }
+
+    .blend-segment {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #fff;
+      transition: width 1s ease-in-out;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+    }
+
+    .formula-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: left;
+      margin-bottom: 24px;
+    }
+
+    .formula-item {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-dot {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #ffffff;
+    }
+
+    .brand-role {
+      font-size: 0.85rem;
+      color: var(--gold-light);
+      font-weight: 600;
+      margin-top: 3px;
+    }
+
+    .brand-ratio {
+      font-family: 'Cinzel', serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .desc-box {
+      background: rgba(212, 175, 55, 0.08);
+      border-left: 4px solid var(--gold);
+      padding: 18px 20px;
+      border-radius: 0 12px 12px 0;
+      text-align: left;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #f0f0f5;
+      margin-bottom: 26px;
+    }
+
+    .whatsapp-order-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--whatsapp-red), #e74c3c);
+      color: #ffffff;
+      border: none;
+      padding: 18px;
+      border-radius: 14px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 8px 25px var(--red-glow);
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-family: inherit;
+    }
+
+    .whatsapp-order-btn:hover {
+      background: linear-gradient(135deg, var(--whatsapp-red-hover), #c0392b);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(214, 48, 49, 0.6);
+    }
+
+    .wts-icon {
+      font-size: 1.3rem;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 22px 16px; }
+      h2.question-text { font-size: 1.25rem; }
+      .option-btn { font-size: 0.95rem; padding: 15px 16px; }
+      .formula-item { padding: 14px 16px; }
+      .brand-name { font-size: 1rem; }
+      .whatsapp-order-btn { font-size: 1.05rem; padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-header">
+      <div class="step-counter" id="stepCounter">सवाल 1 / 5</div>
+      <div class="lang-switch">
+        <button class="lang-btn active" id="btn-hi" onclick="app.setLanguage('hi')">हिंदी</button>
+        <button class="lang-btn" id="btn-gu" onclick="app.setLanguage('gu')">ગુજરાતી</button>
+      </div>
+    </div>
+
+    <div class="progress-bar-container" id="progressTrack">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Quiz Box -->
+    <div id="quizBlock">
+      <h2 class="question-text" id="questionTitle">Loading...</h2>
+      <div class="options-grid" id="optionsGrid"></div>
+    </div>
+
+    <!-- Loader Box -->
+    <div class="blending-screen" id="blendingBlock">
+      <div class="beaker-loader">
+        <div class="liquid"></div>
+      </div>
+      <h2 id="loaderTitle">आपकी 3 अत्तरों की सिग्नेचर फ़ॉर्मूलेशन तैयार हो रही है...</h2>
+      <p id="loaderSub">50% Base, 30% Heart और 20% Top नोट्स का अनुपात तैयार किया जा रहा है</p>
+    </div>
+
+    <!-- Result Box -->
+    <div class="result-screen" id="resultBlock">
+      <div class="custom-code" id="blendCode">TRINITY FORMULA: #ATTAR-9021</div>
+      <h1 class="result-title" id="resultTitle">आपका व्यक्तिगत 3-अत्तर ब्लेंड</h1>
+      
+      <div class="stacked-bar-container" id="stackedBar"></div>
+      <div class="formula-list" id="formulaList"></div>
+      <div class="desc-box" id="blendVerdict"></div>
+
+      <!-- Red Order on WhatsApp Button -->
+      <button class="whatsapp-order-btn" id="orderBtn" onclick="app.orderOnWhatsApp()">
+        <span class="wts-icon">💬</span>
+        <span id="orderBtnLabel">Order on WhatsApp</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const CATALOG = {
+      coolWater:    { name: "Cool Water", color: "#3a7bd5" },
+      copper:       { name: "Copper", color: "#2980b9" },
+      classic:      { name: "Classic", color: "#1f4068" },
+      diamondSandal:{ name: "Diamond Sandal", color: "#e67e22" },
+      mexico:       { name: "Mexico", color: "#d35400" },
+      nazneen:      { name: "નાઝનીન (Nazneen)", color: "#f39c12" },
+      horrid:       { name: "Horrid", color: "#9b59b6" },
+      fantasia:     { name: "Fantasia", color: "#8e44ad" },
+      blueLady:     { name: "Blue Lady", color: "#6c5ce7" },
+      poise:        { name: "Poise", color: "#a29bfe" },
+      chocoBlast:   { name: "Choco Blast", color: "#e84393" },
+      xChocolate:   { name: "X Chocolate", color: "#d63031" },
+      frenchRose:   { name: "French Rose", color: "#fd79a8" },
+      cherish:      { name: "Cherish", color: "#e17055" },
+      whiteMusk:    { name: "White Musk", color: "#27ae60" },
+      whiteHope:    { name: "White Hope", color: "#2ecc71" },
+      dove:         { name: "Dove", color: "#1abc9c" },
+      krupali:      { name: "કૃપાલી (Krupali)", color: "#16a085" }
+    };
+
+    const I18N = {
+      hi: {
+        stepText: "सवाल {cur} / {total}",
+        loaderTitle: "आपकी 3 अत्तरों की सिग्नेचर फ़ॉर्मूलेशन तैयार हो रही है...",
+        loaderSub: "50% Base, 30% Heart और 20% Top नोट्स का अनुपात तैयार किया जा रहा है",
+        resultTitle: "आपका व्यक्तिगत 3-अत्तर ब्लेंड",
+        orderBtnText: "Order on WhatsApp (ऑर्डर करें)",
+        roles: ["Base Note (मुख्य आधार)", "Heart Note (हार्ट नोट)", "Top Note (टॉप नोट)"],
+        verdictText: (p, s, t) => `<strong>फ़ॉर्मूलेशन विश्लेषण:</strong> आपकी पसंद के आधार पर यह विशेष 3-अत्तर ब्लेंड तैयार किया गया है। इसमें <strong>${p.name}</strong> का <strong>${p.percent}%</strong> मुख्य बेस है जो खुशबू को टिकाऊपन और गहराई देता है। <strong>${s.percent}% ${s.name}</strong> इसकी आंतरिक कशिश (Heart) को संभालता है, और <strong>${t.percent}% ${t.name}</strong> पहले स्प्रे में तुरंत आकर्षित करने वाली ताज़गी छोड़ता है।`,
+        wtsTemplate: (code, p, s, t) => `नमस्ते! मैंने आपके कस्टम अत्तर लैब पर अपना 3-अत्तर ब्लेंड तैयार किया है:%0A%0A*फ़ॉर्मूलेशन कोड:* ${code}%0A*1. बेस नोट (50%):* ${p.name}%0A*2. हार्ट नोट (30%):* ${s.name}%0A*3. टॉप नोट (20%):* ${t.name}%0A%0Aकृपया मुझे इस कस्टम ब्लेंड की बॉटल तैयार करवाने की कीमत और डिलीवरी प्रक्रिया बताएं।`,
+        rootQuestion: {
+          q: "1. आप यह अत्तर किस मक़सद के लिए तैयार करवाना चाहते हैं?",
+          options: [
+            { text: "💼 Work & Professional — गंभीर, शार्प और ऑफिस में वजनदार रुतबा", segment: "work", seedPicks: ["classic", "copper"] },
+            { text: "❤️ Attraction & Romance — चुंबकीय खिंचाव, मदहोशी और दिलकश महक", segment: "attraction", seedPicks: ["xChocolate", "frenchRose"] },
+            { text: "🌿 Family & Peace — सुकून, सादगी और अपनों के बीच पवित्रता का एहसास", segment: "family", seedPicks: ["whiteMusk", "krupali"] }
+          ]
+        },
+        branchTrees: {
+          work: [
+            {
+              q: "2. आपकी कार्यशैली और ऑफिस का माहौल ज्यादातर कैसा रहता है?",
+              options: [
+                { text: "बोर्ड रूम, हाई-लेवल क्लाइंट डील्स और गंभीर बातचीत", picks: ["classic", "copper"] },
+                { text: "दिनभर की भागदौड़, लगातार मीटिंग्स और तेज गति वाला काम", picks: ["coolWater", "poise"] }
+              ]
+            },
+            {
+              q: "3. काम के घंटों के दौरान आप खुशबू से किस तरह का अहसास चाहते हैं?",
+              options: [
+                { text: "एक ताज़ा, ठंडा और ऊर्जावान वाइब जो दिनभर दिमाग शांत और अलर्ट रखे", picks: ["coolWater", "whiteHope"] },
+                { text: "एक वजनदार, मजबूत और निडर अहसास जो फैसलों में आत्मविश्वास दिखाए", picks: ["copper", "classic"] }
+              ]
+            },
+            {
+              q: "4. सहकर्मियों और क्लाइंट्स के बीच आपकी खुशबू का असर कैसा पड़ना चाहिए?",
+              options: [
+                { text: "एक सलीकेदार और संतुलित दायरा जो पूरे दिन मर्यादा के साथ बना रहे", picks: ["classic", "poise"] },
+                { text: "केबिन या मीटिंग रूम में दाखिल होते ही आपकी मजबूत मौजूदगी दर्ज करा दे", picks: ["copper", "diamondSandal"] }
+              ]
+            },
+            {
+              q: "5. इस अत्तर को पहनकर आप अपने काम में क्या छाप छोड़ना चाहते हैं?",
+              options: [
+                { text: "एक निर्विवाद अधिकार, अनुशासन और सम्मान (Undisputed Authority)", picks: ["classic", "diamondSandal"] },
+                { text: "तीव्र फोकस, निरंतर सक्रियता और मॉडर्न सोच (Sharp & Dynamic)", picks: ["coolWater", "copper"] }
+              ]
+            }
+          ],
+          attraction: [
+            {
+              q: "2. आप इस अत्तर से किस पर अपना चुंबकीय प्रहार करना चाहते हैं?",
+              options: [
+                { text: "अपनी महिला साथी पर — एक मदहोश, नशीला और दीवाना बना देने वाला खिंचाव", picks: ["xChocolate", "chocoBlast", "mexico"] },
+                { text: "अपने पुरुष साथी पर — एक मखमली, दिलकश और रूह में उतर जाने वाली कशिश", picks: ["frenchRose", "cherish", "nazneen"] }
+              ]
+            },
+            {
+              q: "3. आपकी नज़दीकियों की तासीर में कौन सा नशा घुलना चाहिए?",
+              options: [
+                { text: "पिघलती हुई डार्क चॉकलेट और गर्म कोको का तीव्र कामुक अहसास", picks: ["xChocolate", "chocoBlast"] },
+                { text: "दमिश्क के भीगे सुर्ख गुलाब और मखमली कस्तूरी की मीठी महक", picks: ["frenchRose", "cherish"] }
+              ]
+            },
+            {
+              q: "4. जब वो आपके बिल्कुल करीब आएँ, तो सांसों की दूरी पर क्या महसूस हो?",
+              options: [
+                { text: "एक ऐसा नशा जो उन्हें आपकी बाहों से दूर जाने ही न दे (Uncontrollable Addiction)", picks: ["chocoBlast", "cherish"] },
+                { text: "एक अनसुलझा सम्मोहन जो आपके जाने के बाद भी उन्हें बेचैन रखे (Hypnotic Aura)", picks: ["blueLady", "fantasia"] }
+              ]
+            },
+            {
+              q: "5. इस अत्तर से आप सामने वाले पर क्या अंतिम छाप छोड़ना चाहते हैं?",
+              options: [
+                { text: "'मुझसे दूर रहना अब तुम्हारी हद में नहीं' — गहरा और मदहोश आकर्षण", picks: ["xChocolate", "mexico"] },
+                { text: "'तेरा जिस्म और रूह सिर्फ मेरी महक से पहचानी जाए' — एक न भूलने वाली हसीन याद", picks: ["frenchRose", "nazneen"] }
+              ]
+            }
+          ],
+          family: [
+            {
+              q: "2. आप घर और अपनों के बीच किस तरह का माहौल सबसे ज्यादा पसंद करते हैं?",
+              options: [
+                { text: "सुबह की सात्विक पूजा-पाठ, शांति और सकारात्मक ऊर्जा", picks: ["krupali", "whiteMusk"] },
+                { text: "हँसी-मज़ाक, चाय की चुस्कियां और शाम की बेफिक्र बातें", picks: ["whiteHope", "dove"] }
+              ]
+            },
+            {
+              q: "3. आपके मन को भीतर तक शांत करने वाली कौन सी महक सबसे ज्यादा छूती है?",
+              options: [
+                { text: "पहली बारिश से महकती सौंधी मिट्टी और हल्का चंदन", picks: ["krupali", "whiteHope"] },
+                { text: "सफ़ेद कस्तूरी (Musk) और एकदम ताज़ी, साफ-सुथरी पवित्र खुशबू", picks: ["whiteMusk", "dove"] }
+              ]
+            },
+            {
+              q: "4. दिनभर की थकान या तनाव के बाद आपकी रूह को किस चीज़ से आराम मिलता है?",
+              options: [
+                { text: "अपनों के साथ शांति से बैठना और एक सुकून भरी ठंडी हवा महसूस करना", picks: ["whiteMusk", "krupali"] },
+                { text: "एक ताज़ा स्नान और बिना किसी चिंता या बोझ के गहरी नींद", picks: ["dove", "whiteHope"] }
+              ]
+            },
+            {
+              q: "5. इस अत्तर की शीशी से आपकी सबसे बड़ी उम्मीद क्या है?",
+              options: [
+                { text: "मन को हर तरह के तनाव से मुक्त और शांत रखना", picks: ["whiteMusk", "dove"] },
+                { text: "घर के हर कोने में अपनापन, शुचिता और दुआओं का असर घोलना", picks: ["krupali", "whiteHope"] }
+              ]
+            }
+          ]
+        }
+      },
+      gu: {
+        stepText: "સવાલ {cur} / {total}",
+        loaderTitle: "તમારું સિગ્નેચર અત્તર બ્લૅન્ડ તૈયાર થઈ રહ્યું છે...",
+        loaderSub: "૫૦% Base, ૩૦% Heart અને ૨૦% Top નોટ્સનું સંતુલન ગણાઈ રહ્યું છે",
+        resultTitle: "તમારું વ્યક્તિગત ૩-અત્તર બ્લૅન્ડ",
+        orderBtnText: "Order on WhatsApp (ઓર્ડર કરો)",
+        roles: ["Base Note (મુખ્ય આધાર)", "Heart Note (હાર્ટ નોટ)", "Top Note (ટોપ નોટ)"],
+        verdictText: (p, s, t) => `<strong>ફોર્મ્યુલેશન વિશ્લેષણ:</strong> તમારી પસંદગી મુજબ આ ખાસ ૩-અત્તર બ્લૅન્ડ તૈયાર કરાયું છે. જેમાં <strong>${p.name}</strong> નું <strong>${p.percent}%</strong> મુખ્ય બેઝ છે જે સુગંધને સ્થિરતા અને દીર્ઘાયુ આપે છે. <strong>${s.percent}% ${s.name}</strong> આંતરિક કશિશ (Heart) સંભાળે છે, અને <strong>${t.percent}% ${t.name}</strong> પહેલા સ્પ્રેમાં તુરંત આકર્ષિત કરતી તાજગી આપે છે.`,
+        wtsTemplate: (code, p, s, t) => `નમસ્તે! મેં તમારી કસ્ટમ અત્તર લેબ પર મારું ૩-અત્તર બ્લૅન્ડ તૈયાર કર્યું છે:%0A%0A*ફોર્મ્યુલેશન કોડ:* ${code}%0A*1. બેઝ નોટ (50%):* ${p.name}%0A*2. હાર્ટ નોટ (30%):* ${s.name}%0A*3. ટોપ નોટ (20%):* ${t.name}%0A%0Aકૃપા કરીને મને આ કસ્ટમ બોટલ તૈયાર કરાવવાની કિંમત અને ડિલિવરી પ્રક્રિયા જણાવો.`,
+        rootQuestion: {
+          q: "૧. તમે આ અત્તર કયા મકસદ (Purpose) માટે તૈયાર કરાવવા માંગો છો?",
+          options: [
+            { text: "💼 Work & Professional — ગંભીર, શાર્પ અને ઓફિસમાં વજનદાર રુઆબ", segment: "work", seedPicks: ["classic", "copper"] },
+            { text: "❤️ Attraction & Romance — ચુંબકીય ખેંચાણ, મદહોશી અને આકર્ષક સુગંધ", segment: "attraction", seedPicks: ["xChocolate", "frenchRose"] },
+            { text: "🌿 Family & Peace — શાંતિ, સાદગી અને સ્વજનો વચ્ચે પવિત્રતાનો અહેસાસ", segment: "family", seedPicks: ["whiteMusk", "krupali"] }
+          ]
+        },
+        branchTrees: {
+          work: [
+            {
+              q: "૨. તમારી કાર્યશૈલી અને ઓફિસનું વાતાવરણ કેવું રહે છે?",
+              options: [
+                { text: "બોર્ડ રૂમ, હાઈ-લેવલ ક્લાયન્ટ ડીલ્સ અને ગંભીર ચર્ચા", picks: ["classic", "copper"] },
+                { text: "દિવસભરની દોડધામ, સતત મીટિંગ્સ અને ઝડપી કામ", picks: ["coolWater", "poise"] }
+              ]
+            },
+            {
+              q: "૩. કામના કલાકો દરમિયાન સુગંધથી કેવો અહેસાસ જોઈએ?",
+              options: [
+                { text: "એકદમ તાજો, ઠંડો અને એનર્જેટિક વાઈબ જે મગજને શાંત રાખે", picks: ["coolWater", "whiteHope"] },
+                { text: "વજનદાર, મજબૂત અને નિડર અહેસાસ જે નિર્ણયોમાં આત્મવિશ્વાસ આપે", picks: ["copper", "classic"] }
+              ]
+            },
+            {
+              q: "૪. સહકર્મીઓ અને ક્લાયન્ટ્સ પર તમારી સુગંધનો કેવો પ્રભાવ પડવો જોઈએ?",
+              options: [
+                { text: "એક સંયમિત અને સંતુલિત વર્તુળ જે આખો દિવસ ગરિમા સાથે ટકે", picks: ["classic", "poise"] },
+                { text: "કેબિનમાં પ્રવેશતાં જ તમારી વજનદાર હાજરીની નોંધ લેવાય", picks: ["copper", "diamondSandal"] }
+              ]
+            },
+            {
+              q: "૫. આ અત્તર લગાવીને તમે કામમાં કઈ છાપ છોડવા માંગો છો?",
+              options: [
+                { text: "નિર્વિવાદ અધિકાર, શિસ્ત અને માન-સન્માન (Undisputed Authority)", picks: ["classic", "diamondSandal"] },
+                { text: "તીવ્ર ફોકસ, સતત સક્રિયતા અને આધુનિક વિચારસરણી (Dynamic Focus)", picks: ["coolWater", "copper"] }
+              ]
+            }
+          ],
+          attraction: [
+            {
+              q: "૨. તમે આ અત્તર વડે કોના પર પોતાનો ચુંબકીય પ્રહાર કરવા માંગો છો?",
+              options: [
+                { text: "પોતાની મહિલા સાથી પર — એક મદહોશ, નશીલો અને દીવાના બનાવતો ખેંચાણ", picks: ["xChocolate", "chocoBlast", "mexico"] },
+                { text: "પોતાના પુરુષ સાથી પર — એક મખમલી, દિલકશ અને રૂહમાં ઉતરી જતી કશિશ", picks: ["frenchRose", "cherish", "nazneen"] }
+              ]
+            },
+            {
+              q: "૩. તમારી નિકટતાની તાસીરમાં કયો નશો ઘૂળવો જોઈએ?",
+              options: [
+                { text: "ઓગળતી ડાર્ક ચોકલેટ અને ગરમ કોકોનો તીવ્ર અહેસાસ", picks: ["xChocolate", "chocoBlast"] },
+                { text: "તાજા દમિશ્ક ગુલાબ અને મખમલી કસ્તુરીની મીઠી મહેક", picks: ["frenchRose", "cherish"] }
+              ]
+            },
+            {
+              q: "૪. જ્યારે તેઓ તમારી એકદમ નજીક આવે, ત્યારે શ્વાસો વચ્ચે શું અનુભવાય?",
+              options: [
+                { text: "એવો નશો જે તેમને તમારા આલિંગનથી દૂર ન જવા દે (Addiction)", picks: ["chocoBlast", "cherish"] },
+                { text: "એવું રહસ્યમય સંમોહન જે તમારા ગયા પછી પણ તેમને બેચેન રાખે (Hypnotic)", picks: ["blueLady", "fantasia"] }
+              ]
+            },
+            {
+              q: "૫. આ અત્તરથી સામેવાળા વ્યક્તિના દિલ પર શું અંતિમ છાપ છોડવી છે?",
+              options: [
+                { text: "'મારાથી દૂર રહેવું હવે તારા વશમાં નથી' — અસીમ આકર્ષણ", picks: ["xChocolate", "mexico"] },
+                { text: "'તમારું અસ્તિત્વ ફક્ત મારી મહેકથી ઓળખાય' — એક અવિસ્મરણીય યાદ", picks: ["frenchRose", "nazneen"] }
+              ]
+            }
+          ],
+          family: [
+            {
+              q: "૨. તમે પરિવાર વચ્ચે કેવું વાતાવરણ સૌથી વધુ પસંદ કરો છો?",
+              options: [
+                { text: "સવારની સાત્વિક પૂજા, શાંતિ અને પોઝિટિવ એનર્જી", picks: ["krupali", "whiteMusk"] },
+                { text: "હસી-મજાક, ચાની ચુસ્કીઓ અને સાંજની હળવી વાતો", picks: ["whiteHope", "dove"] }
+              ]
+            },
+            {
+              q: "૩. તમારા મનને ઊંડે સુધી શાંત કરનારી કઈ સુગંધ સૌથી વધુ સ્પર્શે છે?",
+              options: [
+                { text: "પહેલા વરસાદ પછીની ભીની માટી અને શીતળ ચંદન", picks: ["krupali", "whiteHope"] },
+                { text: "સફેદ કસ્તુરી (Musk) અને એકદમ ચોખ્ખી પવિત્ર સુગંધ", picks: ["whiteMusk", "dove"] }
+              ]
+            },
+            {
+              q: "૪. દિવસભરના થાક પછી તમારા મનને કઈ વાતથી શાંતિ મળે છે?",
+              options: [
+                { text: "સ્વજનો સાથે શાંતિથી બેસીને ઠંડી હવાની લહેર અનુભવવી", picks: ["whiteMusk", "krupali"] },
+                { text: "તાજગીભર્યું સ્નાન અને કોઈ પણ ચિંતા વિનાની ગાઢ ઊંઘ", picks: ["dove", "whiteHope"] }
+              ]
+            },
+            {
+              q: "૫. આ અત્તરની શીશી પાસેથી તમારી સૌથી મોટી અપેક્ષા કઈ છે?",
+              options: [
+                { text: "મનને તમામ પ્રકારના તણાવથી મુક્ત અને શાંત રાખવું", picks: ["whiteMusk", "dove"] },
+                { text: "ઘરના દરેક ખૂણામાં સ્નેહ, શુદ્ધતા અને આશીર્વાદ ઘોળવા", picks: ["krupali", "whiteHope"] }
+              ]
+            }
+          ]
+        }
+      }
+    };
+
+    class TrinityEngine {
+      constructor() {
+        this.brandScores = {};
+        for (let key in CATALOG) {
+          this.brandScores[key] = 0;
+        }
+      }
+
+      vote(picks) {
+        picks.forEach(key => {
+          if (this.brandScores[key] !== undefined) {
+            this.brandScores[key] += 12;
+          }
+        });
+      }
+
+      getTopThreeBlend() {
+        const sorted = Object.keys(this.brandScores)
+          .sort((a, b) => this.brandScores[b] - this.brandScores[a]);
+
+        const ratios = [50, 30, 20];
+        return [0, 1, 2].map(i => ({
+          key: sorted[i],
+          name: CATALOG[sorted[i]].name,
+          color: CATALOG[sorted[i]].color,
+          percent: ratios[i]
+        }));
+      }
+    }
+
+    class AppController {
+      constructor() {
+        this.lang = 'hi';
+        this.currentStep = 0;
+        this.totalSteps = 5;
+        this.selectedSegment = null;
+        this.engine = new TrinityEngine();
+        this.finalBlend = null;
+        this.formulationCode = `#ATTAR-${Math.floor(1000 + Math.random() * 9000)}`;
+        this.whatsappNumber = "919327938950";
+      }
+
+      init() {
+        this.renderStep();
+      }
+
+      setLanguage(targetLang) {
+        if (this.lang === targetLang) return;
+        this.lang = targetLang;
+
+        document.getElementById('btn-hi').classList.toggle('active', targetLang === 'hi');
+        document.getElementById('btn-gu').classList.toggle('active', targetLang === 'gu');
+
+        if (this.currentStep < this.totalSteps) {
+          this.renderStep();
+        } else if (this.finalBlend) {
+          this.renderResultUI(this.finalBlend);
+        }
+      }
+
+      renderStep() {
+        const dict = I18N[this.lang];
+        const stepDisplay = dict.stepText.replace('{cur}', this.currentStep + 1).replace('{total}', this.totalSteps);
+        document.getElementById('stepCounter').innerText = stepDisplay;
+        document.getElementById('progressBar').style.width = `${((this.currentStep + 1) / this.totalSteps) * 100}%`;
+
+        const grid = document.getElementById('optionsGrid');
+        grid.innerHTML = '';
+
+        if (this.currentStep === 0) {
+          document.getElementById('questionTitle').innerText = dict.rootQuestion.q;
+          dict.rootQuestion.options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerHTML = `<span class="opt-icon">✦</span> <span>${opt.text}</span>`;
+            btn.onclick = () => {
+              this.selectedSegment = opt.segment;
+              this.engine.vote(opt.seedPicks);
+              this.currentStep = 1;
+              this.renderStep();
+            };
+            grid.appendChild(btn);
+          });
+        } else {
+          const branchQ = dict.branchTrees[this.selectedSegment][this.currentStep - 1];
+          document.getElementById('questionTitle').innerText = branchQ.q;
+          branchQ.options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerHTML = `<span class="opt-icon">✦</span> <span>${opt.text}</span>`;
+            btn.onclick = () => {
+              this.engine.vote(opt.picks);
+              this.currentStep++;
+              if (this.currentStep < this.totalSteps) {
+                this.renderStep();
+              } else {
+                this.showBlending();
+              }
+            };
+            grid.appendChild(btn);
+          });
+        }
+      }
+
+      showBlending() {
+        const dict = I18N[this.lang];
+        document.getElementById('quizBlock').style.display = 'none';
+        document.getElementById('progressTrack').style.display = 'none';
+        document.getElementById('loaderTitle').innerText = dict.loaderTitle;
+        document.getElementById('loaderSub').innerText = dict.loaderSub;
+        document.getElementById('blendingBlock').style.display = 'flex';
+
+        setTimeout(() => {
+          document.getElementById('blendingBlock').style.display = 'none';
+          this.finalBlend = this.engine.getTopThreeBlend();
+          this.renderResultUI(this.finalBlend);
+        }, 2400);
+      }
+
+      renderResultUI(blend) {
+        const dict = I18N[this.lang];
+        document.getElementById('resultBlock').style.display = 'block';
+        document.getElementById('resultTitle').innerText = dict.resultTitle;
+        document.getElementById('orderBtnLabel').innerText = dict.orderBtnText;
+        document.getElementById('blendCode').innerText = `TRINITY FORMULA: ${this.formulationCode}`;
+
+        const bar = document.getElementById('stackedBar');
+        const list = document.getElementById('formulaList');
+        bar.innerHTML = '';
+        list.innerHTML = '';
+
+        blend.forEach((item, index) => {
+          const seg = document.createElement('div');
+          seg.className = 'blend-segment';
+          seg.style.width = `${item.percent}%`;
+          seg.style.background = item.color;
+          seg.innerText = `${item.percent}%`;
+          bar.appendChild(seg);
+
+          const card = document.createElement('div');
+          card.className = 'formula-item';
+          card.innerHTML = `
+            <div class="brand-meta">
+              <div class="brand-dot" style="background: ${item.color};"></div>
+              <div>
+                <div class="brand-name">${item.name}</div>
+                <div class="brand-role">${dict.roles[index]}</div>
+              </div>
+            </div>
+            <div class="brand-ratio">${item.percent}%</div>
+          `;
+          list.appendChild(card);
+        });
+
+        document.getElementById('blendVerdict').innerHTML = dict.verdictText(blend[0], blend[1], blend[2]);
+      }
+
+      orderOnWhatsApp() {
+        if (!this.finalBlend) return;
+        const dict = I18N[this.lang];
+        const [p, s, t] = this.finalBlend;
+        const message = dict.wtsTemplate(this.formulationCode, p, s, t);
+        const url = `https://wa.me/${this.whatsappNumber}?text=${message}`;
+        window.open(url, '_blank');
+      }
+    }
+
+    const app = new AppController();
+    app.init();
+  </script>
+</body>
+</html>
