@@ -1,15 +1,20 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="gu">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>ROOAB ATTR LAB | Bespoke Sensory Compounding Chamber</title>
-  <!-- Google Fonts -->
+  <title>AURAFRAG LAB | Bespoke Sensory Compounding Chamber</title>
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=JetBrains+Mono:wght@400;600;800&family=Noto+Sans+Devanagari:wght@500;700;800;900&family=Noto+Sans+Gujarati:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=JetBrains+Mono:wght@400;600;800&family=Noto+Sans+Gujarati:wght@500;700;800;900&display=swap" rel="stylesheet">
+  
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Razorpay Official Checkout SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
   <script>
     tailwind.config = {
       theme: {
@@ -21,13 +26,12 @@
             goldLight: '#ffd369',
             goldGlow: 'rgba(245, 176, 65, 0.35)',
             cyberRed: '#ff2a55',
-            waEmerald: '#25D366',
-            waEmeraldHover: '#1eb956',
+            rzpBlue: '#0c2340',
+            rzpAccent: '#3399cc'
           },
           fontFamily: {
             cinzel: ['Cinzel', 'serif'],
             mono: ['"JetBrains Mono"', 'monospace'],
-            hindi: ['"Noto Sans Devanagari"', 'sans-serif'],
             gujarati: ['"Noto Sans Gujarati"', 'sans-serif'],
           }
         }
@@ -36,13 +40,6 @@
   </script>
 
   <style>
-    :root {
-      --gold: #f5b041;
-      --wa-green: #25D366;
-      --wa-glow: rgba(37, 211, 102, 0.6);
-      --red-neon: #ff2a55;
-    }
-
     body {
       background-color: #040407;
       background-image: 
@@ -52,27 +49,14 @@
       color: #f3f4f8;
       overflow-x: hidden;
       -webkit-tap-highlight-color: transparent;
+      font-family: 'Noto Sans Gujarati', sans-serif;
     }
 
-    /* Ambient Matrix Lines */
     .bg-grid {
       background-size: 32px 32px;
       background-image: 
         linear-gradient(to right, rgba(245, 176, 65, 0.035) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(245, 176, 65, 0.035) 1px, transparent 1px);
-    }
-
-    /* Scanline effect */
-    .scanlines::before {
-      content: " ";
-      display: block;
-      position: absolute;
-      top: 0; left: 0; bottom: 0; right: 0;
-      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.28) 50%);
-      background-size: 100% 4px;
-      z-index: 15;
-      pointer-events: none;
-      opacity: 0.5;
     }
 
     .lab-panel {
@@ -89,7 +73,6 @@
       background: linear-gradient(90deg, transparent, #f5b041, transparent);
     }
 
-    /* Option Card interactive behavior */
     .choice-card {
       transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -100,27 +83,9 @@
       transform: translateY(-2px);
       border-color: #f5b041;
       background: linear-gradient(180deg, rgba(245, 176, 65, 0.14) 0%, rgba(245, 176, 65, 0.02) 100%);
-      box-shadow: 0 8px 24px rgba(245, 176, 65, 0.16), inset 0 0 12px rgba(245, 176, 65, 0.08);
+      box-shadow: 0 8px 24px rgba(245, 176, 65, 0.16);
     }
 
-    /* Green Pulsing WhatsApp Conversion Button */
-    .wa-master-btn {
-      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-      box-shadow: 0 0 26px rgba(37, 211, 102, 0.55), 0 8px 20px rgba(0,0,0,0.7);
-      animation: pulseWhatsApp 2s infinite ease-in-out;
-    }
-
-    .wa-master-btn:hover {
-      box-shadow: 0 0 38px rgba(37, 211, 102, 0.85), 0 10px 25px rgba(0,0,0,0.85);
-      transform: translateY(-2px);
-    }
-
-    @keyframes pulseWhatsApp {
-      0%, 100% { box-shadow: 0 0 20px rgba(37, 211, 102, 0.5); }
-      50% { box-shadow: 0 0 36px rgba(37, 211, 102, 0.85); }
-    }
-
-    /* Compounding Flask Reactor */
     .reactor-core {
       position: relative;
       width: 90px;
@@ -139,14 +104,13 @@
       height: 0%;
       background: linear-gradient(0deg, #965f03 0%, #f5b041 50%, #ff2a55 100%);
       transition: height 0.35s linear;
-      filter: blur(0.4px);
     }
 
     .bubble {
       position: absolute;
       background: rgba(255, 255, 255, 0.7);
       border-radius: 50%;
-      animation: bubbleFloat 2.1s infinite ease-in;
+      animation: bubbleFloat 2s infinite ease-in;
     }
 
     @keyframes bubbleFloat {
@@ -154,25 +118,28 @@
       100% { bottom: 100%; opacity: 0; transform: scale(1.3); }
     }
 
-    /* Reservation Expiry Glow */
+    .btn-razorpay {
+      background: linear-gradient(135deg, #ffd369 0%, #f5b041 100%);
+      box-shadow: 0 0 25px rgba(245, 176, 65, 0.4);
+      transition: all 0.2s ease;
+    }
+
+    .btn-razorpay:active {
+      transform: scale(0.98);
+    }
+
     .timer-alert {
       background: rgba(231, 76, 60, 0.12);
       border: 1px solid rgba(231, 76, 60, 0.5);
-      animation: alertPulse 1.5s infinite alternate;
-    }
-
-    @keyframes alertPulse {
-      0% { border-color: rgba(231, 76, 60, 0.3); color: #ff6b8b; }
-      100% { border-color: rgba(231, 76, 60, 0.95); color: #ffffff; box-shadow: 0 0 14px rgba(231, 76, 60, 0.35); }
     }
   </style>
 </head>
 
-<body class="bg-grid min-h-screen flex items-center justify-center p-3 sm:p-5 font-hindi select-none">
+<body class="bg-grid min-h-screen flex items-center justify-center p-3 sm:p-5 select-none">
 
-  <div class="w-full max-w-[640px] lab-panel rounded-3xl p-5 sm:p-7 backdrop-blur-2xl relative z-10 scanlines">
+  <div class="w-full max-w-[640px] lab-panel rounded-3xl p-5 sm:p-7 backdrop-blur-2xl relative z-10">
     
-    <!-- TOP TELEMETRY STATUS BAR -->
+    <!-- TOP STATUS BAR -->
     <header class="flex items-center justify-between pb-3.5 mb-4 border-b border-goldPrimary/20 text-xs">
       <div class="flex items-center space-x-2">
         <span class="relative flex h-2.5 w-2.5">
@@ -183,23 +150,14 @@
           AURAFRAG LAB // BIO-SYNTHESIS
         </span>
       </div>
-
-      <!-- Language Selector -->
-      <div class="flex items-center bg-black/70 border border-goldPrimary/30 rounded-full p-1 gap-1">
-        <button id="lang-hi" onclick="labApp.setLanguage('hi')" class="px-3 py-1 rounded-full text-[11px] font-bold transition-all bg-goldPrimary text-black">
-          हिंदी
-        </button>
-        <button id="lang-gu" onclick="labApp.setLanguage('gu')" class="px-3 py-1 rounded-full text-[11px] font-bold text-gray-400 hover:text-white transition-all">
-          ગુજરાતી
-        </button>
-      </div>
+      <span class="text-emerald-400 font-mono text-[11px] font-bold">100% ALCOHOL-FREE</span>
     </header>
 
     <!-- STEP TRACKER -->
     <div id="telemetryHeader" class="mb-4">
       <div class="flex justify-between items-center text-[12px] font-mono text-gray-400 mb-1.5">
         <span id="stepLabel" class="text-goldLight font-bold">SYNTHESIS PHASE // 01/04</span>
-        <span class="text-emerald-400 font-semibold tracking-wider">100% BESPOKE MADE-TO-ORDER</span>
+        <span class="text-emerald-400 font-semibold tracking-wider">BESPOKE CUSTOM BLEND</span>
       </div>
       <div class="w-full h-1.5 bg-black/60 rounded-full overflow-hidden border border-goldPrimary/20">
         <div id="chamberProgress" class="h-full bg-gradient-to-r from-goldPrimary via-yellow-400 to-cyberRed transition-all duration-500" style="width: 25%;"></div>
@@ -207,40 +165,32 @@
     </div>
 
     <!-- ============================================ -->
-    <!-- VIEW 1: SENSORY DECISION MATRIX (RAW QUESTIONS)-->
+    <!-- VIEW 1: SENSORY QUESTIONS MATRIX -->
     <!-- ============================================ -->
     <main id="simulationView" class="space-y-4">
       <div class="text-left mb-1">
-        <p id="tacticalTagline" class="text-[11px] font-mono tracking-widest text-cyberRed font-bold uppercase mb-1">
+        <p class="text-[11px] font-mono tracking-widest text-cyberRed font-bold uppercase mb-1">
           // OLFACTORY ATTRACTION MATRIX
         </p>
         <h1 id="chamberQuestion" class="text-base sm:text-lg font-black text-white leading-snug">
-          1. आप अपनी उपस्थिति (Presence) से आसपास कैसा चुंबकीय खिंचाव पैदा करना चाहते हैं?
+          ૧. તમે તમારી હાજરીથી આસપાસ કેવું ચુંબકીય ખેંચાણ ઊભું કરવા માંગો છો?
         </h1>
         <p id="chamberSubtext" class="text-xs text-gray-400 mt-1">
-          सिर्फ एक विकल्प चुनें। लैब एल्गोरिदम आपकी पसंद अनुसार 3 दुर्लभ अत्तर कंपाउंड करेगा।
+          એક વિકલ્પ પસંદ કરો. લેબ એલ્ગોરિધમ તમારા સ્વભાવ અનુસાર ૩ દુર્લભ અત્તર કમ્પાઉન્ડ કરશે.
         </p>
       </div>
 
       <!-- Interactive Choices Grid -->
-      <div id="choicesGrid" class="space-y-2.5 pt-1">
-        <!-- Rendered by JavaScript -->
-      </div>
+      <div id="choicesGrid" class="space-y-2.5 pt-1"></div>
 
-      <!-- Subtle Proof Bar -->
-      <div class="pt-3 flex items-center justify-between text-[11px] text-gray-400 border-t border-white/5">
-        <span class="flex items-center gap-1.5">
-          <svg class="w-3.5 h-3.5 text-goldPrimary" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
-          </svg>
-          <span id="activeUsersTag">1,842 लोग आज अपना ब्लेंड कम्पाउंड कर चुके हैं</span>
-        </span>
-        <span class="font-mono text-goldLight/80 font-bold">100% PURE CONCENTRATE</span>
+      <div class="pt-3 flex items-center justify-between text-[11px] text-gray-400 border-t border-white/5 font-mono">
+        <span>⚡ ૧,૮૪૨ લોકોએ આજે પોતાનો ફોર્મ્યુલા બનાવ્યો</span>
+        <span class="text-goldLight font-bold">PURE OIL CONCENTRATE</span>
       </div>
     </main>
 
     <!-- ============================================ -->
-    <!-- VIEW 2: LIVE SIMULATION REACTOR & TELEMETRY   -->
+    <!-- VIEW 2: COMPOUNDING SIMULATION -->
     <!-- ============================================ -->
     <section id="compoundingView" class="hidden flex-col items-center justify-center py-7 text-center space-y-4">
       <div class="reactor-core">
@@ -248,152 +198,129 @@
         <div class="bubble" style="left: 20%; animation-delay: 0.1s; width: 6px; height: 6px;"></div>
         <div class="bubble" style="left: 55%; animation-delay: 0.7s; width: 7px; height: 7px;"></div>
         <div class="bubble" style="left: 40%; animation-delay: 1.2s; width: 5px; height: 5px;"></div>
-        <div class="bubble" style="left: 75%; animation-delay: 0.4s; width: 6px; height: 6px;"></div>
       </div>
 
       <div>
         <div id="compoundingStatus" class="font-mono text-sm tracking-widest text-goldLight font-black animate-pulse">
           EXTRACTING BASE MOLECULES...
         </div>
-        <div id="compoundingDetails" class="text-xs text-gray-400 mt-1 max-w-sm">
-          50% Base Sustain, 30% Heart Resonance, 20% Top Projection का संतुलन बाँधा जा रहा है...
+        <div class="text-xs text-gray-400 mt-1 max-w-sm">
+          50% Base Sustain, 30% Heart Resonance, 20% Top Projection નો સંગમ થઈ રહ્યો છે...
         </div>
       </div>
 
-      <!-- Live Stream Logs -->
       <div class="w-full bg-black/80 rounded-xl p-3 text-left font-mono text-[11px] text-gray-300 border border-goldPrimary/20 space-y-1">
         <div class="text-emerald-400 flex items-center justify-between">
-          <span>> ATOMIZING ESSENTIAL RESINS</span>
+          <span>> ATOMIZING NATURAL ESSENTIAL OILS</span>
           <span id="liveYield">64.2%</span>
         </div>
-        <div class="text-goldLight">> INFUSING IN-BUILT PROJECTION MOLECULES</div>
-        <div class="text-goldLight">> ZERO ALCOHOL // 100% PURE OIL CONCENTRATE</div>
+        <div class="text-goldLight">> INFUSING 14-HOUR MAGNETIC PROJECTION</div>
       </div>
     </section>
 
     <!-- ============================================ -->
-    <!-- VIEW 3: BESPOKE RESULTS & DIRECT WHATSAPP CTA -->
+    <!-- VIEW 3: FORMULA & INSTANT RAZORPAY CHECKOUT -->
     <!-- ============================================ -->
     <section id="dossierView" class="hidden space-y-4">
       
-      <!-- 10-MINUTE EXPIRATION RESERVATION TICKER -->
+      <!-- Timer -->
       <div class="timer-alert rounded-xl py-2 px-3 text-center text-xs font-mono font-bold flex items-center justify-center gap-2">
         <span class="w-2 h-2 rounded-full bg-cyberRed animate-ping"></span>
-        <span id="timerHeadline">RESERVED FORMULATION EXPIRES IN:</span>
+        <span>સ્પેશિયલ ડિસ્કાઉન્ટ સમાપ્ત થવામાં સમય:</span>
         <span id="countdownClock" class="text-cyberRed font-black text-sm tracking-widest">09:59</span>
       </div>
 
-      <!-- Result Card & Bottle Visual -->
-      <div class="bg-gradient-to-b from-white/[0.04] to-black/70 border border-goldPrimary/30 rounded-2xl p-4 sm:p-5 text-center relative overflow-hidden">
-        
+      <!-- Result Card -->
+      <div class="bg-gradient-to-b from-white/[0.04] to-black/70 border border-goldPrimary/30 rounded-2xl p-4 text-center">
         <div class="flex items-center justify-between text-[11px] font-mono text-gray-400 pb-2 border-b border-white/10">
           <span id="dossierBatchCode" class="text-goldLight tracking-widest font-black">FORMULA #AURAFRAG-7492</span>
-          <span class="text-emerald-400 font-bold">100% BESPOKE SYNTHESIS</span>
+          <span class="text-emerald-400 font-bold">100% BESPOKE MATCH</span>
         </div>
 
-        <!-- Custom Hand-Crafted Luxury Bottle Hologram -->
-        <div class="py-2.5 flex justify-center items-center">
-          <div class="relative w-24 h-32 flex items-center justify-center">
-            <div class="absolute inset-0 bg-goldPrimary/15 blur-xl rounded-full"></div>
-            <svg class="w-20 h-28 drop-shadow-[0_0_15px_rgba(245,176,65,0.45)]" viewBox="0 0 100 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="36" y="8" width="28" height="20" rx="3" fill="#e5c158" stroke="#fff" stroke-width="0.8"/>
-              <rect x="42" y="4" width="16" height="4" rx="1" fill="#b8860b"/>
-              <line x1="38" y1="18" x2="62" y2="18" stroke="#111" stroke-width="1.2"/>
-              <rect x="43" y="28" width="14" height="8" fill="#a0781a"/>
-              <path d="M22 42C22 37.5817 25.5817 34 30 34H70C74.4183 34 78 37.5817 78 42V124C78 129.523 73.5228 134 68 134H32C26.4772 134 22 129.523 22 124V42Z" fill="url(#bottleGrad)" stroke="#f5b041" stroke-width="2"/>
-              <rect x="26" y="56" width="48" height="50" rx="4" fill="#0b0b12" stroke="#f5b041" stroke-width="1"/>
-              <text x="50" y="74" font-family="'Cinzel', serif" font-size="7" fill="#ffd369" font-weight="bold" text-anchor="middle">AURAFRAG</text>
-              <line x1="32" y1="80" x2="68" y2="80" stroke="#f5b041" stroke-width="0.6"/>
-              <text x="50" y="91" font-family="sans-serif" font-size="6" fill="#ffffff" text-anchor="middle" font-weight="bold">SIGNATURE</text>
-              <text x="50" y="100" font-family="'JetBrains Mono', monospace" font-size="5" fill="#25D366" text-anchor="middle">BESPOKE OIL</text>
-              <defs>
-                <linearGradient id="bottleGrad" x1="50" y1="34" x2="50" y2="134" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#2a1f05"/>
-                  <stop offset="0.4" stop-color="#14110b"/>
-                  <stop offset="1" stop-color="#4a3406"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-        </div>
-
-        <h2 id="blendHeadline" class="text-lg sm:text-xl font-black text-goldLight font-cinzel tracking-wide">
-          TRINITY IMPERIAL EXTRAIT
-        </h2>
-        <p id="blendSubheadline" class="text-xs text-gray-300 max-w-md mx-auto mt-1 leading-relaxed">
-          आपकी चुंबकीय पसंद अनुसार 3 दुर्लभ अत्तरों का ऐसा नशीला सम्मिश्रण, जो त्वचा पर लगते ही सामने वाले के दिल और दिमाग पर बेकाबू खिंचाव बनाता है।
+        <h2 class="text-lg font-black text-goldLight font-cinzel mt-2">TRINITY IMPERIAL EXTRAIT</h2>
+        <p class="text-xs text-gray-300 max-w-md mx-auto mt-1">
+          તમારી પસંદગી મુજબ તૈયાર કરેલું ૩ પ્યોર અત્તરનું મિશ્રણ, જે ત્વચા પર લાગતાં જ ૧૪ કલાક સુધી મોહક રૂઆબ જાળવી રાખશે.
         </p>
-      </div>
 
-      <!-- Ratio Progress Bar -->
-      <div>
-        <div class="flex justify-between text-[11px] font-mono text-gray-400 mb-1">
-          <span>COMPOUND RATIO (50:30:20)</span>
-          <span class="text-goldLight font-bold">14+ HOURS HEAVY PROJECTION</span>
+        <!-- Ratio Bar -->
+        <div class="mt-3">
+          <div id="resultRatioBar" class="w-full h-7 rounded-xl overflow-hidden flex border border-goldPrimary/30 bg-black/40"></div>
         </div>
-        <div id="resultRatioBar" class="w-full h-8 rounded-xl overflow-hidden flex border border-goldPrimary/30 bg-black/40">
-          <!-- Dynamically inserted bar slices -->
-        </div>
+
+        <!-- 3 Notes Breakdown -->
+        <div id="formulaListDetails" class="space-y-1.5 mt-3"></div>
       </div>
 
-      <!-- 3 Notes Breakdown List -->
-      <div id="formulaListDetails" class="space-y-2">
-        <!-- Dynamically inserted rows -->
-      </div>
-
-      <!-- In-built Projection Badge -->
-      <div class="p-3 bg-black/60 border border-goldPrimary/20 rounded-xl flex items-center gap-2.5 text-left text-xs text-goldLight">
-        <span class="text-base flex-shrink-0">⚡</span>
-        <span><strong>In-Built Magnetic Sillage:</strong> इसमें 14-घंटे तक लगातार महकने वाला प्रोजेक्शन बेस फ़ॉर्मूले के अंदर ही इन-बिल्ट कम्पाउंड किया गया है।</span>
-      </div>
-
-      <!-- ============================================ -->
-      <!-- DIRECT WHATSAPP CONVERSION BLOCK             -->
-      <!-- ============================================ -->
-      <div class="bg-gradient-to-b from-emerald-950/45 via-black/85 to-emerald-950/35 border-2 border-emerald-500/70 rounded-2xl p-4 sm:p-5 text-left shadow-[0_0_35px_rgba(37,211,102,0.25)] space-y-3">
-        
+      <!-- DIRECT CHECKOUT FORM (RAZORPAY) -->
+      <div class="bg-panelBg/95 border-2 border-goldPrimary/40 rounded-2xl p-4 sm:p-5 text-left shadow-2xl space-y-3">
         <div class="flex items-center justify-between">
-          <span class="bg-emerald-500/20 text-emerald-300 text-[10px] sm:text-[11px] font-mono font-extrabold px-2.5 py-1 rounded-full border border-emerald-400/40 uppercase tracking-wider">
-            ★ ₹150 INSTANT LAB CREDIT UNLOCKED
+          <span class="text-xs font-mono text-goldLight font-bold uppercase tracking-wider">
+            ★ ડાયરેક્ટ ઓર્ડર ફોર્મ
           </span>
-          <span class="text-[11px] text-gray-400 font-mono">MADE-TO-ORDER</span>
-        </div>
-
-        <div class="space-y-1">
-          <div id="offerMainTitle" class="text-base sm:text-lg font-black text-white leading-tight">
-            🎁 ₹150 की विशेष छूट तुरंत अनलॉक करें
+          <div class="text-right">
+            <span class="text-xs text-gray-400 line-through mr-1">₹899</span>
+            <span class="text-lg font-black text-goldLight">₹599</span>
           </div>
-          <p id="offerDescription" class="text-xs sm:text-[13px] text-emerald-100/80 leading-snug">
-            यह व्यक्तिगत फ़ॉर्मूलेशन हमारे मास्टर परफ्यूमर को WhatsApp पर भेजें ताकि आपकी विशेष कस्टम बॉटल तुरंत तैयार की जा सके।
-          </p>
         </div>
 
-        <!-- 1-TAP INSTANT WHATSAPP DIRECT CTA BUTTON -->
-        <button id="whatsappTriggerBtn" onclick="labApp.openWhatsAppDispatch()" class="wa-master-btn w-full py-4 px-4 rounded-xl flex items-center justify-center gap-2.5 text-white font-black text-base sm:text-lg tracking-wide transition-all group">
-          <svg class="w-6 h-6 fill-current flex-shrink-0" viewBox="0 0 24 24">
-            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.586-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.199.534 1.285.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.303c-.086.087-.176.182-.075.355.101.174.449.741.964 1.2 1.017.904 1.83 1.18 2.062 1.295.231.116.368.101.505-.058.138-.159.593-.693.751-.931.159-.239.317-.202.534-.116.216.087 1.372.647 1.609.766.237.119.395.176.452.274.058.101.058.577-.086.982z"/>
+        <!-- Inputs -->
+        <div class="space-y-2.5">
+          <div>
+            <label class="block text-[11px] text-gray-400 font-bold uppercase mb-1">પૂરું નામ *</label>
+            <input type="text" id="custName" placeholder="દા.ત. રાહુલ શાહ" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-goldPrimary">
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-[11px] text-gray-400 font-bold uppercase mb-1">મોબાઈલ નંબર *</label>
+              <input type="tel" id="custPhone" placeholder="10 આંકડાનો નંબર" maxlength="10" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-goldPrimary">
+            </div>
+            <div>
+              <label class="block text-[11px] text-gray-400 font-bold uppercase mb-1">પિનકોડ *</label>
+              <input type="text" id="custPincode" placeholder="6 આંકડાનો પિનકોડ" maxlength="6" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-goldPrimary">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[11px] text-gray-400 font-bold uppercase mb-1">ઘરનું પૂરું સરનામું (ગામ/શહેર સહિત) *</label>
+            <textarea id="custAddress" rows="2" placeholder="ઘર/ફ્લેટ નં, સોસાયટી, રોડ, શહેર" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-goldPrimary"></textarea>
+          </div>
+        </div>
+
+        <!-- RAZORPAY CTA BUTTON -->
+        <button id="payNowBtn" onclick="labApp.initiateRazorpayPayment()" class="btn-razorpay w-full py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 text-black font-black text-base tracking-wide mt-2">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5z"/>
           </svg>
-          <span id="btnCtaLabel">WhatsApp पर फ़ॉर्मूला भेजें और ₹150 बचाएं</span>
-          <span class="group-hover:translate-x-1 transition-transform">➔</span>
+          <span>₹૫૯૯ ચૂકવો (Pay via UPI / GPay / Cards)</span>
         </button>
 
-        <div class="text-[11px] text-emerald-200/70 text-center font-mono">
-          🧪 100% शुद्ध कॉन्संट्रेटेड अत्तर ऑઇલ • मेड-टू-ऑर्डर फ्रेश ब्लेंड
+        <div class="text-[11px] text-gray-400 text-center flex items-center justify-center gap-2 pt-1 font-mono">
+          <span>🔒 100% Safe Razorpay Gateway</span>
+          <span>•</span>
+          <span>Google Pay / PhonePe / Paytm Available</span>
         </div>
       </div>
 
-      <!-- Compounding Narrative Analysis -->
-      <div id="verdictExplanation" class="text-xs text-gray-300 leading-relaxed bg-black/50 border border-white/10 rounded-xl p-3.5 text-left">
-        <!-- Injected dynamic verdict text -->
+      <!-- SUCCESS RECEIPT MODAL -->
+      <div id="successModal" class="hidden bg-emerald-950/90 border border-emerald-500 rounded-2xl p-4 text-center space-y-2">
+        <div class="text-2xl">🎉</div>
+        <h3 class="text-base font-black text-white">ઓર્ડર સફળતાપૂર્વક કન્ફર્મ થયો!</h3>
+        <p class="text-xs text-emerald-200" id="receiptDetails"></p>
+        <p class="text-[11px] text-gray-300">તમારું અત્તર તૈયાર કરીને ૧-૨ દિવસમાં કુરિયર રવાના કરી દેવાશે.</p>
       </div>
+
     </section>
   </div>
 
-  <!-- ============================================ -->
-  <!-- JAVASCRIPT LABORATORY ENGINE                 -->
-  <!-- ============================================ -->
+  <!-- SCRIPT LOGIC -->
   <script>
-    // Fragrance Database
+    // ==========================================================
+    // અગત્યનું: અહીં તમારો Razorpay Key ID નાખો (Live or Test)
+    // ==========================================================
+    const RAZORPAY_KEY = "rzp_live_TcnN4bgnhTNHvC"; 
+    const ORDER_AMOUNT_INR = 599;
+
     const CATALOG = {
       xChocolate:   { name: "X-Chocolate Noir", color: "#8B0000" },
       chocoBlast:   { name: "Choco Blast Royale", color: "#d63031" },
@@ -409,273 +336,52 @@
       mexico:       { name: "Mexico Wild Leather", color: "#e67e22" }
     };
 
-    // Multilingual Intelligence Matrix
-    const LOCALES = {
-      hi: {
-        telemetryPhases: [
-          "SYNTHESIS PHASE // 01/04",
-          "SYNTHESIS PHASE // 02/04",
-          "SYNTHESIS PHASE // 03/04",
-          "SYNTHESIS PHASE // 04/04"
-        ],
-        activeUsers: "1,842 लोग आज अपना ब्लेंड कम्पाउंड कर चुके हैं",
-        tagline: "// OLFACTORY ATTRACTION MATRIX",
-        questions: [
-          {
-            q: "1. आप अपनी उपस्थिति (Presence) से आसपास कैसा चुंबकीय खिंचाव पैदा करना चाहते हैं?",
-            sub: "सिर्फ एक विकल्प चुनें। लैब एल्गोरिदम आपकी पसंद अनुसार 3 दुर्लभ अत्तर कंपाउंड करेगा।",
-            options: [
-              {
-                title: "Dark Attraction & Seduction (मदहोश करने वाला खिंचाव)",
-                desc: "जब वो सांसों की दूरी पर आएं तो आपकी महक उनका होश उड़ा दे और वो बस आपकी बाहों में खिंची चली आएं।",
-                icon: "🔥",
-                picks: ["xChocolate", "frenchRose", "chocoBlast"]
-              },
-              {
-                title: "Alpha Dominance & Boardroom Command (रूतबा और दबदबा)",
-                desc: "जिस महफ़िल या मीटिंग में आप कदम रखें, लोग बिना बोले आपकी शक्ति और वजनदार पर्सनैलिटी का लोहा मानें।",
-                icon: "👑",
-                picks: ["copper", "classic", "diamondSandal"]
-              },
-              {
-                title: "Sacred Peace & Divine Aura (सुकून और पवित्र आकर्षण)",
-                desc: "एक ऐसी पाक और रूहानी खुशबू जो आपके करीब आने वाले हर इंसान के दिल को शांति और खिंचाव से भर दे।",
-                icon: "🌿",
-                picks: ["whiteMusk", "fawaki", "diamondSandal"]
-              }
-            ]
-          },
-          {
-            q: "2. आप सामने वाले के दिमाग पर किस तरह का गहरा असर (Psychological Trigger) छोड़ना चाहते हैं?",
-            sub: "सुगंध सीधे इंसानी दिमाग के लिम्बिक सिस्टम (भावनाओं के केंद्र) पर वार करती है।",
-            options: [
-              {
-                title: "Uncontrollable Neck-Sniffs (बार-बार करीब आने की बेताबी)",
-                desc: "उनकी निगाहें और सांसें सिर्फ आपकी गर्दन की खुशबू पर टिक जाएं; दूर जाने का मन न करे।",
-                icon: "💋",
-                picks: ["xChocolate", "cherish", "blueLady"]
-              },
-              {
-                title: "Undeniable Respect & Silence (कड़क आदर और मर्यादा)",
-                desc: "आपकी एंट्री होते ही कमरे में सब आपकी तरफ मुड़ें और आपकी बात को अंतिम फैसला माना जाए।",
-                icon: "⚡",
-                picks: ["copper", "classic"]
-              },
-              {
-                title: "Haunting Memory (दिन-रात याद आने वाला नशा)",
-                desc: "जब आप चले भी जाएं, तो आपकी खुशबू की महक उनके कमरे और खयालों में घंटों गूंजती रहे।",
-                icon: "🔮",
-                picks: ["frenchRose", "mexico", "cherish"]
-              }
-            ]
-          },
-          {
-            q: "3. आपकी त्वचा के लिए कौन सा एरोमैटिक बेस सबसे ज़्यादा कामुक और वजनदार होना चाहिए?",
-            sub: "यह आपके 3-अत्तर फ़ॉर्मूले का 50% मुख्य आधार (Base Note) तय करेगा।",
-            options: [
-              {
-                title: "Warm Cocoa, Smoked Vanilla & Dark Amber (नशीला और गर्म)",
-                desc: "गर्म, पिघलती हुई डार्क चॉकलेट और एम्बर का कामुक संगम जो रात के वक्त आग लगा दे।",
-                icon: "🍫",
-                picks: ["xChocolate", "chocoBlast"]
-              },
-              {
-                title: "Smoked Oud, Aged Sandal & Royal Leather (वजनदार और रईस)",
-                desc: "असली संदल और शाही ओउड की ऐसी तासीर जो खानदानी रईसी और मर्दानगी दर्शाती है।",
-                icon: "🪵",
-                picks: ["diamondSandal", "copper"]
-              },
-              {
-                title: "First Rain Earth & White Kashmiri Musk (पवित्र और शीतल)",
-                desc: "पहली बारिश की भीनी मिट्टी और शुद्ध सफ़ेद कस्तूरी की ऐसी महक जो रूह को छू ले।",
-                icon: "💧",
-                picks: ["whiteMusk", "fawaki"]
-              }
-            ]
-          },
-          {
-            q: "4. आप इस अत्तर की परफ्यूम प्रोजेक्शन और फैलाव (Sillage) कैसा चाहते हैं?",
-            sub: "अंतिम कम्पाउंडिंग स्टेज: तापमान के साथ खुशबू के फैलने की क्षमता लॉक की जा रही है।",
-            options: [
-              {
-                title: "14-Hour Beast Mode Aura (पूरा कमरा महक उठे)",
-                desc: "कमरे में दाखिल होते ही आपकी खुशबू का गहरा आभामंडल छा जाए; सुबह से रात तक बिना फीके पड़े।",
-                icon: "💣",
-                picks: ["copper", "xChocolate", "diamondSandal"]
-              },
-              {
-                title: "Intimate Whisper Lock (सिर्फ उनके लिए जो एकदम करीब आएं)",
-                desc: "एक रहस्यमयी कशिश जो सिर्फ उन्हीं को महसूस होगी जो आपके आलिंगन और सांसों के करीब होंगे।",
-                icon: "🥀",
-                picks: ["frenchRose", "whiteMusk", "cherish"]
-              }
-            ]
-          }
-        ],
-        compoundingStages: [
-          "EXTRACTING TARGET RESINS...",
-          "STABILIZING THERMAL BASE NOTES...",
-          "FUSING IN-BUILT PROJECTION...",
-          "LOCKING 50:30:20 RATIO MATRICES..."
-        ],
-        roles: ["50% Base Sustain (अविनाशी आधार)", "30% Heart Resonance (दिल की धड़कन)", "20% Top Magnetism (पहला वार)"],
-        offerTitle: "🎁 ₹150 की विशेष छूट तुरंत अनलॉक करें",
-        offerDesc: "यह व्यक्तिगत फ़ॉर्मूलेशन हमारे मास्टर परफ्यूमर को WhatsApp पर भेजें ताकि आपकी विशेष कस्टम बॉटल तुरंत तैयार की जा सके।",
-        btnLabel: "WhatsApp पर फ़ॉर्मूला भेजें और ₹150 बचाएं",
-        timerLabel: "फ़ॉर्मूलेशन रिज़र्वेशन समाप्त होने में:",
-        wtsMessage: (code, p, s, t) => 
-`नमस्ते मास्टर परफ्यूमर! 🔥
-
-मैंने AURAFRAG LAB पर अपनी पर्सनल 3-अत्तर फ़ॉर्मूलेशन कम्पाउंड की है:
-
-🧪 *फ़ॉर्मूला कोड:* ${code}
-• 50% बेस नोट: ${p.name}
-• 30% हार्ट नोट: ${s.name}
-• 20% टॉप नोट: ${t.name}
-
-💥 *VIP छूट:*
-कृपया मेरा ₹150 का डिस्काउंट लागू करके मुझे इस कस्टम बॉटल की कीमत और डिलीवरी की जानकारी दें!`
+    const QUESTIONS = [
+      {
+        q: "૧. તમે તમારી હાજરીથી આસપાસ કેવું ચુંબકીય ખેંચાણ ઊભું કરવા માંગો છો?",
+        sub: "એક વિકલ્પ પસંદ કરો. લેબ તમારા સ્વભાવ મુજબ ૩ અત્તર કમ્પાઉન્ડ કરશે.",
+        options: [
+          { title: "Dark Attraction & Seduction (મદહોશ કરતું આકર્ષણ)", desc: "જ્યારે તેઓ નજીક આવે ત્યારે તમારી સુગંધથી માત્ર તમારા તરફ ખેંચાય.", icon: "🔥", picks: ["xChocolate", "frenchRose", "chocoBlast"] },
+          { title: "Alpha Dominance & Authority (વજનદાર રુઆબ)", desc: "મીટિંગ કે સભામાં પગ મૂકતાં જ લોકો તમારી પર્સનાલિટીનો પ્રભાવ માને.", icon: "👑", picks: ["copper", "classic", "diamondSandal"] },
+          { title: "Sacred Peace & Divine Aura (શાંતિ અને સ્નેહ)", desc: "પાક અને આહલાદક સુગંધ જે નજીક આવનારના દિલને શાંતિ આપે.", icon: "🌿", picks: ["whiteMusk", "fawaki", "diamondSandal"] }
+        ]
       },
-
-      gu: {
-        telemetryPhases: [
-          "SYNTHESIS PHASE // 01/04",
-          "SYNTHESIS PHASE // 02/04",
-          "SYNTHESIS PHASE // 03/04",
-          "SYNTHESIS PHASE // 04/04"
-        ],
-        activeUsers: "૧,૮૪૨ લોકોએ આજે પોતાનું બ્લૅન્ડ કમ્પાઉન્ડ કર્યું છે",
-        tagline: "// OLFACTORY ATTRACTION MATRIX",
-        questions: [
-          {
-            q: "૧. તમે તમારી હાજરીથી આસપાસ કેવું ચુંબકીય ખેંચાણ (Magnetism) ઊભું કરવા માંગો છો?",
-            sub: "એક વિકલ્પ પસંદ કરો. લેબ એલ્ગોરિધમ તમારા સ્વભાવ અનુસાર ૩ દુર્લભ અત્તર કમ્પાઉન્ડ કરશે.",
-            options: [
-              {
-                title: "Dark Attraction & Seduction (મદહોશ કરતું આકર્ષણ)",
-                desc: "જ્યારે તેઓ તમારી નજીક આવે ત્યારે તમારી સુગંધ તેમના હોશ ઉડાવી દે અને તેઓ ફક્ત તમારા તરફ ખેંચાય.",
-                icon: "🔥",
-                picks: ["xChocolate", "frenchRose", "chocoBlast"]
-              },
-              {
-                title: "Alpha Dominance & Authority (વજનદાર રુઆબ અને શાસન)",
-                desc: "જે સભા કે બિઝનેસ મીટિંગમાં તમે પગ મૂકો, ત્યાં કોઈ પણ ચર્ચા વિના તમારી વજનદાર પર્સનાલિટીનો પ્રભાવ પડે.",
-                icon: "👑",
-                picks: ["copper", "classic", "diamondSandal"]
-              },
-              {
-                title: "Sacred Peace & Divine Aura (શાંતિ અને દિવ્ય પવિત્રતા)",
-                desc: "એવી પાક અને આહલાદક સુગંધ જે તમારી નજીક આવનાર દરેક વ્યક્તિના દિલમાં પરમ શાંતિ અને સ્નેહ ભરી દે.",
-                icon: "🌿",
-                picks: ["whiteMusk", "fawaki", "diamondSandal"]
-              }
-            ]
-          },
-          {
-            q: "૨. તમે સામી વ્યક્તિના મગજ પર કેવો મનોવૈજ્ઞાનિક પ્રભાવ (Psychological Trigger) છોડવા માંગો છો?",
-            sub: "સુગંધ સીધી મગજના લિમ્બિક સિસ્ટમ (લાગણીઓના કેન્દ્ર) પર તુરંત અસર કરે છે.",
-            options: [
-              {
-                title: "Uncontrollable Neck-Sniffs (વારંવાર નજીક આવવાની બેચેની)",
-                desc: "તેમની નજર અને શ્વાસ માત્ર તમારી ગરદનની ખુશબૂ પર અટકી જાય; દૂર જવાનું મન ન થાય.",
-                icon: "💋",
-                picks: ["xChocolate", "cherish", "blueLady"]
-              },
-              {
-                title: "Undeniable Respect & Silence (ગંભીર સન્માન અને મર્યાદા)",
-                desc: "તમારી એન્ટ્રી થતાં જ સમગ્ર રૂમમાં શાંતિ છવાઈ જાય અને તમારા શબ્દોને આખરી ફેંસલો માનવામાં આવે.",
-                icon: "⚡",
-                picks: ["copper", "classic"]
-              },
-              {
-                title: "Haunting Memory (દિવસ-રાત યાદ રહેતો નશો)",
-                desc: "તમે રૂમમાંથી નીકળી જાઓ તો પણ તમારી મહેક તેમના શ્વાસ અને વિચારોમાં કલાકો સુધી ગુંજતી રહે.",
-                icon: "🔮",
-                picks: ["frenchRose", "mexico", "cherish"]
-              }
-            ]
-          },
-          {
-            q: "૩. તમારી ત્વચા માટે કયો એરોમેટિક બેઝ સૌથી વધુ આકર્ષક અને વજનદાર હોવો જોઈએ?",
-            sub: "આ તમારા ૩-અત્તર ફોર્મ્યુલાનો ૫૦% મુખ્ય આધાર (Base Note) નક્કી કરશે.",
-            options: [
-              {
-                title: "Warm Cocoa, Smoked Vanilla & Dark Amber (ગરમ અને નશીલું)",
-                desc: "ઓગળતી ડાર્ક ચોકલેટ અને એમ્બરનો એવો કામુક સંગમ જે સાંજની મહેફિલમાં મોહક વાતાવરણ સર્જે.",
-                icon: "🍫",
-                picks: ["xChocolate", "chocoBlast"]
-              },
-              {
-                title: "Smoked Oud, Aged Sandal & Royal Leather (શાહી અને મર્દાના)",
-                desc: "શુદ્ધ ચંદન અને પુરાતન ઊદની એવી તાસીર જે ખાનદાની રઈસી અને અખંડ પાવર દર્શાવે છે.",
-                icon: "🪵",
-                picks: ["diamondSandal", "copper"]
-              },
-              {
-                title: "First Rain Earth & White Kashmiri Musk (પવિત્ર અને શીતળ)",
-                desc: "પહેલા વરસાદ પછીની ભીની માટી અને શુદ્ધ સફેદ કસ્તુરીની એવી મહેક જે આત્માને સ્પર્શી જાય.",
-                icon: "💧",
-                picks: ["whiteMusk", "fawaki"]
-              }
-            ]
-          },
-          {
-            q: "૪. તમે આ અત્તરનો ફેલાવો (Projection & Sillage) કેવો રાખવા માંગો છો?",
-            sub: "અંતિમ કમ્પાઉન્ડિંગ સ્ટેજ: ગરમી સાથે ખુશબૂ ફેલાવવાની ક્ષમતા લોક કરવામાં આવી રહી છે.",
-            options: [
-              {
-                title: "14-Hour Beast Mode Aura (આખો રૂમ મહેકી ઊઠે)",
-                desc: "તમે પ્રવેશ કરો એટલે તમારી સુગંધનું પ્રચંડ વર્તુળ રચાઈ જાય; સવારથી રાત સુધી અવિરત ટકે.",
-                icon: "💣",
-                picks: ["copper", "xChocolate", "diamondSandal"]
-              },
-              {
-                title: "Intimate Whisper Lock (ફક્ત અત્યંત નજીક આવનાર માટે)",
-                desc: "એવું રહસ્યમય ખેંચાણ જે ફક્ત તમારા આલિંગન અને શ્વાસોની નિકટ આવનારને જ અનુભવાય.",
-                icon: "🥀",
-                picks: ["frenchRose", "whiteMusk", "cherish"]
-              }
-            ]
-          }
-        ],
-        compoundingStages: [
-          "EXTRACTING TARGET RESINS...",
-          "STABILIZING THERMAL BASE NOTES...",
-          "FUSING IN-BUILT PROJECTION...",
-          "LOCKING 50:30:20 RATIO MATRICES..."
-        ],
-        roles: ["૫૦% Base Sustain (અવિનાશી આધાર)", "૩૦% Heart Resonance (દિલનું આકર્ષણ)", "૨૦% Top Magnetism (પહેલો વાર)"],
-        offerTitle: "🎁 ₹150 નું ડિસ્કાઉન્ટ તુરંત અનલોક કરો",
-        offerDesc: "આ ફોર્મ્યુલેશન અમારા પરફ્યુમરને મોકલો જેથી તમારી ખાસ બોટલ તૈયાર કરી શકાય.",
-        btnLabel: "WhatsApp પર ફોર્મ્યુલા મોકલો અને ₹150 બચાવો",
-        timerLabel: "ફોર્મ્યુલા રિઝર્વેશન સમાપ્ત થવામાં:",
-        wtsMessage: (code, p, s, t) => 
-`નમસ્તે માસ્ટર પરફ્યુમર! 🔥
-
-મેં AURAFRAG LAB પર મારી પર્સનલ ૩-અત્તર ફોર્મ્યુલા કમ્પાઉન્ડ કરી છે:
-
-🧪 *ફોર્મ્યુલા કોડ:* ${code}
-• 50% બેઝ નોટ: ${p.name}
-• 30% હાર્ટ નોટ: ${s.name}
-• 20% ટોપ નોટ: ${t.name}
-
-💥 *VIP ડિસ્કાઉન્ટ:*
-કૃપા કરીને મારું ₹150 નું ડિસ્કાઉન્ટ લાગુ કરી આ કસ્ટમ બોટલની કિંમત અને ડિલિવરી જણાવો!`
+      {
+        q: "૨. સામી વ્યક્તિના મગજ પર કેવો મનોવૈજ્ઞાનિક પ્રભાવ છોડવો છે?",
+        sub: "સુગંધ સીધી મગજના લિમ્બિક સિસ્ટમ પર અસર કરે છે.",
+        options: [
+          { title: "Uncontrollable Magnetism (નજીક આવવાની બેચેની)", desc: "તેમનું ધ્યાન વારંવાર તમારી તરફ જ ખેંચાયા કરે.", icon: "💋", picks: ["xChocolate", "cherish", "blueLady"] },
+          { title: "Undeniable Respect (ગંભીર સન્માન)", desc: "રૂમમાં શાંતિ છવાઈ જાય અને તમારી વાતને વજન મળે.", icon: "⚡", picks: ["copper", "classic"] },
+          { title: "Haunting Memory (દિવસો સુધી યાદ રહેતો નશો)", desc: "તમે ગયા પછી પણ તમારી મહેક કલાકો સુધી ગુંજતી રહે.", icon: "🔮", picks: ["frenchRose", "mexico", "cherish"] }
+        ]
+      },
+      {
+        q: "૩. તમારી ત્વચા માટે કયો બેઝ સૌથી વધુ વજનદાર હોવો જોઈએ?",
+        sub: "આ તમારા ફોર્મ્યુલાનો ૫૦% મુખ્ય આધાર (Base Note) નક્કી કરશે.",
+        options: [
+          { title: "Warm Cocoa & Dark Amber (ગરમ અને નશીલું)", desc: "ડાર્ક ચોકલેટ અને એમ્બરનો મોહક સંગમ.", icon: "🍫", picks: ["xChocolate", "chocoBlast"] },
+          { title: "Smoked Oud & Sandalwood (શાહી અને મર્દાના)", desc: "શુદ્ધ ચંદન અને ઊદની ખાનદાની રઈસી દર્શાવતી તાસીર.", icon: "🪵", picks: ["diamondSandal", "copper"] },
+          { title: "Rain Earth & White Musk (પવિત્ર અને શીતળ)", desc: "ભીની માટી અને શુદ્ધ સફેદ કસ્તુરીની આત્મીય મહેક.", icon: "💧", picks: ["whiteMusk", "fawaki"] }
+        ]
+      },
+      {
+        q: "૪. તમે અત્તરનો ફેલાવો (Projection) કેવો રાખવા માંગો છો?",
+        sub: "ખુશ્બૂ ફેલાવવાની તાકાત લોક કરવામાં આવી રહી છે.",
+        options: [
+          { title: "14-Hour Beast Mode (આખો રૂમ મહેકી ઊઠે)", desc: "સવારથી રાત સુધી પ્રચંડ ખુશ્બૂ ટકી રહેશે.", icon: "💣", picks: ["copper", "xChocolate", "diamondSandal"] },
+          { title: "Intimate Whisper Lock (નજીક આવનાર માટે)", desc: "ફક્ત તમારા એકદમ નિકટ આવનારને જ અનુભવાય.", icon: "🥀", picks: ["frenchRose", "whiteMusk", "cherish"] }
+        ]
       }
-    };
+    ];
 
     class LaboratoryEngine {
       constructor() {
-        this.lang = 'hi';
-        this.currentStep = 0;
-        this.totalSteps = 4;
+        this.step = 0;
         this.votes = {};
         for (let k in CATALOG) { this.votes[k] = 0; }
         this.finalBlend = null;
-        this.formulationCode = `AURAFRAG-${Math.floor(1000 + Math.random() * 9000)}`;
-        this.whatsappTarget = "919327938950";
-        this.timerSeconds = 10 * 60 - 1; // 09:59 countdown
-        this.timerInterval = null;
+        this.code = `AURAFRAG-${Math.floor(1000 + Math.random() * 9000)}`;
+        this.timer = 600;
       }
 
       init() {
@@ -683,106 +389,68 @@
         this.startTimer();
       }
 
-      setLanguage(target) {
-        if (this.lang === target) return;
-        this.lang = target;
-        document.getElementById('lang-hi').className = target === 'hi' 
-          ? "px-3 py-1 rounded-full text-[11px] font-bold transition-all bg-goldPrimary text-black"
-          : "px-3 py-1 rounded-full text-[11px] font-bold text-gray-400 hover:text-white transition-all";
-        
-        document.getElementById('lang-gu').className = target === 'gu'
-          ? "px-3 py-1 rounded-full text-[11px] font-bold transition-all bg-goldPrimary text-black"
-          : "px-3 py-1 rounded-full text-[11px] font-bold text-gray-400 hover:text-white transition-all";
-
-        if (this.currentStep < this.totalSteps) {
-          this.renderStep();
-        } else if (this.finalBlend) {
-          this.renderDossier();
-        }
-      }
-
       renderStep() {
-        const locale = LOCALES[this.lang];
-        const stepData = locale.questions[this.currentStep];
+        const data = QUESTIONS[this.step];
+        document.getElementById('stepLabel').innerText = `SYNTHESIS PHASE // 0${this.step + 1}/04`;
+        document.getElementById('chamberProgress').style.width = `${((this.step + 1) / 4) * 100}%`;
+        document.getElementById('chamberQuestion').innerText = data.q;
+        document.getElementById('chamberSubtext').innerText = data.sub;
 
-        // Telemetry header
-        document.getElementById('stepLabel').innerText = locale.telemetryPhases[this.currentStep];
-        document.getElementById('chamberProgress').style.width = `${((this.currentStep + 1) / this.totalSteps) * 100}%`;
-        document.getElementById('chamberQuestion').innerText = stepData.q;
-        document.getElementById('chamberSubtext').innerText = stepData.sub;
-        document.getElementById('activeUsersTag').innerText = locale.activeUsers;
-        document.getElementById('tacticalTagline').innerText = locale.tagline;
-
-        // Render Cards
         const grid = document.getElementById('choicesGrid');
         grid.innerHTML = '';
 
-        stepData.options.forEach((opt) => {
+        data.options.forEach(opt => {
           const card = document.createElement('div');
           card.className = "choice-card rounded-xl p-3.5 sm:p-4 cursor-pointer flex items-start gap-3";
           card.innerHTML = `
             <div class="text-2xl pt-0.5 flex-shrink-0">${opt.icon}</div>
             <div class="flex-1">
-              <h3 class="text-sm sm:text-base font-black text-white leading-tight mb-1">
-                ${opt.title}
-              </h3>
-              <p class="text-xs text-gray-300 leading-snug">
-                ${opt.desc}
-              </p>
+              <h3 class="text-sm sm:text-base font-black text-white leading-tight mb-1">${opt.title}</h3>
+              <p class="text-xs text-gray-300 leading-snug">${opt.desc}</p>
             </div>
-            <div class="text-goldPrimary/50 text-xs font-mono font-bold self-center">
-              [LOCK]
-            </div>
+            <div class="text-goldPrimary/60 text-xs font-mono font-bold self-center">[પસંદ કરો]</div>
           `;
-
           card.onclick = () => {
-            opt.picks.forEach((key, pIdx) => {
-              if (this.votes[key] !== undefined) {
-                this.votes[key] += (opt.picks.length - pIdx) * 10 + 12;
-              }
+            opt.picks.forEach((k, idx) => {
+              if (this.votes[k] !== undefined) this.votes[k] += (3 - idx) * 10 + 15;
             });
-
-            this.currentStep++;
-            if (this.currentStep < this.totalSteps) {
+            this.step++;
+            if (this.step < 4) {
               this.renderStep();
             } else {
-              this.triggerCompoundingSimulation();
+              this.runCompounding();
             }
           };
-
           grid.appendChild(card);
         });
       }
 
-      triggerCompoundingSimulation() {
+      runCompounding() {
         document.getElementById('simulationView').classList.add('hidden');
         document.getElementById('telemetryHeader').classList.add('hidden');
-        const simView = document.getElementById('compoundingView');
-        simView.classList.remove('hidden');
-        simView.classList.add('flex');
+        const cView = document.getElementById('compoundingView');
+        cView.classList.remove('hidden');
+        cView.classList.add('flex');
 
-        const locale = LOCALES[this.lang];
         let fluid = document.getElementById('fluidLevel');
         let status = document.getElementById('compoundingStatus');
-        let yieldText = document.getElementById('liveYield');
+        let yText = document.getElementById('liveYield');
 
-        setTimeout(() => { fluid.style.height = "35%"; status.innerText = locale.compoundingStages[1]; yieldText.innerText = "78.4%"; }, 500);
-        setTimeout(() => { fluid.style.height = "70%"; status.innerText = locale.compoundingStages[2]; yieldText.innerText = "92.1%"; }, 1200);
-        setTimeout(() => { fluid.style.height = "88%"; status.innerText = locale.compoundingStages[3]; yieldText.innerText = "98.8%"; }, 1800);
+        setTimeout(() => { fluid.style.height = "40%"; status.innerText = "STABILIZING BASE RESINS..."; yText.innerText = "75.4%"; }, 600);
+        setTimeout(() => { fluid.style.height = "75%"; status.innerText = "LOCKING 50:30:20 PROJECTION..."; yText.innerText = "94.2%"; }, 1300);
 
         setTimeout(() => {
-          this.calculateFormula();
-          simView.classList.remove('flex');
-          simView.classList.add('hidden');
+          this.calculateBlend();
+          cView.classList.remove('flex');
+          cView.classList.add('hidden');
           this.renderDossier();
-        }, 2400);
+        }, 2200);
       }
 
-      calculateFormula() {
+      calculateBlend() {
         const sorted = Object.keys(this.votes).sort((a, b) => this.votes[b] - this.votes[a]);
         const ratios = [50, 30, 20];
         this.finalBlend = [0, 1, 2].map(i => ({
-          key: sorted[i],
           name: CATALOG[sorted[i]].name,
           color: CATALOG[sorted[i]].color,
           percent: ratios[i]
@@ -790,89 +458,95 @@
       }
 
       renderDossier() {
-        const locale = LOCALES[this.lang];
-        const dossier = document.getElementById('dossierView');
-        dossier.classList.remove('hidden');
+        document.getElementById('dossierView').classList.remove('hidden');
+        document.getElementById('dossierBatchCode').innerText = `FORMULA #${this.code}`;
 
-        document.getElementById('dossierBatchCode').innerText = `FORMULA #${this.formulationCode}`;
-        document.getElementById('offerMainTitle').innerText = locale.offerTitle;
-        document.getElementById('offerDescription').innerText = locale.offerDesc;
-        document.getElementById('btnCtaLabel').innerText = locale.btnLabel;
-        document.getElementById('timerHeadline').innerText = locale.timerLabel;
-
-        // Ratio Bar Injection
-        const ratioBar = document.getElementById('resultRatioBar');
-        ratioBar.innerHTML = '';
+        const bar = document.getElementById('resultRatioBar');
+        bar.innerHTML = '';
         this.finalBlend.forEach(item => {
-          const seg = document.createElement('div');
-          seg.style.width = `${item.percent}%`;
-          seg.style.backgroundColor = item.color;
-          seg.className = "h-full flex items-center justify-center font-mono font-black text-xs text-white drop-shadow-md";
-          seg.innerText = `${item.percent}%`;
-          ratioBar.appendChild(seg);
+          const s = document.createElement('div');
+          s.style.width = `${item.percent}%`;
+          s.style.backgroundColor = item.color;
+          s.className = "h-full flex items-center justify-center font-mono font-black text-xs text-white";
+          s.innerText = `${item.percent}%`;
+          bar.appendChild(s);
         });
 
-        // 3 Notes Breakdown
         const list = document.getElementById('formulaListDetails');
         list.innerHTML = '';
+        const roles = ["૫૦% બેઝ નોટ (લાંબો પ્રભાવ)", "૩૦% હાર્ટ નોટ (દિલનું આકર્ષણ)", "૨૦% ટોપ નોટ (પ્રથમ વાર)"];
         this.finalBlend.forEach((item, idx) => {
           const row = document.createElement('div');
-          row.className = "flex items-center justify-between p-3 rounded-xl border border-white/10 bg-black/40";
+          row.className = "flex items-center justify-between p-2.5 rounded-xl border border-white/10 bg-black/40 text-xs";
           row.innerHTML = `
-            <div class="flex items-center gap-2.5">
-              <div class="w-3 h-3 rounded-full shadow-[0_0_8px_${item.color}]" style="background-color: ${item.color}"></div>
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full" style="background:${item.color}"></span>
               <div>
-                <div class="font-extrabold text-sm text-white">${item.name}</div>
-                <div class="text-[11px] text-goldLight font-medium">${locale.roles[idx]}</div>
+                <span class="font-bold text-white">${item.name}</span>
+                <span class="text-[10px] text-gray-400 block">${roles[idx]}</span>
               </div>
             </div>
-            <div class="font-mono text-base font-extrabold text-white">
-              ${item.percent}%
-            </div>
+            <span class="font-mono font-bold text-goldLight">${item.percent}%</span>
           `;
           list.appendChild(row);
         });
-
-        // Visceral Verdict Text
-        const [p, s, t] = this.finalBlend;
-        const verdict = document.getElementById('verdictExplanation');
-        if (this.lang === 'hi') {
-          verdict.innerHTML = `<strong>🧪 फ़ॉर्मूलेशन डायग्नोसिस:</strong> आपकी नसों की तासीर अनुसार <strong>${p.name}</strong> का 50% आधार 14 घंटे तक आपकी त्वचा से चिपककर भारी आभामंडल छोड़ेगा। 30% <strong>${s.name}</strong> से दिलकश खिंचाव पैदा होगा, और 20% <strong>${t.name}</strong> पहले स्प्रे में ही किसी को भी आपकी ओर मुड़ने पर मजबूर कर देगा।`;
-        } else {
-          verdict.innerHTML = `<strong>🧪 ફોર્મ્યુલેશન રિપોર્ટ:</strong> તમારી પસંદગી મુજબ <strong>${p.name}</strong> નું ૫૦% બેઝ ૧૪ કલાક સુધી તમારા શરીર પર ટકી ભારે આભા બનાવશે. ૩૦% <strong>${s.name}</strong> દિલકશ ખેંચાણ આપશે, અને ૨૦% <strong>${t.name}</strong> પ્રથમ સ્પ્રેમાં સામી વ્યક્તિને તમારા તરફ જોવા મજબૂર કરશે.`;
-        }
       }
 
-      openWhatsAppDispatch() {
-        if (!this.finalBlend) return;
-        const locale = LOCALES[this.lang];
-        const [p, s, t] = this.finalBlend;
-        const msg = locale.wtsMessage(this.formulationCode, p, s, t);
-        const encoded = encodeURIComponent(msg);
-        const targetUrl = `https://wa.me/${this.whatsappTarget}?text=${encoded}`;
-        window.location.href = targetUrl;
+      initiateRazorpayPayment() {
+        const name = document.getElementById('custName').value.trim();
+        const phone = document.getElementById('custPhone').value.trim();
+        const pincode = document.getElementById('custPincode').value.trim();
+        const address = document.getElementById('custAddress').value.trim();
+
+        if (!name || phone.length < 10 || pincode.length < 6 || !address) {
+          alert("કૃપા કરીને તમારું પૂરું નામ, ૧૦ આંકડાનો મોબાઈલ નંબર, પિનકોડ અને સરનામું ભરો.");
+          return;
+        }
+
+        const options = {
+          key: RAZORPAY_KEY,
+          amount: ORDER_AMOUNT_INR * 100, // Amount in paise
+          currency: "INR",
+          name: "AURAFRAG LAB",
+          description: `Custom 3-Attar Blend (${this.code})`,
+          prefill: {
+            name: name,
+            contact: phone
+          },
+          theme: {
+            color: "#f5b041"
+          },
+          handler: function (response) {
+            document.getElementById('payNowBtn').classList.add('hidden');
+            const modal = document.getElementById('successModal');
+            modal.classList.remove('hidden');
+            document.getElementById('receiptDetails').innerText = 
+              `Payment ID: ${response.razorpay_payment_id} | ગ્રાહક: ${name} | અમાઉન્ટ: ₹${ORDER_AMOUNT_INR}`;
+          }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.on('payment.failed', function (response) {
+          alert("પેમેન્ટ અપૂર્ણ રહ્યું: " + response.error.description);
+        });
+        rzp.open();
       }
 
       startTimer() {
-        if (this.timerInterval) clearInterval(this.timerInterval);
-        this.timerInterval = setInterval(() => {
-          if (this.timerSeconds > 0) {
-            this.timerSeconds--;
-            const m = Math.floor(this.timerSeconds / 60).toString().padStart(2, '0');
-            const s = (this.timerSeconds % 60).toString().padStart(2, '0');
-            const clockEl = document.getElementById('countdownClock');
-            if (clockEl) clockEl.innerText = `${m}:${s}`;
-          } else {
-            clearInterval(this.timerInterval);
+        setInterval(() => {
+          if (this.timer > 0) {
+            this.timer--;
+            const m = Math.floor(this.timer / 60).toString().padStart(2, '0');
+            const s = (this.timer % 60).toString().padStart(2, '0');
+            const el = document.getElementById('countdownClock');
+            if (el) el.innerText = `${m}:${s}`;
           }
         }, 1000);
       }
     }
 
     const labApp = new LaboratoryEngine();
-    window.addEventListener('DOMContentLoaded', () => {
-      labApp.init();
-    });
+    window.addEventListener('DOMContentLoaded', () => labApp.init());
   </script>
 </body>
 </html>
