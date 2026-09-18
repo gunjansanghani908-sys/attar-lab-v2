@@ -45,7 +45,7 @@
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 24px;
-      padding: 30px 22px;
+      padding: 28px 20px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(20px);
       position: relative;
@@ -61,7 +61,7 @@
     .brand-tag {
       font-family: 'Cinzel', serif;
       font-size: 0.85rem;
-      letter-spacing: 2.5px;
+      letter-spacing: 2px;
       color: var(--gold-light);
       text-transform: uppercase;
       font-weight: 700;
@@ -237,7 +237,7 @@
       padding: 4px 12px;
       border-radius: 20px;
       letter-spacing: 0.5px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .custom-code {
@@ -245,15 +245,15 @@
       font-size: 0.9rem;
       letter-spacing: 1.5px;
       color: var(--gold-light);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       font-weight: 700;
     }
 
     .result-title {
-      font-size: 1.6rem;
+      font-size: 1.55rem;
       font-weight: 800;
       color: #ffffff;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .stacked-bar-container {
@@ -264,7 +264,7 @@
       display: flex;
       overflow: hidden;
       border: 1px solid var(--border-color);
-      margin-bottom: 22px;
+      margin-bottom: 18px;
     }
 
     .blend-segment {
@@ -290,7 +290,7 @@
       background: rgba(255, 255, 255, 0.035);
       border: 1px solid rgba(229, 184, 66, 0.16);
       border-radius: 12px;
-      padding: 14px 18px;
+      padding: 13px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -328,52 +328,41 @@
       color: var(--gold);
     }
 
-    .desc-box {
-      background: rgba(229, 184, 66, 0.06);
-      border-left: 3px solid var(--gold);
-      padding: 14px 16px;
-      border-radius: 0 10px 10px 0;
-      text-align: left;
-      font-size: 0.95rem;
-      line-height: 1.55;
-      color: #e3e3ea;
-      margin-bottom: 22px;
-    }
-
-    /* WhatsApp Conversion Card */
+    /* WhatsApp Offer Box placed directly below formula */
     .offer-box {
-      background: linear-gradient(180deg, rgba(37, 211, 102, 0.12) 0%, rgba(37, 211, 102, 0.03) 100%);
+      background: linear-gradient(180deg, rgba(37, 211, 102, 0.14) 0%, rgba(37, 211, 102, 0.04) 100%);
       border: 1.5px dashed var(--wa-green);
       border-radius: 16px;
-      padding: 16px 14px;
-      margin-bottom: 16px;
+      padding: 18px 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     }
 
     .offer-title {
       color: #6ef09f;
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       font-weight: 800;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
     }
 
     .offer-sub {
-      color: #ccefd8;
-      font-size: 0.88rem;
-      line-height: 1.4;
-      margin-bottom: 14px;
+      color: #d1f3dc;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      margin-bottom: 15px;
     }
 
     .whatsapp-order-btn {
       width: 100%;
       background: linear-gradient(135deg, #25D366, #128C7E);
-      color: #062a14;
+      color: #052410;
       border: none;
       padding: 16px 18px;
       border-radius: 12px;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 800;
       cursor: pointer;
-      box-shadow: 0 8px 25px var(--wa-green-glow);
+      box-shadow: 0 8px 22px var(--wa-green-glow);
       transition: all 0.22s ease;
       display: flex;
       align-items: center;
@@ -399,21 +388,32 @@
       fill: currentColor;
     }
 
+    .desc-box {
+      background: rgba(229, 184, 66, 0.06);
+      border-left: 3px solid var(--gold);
+      padding: 14px 16px;
+      border-radius: 0 10px 10px 0;
+      text-align: left;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: #e3e3ea;
+      margin-bottom: 16px;
+    }
+
     .guarantee-badges {
       display: flex;
       justify-content: center;
       gap: 16px;
       font-size: 0.78rem;
       color: var(--text-sub);
-      margin-top: 12px;
     }
 
     @media (max-width: 600px) {
-      .container { padding: 20px 15px; }
+      .container { padding: 20px 14px; }
       h2.question-text { font-size: 1.2rem; }
       .option-btn { font-size: 0.92rem; padding: 13px 14px; }
       .formula-item { padding: 12px 14px; }
-      .whatsapp-order-btn { font-size: 1rem; padding: 15px; }
+      .whatsapp-order-btn { font-size: 0.98rem; padding: 14px; }
     }
   </style>
 </head>
@@ -443,7 +443,7 @@
       <div class="options-grid" id="optionsGrid"></div>
     </div>
 
-    <!-- Blending Animation Screen -->
+    <!-- Loader Screen -->
     <div class="blending-screen" id="blendingBlock">
       <div class="beaker-loader">
         <div class="liquid"></div>
@@ -458,27 +458,32 @@
       <div class="custom-code" id="blendCode">TRINITY FORMULA: #ATTAR-9021</div>
       <h1 class="result-title" id="resultTitle">आपका व्यक्तिगत 3-अत्तर ब्लेंड</h1>
       
+      <!-- Blend Percentages Bar -->
       <div class="stacked-bar-container" id="stackedBar"></div>
-      <div class="formula-list" id="formulaList"></div>
-      <div class="desc-box" id="blendVerdict"></div>
 
-      <!-- High-converting WhatsApp Action Box -->
+      <!-- Formula Notes List -->
+      <div class="formula-list" id="formulaList"></div>
+
+      <!-- WHATSAPP BOX: Placed Directly Below Result -->
       <div class="offer-box">
-        <div class="offer-title" id="offerHeadline">🎁 ₹150 की विशेष छूट + मुफ़्त 2ml टेस्टर</div>
-        <div class="offer-sub" id="offerDesc">यह फ़ॉर्मूलेशन हमारे मास्टर परफ्यूमर को भेजें और अपना कूपन कोड तुरंत अनलॉक करें।</div>
+        <div class="offer-title" id="offerHeadline">🎁 ₹150 की विशेष छूट तुरंत अनलॉक करें</div>
+        <div class="offer-sub" id="offerDesc">यह फ़ॉर्मूलेशन हमारे परफ्यूमर को भेजकर अपना कूपन कोड और बॉटल की कीमत जानें।</div>
 
         <button class="whatsapp-order-btn" id="orderBtn" onclick="app.orderOnWhatsApp()">
           <svg class="wts-svg" viewBox="0 0 24 24">
             <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.586-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.199.534 1.285.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.303c-.086.087-.176.182-.075.355.101.174.449.741.964 1.2 1.017.904 1.83 1.18 2.062 1.295.231.116.368.101.505-.058.138-.159.593-.693.751-.931.159-.239.317-.202.534-.116.216.087 1.372.647 1.609.766.237.119.395.176.452.274.058.101.058.577-.086.982z"/>
           </svg>
-          <span id="orderBtnLabel">WhatsApp पर फ़ॉर्मूला भेजें और ऑफर पाएं</span>
+          <span id="orderBtnLabel">WhatsApp पर फ़ॉर्मूला भेजें और छूट पाएं</span>
         </button>
       </div>
+
+      <!-- Verdict Analysis Box below WhatsApp CTA -->
+      <div class="desc-box" id="blendVerdict"></div>
 
       <div class="guarantee-badges">
         <span>🔒 100% अल्कोहल-फ़्री</span>
         <span>💧 लॉन्ग-लास्टिंग 12+ घंटे</span>
-        <span>🚚 कैश ऑन डिलीवरी उपलब्ध</span>
+        <span>🚚 કસ્ટમ ડિલિવરી</span>
       </div>
     </div>
   </div>
@@ -512,9 +517,9 @@
         loaderSub: "50% Base, 30% Heart और 20% Top नोट्स का अनुपात तैयार किया जा रहा है",
         resultTitle: "आपका व्यक्तिगत 3-अत्तर ब्लेंड",
         readyBadge: "✓ फ़ॉर्मूला सफलतापूर्वक लॉक कर दिया गया",
-        offerHeadline: "🎁 ₹150 की छूट + मुफ़्त 2ml टेस्टर",
-        offerDesc: "यह फ़ॉर्मूलेशन हमारे मास्टर परफ्यूमर को भेजें और अपना कूपन कोड तुरंत अनलॉक करें।",
-        orderBtnText: "WhatsApp पर फ़ॉर्मूला भेजें और ऑफर पाएं",
+        offerHeadline: "🎁 ₹150 की विशेष छूट तुरंत अनलॉक करें",
+        offerDesc: "यह फ़ॉर्मूलेशन हमारे परफ्यूमर को भेजकर अपना डिस्काउंट कूपन और बॉटल की कीमत जानें।",
+        orderBtnText: "WhatsApp पर फ़ॉर्मूला भेजें और छूट पाएं",
         roles: ["Base Note (मुख्य आधार)", "Heart Note (हार्ट नोट)", "Top Note (टॉप नोट)"],
         verdictText: (p, s, t) => `<strong>फ़ॉर्मूलेशन विश्लेषण:</strong> आपकी पसंद के आधार पर यह विशेष 3-अत्तर ब्लेंड तैयार किया गया है। इसमें <strong>${p.name}</strong> का <strong>${p.percent}%</strong> मुख्य बेस है जो खुशबू को टिकाऊपन और गहराई देता है। <strong>${s.percent}% ${s.name}</strong> इसकी आंतरिक कशिश (Heart) को संभालता है, और <strong>${t.percent}% ${t.name}</strong> पहले स्प्रे में तुरंत आकर्षित करने वाली ताज़गी छोड़ता है।`,
         wtsTemplate: (code, p, s, t) => 
@@ -525,7 +530,7 @@
 *2. हार्ट नोट (${s.percent}%):* ${s.name}
 *3. टॉप नोट (${t.percent}%):* ${t.name}
 
-कृपया मेरा ₹150 का डिस्काउंट कोड लागू करके मुझे इस कस्टम बॉटल की कीमत और डिलीवरी की जानकारी दें।`,
+कृपया मेरा ₹150 का डिस्काउंट कूपन लागू करके मुझे इस कस्टम बॉटल की कीमत और डिलीवरी की जानकारी दें।`,
         rootQuestion: {
           q: "1. आप यह अत्तर किस मक़सद के लिए तैयार करवाना चाहते हैं?",
           options: [
@@ -633,9 +638,9 @@
         loaderSub: "૫૦% Base, ૩૦% Heart અને ૨૦% Top નોટ્સનું સંતુલન ગણાઈ રહ્યું છે",
         resultTitle: "તમારું વ્યક્તિગત ૩-અત્તર બ્લૅન્ડ",
         readyBadge: "✓ ફોર્મ્યુલા સફળતાપૂર્વક લોક થઈ ગઈ",
-        offerHeadline: "🎁 ₹150 નું ડિસ્કાઉન્ટ + ફ્રી 2ml ટેસ્ટર બોટલ",
-        offerDesc: "આ ફોર્મ્યુલેશન અમારા પરફ્યુમરને મોકલો અને કૂપન કોડ અનલોક કરો.",
-        orderBtnText: "WhatsApp પર ફોર્મ્યુલા મોકલો અને ઓફર મેળવો",
+        offerHeadline: "🎁 ₹150 નું ડિસ્કાઉન્ટ તુરંત મેળવો",
+        offerDesc: "આ ફોર્મ્યુલેશન અમારા પરફ્યુમરને મોકલી કૂપન કોડ અને બોટલની કિંમત જાણો.",
+        orderBtnText: "WhatsApp પર ફોર્મ્યુલા મોકલો અને ડિસ્કાઉન્ટ મેળવો",
         roles: ["Base Note (મુખ્ય આધાર)", "Heart Note (હાર્ટ નોટ)", "Top Note (ટોપ નોટ)"],
         verdictText: (p, s, t) => `<strong>ફોર્મ્યુલેશન વિશ્લેષણ:</strong> તમારી પસંદગી મુજબ આ ખાસ ૩-અત્તર બ્લૅન્ડ તૈયાર કરાયું છે. જેમાં <strong>${p.name}</strong> નું <strong>${p.percent}%</strong> મુખ્ય બેઝ છે જે સુગંધને સ્થિરતા અને દીર્ઘાયુ આપે છે. <strong>${s.percent}% ${s.name}</strong> આંતરિક કશિશ (Heart) સંભાળે છે, અને <strong>${t.percent}% ${t.name}</strong> પહેલા સ્પ્રેમાં તુરંત આકર્ષિત કરતી તાજગી આપે છે.`,
         wtsTemplate: (code, p, s, t) => 
@@ -646,7 +651,7 @@
 *2. હાર્ટ નોટ (${s.percent}%):* ${s.name}
 *3. ટોપ નોટ (${t.percent}%):* ${t.name}
 
-કૃપા કરીને મારું ₹150 ડિસ્કાઉન્ટ કૂપન લાગુ કરી આ કસ્ટમ બોટલની કિંમત અને ડિલિવરી જણાવો.`,
+કૃપા કરીને મારું ₹150 નું ડિસ્કાઉન્ટ કૂપન લાગુ કરી આ કસ્ટમ બોટલની કિંમત અને ડિલિવરી જણાવો.`,
         rootQuestion: {
           q: "૧. તમે આ અત્તર કયા મકસદ (Purpose) માટે તૈયાર કરાવવા માંગો છો?",
           options: [
@@ -918,7 +923,7 @@
         const rawMessage = dict.wtsTemplate(this.formulationCode, p, s, t);
         const encoded = encodeURIComponent(rawMessage);
         
-        // Universal direct WhatsApp handler
+        // Direct WhatsApp redirection
         const targetUrl = `https://wa.me/${this.whatsappNumber}?text=${encoded}`;
         window.location.href = targetUrl;
       }
