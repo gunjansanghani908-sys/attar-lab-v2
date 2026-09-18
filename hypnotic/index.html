@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="gu">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>AURA: Sensory Projection Simulator</title>
+  <title>AURA - મોહક અત્તર સિમ્યુલેશન</title>
   <style>
     :root {
       --bg: #05040a;
@@ -11,16 +11,17 @@
       --gold-dim: #7a6125;
       --gold-glow: rgba(229, 185, 76, 0.35);
       --text: #f3f3f7;
-      --text-muted: #8a8899;
-      --panel: rgba(18, 16, 26, 0.85);
-      --border: rgba(229, 185, 76, 0.2);
+      --text-muted: #a5a3b7;
+      --panel: rgba(18, 16, 26, 0.88);
+      --border: rgba(229, 185, 76, 0.25);
+      --whatsapp: #25d366;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Gujarati", sans-serif;
       user-select: none;
     }
 
@@ -35,7 +36,7 @@
       justify-content: center;
     }
 
-    /* Ambient Simulation Canvas */
+    /* Interactive Hypnotic Canvas */
     #simCanvas {
       position: fixed;
       inset: 0;
@@ -66,7 +67,7 @@
 
     .step-dot {
       width: 28px;
-      height: 3px;
+      height: 4px;
       background: rgba(255, 255, 255, 0.15);
       border-radius: 2px;
       transition: all 0.4s ease;
@@ -81,12 +82,13 @@
     .screen {
       background: var(--panel);
       border: 1px solid var(--border);
-      border-radius: 20px;
+      border-radius: 22px;
       backdrop-filter: blur(14px);
       padding: 30px 22px;
       text-align: center;
       display: none;
       animation: fadeIn 0.45s ease forwards;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
     }
 
     .screen.active {
@@ -100,22 +102,22 @@
 
     .badge {
       display: inline-block;
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
+      font-size: 11px;
+      letter-spacing: 0.08em;
       color: var(--gold);
       border: 1px solid var(--gold-dim);
-      padding: 4px 12px;
+      padding: 4px 14px;
       border-radius: 20px;
       margin-bottom: 14px;
-      background: rgba(229, 185, 76, 0.05);
+      background: rgba(229, 185, 76, 0.08);
+      font-weight: 600;
     }
 
     h2 {
       font-size: 22px;
       font-weight: 800;
-      line-height: 1.3;
-      margin-bottom: 8px;
+      line-height: 1.35;
+      margin-bottom: 10px;
       color: #fff;
     }
 
@@ -124,17 +126,17 @@
     }
 
     p.sub {
-      font-size: 13px;
+      font-size: 13.5px;
       color: var(--text-muted);
-      line-height: 1.5;
+      line-height: 1.6;
       margin-bottom: 24px;
     }
 
-    /* Interactive Vortex Simulator (Screen 1) */
+    /* Vortex Touch Simulation (Stage 1) */
     .vortex-trigger {
-      width: 140px;
-      height: 140px;
-      margin: 10px auto 28px;
+      width: 145px;
+      height: 145px;
+      margin: 10px auto 26px;
       border-radius: 50%;
       border: 2px dashed var(--gold);
       display: flex;
@@ -143,12 +145,13 @@
       justify-content: center;
       cursor: pointer;
       position: relative;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      background: radial-gradient(circle, rgba(229,185,76,0.12) 0%, transparent 70%);
+      box-shadow: 0 0 25px rgba(0,0,0,0.8);
+      transition: transform 0.2s;
     }
 
     .vortex-trigger:active {
-      transform: scale(0.94);
+      transform: scale(0.95);
     }
 
     .vortex-trigger .core {
@@ -156,15 +159,15 @@
       height: 60px;
       background: radial-gradient(circle, var(--gold) 0%, transparent 80%);
       border-radius: 50%;
-      animation: pulseCore 2s infinite alternate;
+      animation: pulseCore 1.8s infinite alternate;
     }
 
     @keyframes pulseCore {
-      from { transform: scale(0.8); opacity: 0.6; }
-      to { transform: scale(1.3); opacity: 1; }
+      from { transform: scale(0.85); opacity: 0.6; }
+      to { transform: scale(1.35); opacity: 1; }
     }
 
-    /* Range Slider Aura Radius (Screen 2) */
+    /* Projection Slider (Stage 2) */
     .slider-container {
       margin: 20px 0;
       text-align: left;
@@ -173,8 +176,8 @@
     .slider-header {
       display: flex;
       justify-content: space-between;
-      font-size: 12px;
-      margin-bottom: 8px;
+      font-size: 13px;
+      margin-bottom: 10px;
       color: var(--gold);
       font-weight: 700;
     }
@@ -182,26 +185,31 @@
     input[type=range] {
       width: 100%;
       accent-color: var(--gold);
-      height: 6px;
+      height: 7px;
       background: #232030;
-      border-radius: 3px;
+      border-radius: 4px;
       outline: none;
     }
 
     .reaction-monitor {
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
-      padding: 12px;
-      margin: 18px 0;
-      font-size: 12px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(229, 185, 76, 0.15);
+      border-radius: 12px;
+      padding: 14px;
+      margin: 20px 0;
+      font-size: 13px;
       text-align: left;
     }
 
     .reaction-item {
       display: flex;
       justify-content: space-between;
-      padding: 4px 0;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .reaction-item:last-child {
+      border-bottom: none;
     }
 
     .reaction-val {
@@ -219,14 +227,34 @@
       border-radius: 10px;
       font-size: 15px;
       font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.03em;
       cursor: pointer;
       box-shadow: 0 6px 20px rgba(229, 185, 76, 0.25);
-      transition: transform 0.15s ease;
     }
 
     .btn-action:active {
+      transform: scale(0.98);
+    }
+
+    .btn-whatsapp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 16px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 800;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+      cursor: pointer;
+      margin-top: 14px;
+    }
+
+    .btn-whatsapp:active {
       transform: scale(0.98);
     }
 
@@ -235,7 +263,7 @@
       width: 110px;
       height: 160px;
       margin: 0 auto 18px;
-      background: linear-gradient(180deg, rgba(229, 185, 76, 0.3) 0%, rgba(10, 8, 16, 0.9) 100%);
+      background: linear-gradient(180deg, rgba(229, 185, 76, 0.3) 0%, rgba(10, 8, 16, 0.95) 100%);
       border: 2px solid var(--gold);
       border-radius: 10px 10px 24px 24px;
       position: relative;
@@ -255,49 +283,44 @@
     }
 
     .bottle-text {
-      font-size: 12px;
+      font-size: 13px;
       letter-spacing: 0.2em;
       font-weight: 800;
       color: var(--gold);
       border: 1px solid var(--gold);
-      padding: 8px 12px;
+      padding: 8px 14px;
       background: #05040a;
     }
 
-    /* Checkout Inputs */
-    .input-field {
-      width: 100%;
-      background: #08070d;
-      border: 1px solid var(--border);
-      color: #fff;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 13px;
-      margin-bottom: 10px;
-      outline: none;
-    }
-
-    .input-field:focus {
-      border-color: var(--gold);
-    }
-
     .price-tag {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 800;
       color: var(--gold);
-      margin-bottom: 14px;
+      margin-bottom: 6px;
     }
 
     .price-tag s {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--text-muted);
       font-weight: 400;
       margin-left: 6px;
+    }
+
+    .trust-bullets {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-top: 14px;
+      line-height: 1.8;
+      text-align: left;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
 
+  <!-- Particle Ripple Background -->
   <canvas id="simCanvas"></canvas>
 
   <div class="app-frame">
@@ -308,80 +331,85 @@
       <div class="step-dot" id="dot3"></div>
     </div>
 
-    <!-- SCREEN 1: CALIBRATION SIMULATOR -->
+    <!-- STAGE 1: HYPNOTIC CHARGE SIMULATOR -->
     <div class="screen active" id="stage1">
-      <span class="badge">Sensory Calibration</span>
-      <h2>Sync With Your <span>Hypnotic Field</span></h2>
-      <p class="sub">Touch and hold the core to measure how quickly your natural pulse charges an oil scent projection.</p>
+      <span class="badge">હિપ્નોટિક એનર્જી ટેસ્ટ</span>
+      <h2>તમારા <span>ઓરા (Aura)</span> સાથે કનેક્ટ કરો</h2>
+      <p class="sub">નીચે આપેલા સેન્ટર પોઈન્ટને ટચ કરીને પકડી રાખો. જુઓ તમારો બોડી પલ્સ અત્તરની ખુશ્બૂને કેવી રીતે એક્ટિવેટ કરે છે.</p>
 
       <div class="vortex-trigger" id="vortexBtn">
         <div class="core"></div>
-        <span style="font-size: 10px; color: var(--gold); margin-top: 8px; font-weight:700;">PRESS & HOLD</span>
+        <span style="font-size: 11px; color: var(--gold); margin-top: 8px; font-weight:700;">અહીં દબાવી રાખો</span>
       </div>
 
-      <div style="font-size: 13px; color: var(--gold); font-weight: 700; margin-bottom: 8px;" id="chargeText">Charge: 0%</div>
-      <div style="height: 4px; background: #232030; border-radius: 2px; overflow: hidden; margin-bottom: 20px;">
+      <div style="font-size: 14px; color: var(--gold); font-weight: 700; margin-bottom: 8px;" id="chargeText">પાવર: 0%</div>
+      <div style="height: 5px; background: #232030; border-radius: 3px; overflow: hidden; margin-bottom: 12px;">
         <div id="chargeBar" style="width: 0%; height: 100%; background: var(--gold); transition: width 0.1s;"></div>
       </div>
     </div>
 
-    <!-- SCREEN 2: PROJECTION RADIUS SIMULATOR -->
+    <!-- STAGE 2: RADIUS SIMULATION -->
     <div class="screen" id="stage2">
-      <span class="badge">Sillage Simulation</span>
-      <h2>Control The <span>Distance</span></h2>
-      <p class="sub">Drag the projection ring slider. Watch how wide your personal presence expands into a room.</p>
+      <span class="badge">પ્રોજેક્શન સિમ્યુલેશન</span>
+      <h2>ખુશ્બૂનો <span>રૂઆબ</span> નક્કી કરો</h2>
+      <p class="sub">સ્લાઈડર આગળ વધારો અને જુઓ કે રૂમમાં લોકોનું ધ્યાન તમારા તરફ કેટલી ઝડપે ખેંચાય છે.</p>
 
       <div class="slider-container">
         <div class="slider-header">
-          <span>Projection Radius</span>
-          <span id="radiusLabel">3 Feet</span>
+          <span>અત્તરનો પ્રભાવ (રેન્જ)</span>
+          <span id="radiusLabel">૪ ફૂટ</span>
         </div>
-        <input type="range" id="radiusRange" min="2" max="10" step="1" value="3" oninput="updateRadius(this.value)" />
+        <input type="range" id="radiusRange" min="2" max="10" step="1" value="4" oninput="updateRadius(this.value)" />
       </div>
 
       <div class="reaction-monitor">
         <div class="reaction-item">
-          <span>Subconscious Notice:</span>
-          <span class="reaction-val" id="noticeSpeed">Immediate (&lt; 2s)</span>
+          <span>ધ્યાન ખેંચાવાનો સમય:</span>
+          <span class="reaction-val" id="noticeSpeed">તરત જ (&lt; ૨ સેકન્ડ)</span>
         </div>
         <div class="reaction-item">
-          <span>Target Response:</span>
-          <span class="reaction-val" id="responseType">Involuntary Head Turn</span>
+          <span>સામેવાળાનું રિએક્શન:</span>
+          <span class="reaction-val" id="responseType">તરત પાછળ ફરીને જોશે</span>
         </div>
         <div class="reaction-item">
-          <span>Formulation:</span>
-          <span class="reaction-val">100% Alcohol-Free Pure Oil</span>
+          <span>ક્વોલિટી:</span>
+          <span class="reaction-val">૧૦૦% આલ્કોહોલ ફ્રી પ્યોર ઓઈલ</span>
         </div>
       </div>
 
-      <button class="btn-action" onclick="goToStep(3)">Lock In Formula</button>
+      <button class="btn-action" onclick="goToStep(3)">આ ફોર્મ્યુલા લોક કરો</button>
     </div>
 
-    <!-- SCREEN 3: RESULT & FAST CHECKOUT -->
+    <!-- STAGE 3: UNLOCKED OFFER & WHATSAPP REDIRECT -->
     <div class="screen" id="stage3">
-      <span class="badge">Formula Calibrated</span>
-      <h2>Your Signature: <span>AURA EXTRAIT</span></h2>
+      <span class="badge">ટેસ્ટ કમ્પ્લીટ • સ્પેશિયલ ઑફર</span>
+      <h2>તમારું પર્સનલ અત્તર: <span>AURA EXTRAIT</span></h2>
 
       <div class="bottle-render">
         <div class="bottle-cap"></div>
         <div class="bottle-text">AURA</div>
       </div>
 
-      <div class="price-tag">₹499 <s>₹999</s> <span style="font-size: 11px; color:#2ecc71;">(50% Unlock Applied)</span></div>
+      <div class="price-tag">₹૪૯૯ <s>₹૯૯૯</s> <span style="font-size: 12px; color:#2ecc71;">(૫૦% છૂટ મળી ગઈ)</span></div>
 
-      <form onsubmit="finishOrder(event)">
-        <input type="text" class="input-field" placeholder="Full Name" required />
-        <input type="tel" class="input-field" placeholder="10-Digit Mobile Number" pattern="[0-9]{10}" required />
-        <input type="text" class="input-field" placeholder="Delivery Pincode & City" required />
-        <input type="text" class="input-field" placeholder="Complete Street Address" required />
+      <div class="trust-bullets">
+        ✔ ૧૬+ કલાક સુધી ટકી રહેતી મોહક સુગંધ<br />
+        ✔ કેશ ઓન ડિલિવરી (COD) ઉપલબ્ધ - ઘરે માલ આવે ત્યારે જ પૈસા આપો<br />
+        ✔ કોઈ કેમિકલ કે આલ્કોહોલ નહીં
+      </div>
 
-        <button type="submit" class="btn-action">Claim Bottle (Cash on Delivery)</button>
-      </form>
+      <!-- WHATSAPP CTA LINK -->
+      <a id="whatsappBtn" href="#" target="_blank" class="btn-whatsapp">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.698.073-1.133-.07-.272-.089-.623-.21-1.077-.406-1.924-.83-3.176-2.779-3.272-2.906-.096-.128-.777-1.034-.777-1.973 0-.94.492-1.402.668-1.593.175-.19.382-.239.51-.239.127 0 .255.002.366.007.119.006.279-.045.437.335.163.393.556 1.356.604 1.455.048.099.08.216.016.343-.064.128-.096.208-.192.32-.096.112-.202.25-.288.336-.096.096-.197.2-.085.392.112.192.499.824 1.072 1.335.738.657 1.36.861 1.552.957.192.096.304.08.416-.048.112-.128.48-.559.608-.751.128-.192.256-.16.432-.096.176.064 1.12.528 1.312.624.192.096.32.144.368.224.048.08.048.464-.096.869z"/>
+        </svg>
+        WhatsApp પર ઓર્ડર કન્ફર્મ કરો
+      </a>
     </div>
   </div>
 
   <script>
-    // Canvas background hypnotic particle waves
+    // Hypnotic Canvas Simulation
     const canvas = document.getElementById("simCanvas");
     const ctx = canvas.getContext("2d");
     let w = (canvas.width = window.innerWidth);
@@ -406,7 +434,7 @@
     }
 
     function drawSim() {
-      ctx.fillStyle = "rgba(5, 4, 10, 0.2)";
+      ctx.fillStyle = "rgba(5, 4, 10, 0.25)";
       ctx.fillRect(0, 0, w, h);
 
       const cx = w / 2;
@@ -428,7 +456,7 @@
     }
     drawSim();
 
-    // Stage 1 Hold Interaction
+    // Stage 1 Press & Hold Simulation
     let charging = false;
     let progress = 0;
     let chargeInterval = null;
@@ -441,7 +469,7 @@
         if (progress < 100) {
           progress += 2;
           document.getElementById("chargeBar").style.width = progress + "%";
-          document.getElementById("chargeText").innerText = "Charge: " + progress + "%";
+          document.getElementById("chargeText").innerText = "પાવર: " + progress + "%";
         } else {
           clearInterval(chargeInterval);
           goToStep(2);
@@ -456,7 +484,7 @@
         clearInterval(chargeInterval);
         progress = 0;
         document.getElementById("chargeBar").style.width = "0%";
-        document.getElementById("chargeText").innerText = "Charge: 0%";
+        document.getElementById("chargeText").innerText = "પાવર: 0%";
       }
     }
 
@@ -465,7 +493,9 @@
     vortexBtn.addEventListener("touchstart", (e) => { e.preventDefault(); startCharge(); });
     vortexBtn.addEventListener("touchend", stopCharge);
 
-    // Stage Navigation
+    // Step Switching Logic
+    let chosenRadius = "૪ ફૂટ";
+
     function goToStep(step) {
       document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
       document.querySelectorAll(".step-dot").forEach(d => d.classList.remove("active"));
@@ -478,32 +508,41 @@
       }
       if (step === 3) {
         vortexSpeed = 0.008;
+        prepareWhatsAppLink();
       }
     }
 
-    // Stage 2 Projection Simulator
+    // Stage 2 Projection Slider Logic
     function updateRadius(val) {
-      document.getElementById("radiusLabel").innerText = val + " Feet";
+      chosenRadius = val + " ફૂટ";
+      document.getElementById("radiusLabel").innerText = chosenRadius;
       waveRadiusScale = 0.7 + (val / 10) * 0.8;
 
       const notice = document.getElementById("noticeSpeed");
       const resp = document.getElementById("responseType");
 
       if (val <= 4) {
-        notice.innerText = "Intimate (< 1 Foot)";
-        resp.innerText = "Subconscious Lean-In";
+        notice.innerText = "નજીક આવતાં જ (< ૧ ફૂટ)";
+        resp.innerText = "ખાસ આકર્ષણ અને નિકટતા";
       } else if (val <= 7) {
-        notice.innerText = "Immediate (< 2s)";
-        resp.innerText = "Involuntary Head Turn";
+        notice.innerText = "તરત જ (< ૨ સેકન્ડ)";
+        resp.innerText = "તરત પાછળ ફરીને જોશે";
       } else {
-        notice.innerText = "Room Filling";
-        resp.innerText = "Complete Focus Dominance";
+        notice.innerText = "આખા રૂમમાં ફેલાશે";
+        resp.innerText = "રૂઆબદાર પ્રભાવ અને પ્રશંસા";
       }
     }
 
-    function finishOrder(e) {
-      e.preventDefault();
-      alert("Sensory Match Verified! Your Cash on Delivery order has been dispatched.");
+    // Pre-fill WhatsApp message with simulation results
+    function prepareWhatsAppLink() {
+      const phoneNumber = "919327938950";
+      const message = encodeURIComponent(
+        "નમસ્તે, મેં વેબસાઇટ પર AURA હિપ્નોટિક અત્તર ટેસ્ટ પૂરો કર્યો છે.\n\n" +
+        "• પસંદ કરેલ રેન્જ: " + chosenRadius + "\n" +
+        "• ઑફર કિંમત: ₹499 (કેશ ઓન ડિલિવરી)\n\n" +
+        "મારે આ અત્તર મંગાવવું છે, કૃપા કરીને ઓર્ડર માટે મારું સરનામું નોંધી લો."
+      );
+      document.getElementById("whatsappBtn").href = `https://wa.me/${phoneNumber}?text=${message}`;
     }
   </script>
 </body>
