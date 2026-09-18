@@ -2,894 +2,955 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>ROOAB ATTR LAB | Biological Scent & Aura Synthesis</title>
-  <!-- Google Fonts -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Attar Synthesis Lab | કસ્ટમ અત્તર સિન્થેસિસ લેબ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=JetBrains+Mono:wght@400;600;800&family=Noto+Sans+Devanagari:wght@400;600;700;800;900&family=Noto+Sans+Gujarati:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brandDark: '#050508',
-            panelDark: '#0c0d14',
-            goldPrimary: '#d4af37',
-            goldLight: '#f6d365',
-            goldGlow: '#d4af3755',
-            cyberRed: '#ff2a55',
-            waEmerald: '#25D366',
-            waEmeraldHover: '#1da851',
-          },
-          fontFamily: {
-            cinzel: ['Cinzel', 'serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
-            hindi: ['"Noto Sans Devanagari"', 'sans-serif'],
-            gujarati: ['"Noto Sans Gujarati"', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
-
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Noto+Sans+Devanagari:wght@500;700;800;900&family=Noto+Sans+Gujarati:wght@500;700;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --gold: #d4af37;
-      --gold-glow: rgba(212, 175, 55, 0.4);
+      --bg: #050508;
+      --card-bg: rgba(14, 14, 20, 0.98);
+      --gold: #f1c40f;
+      --gold-light: #fef08a;
+      --gold-glow: rgba(241, 196, 15, 0.4);
       --wa-green: #25D366;
-      --wa-glow: rgba(37, 211, 102, 0.55);
-      --red-neon: #ff2a55;
+      --wa-green-glow: rgba(37, 211, 102, 0.5);
+      --border-color: rgba(241, 196, 15, 0.3);
+      --text-main: #ffffff;
+      --text-sub: #b0b0be;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      background-color: #050508;
-      background-image: 
-        radial-gradient(at 50% 0%, rgba(212, 175, 55, 0.12) 0px, transparent 60%),
-        radial-gradient(at 100% 100%, rgba(255, 42, 85, 0.06) 0px, transparent 50%),
-        linear-gradient(to bottom, rgba(5, 5, 8, 0.95), rgba(5, 5, 8, 0.98));
-      color: #f1f2f6;
-      overflow-x: hidden;
-      -webkit-tap-highlight-color: transparent;
+      min-height: 100vh;
+      font-family: 'Noto Sans Devanagari', 'Noto Sans Gujarati', sans-serif;
+      background: radial-gradient(circle at 50% 10%, #1a1a2b 0%, var(--bg) 100%);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Ambient Circuit Grid overlay */
-    .bg-grid {
-      background-size: 30px 30px;
-      background-image: 
-        linear-gradient(to right, rgba(212, 175, 55, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
-    }
-
-    /* Scanline Screen Effect */
-    .scanlines::before {
-      content: " ";
-      display: block;
-      position: absolute;
-      top: 0; left: 0; bottom: 0; right: 0;
-      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
-      background-size: 100% 4px;
-      z-index: 20;
-      pointer-events: none;
-      opacity: 0.6;
-    }
-
-    /* Custom Glass Panel */
-    .lab-panel {
-      background: linear-gradient(145deg, rgba(16, 17, 26, 0.94), rgba(9, 10, 15, 0.97));
-      border: 1px solid rgba(212, 175, 55, 0.25);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.85), 0 0 35px rgba(212, 175, 55, 0.08);
+    .container {
+      width: 100%;
+      max-width: 660px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 26px 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(25px);
       position: relative;
     }
 
-    .lab-panel::after {
-      content: "";
-      position: absolute;
-      top: -1px; left: 15%; right: 15%; height: 1px;
-      background: linear-gradient(90deg, transparent, #d4af37, transparent);
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
     }
 
-    /* Option Card interactive hover */
-    .choice-card {
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.005) 100%);
+    .brand-tag {
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      color: var(--gold);
+      font-weight: 900;
     }
 
-    .choice-card:hover, .choice-card:active {
-      transform: translateY(-2px) scale(1.008);
-      border-color: #d4af37;
-      background: linear-gradient(180deg, rgba(212, 175, 55, 0.12) 0%, rgba(212, 175, 55, 0.02) 100%);
-      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.18), inset 0 0 15px rgba(212, 175, 55, 0.1);
+    .lang-switch {
+      display: inline-flex;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 2px;
+      gap: 2px;
     }
 
-    /* Pulsing Green VIP Button */
-    .wa-master-btn {
-      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-      box-shadow: 0 0 25px rgba(37, 211, 102, 0.6), 0 8px 20px rgba(0,0,0,0.7);
-      animation: pulseGreen 2s infinite ease-in-out;
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-sub);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 5px 12px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
     }
 
-    .wa-master-btn:hover {
-      box-shadow: 0 0 35px rgba(37, 211, 102, 0.85), 0 10px 25px rgba(0,0,0,0.8);
-      transform: translateY(-2px);
+    .lang-btn.active {
+      background: var(--gold);
+      color: #060608;
     }
 
-    @keyframes pulseGreen {
-      0%, 100% {
-        box-shadow: 0 0 18px rgba(37, 211, 102, 0.5);
-      }
-      50% {
-        box-shadow: 0 0 34px rgba(37, 211, 102, 0.85);
-      }
+    .step-counter {
+      font-size: 0.85rem;
+      color: var(--gold-light);
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
     }
 
-    /* Chemical Reactor Fluid Animation */
-    .reactor-core {
-      position: relative;
-      width: 110px;
-      height: 160px;
-      border: 3px solid #d4af37;
-      border-radius: 6px 6px 36px 36px;
-      background: rgba(0, 0, 0, 0.5);
+    .progress-bar-container {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      margin-bottom: 22px;
       overflow: hidden;
-      box-shadow: 0 0 30px rgba(212, 175, 55, 0.35);
     }
 
-    .fluid-layer {
+    .progress-bar {
+      height: 100%;
+      width: 20%;
+      background: linear-gradient(90deg, var(--gold), #ff9900);
+      transition: width 0.35s ease;
+    }
+
+    h2.question-text {
+      font-size: 1.35rem;
+      line-height: 1.45;
+      font-weight: 800;
+      margin-bottom: 20px;
+      color: #ffffff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1.5px solid rgba(241, 196, 15, 0.22);
+      border-radius: 14px;
+      padding: 16px 18px;
+      color: #ffffff;
+      font-size: 1rem;
+      line-height: 1.45;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: inherit;
+    }
+
+    .option-btn:hover {
+      border-color: var(--gold);
+      background: rgba(241, 196, 15, 0.12);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+    }
+
+    .opt-icon {
+      font-size: 1.1rem;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* Simulation Lab Screen */
+    .blending-screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 35px 10px;
+      gap: 18px;
+    }
+
+    .beaker-loader {
+      width: 72px;
+      height: 98px;
+      border: 3.5px solid var(--gold);
+      border-top: none;
+      border-radius: 0 0 22px 22px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 25px var(--gold-glow);
+    }
+
+    .liquid {
       position: absolute;
       bottom: 0;
       width: 100%;
       height: 0%;
-      background: linear-gradient(0deg, #b8860b 0%, #e5c158 50%, #ff2a55 100%);
-      transition: height 0.3s linear;
-      filter: blur(0.5px);
+      background: linear-gradient(180deg, var(--gold), #c28809);
+      animation: fillFlask 2.2s forwards ease-in-out;
     }
 
-    .bubble {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.6);
+    @keyframes fillFlask {
+      0% { height: 0%; }
+      100% { height: 88%; }
+    }
+
+    .blending-screen h2 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--gold-light);
+    }
+
+    .blending-screen p {
+      font-size: 0.95rem;
+      color: var(--text-sub);
+    }
+
+    /* Result Screen */
+    .result-screen {
+      display: none;
+      text-align: center;
+      animation: fadeIn 0.45s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .timer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(231, 76, 60, 0.15);
+      border: 1px solid #e74c3c;
+      color: #ff6b6b;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .custom-code {
+      font-family: 'Cinzel', serif;
+      font-size: 0.92rem;
+      letter-spacing: 1.8px;
+      color: var(--gold-light);
+      margin-bottom: 6px;
+      font-weight: 800;
+    }
+
+    .result-title {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 18px;
+    }
+
+    .stacked-bar-container {
+      width: 100%;
+      height: 38px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 19px;
+      display: flex;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      margin-bottom: 16px;
+    }
+
+    .blend-segment {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+    }
+
+    .formula-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-align: left;
+      margin-bottom: 18px;
+    }
+
+    .formula-item {
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(241, 196, 15, 0.18);
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-dot {
+      width: 13px;
+      height: 13px;
       border-radius: 50%;
-      animation: bubbleRise 2s infinite ease-in;
+      flex-shrink: 0;
     }
 
-    @keyframes bubbleRise {
-      0% { bottom: 0; opacity: 0.8; transform: scale(0.6); }
-      100% { bottom: 100%; opacity: 0; transform: scale(1.4); }
+    .brand-name {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #ffffff;
     }
 
-    /* Urgency Countdown Glow */
-    .urgent-badge {
-      background: rgba(255, 42, 85, 0.12);
-      border: 1px solid rgba(255, 42, 85, 0.5);
-      animation: alertBlink 1.4s infinite alternate;
+    .brand-role {
+      font-size: 0.8rem;
+      color: var(--gold-light);
+      font-weight: 600;
     }
 
-    @keyframes alertBlink {
-      0% { border-color: rgba(255, 42, 85, 0.3); color: #ff6b8b; }
-      100% { border-color: rgba(255, 42, 85, 1); color: #ffffff; box-shadow: 0 0 12px rgba(255, 42, 85, 0.4); }
+    .brand-ratio {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--gold);
+    }
+
+    /* WhatsApp Direct Action Section */
+    .offer-box {
+      background: linear-gradient(180deg, rgba(37, 211, 102, 0.15) 0%, rgba(37, 211, 102, 0.04) 100%);
+      border: 1.5px dashed var(--wa-green);
+      border-radius: 16px;
+      padding: 18px 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+    }
+
+    .offer-title {
+      color: #6ef09f;
+      font-size: 1.15rem;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .offer-sub {
+      color: #d1f3dc;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      margin-bottom: 14px;
+    }
+
+    .whatsapp-order-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: #03200d;
+      border: none;
+      padding: 16px 18px;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 8px 24px var(--wa-green-glow);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: inherit;
+      animation: pulseBtn 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseBtn {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    .whatsapp-order-btn:hover {
+      background: linear-gradient(135deg, #2ae772, #149c8d);
+      transform: translateY(-2px);
+    }
+
+    .wts-svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+
+    .desc-box {
+      background: rgba(241, 196, 15, 0.06);
+      border-left: 3px solid var(--gold);
+      padding: 14px 16px;
+      border-radius: 0 10px 10px 0;
+      text-align: left;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: #e3e3ea;
+      margin-bottom: 14px;
+    }
+
+    .bespoke-note {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px 14px; }
+      h2.question-text { font-size: 1.18rem; }
+      .option-btn { font-size: 0.92rem; padding: 13px 14px; }
+      .formula-item { padding: 12px 14px; }
+      .whatsapp-order-btn { font-size: 0.96rem; padding: 14px; }
     }
   </style>
 </head>
+<body>
 
-<body class="bg-grid min-h-screen flex items-center justify-center p-3 sm:p-5 font-hindi select-none">
-
-  <div class="w-full max-w-[640px] lab-panel rounded-3xl p-5 sm:p-8 backdrop-blur-2xl relative z-10 scanlines">
-    
-    <!-- TOP STATUS BAR: SYSTEM TELEMETRY -->
-    <header class="flex items-center justify-between pb-4 mb-5 border-b border-goldPrimary/20 text-xs">
-      <div class="flex items-center space-x-2">
-        <span class="relative flex h-2.5 w-2.5">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-        </span>
-        <span class="font-mono text-goldLight tracking-widest uppercase font-bold text-[11px] sm:text-xs">
-          ROOAB LAB CORE // v4.8
-        </span>
-      </div>
-
-      <!-- Language Selector with Visceral Glow -->
-      <div class="flex items-center bg-black/60 border border-goldPrimary/30 rounded-full p-1 gap-1">
-        <button id="lang-hi" onclick="labApp.setLanguage('hi')" class="px-3 py-1 rounded-full text-[11px] font-bold transition-all bg-goldPrimary text-black">
-          हिंदी
-        </button>
-        <button id="lang-gu" onclick="labApp.setLanguage('gu')" class="px-3 py-1 rounded-full text-[11px] font-bold text-gray-400 hover:text-white transition-all">
-          ગુજરાતી
-        </button>
-      </div>
-    </header>
-
-    <!-- STEP PROGRESSION TELEMETRY -->
-    <div id="telemetryHeader" class="mb-4">
-      <div class="flex justify-between items-center text-[12px] font-mono text-gray-400 mb-1.5">
-        <span id="stepLabel" class="text-goldLight font-bold">SYNTHESIS PHASE // 01/04</span>
-        <span id="pheromoneStatus" class="text-emerald-400 tracking-wider font-semibold">BIO-MATCHING ACTIVE</span>
-      </div>
-      <div class="w-full h-1.5 bg-black/60 rounded-full overflow-hidden border border-goldPrimary/20">
-        <div id="chamberProgress" class="h-full bg-gradient-to-r from-goldPrimary via-yellow-400 to-cyberRed transition-all duration-500" style="width: 25%;"></div>
+  <div class="container">
+    <div class="top-header">
+      <div class="brand-tag">ROOAB ATTR LAB</div>
+      <div class="lang-switch">
+        <button class="lang-btn active" id="btn-hi" onclick="app.setLanguage('hi')">हिंदी</button>
+        <button class="lang-btn" id="btn-gu" onclick="app.setLanguage('gu')">ગુજરાતી</button>
       </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- VIEW 1: THE 4-STEP SENSORY SYNTHESIS MATRIX  -->
-    <!-- ============================================ -->
-    <main id="simulationView" class="space-y-4">
-      <!-- Visceral Hook / Subtitle -->
-      <div class="text-center sm:text-left mb-2">
-        <p id="tacticalTagline" class="text-[11px] font-mono tracking-widest text-cyberRed font-bold uppercase mb-1">
-          // PHEROMONAL LOCK MATRIX
-        </p>
-        <h1 id="chamberQuestion" class="text-lg sm:text-xl font-extrabold text-white leading-snug">
-          1. आप अपनी उपस्थिति (Presence) से आसपास कैसा चुंबकीय खिंचाव पैदा करना चाहते हैं?
-        </h1>
-        <p id="chamberSubtext" class="text-xs text-gray-400 mt-1">
-          सिर्फ एक विकल्प चुनें। लैब एल्गोरिदम आपके स्वभाव अनुसार 3 दुर्लभ अत्तर कंपाउंड करेगा।
-        </p>
-      </div>
+    <div class="step-counter" id="stepCounterBox">
+      <span id="stepCounter">सवाल 1 / 5</span>
+      <span style="color: var(--gold);">100% Bespoke Made-to-Order</span>
+    </div>
 
-      <!-- Interactive Decision Grid -->
-      <div id="choicesGrid" class="space-y-3 pt-2">
-        <!-- Dynamic Cards rendered by JS -->
-      </div>
+    <div class="progress-bar-container" id="progressTrack">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
 
-      <!-- Subtle psychological proof bar -->
-      <div class="pt-4 flex items-center justify-between text-[11px] text-gray-400 border-t border-white/5">
-        <span class="flex items-center gap-1.5">
-          <svg class="w-3.5 h-3.5 text-goldPrimary" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
-          </svg>
-          <span id="activeUsersTag">1,842 लोग आज अपना ब्लेंड कम्पाउंड कर चुके हैं</span>
-        </span>
-        <span class="font-mono text-goldLight/70">100% PURE OIL</span>
-      </div>
-    </main>
+    <!-- Quiz Question Screen -->
+    <div id="quizBlock">
+      <h2 class="question-text" id="questionTitle">Loading...</h2>
+      <div class="options-grid" id="optionsGrid"></div>
+    </div>
 
-    <!-- ============================================ -->
-    <!-- VIEW 2: LIVE SIMULATION & COMPOUNDING CHAMBER -->
-    <!-- ============================================ -->
-    <section id="compoundingView" class="hidden flex-col items-center justify-center py-8 text-center space-y-5">
-      <!-- Chemical Beaker Reactor -->
-      <div class="reactor-core">
-        <div id="fluidLevel" class="fluid-layer"></div>
-        <div class="bubble" style="left: 20%; animation-delay: 0.1s; width: 6px; height: 6px;"></div>
-        <div class="bubble" style="left: 60%; animation-delay: 0.7s; width: 8px; height: 8px;"></div>
-        <div class="bubble" style="left: 45%; animation-delay: 1.2s; width: 5px; height: 5px;"></div>
-        <div class="bubble" style="left: 75%; animation-delay: 0.4s; width: 7px; height: 7px;"></div>
+    <!-- Live Compounding Animation -->
+    <div class="blending-screen" id="blendingBlock">
+      <div class="beaker-loader">
+        <div class="liquid"></div>
       </div>
+      <h2 id="loaderTitle">आपकी 3 अत्तरों की सिग्नेचर फ़ॉर्मूलेशन तैयार हो रही है...</h2>
+      <p id="loaderSub">50% Base, 30% Heart और 20% Top नोट्स का अनुपात तैयार किया जा रहा है</p>
+    </div>
 
-      <div>
-        <div id="compoundingStatus" class="font-mono text-sm tracking-widest text-goldLight font-bold animate-pulse">
-          EXTRACTING BASE PHEROMONE NOTES...
-        </div>
-        <div id="compoundingDetails" class="text-xs text-gray-400 mt-1 max-w-sm">
-          50% Base Sustain, 30% Heart Resonance, 20% Top Projection का संतुलन बाँधा जा रहा है...
-        </div>
-      </div>
-
-      <!-- Live Terminal Stream Logs -->
-      <div class="w-full bg-black/80 rounded-xl p-3 text-left font-mono text-[11px] text-gray-300 border border-goldPrimary/20 space-y-1">
-        <div class="text-emerald-400 flex items-center justify-between">
-          <span>> ATOMIZING ESSENTIAL OILS</span>
-          <span id="liveYield">64.2%</span>
-        </div>
-        <div class="text-goldLight">> INFUSING THERMAL ADHESION MOLECULES</div>
-        <div class="text-cyberRed">> PURGING SYNTHETIC IMPURITIES (0% ALCOHOL)</div>
-      </div>
-    </section>
-
-    <!-- ============================================ -->
-    <!-- VIEW 3: BESPOKE RESULTS & GREED-DRIVEN CTA    -->
-    <!-- ============================================ -->
-    <section id="dossierView" class="hidden space-y-5">
+    <!-- Results Screen -->
+    <div class="result-screen" id="resultBlock">
       
-      <!-- FOMO TIMER EXPIRY TICKER -->
-      <div class="urgent-badge rounded-xl py-2 px-3 text-center text-xs font-mono font-bold flex items-center justify-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-cyberRed animate-ping"></span>
-        <span id="timerHeadline">RESERVED FORMULA EXPIRATION:</span>
-        <span id="countdownClock" class="text-cyberRed font-extrabold text-sm tracking-widest">09:47</span>
+      <!-- 10 Minute Expiry Reservation Lock -->
+      <div class="timer-badge">
+        <span>⏱️ फ़ॉर्मूलेशन रिज़र्वेशन:</span>
+        <span id="lockTimer">09:59</span>
       </div>
 
-      <!-- Bottle & Blend Header Card -->
-      <div class="bg-gradient-to-b from-white/[0.04] to-black/60 border border-goldPrimary/30 rounded-2xl p-4 sm:p-5 text-center relative overflow-hidden">
-        
-        <div class="flex items-center justify-between text-[11px] font-mono text-gray-400 pb-2 border-b border-white/10">
-          <span id="dossierBatchCode" class="text-goldLight tracking-widest font-bold">BATCH #ROOAB-ALPHA-982</span>
-          <span class="text-emerald-400 font-bold">POTENCY: 98.6%</span>
-        </div>
+      <div class="custom-code" id="blendCode">TRINITY FORMULA: #ATTAR-9021</div>
+      <h1 class="result-title" id="resultTitle">आपका व्यक्तिगत 3-अत्तर ब्लेंड</h1>
+      
+      <!-- Blend Bar Breakdown -->
+      <div class="stacked-bar-container" id="stackedBar"></div>
 
-        <!-- Custom Bottle SVG Hologram -->
-        <div class="py-3 flex justify-center items-center">
-          <div class="relative w-28 h-36 flex items-center justify-center">
-            <!-- Glow circle behind bottle -->
-            <div class="absolute inset-0 bg-goldPrimary/15 blur-xl rounded-full"></div>
-            <!-- Hand-crafted sleek Perfume Flask SVG -->
-            <svg class="w-24 h-32 drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]" viewBox="0 0 100 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Cap -->
-              <rect x="36" y="8" width="28" height="20" rx="3" fill="#e5c158" stroke="#fff" stroke-width="0.8"/>
-              <rect x="42" y="4" width="16" height="4" rx="1" fill="#b8860b"/>
-              <line x1="38" y1="18" x2="62" y2="18" stroke="#111" stroke-width="1.2"/>
-              <!-- Neck -->
-              <rect x="43" y="28" width="14" height="8" fill="#a0781a"/>
-              <!-- Flask Body -->
-              <path d="M22 42C22 37.5817 25.5817 34 30 34H70C74.4183 34 78 37.5817 78 42V124C78 129.523 73.5228 134 68 134H32C26.4772 134 22 129.523 22 124V42Z" fill="url(#bottleGrad)" stroke="#d4af37" stroke-width="2"/>
-              <!-- Golden Crest & Label -->
-              <rect x="29" y="56" width="42" height="50" rx="4" fill="#0b0b12" stroke="#d4af37" stroke-width="1"/>
-              <text x="50" y="74" font-family="'Cinzel', serif" font-size="8" fill="#f5cf62" font-weight="bold" text-anchor="middle">ROOAB</text>
-              <line x1="35" y1="80" x2="65" y2="80" stroke="#d4af37" stroke-width="0.6"/>
-              <text x="50" y="91" font-family="sans-serif" font-size="6" fill="#ffffff" text-anchor="middle" font-weight="bold">SIGNATURE</text>
-              <text x="50" y="100" font-family="'JetBrains Mono', monospace" font-size="5" fill="#25D366" text-anchor="middle">100% PURE</text>
-              <!-- Liquid Gradient -->
-              <defs>
-                <linearGradient id="bottleGrad" x1="50" y1="34" x2="50" y2="134" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#2a1f05"/>
-                  <stop offset="0.4" stop-color="#14110b"/>
-                  <stop offset="1" stop-color="#4a3406"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-        </div>
+      <!-- Formula Notes List -->
+      <div class="formula-list" id="formulaList"></div>
 
-        <h2 id="blendHeadline" class="text-xl sm:text-2xl font-black text-goldLight font-cinzel tracking-wide">
-          TRINITY IMPERIAL EXTRAIT
-        </h2>
-        <p id="blendSubheadline" class="text-xs text-gray-300 max-w-md mx-auto mt-1 leading-relaxed">
-          आपकी चुंबकीय पसंद से तैयार 3 दुर्लभ अत्तरों का ऐसा नशीला सम्मिश्रण, जो पास आते ही सामने वाले के दिल और दिमाग पर बेकाबू खिंचाव बनाता है।
-        </p>
-      </div>
+      <!-- WHATSAPP CTA BOX: DIRECTLY BELOW FORMULA -->
+      <div class="offer-box">
+        <div class="offer-title" id="offerHeadline">🎁 ₹150 की विशेष छूट तुरंत अनलॉक करें</div>
+        <div class="offer-sub" id="offerDesc">यह फ़ॉर्मूलेशन हमारे मास्टर परफ्यूमर को भेजें ताकि आपकी विशेष बॉटल तैयार की जा सके।</div>
 
-      <!-- Formulated Ratios Multi-Colored Bar -->
-      <div>
-        <div class="flex justify-between text-[11px] font-mono text-gray-400 mb-1">
-          <span>COMPOUND RATIO (50:30:20)</span>
-          <span class="text-goldLight">12-16 HRS SKIN LONGEVITY</span>
-        </div>
-        <div id="resultRatioBar" class="w-full h-8 rounded-xl overflow-hidden flex border border-goldPrimary/30 bg-black/40">
-          <!-- Dynamically populated segments -->
-        </div>
-      </div>
-
-      <!-- 3-Formula Ingredient Breakdown -->
-      <div id="formulaListDetails" class="space-y-2">
-        <!-- Dynamically injected formula cards -->
-      </div>
-
-      <!-- ============================================ -->
-      <!-- THE MASTER WHATSAPP CONVERSION ENGINE       -->
-      <!-- ============================================ -->
-      <div class="bg-gradient-to-b from-emerald-950/40 via-black/80 to-emerald-950/30 border-2 border-emerald-500/70 rounded-2xl p-4 sm:p-5 relative shadow-[0_0_40px_rgba(37,211,102,0.2)]">
-        
-        <!-- Top VIP Hook Tag -->
-        <div class="flex items-center justify-between mb-3">
-          <span class="bg-emerald-500/20 text-emerald-300 text-[10px] sm:text-[11px] font-mono font-extrabold px-2.5 py-1 rounded-full border border-emerald-400/40 uppercase tracking-wider">
-            ★ VIP LAB ALLOCATION UNLOCKED
-          </span>
-          <span class="text-[11px] text-gray-400 font-mono">STOCK: 7 BOTTLES LEFT</span>
-        </div>
-
-        <!-- Visceral Psychological Offer Copy -->
-        <div class="space-y-1 text-left mb-4">
-          <div id="offerMainTitle" class="text-base sm:text-lg font-black text-white leading-tight flex items-center gap-1.5">
-            <span>🎁 ₹200 इंस्टेंट छूट + सीक्रेट फेरोमोन बूस्टर ड्रॉप मुफ़्त</span>
-          </div>
-          <p id="offerDescription" class="text-xs sm:text-[13px] text-emerald-100/80 leading-snug">
-            यह फ़ॉर्मूला हमारे मास्टर परफ्यूमर को तुरंत WhatsApp पर भेजें। आपके इस पर्सनल ब्लेंड के साथ <strong>1x सीक्रेट अट्रैक्शन बूस्टर ऑयल</strong> मुफ़्त जोड़ा जाएगा।
-          </p>
-        </div>
-
-        <!-- 1-TAP INSTANT WHATSAPP DIRECT CTA BUTTON -->
-        <button id="whatsappTriggerBtn" onclick="labApp.openWhatsAppDispatch()" class="wa-master-btn w-full py-4 px-4 rounded-xl flex items-center justify-center gap-3 text-white font-extrabold text-base sm:text-lg tracking-wide transition-all group">
-          <!-- WhatsApp Icon SVG -->
-          <svg class="w-6 h-6 fill-current flex-shrink-0" viewBox="0 0 24 24">
+        <button class="whatsapp-order-btn" id="orderBtn" onclick="app.orderOnWhatsApp()">
+          <svg class="wts-svg" viewBox="0 0 24 24">
             <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.586-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.199.534 1.285.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.303c-.086.087-.176.182-.075.355.101.174.449.741.964 1.2 1.017.904 1.83 1.18 2.062 1.295.231.116.368.101.505-.058.138-.159.593-.693.751-.931.159-.239.317-.202.534-.116.216.087 1.372.647 1.609.766.237.119.395.176.452.274.058.101.058.577-.086.982z"/>
           </svg>
-          <span id="btnCtaLabel">WhatsApp पर फ़ॉर्मूला भेजें और ₹200 बचाएं</span>
-          <span class="group-hover:translate-x-1 transition-transform">➔</span>
+          <span id="orderBtnLabel">WhatsApp पर फ़ॉर्मूला भेजें और छूट पाएं</span>
         </button>
-
-        <!-- Social Proof Micro Badges -->
-        <div class="mt-3 flex items-center justify-center gap-3 sm:gap-4 text-[11px] text-emerald-200/70 font-medium">
-          <span class="flex items-center gap-1">✓ 100% ओरिजिनल अत्तर</span>
-          <span class="flex items-center gap-1">✓ कैश ऑन डिलीवरी</span>
-          <span class="flex items-center gap-1">✓ 12+ घंटे गारंटी</span>
-        </div>
       </div>
 
-      <!-- Formulation Breakdown Analysis -->
-      <div id="verdictExplanation" class="text-xs text-gray-300 leading-relaxed bg-black/40 border border-white/10 rounded-xl p-3.5 text-left">
-        <!-- Injected dynamic verdict text -->
+      <!-- Verdict Explanation -->
+      <div class="desc-box" id="blendVerdict"></div>
+
+      <div class="bespoke-note">
+        <span>🧪 यह कोई रेडीमेड अत्तर नहीं है — आपकी पसंद के अनुसार फ्रेश बनाया जाता है।</span>
       </div>
-    </section>
+    </div>
   </div>
 
-  <!-- ============================================ -->
-  <!-- JAVASCRIPT: THE SENSORY ALGORITHM ENGINE     -->
-  <!-- ============================================ -->
   <script>
-    // Fragrance Database & Color Chromatics
     const CATALOG = {
-      xChocolate:   { name: "X-Chocolate Noir", category: "Aphrodisiac", color: "#8B0000" },
-      chocoBlast:   { name: "Choco Blast Royale", category: "Gourmand Musk", color: "#d63031" },
-      frenchRose:   { name: "Damascus Blood Rose", category: "Velvet Floral", color: "#e84393" },
-      cherish:      { name: "Cherish Intense", category: "Seduction Amber", color: "#fd79a8" },
-      copper:       { name: "Smoked Copper Wood", category: "Alpha Dominance", color: "#c0392b" },
-      classic:      { name: "Classic Royal Sovereign", category: "Boardroom Authority", color: "#1f4068" },
-      coolWater:    { name: "Glacial Deep Cool", category: "High Vibration", color: "#2980b9" },
-      diamondSandal:{ name: "Imperial Diamond Sandal", category: "Sacred Power", color: "#d35400" },
-      whiteMusk:    { name: "White Musk Nirvana", category: "Pure Serenity", color: "#27ae60" },
-      fawaki:       { name: "Fawaki Eden Mist", category: "Exotic Harmony", color: "#16a085" },
-      blueLady:     { name: "Blue Lady Hypnotic", category: "Nocturnal Magnetic", color: "#6c5ce7" },
-      mexico:       { name: "Mexico Wild Leather", category: "Raw Animalic", color: "#e67e22" }
+      coolWater:    { name: "Cool Water", color: "#3a7bd5" },
+      copper:       { name: "Copper", color: "#2980b9" },
+      classic:      { name: "Classic", color: "#1f4068" },
+      diamondSandal:{ name: "Diamond Sandal", color: "#e67e22" },
+      mexico:       { name: "Mexico", color: "#d35400" },
+      nazneen:      { name: "નાઝનીન (Nazneen)", color: "#f39c12" },
+      horrid:       { name: "Horrid", color: "#9b59b6" },
+      fantasia:     { name: "Fantasia", color: "#8e44ad" },
+      blueLady:     { name: "Blue Lady", color: "#6c5ce7" },
+      poise:        { name: "Poise", color: "#a29bfe" },
+      chocoBlast:   { name: "Choco Blast", color: "#e84393" },
+      xChocolate:   { name: "X Chocolate", color: "#d63031" },
+      frenchRose:   { name: "French Rose", color: "#fd79a8" },
+      cherish:      { name: "Cherish", color: "#e17055" },
+      whiteMusk:    { name: "White Musk", color: "#27ae60" },
+      whiteHope:    { name: "White Hope", color: "#2ecc71" },
+      dove:         { name: "Dove", color: "#1abc9c" },
+      fawaki:       { name: "FAWAKI", color: "#16a085" }
     };
 
-    // Multilingual Narrative Script Engine
-    const LOCALES = {
+    const I18N = {
       hi: {
-        telemetryPhases: [
-          "SYNTHESIS PHASE // 01/04",
-          "SYNTHESIS PHASE // 02/04",
-          "SYNTHESIS PHASE // 03/04",
-          "SYNTHESIS PHASE // 04/04"
-        ],
-        activeUsers: "1,842 लोग आज अपना ब्लेंड कम्पाउंड कर चुके हैं",
-        tagline: "// PHEROMONAL LOCK MATRIX",
-        questions: [
-          {
-            q: "1. आप अपनी उपस्थिति (Presence) से आसपास कैसा चुंबकीय खिंचाव पैदा करना चाहते हैं?",
-            sub: "सिर्फ एक विकल्प चुनें। लैब एल्गोरिदम आपके स्वभाव अनुसार 3 दुर्लभ अत्तर कंपाउंड करेगा।",
-            options: [
-              {
-                title: "Dark Attraction & Seduction (मदहोश करने वाला खिंचाव)",
-                desc: "जब वो सांसों की दूरी पर आएं तो आपकी महक उनका होश उड़ा दे और वो बस आपकी बाहों में खिंची चली आएं।",
-                icon: "🔥",
-                picks: ["xChocolate", "frenchRose", "chocoBlast"]
-              },
-              {
-                title: "Alpha Dominance & Boardroom Command (रूतबा और दबदबा)",
-                desc: "जिस महफ़िल या मीटिंग में आप कदम रखें, लोग बिना बोले आपकी शक्ति और वजनदार पर्सनैलिटी का लोहा मानें।",
-                icon: "👑",
-                picks: ["copper", "classic", "diamondSandal"]
-              },
-              {
-                title: "Sacred Peace & Divine Aura (सुकून और पवित्र आकर्षण)",
-                desc: "एक ऐसी पाक और रूहानी खुशबू जो आपके करीब आने वाले हर इंसान के दिल को शांति और खिंचाव से भर दे।",
-                icon: "🌿",
-                picks: ["whiteMusk", "fawaki", "diamondSandal"]
-              }
-            ]
-          },
-          {
-            q: "2. आप सामने वाले के दिमाग पर किस तरह का गहरा असर (Psychological Trigger) छोड़ना चाहते हैं?",
-            sub: "सुगंध सीधे इंसानी दिमाग के लिम्बिक सिस्टम (भावनाओं के केंद्र) पर वार करती है।",
-            options: [
-              {
-                title: "Uncontrollable Neck-Sniffs (बार-बार करीब आने की बेताबी)",
-                desc: "उनकी निगाहें और सांसें सिर्फ आपकी गर्दन की खुशबू पर टिक जाएं; दूर जाने का मन न करे।",
-                icon: "💋",
-                picks: ["xChocolate", "cherish", "blueLady"]
-              },
-              {
-                title: "Undeniable Respect & Silence (कड़क आदर और मर्यादा)",
-                desc: "आपकी एंट्री होते ही कमरे में सब आपकी तरफ मुड़ें और आपकी बात को अंतिम फैसला माना जाए।",
-                icon: "⚡",
-                picks: ["copper", "classic"]
-              },
-              {
-                title: "Haunting Memory (दिन-रात याद आने वाला नशा)",
-                desc: "जब आप चले भी जाएं, तो आपकी खुशबू की महक उनके कमरे और खयालों में घंटों गूंजती रहे।",
-                icon: "🔮",
-                picks: ["frenchRose", "mexico", "cherish"]
-              }
-            ]
-          },
-          {
-            q: "3. आपकी त्वचा के लिए कौन सा एरोमैटिक बेस सबसे ज़्यादा कामुक और वजनदार होना चाहिए?",
-            sub: "यह आपके 3-अत्तर फ़ॉर्मूले का 50% मुख्य आधार (Base Note) तय करेगा।",
-            options: [
-              {
-                title: "Warm Cocoa, Smoked Vanilla & Dark Amber (नशीला और गर्म)",
-                desc: "गर्म, पिघलती हुई डार्क चॉकलेट और एम्बर का कामुक संगम जो रात के वक्त आग लगा दे।",
-                icon: "🍫",
-                picks: ["xChocolate", "chocoBlast"]
-              },
-              {
-                title: "Smoked Oud, Aged Sandal & Royal Leather (वजनदार और रईस)",
-                desc: "असली संदल और शाही ओउड की ऐसी तासीर जो खानदानी रईसी और मर्दानगी दर्शाती है।",
-                icon: "🪵",
-                picks: ["diamondSandal", "copper"]
-              },
-              {
-                title: "First Rain Earth & White Kashmiri Musk (पवित्र और शीतल)",
-                desc: "पहली बारिश की भीनी मिट्टी और शुद्ध सफ़ेद कस्तूरी की ऐसी महक जो रूह को छू ले।",
-                icon: "💧",
-                picks: ["whiteMusk", "fawaki"]
-              }
-            ]
-          },
-          {
-            q: "4. आप इस अत्तर की परफ्यूम प्रोजेक्शन और फैलाव (Sillage) कैसा चाहते हैं?",
-            sub: "अंतिम कम्पाउंडिंग स्टेज: तापमान के साथ खुशबू के फैलने की क्षमता लॉक की जा रही है।",
-            options: [
-              {
-                title: "14-Hour Beast Mode Aura (पूरा कमरा महक उठे)",
-                desc: "कमरे में दाखिल होते ही आपकी खुशबू का गहरा आभामंडल छा जाए; सुबह से रात तक बिना फीके पड़े।",
-                icon: "💣",
-                picks: ["copper", "xChocolate", "diamondSandal"]
-              },
-              {
-                title: "Intimate Whisper Lock (सिर्फ उनके लिए जो एकदम करीब आएं)",
-                desc: "एक रहस्यमयी कशिश जो सिर्फ उन्हीं को महसूस होगी जो आपके आलिंगन और सांसों के करीब होंगे।",
-                icon: "🥀",
-                picks: ["frenchRose", "whiteMusk", "cherish"]
-              }
-            ]
-          }
-        ],
-        compoundingStages: [
-          "EXTRACTING TARGET MOLECULES...",
-          "STABILIZING THERMAL BASE NOTES...",
-          "INFUSING PHEROMONAL MAGNETS...",
-          "LOCKING 50:30:20 RATIO MATRICES..."
-        ],
-        roles: ["50% Base Sustain (अविनाशी आधार)", "30% Heart Resonance (दिल की धड़कन)", "20% Top Magnetism (पहला वार)"],
-        offerTitle: "🎁 ₹200 इंस्टेंट छूट + सीक्रेट फेरोमोन बूस्टर ड्रॉप मुफ़्त",
-        offerDesc: "यह फ़ॉर्मूला हमारे मास्टर परफ्यूमर को तुरंत WhatsApp पर भेजें। आपके इस पर्सनल ब्लेंड के साथ 1x सीक्रेट अट्रैक्शन बूस्टर ऑयल मुफ़्त जोड़ा जाएगा।",
-        btnLabel: "WhatsApp पर फ़ॉर्मूला भेजें और ₹200 बचाएं",
-        timerLabel: "फ़ॉर्मूलेशन रिज़र्वेशन समाप्त होने में:",
-        wtsMessage: (code, p, s, t) => 
-`नमस्ते मास्टर परफ्यूमर! 🔥 
+        stepText: "सवाल {cur} / {total}",
+        loaderTitle: "आपकी 3 अत्तरों की सिग्नेचर फ़ॉर्मूलेशन तैयार हो रही है...",
+        loaderSub: "50% Base, 30% Heart और 20% Top नोट्स का अनुपात तैयार किया जा रहा है",
+        resultTitle: "आपका व्यक्तिगत 3-अत्तर ब्लेंड",
+        offerHeadline: "🎁 ₹150 की विशेष छूट तुरंत अनलॉक करें",
+        offerDesc: "यह फ़ॉर्मूलेशन हमारे मास्टर परफ्यूमर को भेजें ताकि आपकी विशेष बॉटल तैयार की जा सके।",
+        orderBtnText: "WhatsApp पर फ़ॉर्मूला भेजें और छूट पाएं",
+        roles: ["Base Note (मुख्य आधार)", "Heart Note (हार्ट नोट)", "Top Note (टॉप नोट)"],
+        verdictText: (p, s, t) => `<strong>फ़ॉर्मूलेशन विश्लेषण:</strong> आपकी पसंद के आधार पर यह विशेष 3-अत्तर ब्लेंड तैयार किया गया है। इसमें <strong>${p.name}</strong> का <strong>${p.percent}%</strong> मुख्य बेस है जो खुशबू को टिकाऊपन और गहराई देता है। <strong>${s.percent}% ${s.name}</strong> इसकी आंतरिक कशिश (Heart) को संभालता है, और <strong>${t.percent}% ${t.name}</strong> पहले स्प्रे में तुरंत आकर्षित करने वाली ताज़गी छोड़ता है।`,
+        wtsTemplate: (code, p, s, t) => 
+`नमस्ते! मैंने आपके लैब पर अपना कस्टम 3-अत्तर ब्लेंड तैयार किया है 🌿
 
-मैंने ROOAB LAB पर अपनी पर्सनल 3-अत्तर फ़ॉर्मूलेशन कम्पाउंड की है:
+*फ़ॉर्मूलेशन कोड:* ${code}
+*1. बेस नोट (${p.percent}%):* ${p.name}
+*2. हार्ट नोट (${s.percent}%):* ${s.name}
+*3. टॉप नोट (${t.percent}%):* ${t.name}
 
-🧪 *फ़ॉर्मूला कोड:* ${code}
-• 50% बेस नोट: ${p.name}
-• 30% हार्ट नोट: ${s.name}
-• 20% टॉप नोट: ${t.name}
-
-💥 *VIP ऑफर क्लेम:*
-मुझे ₹200 की विशेष लैब छूट दें और साथ में *मुफ़्त सीक्रेट फेरोमोन बूस्टर ऑयल* जोड़कर इस कस्टम बॉटल की कीमत व डिलीवरी प्रक्रिया बताएं!`
+कृपया मेरा ₹150 का डिस्काउंट लागू करके मुझे इस कस्टम बॉटल की कीमत और डिलीवरी की जानकारी दें।`,
+        rootQuestion: {
+          q: "1. आप यह अत्तर किस मक़सद के लिए तैयार करवाना चाहते हैं?",
+          options: [
+            { text: "💼 Work & Professional — गंभीर, शार्प और ऑफिस में वजनदार रुतबा", segment: "work", seedPicks: ["classic", "copper"] },
+            { text: "❤️ Attraction & Romance — चुंबकीय खिंचाव, मदहोशी और दिलकश महक", segment: "attraction", seedPicks: ["xChocolate", "frenchRose"] },
+            { text: "🌿 Family & Peace — सुकून, सादगी और अपनों के बीच पवित्रता का एहसास", segment: "family", seedPicks: ["whiteMusk", "fawaki"] }
+          ]
+        },
+        branchTrees: {
+          work: [
+            {
+              q: "2. आपकी कार्यशैली और ऑफिस का माहौल ज्यादातर कैसा रहता है?",
+              options: [
+                { text: "बोर्ड रूम, हाई-लेवल क्लाइंट डील्स और गंभीर बातचीत", picks: ["classic", "copper"] },
+                { text: "दिनभर की भागदौड़, लगातार मीटिंग्स और तेज गति वाला काम", picks: ["coolWater", "poise"] }
+              ]
+            },
+            {
+              q: "3. काम के घंटों के दौरान आप खुशबू से किस तरह का अहसास चाहते हैं?",
+              options: [
+                { text: "एक ताज़ा, ठंडा और ऊर्जावान वाइब जो दिनभर दिमाग शांत और अलर्ट रखे", picks: ["coolWater", "whiteHope"] },
+                { text: "एक वजनदार, मजबूत और निडर अहसास जो फैसलों में आत्मविश्वास दिखाए", picks: ["copper", "classic"] }
+              ]
+            },
+            {
+              q: "4. सहकर्मियों और क्लाइंट्स के बीच आपकी खुशबू का असर कैसा पड़ना चाहिए?",
+              options: [
+                { text: "एक सलीकेदार और संतुलित दायरा जो पूरे दिन मर्यादा के साथ बना रहे", picks: ["classic", "poise"] },
+                { text: "केबिन या मीटिंग रूम में दाखिल होते ही आपकी मजबूत मौजूदगी दर्ज करा दे", picks: ["copper", "diamondSandal"] }
+              ]
+            },
+            {
+              q: "5. इस अत्तर को पहनकर आप अपने काम में क्या छाप छोड़ना चाहते हैं?",
+              options: [
+                { text: "एक निर्विवाद अधिकार, अनुशासन और सम्मान (Undisputed Authority)", picks: ["classic", "diamondSandal"] },
+                { text: "तीव्र फोकस, निरंतर सक्रियता और मॉडर्न सोच (Sharp & Dynamic)", picks: ["coolWater", "copper"] }
+              ]
+            }
+          ],
+          attraction: [
+            {
+              q: "2. आप इस अत्तर से किस पर अपना चुंबकीय प्रहार करना चाहते हैं?",
+              options: [
+                { text: "अपनी महिला साथी पर — एक मदहोश, नशीला और दीवाना बना देने वाला खिंचाव", picks: ["xChocolate", "chocoBlast", "mexico"] },
+                { text: "अपने पुरुष साथी पर — एक मखमली, दिलकश और रूह में उतर जाने वाली कशिश", picks: ["frenchRose", "cherish", "nazneen"] }
+              ]
+            },
+            {
+              q: "3. आपकी नज़दीकियों की तासीर में कौन सा नशा घुलना चाहिए?",
+              options: [
+                { text: "पिघलती हुई डार्क चॉकलेट और गर्म कोको का तीव्र कामुक अहसास", picks: ["xChocolate", "chocoBlast"] },
+                { text: "दमिश्क के भीगे सुर्ख गुलाब और मखमली कस्तूरी की मीठी महक", picks: ["frenchRose", "cherish"] }
+              ]
+            },
+            {
+              q: "4. जब वो आपके बिल्कुल करीब आएँ, तो सांसों की दूरी पर क्या महसूस हो?",
+              options: [
+                { text: "एक ऐसा नशा जो उन्हें आपकी बाहों से दूर जाने ही न दे (Uncontrollable Addiction)", picks: ["chocoBlast", "cherish"] },
+                { text: "एक अनसुलझा सम्मोहन जो आपके जाने के बाद भी उन्हें बेचैन रखे (Hypnotic Aura)", picks: ["blueLady", "fantasia"] }
+              ]
+            },
+            {
+              q: "5. इस अत्तर से आप सामने वाले पर क्या अंतिम छाप छोड़ना चाहते हैं?",
+              options: [
+                { text: "'मुझसे दूर रहना अब तुम्हारी हद में नहीं' — गहरा और मदहोश आकर्षण", picks: ["xChocolate", "mexico"] },
+                { text: "'तेरा जिस्म और रूह सिर्फ मेरी महक से पहचानी जाए' — एक न भूलने वाली हसीन याद", picks: ["frenchRose", "nazneen"] }
+              ]
+            }
+          ],
+          family: [
+            {
+              q: "2. आप घर और अपनों के बीच किस तरह का माहौल सबसे ज्यादा पसंद करते हैं?",
+              options: [
+                { text: "सुबह की सात्विक पूजा-पाठ, शांति और सकारात्मक ऊर्जा", picks: ["fawaki", "whiteMusk"] },
+                { text: "हँसी-मज़ाक, चाय की चुस्कियां और शाम की बेफिक्र बातें", picks: ["whiteHope", "dove"] }
+              ]
+            },
+            {
+              q: "3. आपके मन को भीतर तक शांत करने वाली कौन सी महक सबसे ज्यादा छूती है?",
+              options: [
+                { text: "पहली बारिश से महकती सौंधी मिट्टी और हल्का चंदन", picks: ["fawaki", "whiteHope"] },
+                { text: "सफ़ेद कस्तूरी (Musk) और एकदम ताज़ी, साफ-सुथरी पवित्र खुशबू", picks: ["whiteMusk", "dove"] }
+              ]
+            },
+            {
+              q: "4. दिनभर की थकान या तनाव के बाद आपकी रूह को किस चीज़ से आराम मिलता है?",
+              options: [
+                { text: "अपनों के साथ शांति से बैठना और एक सुकून भरी ठंडी हवा महसूस करना", picks: ["whiteMusk", "fawaki"] },
+                { text: "एक ताज़ा स्नान और बिना किसी चिंता या बोझ के गहरी नींद", picks: ["dove", "whiteHope"] }
+              ]
+            },
+            {
+              q: "5. इस अत्तर की शीशी से आपकी सबसे बड़ी उम्मीद क्या है?",
+              options: [
+                { text: "मन को हर तरह के तनाव से मुक्त और शांत रखना", picks: ["whiteMusk", "dove"] },
+                { text: "घर के हर कोने में अपनापन, शुचिता और दुआओं का असर घोलना", picks: ["fawaki", "whiteHope"] }
+              ]
+            }
+          ]
+        }
       },
-
       gu: {
-        telemetryPhases: [
-          "SYNTHESIS PHASE // 01/04",
-          "SYNTHESIS PHASE // 02/04",
-          "SYNTHESIS PHASE // 03/04",
-          "SYNTHESIS PHASE // 04/04"
-        ],
-        activeUsers: "૧,૮૪૨ લોકોએ આજે પોતાનું બ્લૅન્ડ કમ્પાઉન્ડ કર્યું છે",
-        tagline: "// PHEROMONAL LOCK MATRIX",
-        questions: [
-          {
-            q: "૧. તમે તમારી હાજરીથી આસપાસ કેવું ચુંબકીય ખેંચાણ (Magnetism) ઊભું કરવા માંગો છો?",
-            sub: "એક વિકલ્પ પસંદ કરો. લેબ એલ્ગોરિધમ તમારા સ્વભાવ અનુસાર ૩ દુર્લભ અત્તર કમ્પાઉન્ડ કરશે.",
-            options: [
-              {
-                title: "Dark Attraction & Seduction (મદહોશ કરતું આકર્ષણ)",
-                desc: "જ્યારે તેઓ તમારી નજીક આવે ત્યારે તમારી સુગંધ તેમના હોશ ઉડાવી દે અને તેઓ ફક્ત તમારા તરફ ખેંચાય.",
-                icon: "🔥",
-                picks: ["xChocolate", "frenchRose", "chocoBlast"]
-              },
-              {
-                title: "Alpha Dominance & Authority (વજનદાર રુઆબ અને શાસન)",
-                desc: "જે સભા કે બિઝનેસ મીટિંગમાં તમે પગ મૂકો, ત્યાં કોઈ પણ ચર્ચા વિના તમારી વજનદાર પર્સનાલિટીનો પ્રભાવ પડે.",
-                icon: "👑",
-                picks: ["copper", "classic", "diamondSandal"]
-              },
-              {
-                title: "Sacred Peace & Divine Aura (શાંતિ અને દિવ્ય પવિત્રતા)",
-                desc: "એવી પાક અને આહલાદક સુગંધ જે તમારી નજીક આવનાર દરેક વ્યક્તિના દિલમાં પરમ શાંતિ અને સ્નેહ ભરી દે.",
-                icon: "🌿",
-                picks: ["whiteMusk", "fawaki", "diamondSandal"]
-              }
-            ]
-          },
-          {
-            q: "૨. તમે સામી વ્યક્તિના મગજ પર કેવો મનોવૈજ્ઞાનિક પ્રભાવ (Psychological Trigger) છોડવા માંગો છો?",
-            sub: "સુગંધ સીધી મગજના લિમ્બિક સિસ્ટમ (લાગણીઓના કેન્દ્ર) પર તુરંત અસર કરે છે.",
-            options: [
-              {
-                title: "Uncontrollable Neck-Sniffs (વારંવાર નજીક આવવાની બેચેની)",
-                desc: "તેમની નજર અને શ્વાસ માત્ર તમારી ગરદનની ખુશબૂ પર અટકી જાય; દૂર જવાનું મન ન થાય.",
-                icon: "💋",
-                picks: ["xChocolate", "cherish", "blueLady"]
-              },
-              {
-                title: "Undeniable Respect & Silence (ગંભીર સન્માન અને મર્યાદા)",
-                desc: "તમારી એન્ટ્રી થતાં જ સમગ્ર રૂમમાં શાંતિ છવાઈ જાય અને તમારા શબ્દોને આખરી ફેંસલો માનવામાં આવે.",
-                icon: "⚡",
-                picks: ["copper", "classic"]
-              },
-              {
-                title: "Haunting Memory (દિવસ-રાત યાદ રહેતો નશો)",
-                desc: "તમે રૂમમાંથી નીકળી જાઓ તો પણ તમારી મહેક તેમના શ્વાસ અને વિચારોમાં કલાકો સુધી ગુંજતી રહે.",
-                icon: "🔮",
-                picks: ["frenchRose", "mexico", "cherish"]
-              }
-            ]
-          },
-          {
-            q: "૩. તમારી ત્વચા માટે કયો એરોમેટિક બેઝ સૌથી વધુ આકર્ષક અને વજનદાર હોવો જોઈએ?",
-            sub: "આ તમારા ૩-અત્તર ફોર્મ્યુલાનો ૫૦% મુખ્ય આધાર (Base Note) નક્કી કરશે.",
-            options: [
-              {
-                title: "Warm Cocoa, Smoked Vanilla & Dark Amber (ગરમ અને નશીલું)",
-                desc: "ઓગળતી ડાર્ક ચોકલેટ અને એમ્બરનો એવો કામુક સંગમ જે સાંજની મહેફિલમાં મોહક વાતાવરણ સર્જે.",
-                icon: "🍫",
-                picks: ["xChocolate", "chocoBlast"]
-              },
-              {
-                title: "Smoked Oud, Aged Sandal & Royal Leather (શાહી અને મર્દાના)",
-                desc: "શુદ્ધ ચંદન અને પુરાતન ઊદની એવી તાસીર જે ખાનદાની રઈસી અને અખંડ પાવર દર્શાવે છે.",
-                icon: "🪵",
-                picks: ["diamondSandal", "copper"]
-              },
-              {
-                title: "First Rain Earth & White Kashmiri Musk (પવિત્ર અને શીતળ)",
-                desc: "પહેલા વરસાદ પછીની ભીની માટી અને શુદ્ધ સફેદ કસ્તુરીની એવી મહેક જે આત્માને સ્પર્શી જાય.",
-                icon: "💧",
-                picks: ["whiteMusk", "fawaki"]
-              }
-            ]
-          },
-          {
-            q: "૪. તમે આ અત્તરનો ફેલાવો (Projection & Sillage) કેવો રાખવા માંગો છો?",
-            sub: "અંતિમ કમ્પાઉન્ડિંગ સ્ટેજ: ગરમી સાથે ખુશબૂ ફેલાવવાની ક્ષમતા લોક કરવામાં આવી રહી છે.",
-            options: [
-              {
-                title: "14-Hour Beast Mode Aura (આખો રૂમ મહેકી ઊઠે)",
-                desc: "તમે પ્રવેશ કરો એટલે તમારી સુગંધનું પ્રચંડ વર્તુળ રચાઈ જાય; સવારથી રાત સુધી અવિરત ટકે.",
-                icon: "💣",
-                picks: ["copper", "xChocolate", "diamondSandal"]
-              },
-              {
-                title: "Intimate Whisper Lock (ફક્ત અત્યંત નજીક આવનાર માટે)",
-                desc: "એવું રહસ્યમય ખેંચાણ જે ફક્ત તમારા આલિંગન અને શ્વાસોની નિકટ આવનારને જ અનુભવાય.",
-                icon: "🥀",
-                picks: ["frenchRose", "whiteMusk", "cherish"]
-              }
-            ]
-          }
-        ],
-        compoundingStages: [
-          "EXTRACTING TARGET MOLECULES...",
-          "STABILIZING THERMAL BASE NOTES...",
-          "INFUSING PHEROMONAL MAGNETS...",
-          "LOCKING 50:30:20 RATIO MATRICES..."
-        ],
-        roles: ["૫૦% Base Sustain (અવિનાશી આધાર)", "૩૦% Heart Resonance (દિલનું આકર્ષણ)", "૨૦% Top Magnetism (પહેલો વાર)"],
-        offerTitle: "🎁 ₹200 ઇન્સ્ટન્ટ છૂટ + ફ્રી સિક્રેટ ફેરોમોન બૂસ્ટર ડ્રોપ",
-        offerDesc: "આ ફોર્મ્યુલા અમારા માસ્ટર પરફ્યુમરને તુરંત WhatsApp પર મોકલો. આ બોટલ સાથે 1x સિક્રેટ અટ્રેક્શન બૂસ્ટર ઓઈલ ફ્રી મળશે.",
-        btnLabel: "WhatsApp પર ફોર્મ્યુલા મોકલો અને ₹200 બચાવો",
-        timerLabel: "ફોર્મ્યુલા રિઝર્વેશન સમાપ્ત થવામાં:",
-        wtsMessage: (code, p, s, t) => 
-`નમસ્તે માસ્ટર પરફ્યુમર! 🔥
+        stepText: "સવાલ {cur} / {total}",
+        loaderTitle: "તમારું સિગ્નેચર અત્તર બ્લૅન્ડ તૈયાર થઈ રહ્યું છે...",
+        loaderSub: "૫૦% Base, ૩૦% Heart અને ૨૦% Top નોટ્સનું સંતુલન ગણાઈ રહ્યું છે",
+        resultTitle: "તમારું વ્યક્તિગત ૩-અત્તર બ્લૅન્ડ",
+        offerHeadline: "🎁 ₹150 નું ડિસ્કાઉન્ટ તુરંત અનલોક કરો",
+        offerDesc: "આ ફોર્મ્યુલેશન અમારા પરફ્યુમરને મોકલો જેથી તમારી ખાસ બોટલ તૈયાર કરી શકાય.",
+        orderBtnText: "WhatsApp પર ફોર્મ્યુલા મોકલો અને ડિસ્કાઉન્ટ મેળવો",
+        roles: ["Base Note (મુખ્ય આધાર)", "Heart Note (હાર્ટ નોટ)", "Top Note (ટોપ નોટ)"],
+        verdictText: (p, s, t) => `<strong>ફોર્મ્યુલેશન વિશ્લેષણ:</strong> તમારી પસંદગી મુજબ આ ખાસ ૩-અત્તર બ્લૅન્ડ તૈયાર કરાયું છે. જેમાં <strong>${p.name}</strong> નું <strong>${p.percent}%</strong> મુખ્ય બેઝ છે જે સુગંધને સ્થિરતા અને દીર્ઘાયુ આપે છે. <strong>${s.percent}% ${s.name}</strong> આંતરિક કશિશ (Heart) સંભાળે છે, અને <strong>${t.percent}% ${t.name}</strong> પહેલા સ્પ્રેમાં તુરંત આકર્ષિત કરતી તાજગી આપે છે.`,
+        wtsTemplate: (code, p, s, t) => 
+`નમસ્તે! મેં તમારી લેબ પર મારું ૩-અત્તર બ્લૅન્ડ તૈયાર કર્યું છે 🌿
 
-મેં ROOAB LAB પર મારી પર્સનલ ૩-અત્તર ફોર્મ્યુલા કમ્પાઉન્ડ કરી છે:
+*ફોર્મ્યુલેશન કોડ:* ${code}
+*1. બેઝ નોટ (${p.percent}%):* ${p.name}
+*2. હાર્ટ નોટ (${s.percent}%):* ${s.name}
+*3. ટોપ નોટ (${t.percent}%):* ${t.name}
 
-🧪 *ફોર્મ્યુલા કોડ:* ${code}
-• 50% બેઝ નોટ: ${p.name}
-• 30% હાર્ટ નોટ: ${s.name}
-• 20% ટોપ નોટ: ${t.name}
-
-💥 *VIP ઓફર ક્લેમ:*
-મને ₹200 ની લેબ છૂટ આપો અને સાથે *ફ્રી સિક્રેટ ફેરોમોન બૂસ્ટર ઓઈલ* જોડી આ કસ્ટમ બોટલની કિંમત અને ડિલિવરી જણાવો!`
+કૃપા કરીને મારું ₹150 નું ડિસ્કાઉન્ટ લાગુ કરી આ કસ્ટમ બોટલની કિંમત અને ડિલિવરી જણાવો.`,
+        rootQuestion: {
+          q: "૧. તમે આ અત્તર કયા મકસદ (Purpose) માટે તૈયાર કરાવવા માંગો છો?",
+          options: [
+            { text: "💼 Work & Professional — ગંભીર, શાર્પ અને ઓફિસમાં વજનદાર રુઆબ", segment: "work", seedPicks: ["classic", "copper"] },
+            { text: "❤️ Attraction & Romance — ચુંબકીય ખેંચાણ, મદહોશી અને આકર્ષક સુગંધ", segment: "attraction", seedPicks: ["xChocolate", "frenchRose"] },
+            { text: "🌿 Family & Peace — શાંતિ, સાદગી અને સ્વજનો વચ્ચે પવિત્રતાનો અહેસાસ", segment: "family", seedPicks: ["whiteMusk", "fawaki"] }
+          ]
+        },
+        branchTrees: {
+          work: [
+            {
+              q: "૨. તમારી કાર્યશૈલી અને ઓફિસનું વાતાવરણ કેવું રહે છે?",
+              options: [
+                { text: "બોર્ડ રૂમ, હાઈ-લેવલ ક્લાયન્ટ ડીલ્સ અને ગંભીર ચર્ચા", picks: ["classic", "copper"] },
+                { text: "દિવસભરની દોડધામ, સતત મીટિંગ્સ અને ઝડપી કામ", picks: ["coolWater", "poise"] }
+              ]
+            },
+            {
+              q: "૩. કામના કલાકો દરમિયાન સુગંધથી કેવો અહેસાસ જોઈએ?",
+              options: [
+                { text: "એકદમ તાજો, ઠંડો અને એનર્જેટિક વાઈબ જે મગજને શાંત રાખે", picks: ["coolWater", "whiteHope"] },
+                { text: "વજનદાર, મજબૂત અને નિડર અહેસાસ જે નિર્ણયોમાં આત્મવિશ્વાસ આપે", picks: ["copper", "classic"] }
+              ]
+            },
+            {
+              q: "૪. સહકર્મીઓ અને ક્લાયન્ટ્સ પર તમારી સુગંધનો કેવો પ્રભાવ પડવો જોઈએ?",
+              options: [
+                { text: "એક સંયમિત અને સંતુલિત વર્તુળ જે આખો દિવસ ગરિમા સાથે ટકે", picks: ["classic", "poise"] },
+                { text: "કેબિનમાં પ્રવેશતાં જ તમારી વજનદાર હાજરીની નોંધ લેવાય", picks: ["copper", "diamondSandal"] }
+              ]
+            },
+            {
+              q: "૫. આ અત્તર લગાવીને તમે કામમાં કઈ છાપ છોડવા માંગો છો?",
+              options: [
+                { text: "નિર્વિવાદ અધિકાર, શિસ્ત અને માન-સન્માન (Undisputed Authority)", picks: ["classic", "diamondSandal"] },
+                { text: "તીવ્ર ફોકસ, સતત સક્રિયતા અને આધુનિક વિચારસરણી (Dynamic Focus)", picks: ["coolWater", "copper"] }
+              ]
+            }
+          ],
+          attraction: [
+            {
+              q: "૨. તમે આ અત્તર વડે કોના પર પોતાનો ચુંબકીય પ્રહાર કરવા માંગો છો?",
+              options: [
+                { text: "પોતાની મહિલા સાથી પર — એક મદહોશ, નશીલો અને દીવાના બનાવતો ખેંચાણ", picks: ["xChocolate", "chocoBlast", "mexico"] },
+                { text: "પોતાના પુરુષ સાથી પર — એક મખમલી, દિલકશ અને રૂહમાં ઉતરી જતી કશિશ", picks: ["frenchRose", "cherish", "nazneen"] }
+              ]
+            },
+            {
+              q: "૩. તમારી નિકટતાની તાસીરમાં કયો નશો ઘૂળવો જોઈએ?",
+              options: [
+                { text: "ઓગળતી ડાર્ક ચોકલેટ અને ગરમ કોકોનો તીવ્ર અહેસાસ", picks: ["xChocolate", "chocoBlast"] },
+                { text: "તાજા દમિશ્ક ગુલાબ અને મખમલી કસ્તુરીની મીઠી મહેક", picks: ["frenchRose", "cherish"] }
+              ]
+            },
+            {
+              q: "૪. જ્યારે તેઓ તમારી એકદમ નજીક આવે, ત્યારે શ્વાસો વચ્ચે શું અનુભવાય?",
+              options: [
+                { text: "એવો નશો જે તેમને તમારા આલિંગનથી દૂર ન જવા દે (Addiction)", picks: ["chocoBlast", "cherish"] },
+                { text: "એવું રહસ્યમય સંમોહન જે તમારા ગયા પછી પણ તેમને બેચેન રાખે (Hypnotic)", picks: ["blueLady", "fantasia"] }
+              ]
+            },
+            {
+              q: "૫. આ અત્તરથી સામેવાળા વ્યક્તિના દિલ પર શું અંતિમ છાપ છોડવી છે?",
+              options: [
+                { text: "'મારાથી દૂર રહેવું હવે તારા વશમાં નથી' — અસીમ આકર્ષણ", picks: ["xChocolate", "mexico"] },
+                { text: "'તમારું અસ્તિત્વ ફક્ત મારી મહેકથી ઓળખાય' — એક અવિસ્મરણીય યાદ", picks: ["frenchRose", "nazneen"] }
+              ]
+            }
+          ],
+          family: [
+            {
+              q: "૨. તમે પરિવાર વચ્ચે કેવું વાતાવરણ સૌથી વધુ પસંદ કરો છો?",
+              options: [
+                { text: "સવારની સાત્વિક પૂજા, શાંતિ અને પોઝિટિવ એનર્જી", picks: ["fawaki", "whiteMusk"] },
+                { text: "હસી-મજાક, ચાની ચુસ્કીઓ અને સાંજની હળવી વાતો", picks: ["whiteHope", "dove"] }
+              ]
+            },
+            {
+              q: "૩. તમારા મનને ઊંડે સુધી શાંત કરનારી કઈ સુગંધ સૌથી વધુ સ્પર્શે છે?",
+              options: [
+                { text: "પહેલા વરસાદ પછીની ભીની માટી અને શીતળ ચંદન", picks: ["fawaki", "whiteHope"] },
+                { text: "સફેદ કસ્તુરી (Musk) અને એકદમ ચોખ્ખી પવિત્ર સુગંધ", picks: ["whiteMusk", "dove"] }
+              ]
+            },
+            {
+              q: "૪. દિવસભરના થાક પછી તમારા મનને કઈ વાતથી શાંતિ મળે છે?",
+              options: [
+                { text: "સ્વજનો સાથે શાંતિથી બેસીને ઠંડી હવાની લહેર અનુભવવી", picks: ["whiteMusk", "fawaki"] },
+                { text: "તાજગીભર્યું સ્નાન અને કોઈ પણ ચિંતા વિનાની ગાઢ ઊંઘ", picks: ["dove", "whiteHope"] }
+              ]
+            },
+            {
+              q: "૫. આ અત્તરની શીશી પાસેથી તમારી સૌથી મોટી અપેક્ષા કઈ છે?",
+              options: [
+                { text: "મનને તમામ પ્રકારના તણાવથી મુક્ત અને શાંત રાખવું", picks: ["whiteMusk", "dove"] },
+                { text: "ઘરના દરેક ખૂણામાં સ્નેહ, શુદ્ધતા અને આશીર્વાદ ઘોળવા", picks: ["fawaki", "whiteHope"] }
+              ]
+            }
+          ]
+        }
       }
     };
 
-    // Core State Controller
-    class LaboratoryController {
+    class TrinityEngine {
       constructor() {
-        this.lang = 'hi';
-        this.currentStep = 0;
-        this.totalSteps = 4;
-        this.votes = {};
-        for (let k in CATALOG) { this.votes[k] = 0; }
-        this.finalBlend = null;
-        this.formulationCode = `ROOAB-${Math.floor(100000 + Math.random() * 900000)}`;
-        this.whatsappTarget = "919327938950";
-        this.timerSeconds = 9 * 60 + 47; // 9m 47s countdown
-      }
-
-      init() {
-        this.renderStep();
-        this.startFOMOTimer();
-      }
-
-      setLanguage(target) {
-        if (this.lang === target) return;
-        this.lang = target;
-        document.getElementById('lang-hi').className = target === 'hi' 
-          ? "px-3 py-1 rounded-full text-[11px] font-bold transition-all bg-goldPrimary text-black"
-          : "px-3 py-1 rounded-full text-[11px] font-bold text-gray-400 hover:text-white transition-all";
-        
-        document.getElementById('lang-gu').className = target === 'gu'
-          ? "px-3 py-1 rounded-full text-[11px] font-bold transition-all bg-goldPrimary text-black"
-          : "px-3 py-1 rounded-full text-[11px] font-bold text-gray-400 hover:text-white transition-all";
-
-        if (this.currentStep < this.totalSteps) {
-          this.renderStep();
-        } else if (this.finalBlend) {
-          this.renderDossier();
+        this.brandScores = {};
+        for (let key in CATALOG) {
+          this.brandScores[key] = 0;
         }
       }
 
-      renderStep() {
-        const locale = LOCALES[this.lang];
-        const stepData = locale.questions[this.currentStep];
-
-        // Header Updates
-        document.getElementById('stepLabel').innerText = locale.telemetryPhases[this.currentStep];
-        document.getElementById('chamberProgress').style.width = `${((this.currentStep + 1) / this.totalSteps) * 100}%`;
-        document.getElementById('chamberQuestion').innerText = stepData.q;
-        document.getElementById('chamberSubtext').innerText = stepData.sub;
-        document.getElementById('activeUsersTag').innerText = locale.activeUsers;
-        document.getElementById('tacticalTagline').innerText = locale.tagline;
-
-        // Render Options
-        const grid = document.getElementById('choicesGrid');
-        grid.innerHTML = '';
-
-        stepData.options.forEach((opt, idx) => {
-          const card = document.createElement('div');
-          card.className = "choice-card rounded-2xl p-4 cursor-pointer flex items-start gap-3.5";
-          card.innerHTML = `
-            <div class="text-2xl pt-0.5 flex-shrink-0">${opt.icon}</div>
-            <div class="flex-1">
-              <h3 class="text-sm sm:text-base font-black text-white group-hover:text-goldLight leading-tight mb-1">
-                ${opt.title}
-              </h3>
-              <p class="text-xs text-gray-300 leading-snug">
-                ${opt.desc}
-              </p>
-            </div>
-            <div class="text-goldPrimary/40 text-xs font-mono font-bold self-center">
-              [SELECT]
-            </div>
-          `;
-
-          card.onclick = () => {
-            // Register Vote Weight
-            opt.picks.forEach((key, pIdx) => {
-              if (this.votes[key] !== undefined) {
-                this.votes[key] += (opt.picks.length - pIdx) * 8 + 10;
-              }
-            });
-
-            this.currentStep++;
-            if (this.currentStep < this.totalSteps) {
-              this.renderStep();
-            } else {
-              this.triggerCompoundingSimulation();
-            }
-          };
-
-          grid.appendChild(card);
+      vote(picks) {
+        picks.forEach(key => {
+          if (this.brandScores[key] !== undefined) {
+            this.brandScores[key] += 12;
+          }
         });
       }
 
-      triggerCompoundingSimulation() {
-        document.getElementById('simulationView').classList.add('hidden');
-        document.getElementById('telemetryHeader').classList.add('hidden');
-        const simView = document.getElementById('compoundingView');
-        simView.classList.remove('hidden');
-        simView.classList.add('flex');
+      getTopThreeBlend() {
+        const sorted = Object.keys(this.brandScores)
+          .sort((a, b) => this.brandScores[b] - this.brandScores[a]);
 
-        const locale = LOCALES[this.lang];
-        let fluid = document.getElementById('fluidLevel');
-        let status = document.getElementById('compoundingStatus');
-        let yieldText = document.getElementById('liveYield');
-
-        // Simulation Stage Transitions
-        setTimeout(() => { fluid.style.height = "35%"; status.innerText = locale.compoundingStages[1]; yieldText.innerText = "78.4%"; }, 600);
-        setTimeout(() => { fluid.style.height = "70%"; status.innerText = locale.compoundingStages[2]; yieldText.innerText = "91.9%"; }, 1300);
-        setTimeout(() => { fluid.style.height = "90%"; status.innerText = locale.compoundingStages[3]; yieldText.innerText = "98.6%"; }, 1900);
-
-        setTimeout(() => {
-          this.calculateBestFormula();
-          simView.classList.remove('flex');
-          simView.classList.add('hidden');
-          this.renderDossier();
-        }, 2600);
-      }
-
-      calculateBestFormula() {
-        const sorted = Object.keys(this.votes).sort((a, b) => this.votes[b] - this.votes[a]);
         const ratios = [50, 30, 20];
-        this.finalBlend = [0, 1, 2].map(i => ({
+        return [0, 1, 2].map(i => ({
           key: sorted[i],
           name: CATALOG[sorted[i]].name,
-          category: CATALOG[sorted[i]].category,
           color: CATALOG[sorted[i]].color,
           percent: ratios[i]
         }));
       }
+    }
 
-      renderDossier() {
-        const locale = LOCALES[this.lang];
-        const dossier = document.getElementById('dossierView');
-        dossier.classList.remove('hidden');
+    class AppController {
+      constructor() {
+        this.lang = 'hi';
+        this.currentStep = 0;
+        this.totalSteps = 5;
+        this.selectedSegment = null;
+        this.engine = new TrinityEngine();
+        this.finalBlend = null;
+        this.formulationCode = `#ROOAB-${Math.floor(1000 + Math.random() * 9000)}`;
+        this.whatsappNumber = "919327938950";
+        this.timerInterval = null;
+        this.timeLeft = 600; // 10 Minutes
+      }
 
-        // Text Content
-        document.getElementById('dossierBatchCode').innerText = `BATCH #${this.formulationCode}`;
-        document.getElementById('offerMainTitle').innerText = locale.offerTitle;
-        document.getElementById('offerDescription').innerText = locale.offerDesc;
-        document.getElementById('btnCtaLabel').innerText = locale.btnLabel;
-        document.getElementById('timerHeadline').innerText = locale.timerLabel;
+      init() {
+        this.renderStep();
+      }
 
-        // Ratio Bar Injection
-        const ratioBar = document.getElementById('resultRatioBar');
-        ratioBar.innerHTML = '';
-        this.finalBlend.forEach(item => {
-          const seg = document.createElement('div');
-          seg.style.width = `${item.percent}%`;
-          seg.style.backgroundColor = item.color;
-          seg.className = "h-full flex items-center justify-center font-mono font-extrabold text-xs text-white drop-shadow-md";
-          seg.innerText = `${item.percent}%`;
-          ratioBar.appendChild(seg);
-        });
+      setLanguage(targetLang) {
+        if (this.lang === targetLang) return;
+        this.lang = targetLang;
 
-        // 3 Ingredients breakdown
-        const list = document.getElementById('formulaListDetails');
-        list.innerHTML = '';
-        this.finalBlend.forEach((item, idx) => {
-          const row = document.createElement('div');
-          row.className = "flex items-center justify-between p-3 rounded-xl border border-white/10 bg-black/40";
-          row.innerHTML = `
-            <div class="flex items-center gap-2.5">
-              <div class="w-3 h-3 rounded-full shadow-[0_0_8px_${item.color}]" style="background-color: ${item.color}"></div>
-              <div>
-                <div class="font-extrabold text-sm text-white">${item.name}</div>
-                <div class="text-[11px] text-goldLight font-medium">${locale.roles[idx]}</div>
-              </div>
-            </div>
-            <div class="font-mono text-base font-extrabold text-white">
-              ${item.percent}%
-            </div>
-          `;
-          list.appendChild(row);
-        });
+        document.getElementById('btn-hi').classList.toggle('active', targetLang === 'hi');
+        document.getElementById('btn-gu').classList.toggle('active', targetLang === 'gu');
 
-        // Visceral Verdict Text
-        const [p, s, t] = this.finalBlend;
-        const verdict = document.getElementById('verdictExplanation');
-        if (this.lang === 'hi') {
-          verdict.innerHTML = `<strong>🧪 फ़ॉर्मूलेशन डायग्नोसिस:</strong> आपकी नसों की तासीर अनुसार <strong>${p.name}</strong> का 50% आधार 14 घंटे तक आपकी त्वचा से चिपककर भारी आभामंडल छोड़ेगा। 30% <strong>${s.name}</strong> से दिलकश खिंचाव पैदा होगा, और 20% <strong>${t.name}</strong> पहले 5 सेकंड में किसी को भी आपकी ओर मुड़ने पर मजबूर कर देगा।`;
-        } else {
-          verdict.innerHTML = `<strong>🧪 ફોર્મ્યુલેશન રિપોર્ટ:</strong> તમારી પસંદગી મુજબ <strong>${p.name}</strong> નું ૫૦% બેઝ ૧૪ કલાક સુધી તમારા શરીર પર ટકી ભારે આભા બનાવશે. ૩૦% <strong>${s.name}</strong> દિલકશ ખેંચાણ આપશે, અને ૨૦% <strong>${t.name}</strong> પ્રથમ સ્પ્રેમાં સામી વ્યક્તિને તમારા તરફ જોવા મજબૂર કરશે.`;
+        if (this.currentStep < this.totalSteps) {
+          this.renderStep();
+        } else if (this.finalBlend) {
+          this.renderResultUI(this.finalBlend);
         }
       }
 
-      openWhatsAppDispatch() {
-        if (!this.finalBlend) return;
-        const locale = LOCALES[this.lang];
-        const [p, s, t] = this.finalBlend;
-        const msg = locale.wtsMessage(this.formulationCode, p, s, t);
-        const encoded = encodeURIComponent(msg);
-        const targetUrl = `https://wa.me/${this.whatsappTarget}?text=${encoded}`;
-        window.location.href = targetUrl;
+      renderStep() {
+        const dict = I18N[this.lang];
+        const stepDisplay = dict.stepText.replace('{cur}', this.currentStep + 1).replace('{total}', this.totalSteps);
+        document.getElementById('stepCounter').innerText = stepDisplay;
+        document.getElementById('progressBar').style.width = `${((this.currentStep + 1) / this.totalSteps) * 100}%`;
+
+        const grid = document.getElementById('optionsGrid');
+        grid.innerHTML = '';
+
+        if (this.currentStep === 0) {
+          document.getElementById('questionTitle').innerText = dict.rootQuestion.q;
+          dict.rootQuestion.options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerHTML = `<span class="opt-icon">✦</span> <span>${opt.text}</span>`;
+            btn.onclick = () => {
+              this.selectedSegment = opt.segment;
+              this.engine.vote(opt.seedPicks);
+              this.currentStep = 1;
+              this.renderStep();
+            };
+            grid.appendChild(btn);
+          });
+        } else {
+          const branchQ = dict.branchTrees[this.selectedSegment][this.currentStep - 1];
+          document.getElementById('questionTitle').innerText = branchQ.q;
+          branchQ.options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerHTML = `<span class="opt-icon">✦</span> <span>${opt.text}</span>`;
+            btn.onclick = () => {
+              this.engine.vote(opt.picks);
+              this.currentStep++;
+              if (this.currentStep < this.totalSteps) {
+                this.renderStep();
+              } else {
+                this.showBlending();
+              }
+            };
+            grid.appendChild(btn);
+          });
+        }
       }
 
-      startFOMOTimer() {
-        setInterval(() => {
-          if (this.timerSeconds > 0) {
-            this.timerSeconds--;
-            const m = Math.floor(this.timerSeconds / 60).toString().padStart(2, '0');
-            const s = (this.timerSeconds % 60).toString().padStart(2, '0');
-            const clockEl = document.getElementById('countdownClock');
-            if (clockEl) clockEl.innerText = `${m}:${s}`;
+      showBlending() {
+        const dict = I18N[this.lang];
+        document.getElementById('quizBlock').style.display = 'none';
+        document.getElementById('progressTrack').style.display = 'none';
+        document.getElementById('stepCounterBox').style.display = 'none';
+        document.getElementById('loaderTitle').innerText = dict.loaderTitle;
+        document.getElementById('loaderSub').innerText = dict.loaderSub;
+        document.getElementById('blendingBlock').style.display = 'flex';
+
+        setTimeout(() => {
+          document.getElementById('blendingBlock').style.display = 'none';
+          this.finalBlend = this.engine.getTopThreeBlend();
+          this.renderResultUI(this.finalBlend);
+          this.startCountdown();
+        }, 2200);
+      }
+
+      startCountdown() {
+        if (this.timerInterval) clearInterval(this.timerInterval);
+        const timerEl = document.getElementById('lockTimer');
+
+        this.timerInterval = setInterval(() => {
+          if (this.timeLeft <= 0) {
+            clearInterval(this.timerInterval);
+            timerEl.innerText = "00:00";
+            return;
           }
+          this.timeLeft--;
+          const m = Math.floor(this.timeLeft / 60);
+          const s = this.timeLeft % 60;
+          timerEl.innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
         }, 1000);
+      }
+
+      renderResultUI(blend) {
+        const dict = I18N[this.lang];
+        document.getElementById('resultBlock').style.display = 'block';
+        document.getElementById('resultTitle').innerText = dict.resultTitle;
+        document.getElementById('orderBtnLabel').innerText = dict.orderBtnText;
+        document.getElementById('offerHeadline').innerText = dict.offerHeadline;
+        document.getElementById('offerDesc').innerText = dict.offerDesc;
+        document.getElementById('blendCode').innerText = `TRINITY FORMULA: ${this.formulationCode}`;
+
+        const bar = document.getElementById('stackedBar');
+        const list = document.getElementById('formulaList');
+        bar.innerHTML = '';
+        list.innerHTML = '';
+
+        blend.forEach((item, index) => {
+          const seg = document.createElement('div');
+          seg.className = 'blend-segment';
+          seg.style.width = `${item.percent}%`;
+          seg.style.background = item.color;
+          seg.innerText = `${item.percent}%`;
+          bar.appendChild(seg);
+
+          const card = document.createElement('div');
+          card.className = 'formula-item';
+          card.innerHTML = `
+            <div class="brand-meta">
+              <div class="brand-dot" style="background: ${item.color};"></div>
+              <div>
+                <div class="brand-name">${item.name}</div>
+                <div class="brand-role">${dict.roles[index]}</div>
+              </div>
+            </div>
+            <div class="brand-ratio">${item.percent}%</div>
+          `;
+          list.appendChild(card);
+        });
+
+        document.getElementById('blendVerdict').innerHTML = dict.verdictText(blend[0], blend[1], blend[2]);
+      }
+
+      orderOnWhatsApp() {
+        if (!this.finalBlend) return;
+        const dict = I18N[this.lang];
+        const [p, s, t] = this.finalBlend;
+        const rawMessage = dict.wtsTemplate(this.formulationCode, p, s, t);
+        const encoded = encodeURIComponent(rawMessage);
+        
+        // Direct WhatsApp redirection
+        const targetUrl = `https://wa.me/${this.whatsappNumber}?text=${encoded}`;
+        window.location.href = targetUrl;
       }
     }
 
-    // Initialize Lab Engine on DOM Ready
-    const labApp = new LaboratoryController();
-    window.addEventListener('DOMContentLoaded', () => {
-      labApp.init();
-    });
+    const app = new AppController();
+    app.init();
   </script>
 </body>
 </html>
