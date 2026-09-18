@@ -9,6 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Noto+Sans+Gujarati:wght@400;600;700;800;900&family=Rozha+One&display=swap" rel="stylesheet">
   
+  <!-- Razorpay Official Checkout SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
   <style>
     :root {
       --bg-night: #08050e;
@@ -475,7 +478,7 @@
       border: 1px solid var(--card-border);
       border-radius: 14px;
       padding: 14px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       text-align: left;
     }
 
@@ -547,45 +550,167 @@
       line-height: 1.6;
     }
 
-    /* Direct WhatsApp Button */
-    .btn-sacred-whatsapp {
+    /* Checkout & Payment Selector Block */
+    .payment-selection-box {
+      background: rgba(14, 8, 26, 0.95);
+      border: 1.5px solid var(--card-border);
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 14px;
+      text-align: left;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+
+    .payment-box-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+      margin-bottom: 12px;
+    }
+
+    .delivery-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: #4ade80;
+      font-weight: 800;
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      padding: 3px 9px;
+      border-radius: 20px;
+    }
+
+    .pay-card {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 12px;
-      width: 100%;
-      background: linear-gradient(135deg, #25d366 0%, #15803d 100%);
-      color: #ffffff;
-      text-decoration: none;
-      padding: 17px 16px;
+      justify-content: space-between;
+      padding: 13px 12px;
       border-radius: 14px;
-      font-size: 16.5px;
-      font-weight: 900;
-      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
-      position: relative;
-      overflow: hidden;
+      cursor: pointer;
+      margin-bottom: 10px;
+      transition: all 0.2s ease;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .pay-card.selected-online {
+      background: rgba(255, 215, 0, 0.08);
+      border: 1.5px solid var(--gold-temple);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
+    }
+
+    .pay-card.selected-cod {
+      background: rgba(37, 211, 102, 0.08);
+      border: 1.5px solid var(--whatsapp);
+      box-shadow: 0 0 15px rgba(37, 211, 102, 0.15);
+    }
+
+    .pay-card-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pay-radio {
+      accent-color: var(--gold-temple);
+      width: 17px;
+      height: 17px;
       cursor: pointer;
     }
 
-    .btn-sacred-whatsapp:active {
+    .pay-card-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .pay-card-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .pay-card-badge {
+      font-size: 9.5px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      margin-left: 6px;
+    }
+
+    .badge-prepaid {
+      background: rgba(34, 197, 94, 0.2);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.4);
+    }
+
+    .badge-cod {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ddd;
+    }
+
+    /* Free Home Delivery Highlight */
+    .delivery-strip {
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      border-radius: 12px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #a7f3d0;
+      margin-bottom: 14px;
+    }
+
+    /* Master Dynamic Action Button */
+    .btn-master-action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px 14px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 900;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-master-action:active {
       transform: scale(0.98);
     }
 
-    .btn-sacred-whatsapp::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.28) 50%, transparent 60%);
-      animation: gleam 2.8s infinite;
-      pointer-events: none;
+    .btn-gold-action {
+      background: linear-gradient(135deg, #ffd700 0%, #f39c12 100%);
+      color: #0c0612;
+      box-shadow: 0 0 24px rgba(255, 215, 0, 0.45);
     }
 
-    @keyframes gleam {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
+    .btn-wa-action {
+      background: linear-gradient(135deg, #25d366 0%, #15803d 100%);
+      color: #ffffff;
+      box-shadow: 0 0 24px rgba(37, 211, 102, 0.45);
+    }
+
+    .success-alert {
+      display: none;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1.5px solid #10b981;
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      margin-top: 14px;
     }
 
     .wa-subtext {
@@ -598,7 +723,7 @@
 </head>
 <body>
 
-  <!-- Ambient Sacred Temple Sparks & Smoke Canvas -->
+  <!-- Ambient Sacred Temple Sparks Canvas -->
   <canvas id="templeCanvas"></canvas>
   <div class="temple-vignette"></div>
 
@@ -738,7 +863,7 @@
       </div>
     </section>
 
-    <!-- SLIDE 4: 50:30:20 SACRED BLEND REVEAL & WHATSAPP ACTION -->
+    <!-- SLIDE 4: 50:30:20 SACRED BLEND REVEAL & DUAL ORDER -->
     <section class="screen-card" id="slide4">
       <span class="step-badge" style="background:rgba(34,197,94,0.15); border-color:#22c55e; color:#4ade80;">✔ સંકલ્પ પૂર્ણ • ૧૦૦% શુદ્ધ પૂજા ગ્રેડ</span>
       <h2 class="heading" style="font-size: 19px; margin-bottom: 10px;">
@@ -808,21 +933,89 @@
         </div>
       </div>
 
-      <!-- Direct Clean WhatsApp Trigger to 9327938950 -->
-      <a id="divineWaBtn" href="#" target="_blank" class="btn-sacred-whatsapp">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.698.073-1.133-.07-.272-.089-.623-.21-1.077-.406-1.924-.83-3.176-2.779-3.272-2.906-.096-.128-.777-1.034-.777-1.973 0-.94.492-1.402.668-1.593.175-.19.382-.239.51-.239.127 0 .255.002.366.007.119.006.279-.045.437.335.163.393.556 1.356.604 1.455.048.099.08.216.016.343-.064.128-.096.208-.192.32-.096.112-.202.25-.288.336-.096.096-.197.2-.085.392.112.192.499.824 1.072 1.335.738.657 1.36.861 1.552.957.192.096.304.08.416-.048.112-.128.48-.559.608-.751.128-.192.256-.16.432-.096.176.064 1.12.528 1.312.624.192.096.32.144.368.224.048.08.048.464-.096.869z"/>
-        </svg>
-        WhatsApp પર દૈવી અત્તર મંગાવો
-      </a>
+      <!-- DUAL PAYMENT SELECTOR (NO FORM) -->
+      <div class="payment-selection-box">
+        <div class="payment-box-header">
+          <span style="font-size:12px; font-weight:800; color:var(--gold-temple); text-transform:uppercase;">
+            ★ પેમેન્ટ પદ્ધતિ પસંદ કરો
+          </span>
+          <span class="delivery-pill">
+            🚚 All India Free Delivery
+          </span>
+        </div>
 
-      <p class="wa-subtext">
-        બટન દબાવતાં જ તમારા ઈષ્ટદેવના બ્લેન્ડ સાથે WhatsApp ચેટ ખૂલશે
+        <!-- Option 1: Razorpay Online -->
+        <label id="cardOnline" class="pay-card selected-online">
+          <div class="pay-card-left">
+            <input type="radio" name="payType" value="ONLINE" checked onchange="handlePaymentModeChange('ONLINE')" class="pay-radio">
+            <div>
+              <div class="pay-card-title">
+                ઓનલાઇન પેમેન્ટ (Prepaid)
+                <span class="pay-card-badge badge-prepaid">ઝડપી ડિસ્પેચ</span>
+              </div>
+              <div class="pay-card-sub">UPI, Google Pay, PhonePe, Paytm, કાર્ડ્સ (Razorpay)</div>
+            </div>
+          </div>
+          <span style="font-size:14px; font-weight:900; color:var(--gold-temple);">₹૫૯૯</span>
+        </label>
+
+        <!-- Option 2: Cash on Delivery via WhatsApp -->
+        <label id="cardCOD" class="pay-card">
+          <div class="pay-card-left">
+            <input type="radio" name="payType" value="COD" onchange="handlePaymentModeChange('COD')" class="pay-radio">
+            <div>
+              <div class="pay-card-title">
+                કેશ ઓન ડિલિવરી (COD)
+                <span class="pay-card-badge badge-cod">WhatsApp</span>
+              </div>
+              <div class="pay-card-sub">પાર્સલ ઘરે પહોંચે ત્યારે જ રોકડા રૂપિયા આપો</div>
+            </div>
+          </div>
+          <span style="font-size:14px; font-weight:900; color:#ddd;">₹૫૯૯</span>
+        </label>
+
+        <!-- Free Delivery Banner -->
+        <div class="delivery-strip">
+          <span>📦 <strong>સમગ્ર ભારતમાં ફ્રી હોમ ડિલિવરી</strong></span>
+          <span style="font-weight:900; color:#fff;">₹0 FREE</span>
+        </div>
+
+        <!-- Single Master CTA Button -->
+        <button id="masterActionBtn" onclick="executeFinalOrder()" class="btn-master-action btn-gold-action">
+          <svg id="btnIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5z"/>
+          </svg>
+          <span id="btnLabel">₹૫૯૯ ઓનલાઇન ચૂકવો (Razorpay Instant)</span>
+        </button>
+
+        <!-- Success Message on Razorpay Complete -->
+        <div id="paymentSuccessBox" class="success-alert">
+          <div style="font-size:24px; margin-bottom:4px;">🙏</div>
+          <h3 style="font-size:16px; font-weight:900; color:#fff; margin-bottom:4px;">દૈવી પ્રસાદ ઓર્ડર કન્ફર્મ!</h3>
+          <p style="font-size:12px; color:#a7f3d0;" id="successDetails"></p>
+          <p style="font-size:11px; color:#ddd; margin-top:4px;">તમારું સિદ્ધ અત્તર તૈયાર કરી સમગ્ર ભારતમાં ફ્રી હોમ ડિલિવરી દ્વારા પહોંચાડવામાં આવશે.</p>
+        </div>
+      </div>
+
+      <p class="wa-subtext" id="footerSubtext">
+        🔒 ૧૦૦% સુરક્ષિત પેમેન્ટ ગેટવે • ઝીરો વધારાનો ચાર્જ
       </p>
     </section>
   </main>
 
   <script>
+    // ==========================================================
+    // 1. Razorpay Key ID (તમારો Key ID અહીં મૂકો)
+    // ==========================================================
+    const RAZORPAY_KEY = "rzp_test_YOUR_KEY_HERE";
+
+    // 2. WhatsApp Target Number
+    const WHATSAPP_NUMBER = "919327938950";
+    const ORDER_AMOUNT_INR = 599;
+
+    // Active Selection State
+    let currentPaymentMode = "ONLINE";
+
     // Temple Particles (Incense Smoke & Golden Sparks)
     const canvas = document.getElementById("templeCanvas");
     const ctx = canvas.getContext("2d");
@@ -892,7 +1085,10 @@
       deity: "મહાદેવ શિવ ભક્તિ",
       vibe: "ધ્યાન & શાંતિ",
       notes: "શ્વેત ચંદન & ભસ્મ અંબર",
-      goal: "પૂજા, પાઠ અને ધ્યાનમાં અખંડ એકાગ્રતા"
+      goal: "પૂજા, પાઠ અને ધ્યાનમાં અખંડ એકાગ્રતા",
+      ing1: "",
+      ing2: "",
+      ing3: ""
     };
 
     // Screen Navigation
@@ -985,7 +1181,7 @@
     diyaCore.addEventListener("touchend", endDiyaCharge);
     diyaCore.addEventListener("touchcancel", endDiyaCharge);
 
-    // Build 50:30:20 Formulation and WhatsApp Pre-filled URL
+    // Build 50:30:20 Formulation Values
     function buildDivineFormula() {
       let ing1 = "૫૦% મલયાગિરી શ્વેત ચંદન & ભસ્મ અર્ક";
       let desc1 = "મનને તાત્કાલિક શાંત કરતો અને ધ્યાનને ઊંડું કરતો પવિત્ર આધાર.";
@@ -1017,33 +1213,109 @@
         desc3 = "દૈનિક પૂજા અને ઘરમાં સુખ-શાંતિનો વાસ કરાવતો અર્ક.";
       }
 
+      spiritualSelections.ing1 = ing1;
+      spiritualSelections.ing2 = ing2;
+      spiritualSelections.ing3 = ing3;
+
       document.getElementById("sacredIng1").innerText = ing1;
       document.getElementById("sacredDesc1").innerText = desc1;
       document.getElementById("sacredIng2").innerText = ing2;
       document.getElementById("sacredDesc2").innerText = desc2;
       document.getElementById("sacredIng3").innerText = ing3;
       document.getElementById("sacredDesc3").innerText = desc3;
+    }
 
-      // WhatsApp URL Construction directly to 9327938950
-      const phoneNumber = "919327938950";
-      const message = 
-        `જય શ્રી કૃષ્ણ / હર હર મહાદેવ 🙏\n` +
-        `મેં વેબસાઇટ પર AURA દૈવી આધ્યાત્મિક અત્તર ટેસ્ટ આપ્યો છે.\n\n` +
-        `• મારા ઈષ્ટદેવ: ${spiritualSelections.deity}\n` +
-        `• મારો હેતુ: ${spiritualSelections.goal}\n\n` +
-        `🪔 મારા માટે તૈયાર થયેલું ૫૦:૩૦:૨૦ પવિત્ર મિશ્રણ:\n` +
-        `૧. ${ing1}\n` +
-        `૨. ${ing2}\n` +
-        `૩. ${ing3}\n\n` +
-        `• ૧૦૦% આલ્કોહોલ ફ્રી પ્યોર અત્તર\n` +
-        `• પ્રસાદ ઑફર કિંમત: ₹599 (₹899 ને બદલે)\n\n` +
-        `કૃપા કરીને આ પવિત્ર અત્તર મારા સરનામે મોકલવા ઓર્ડર વિગત આપો.`;
+    // Toggle between ONLINE and COD
+    function handlePaymentModeChange(mode) {
+      currentPaymentMode = mode;
+      const btn = document.getElementById("masterActionBtn");
+      const label = document.getElementById("btnLabel");
+      const icon = document.getElementById("btnIcon");
+      const cardOnline = document.getElementById("cardOnline");
+      const cardCOD = document.getElementById("cardCOD");
+      const footerText = document.getElementById("footerSubtext");
 
-      const encodedUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-      const waBtn = document.getElementById("divineWaBtn");
-      if (waBtn) {
-        waBtn.href = encodedUrl;
+      if (mode === "ONLINE") {
+        cardOnline.className = "pay-card selected-online";
+        cardCOD.className = "pay-card";
+        btn.className = "btn-master-action btn-gold-action";
+        label.innerText = "₹૫૯૯ ઓનલાઇન ચૂકવો (Razorpay Instant)";
+        icon.innerHTML = `<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5z"/>`;
+        footerText.innerText = "🔒 ૧૦૦% સુરક્ષિત પેમેન્ટ ગેટવે • ઝીરો વધારાનો ચાર્જ";
+      } else {
+        cardOnline.className = "pay-card";
+        cardCOD.className = "pay-card selected-cod";
+        btn.className = "btn-master-action btn-wa-action";
+        label.innerText = "WhatsApp પર COD ઓર્ડર કન્ફર્મ કરો ➔";
+        icon.innerHTML = `<path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.586-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.698.073-1.133-.07-.272-.089-.623-.21-1.077-.406-1.924-.83-3.176-2.779-3.272-2.906-.096-.128-.777-1.034-.777-1.973 0-.94.492-1.402.668-1.593.175-.19.382-.239.51-.239.127 0 .255.002.366.007.119.006.279-.045.437.335.163.393.556 1.356.604 1.455.048.099.08.216.016.343-.064.128-.096.208-.192.32-.096.112-.202.25-.288.336-.096.096-.197.2-.085.392.112.192.499.824 1.072 1.335.738.657 1.36.861 1.552.957.192.096.304.08.416-.048.112-.128.48-.559.608-.751.128-.192.256-.16.432-.096.176.064 1.12.528 1.312.624.192.096.32.144.368.224.048.08.048.464-.096.869z"/>`;
+        footerText.innerText = "બટન દબાવતાં જ તમારા ઈષ્ટદેવના બ્લેન્ડ સાથે WhatsApp ચેટ ખૂલશે";
       }
+    }
+
+    // Main Order Trigger
+    function executeFinalOrder() {
+      if (currentPaymentMode === "ONLINE") {
+        triggerRazorpayPayment();
+      } else {
+        triggerWhatsAppCODOrder();
+      }
+    }
+
+    // Razorpay Flow
+    function triggerRazorpayPayment() {
+      const options = {
+        key: RAZORPAY_KEY,
+        amount: ORDER_AMOUNT_INR * 100, // In paise
+        currency: "INR",
+        name: "AURA DIVINE",
+        description: `દૈવી અત્તર પ્રસાદ (${spiritualSelections.deity})`,
+        theme: {
+          color: "#ffd700"
+        },
+        handler: function (response) {
+          document.getElementById("masterActionBtn").style.display = "none";
+          const successBox = document.getElementById("paymentSuccessBox");
+          successBox.style.display = "block";
+          document.getElementById("successDetails").innerText = 
+            `Payment ID: ${response.razorpay_payment_id} | અમાઉન્ટ: ₹${ORDER_AMOUNT_INR} (Paid) | ડિલિવરી: સમગ્ર ભારતમાં ફ્રી`;
+        }
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.on('payment.failed', function (response) {
+        alert("પેમેન્ટ અપૂર્ણ રહ્યું: " + response.error.description);
+      });
+      rzp.open();
+    }
+
+    // WhatsApp COD Flow
+    function triggerWhatsAppCODOrder() {
+      const message = 
+`જય શ્રી કૃષ્ણ / હર હર મહાદેવ 🙏
+
+મારે *Cash on Delivery (COD)* દ્વારા આ પવિત્ર દૈવી અત્તર મંગાવવું છે.
+
+🕉️ *આધ્યાત્મિક સંકલ્પ વિગત:*
+• ઈષ્ટદેવ: ${spiritualSelections.deity}
+• હેતુ: ${spiritualSelections.goal}
+
+🪔 *સિદ્ધ થયેલું ૫૦:૩૦:૨૦ પવિત્ર અર્ક:*
+૧. ${spiritualSelections.ing1}
+૨. ${spiritualSelections.ing2}
+૩. ${spiritualSelections.ing3}
+
+💰 *પ્રસાદ ઑફર:* ₹${ORDER_AMOUNT_INR} (સમગ્ર ભારતમાં ફ્રી હોમ ડિલિવરી)
+
+📦 *મારું ડિલિવરી સરનામું:*
+• પૂરું નામ: 
+• મોબાઈલ નંબર: 
+• ગામ/શહેર: 
+• પિનકોડ: 
+
+કૃપા કરીને મારો COD ઓર્ડર કન્ફર્મ કરશો!`;
+
+      const encodedUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      window.location.href = encodedUrl;
     }
   </script>
 </body>
