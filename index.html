@@ -310,19 +310,19 @@
           <span id="btnText">₹૫૯૯ ઓનલાઇન ચૂકવો (Razorpay Instant)</span>
         </button>
 
+        <!-- SUCCESS NOTIFICATION BOX -->
+        <div id="paymentSuccessBox" class="hidden bg-emerald-950/90 border border-emerald-500 rounded-2xl p-5 text-center space-y-2">
+          <div class="text-3xl">🎉</div>
+          <h3 class="text-lg font-black text-white">પેમેન્ટ સફળ!</h3>
+          <p class="text-xs text-emerald-200" id="receiptDetails"></p>
+          <p class="text-[11px] text-yellow-300">સરનામું મોકલવા WhatsApp ખૂલી રહ્યું છે...</p>
+        </div>
+
         <div class="text-[11px] text-gray-400 text-center flex items-center justify-center gap-2 font-mono">
           <span>🔒 ૧૦૦% સેફ ટ્રાન્ઝેક્શન</span>
           <span>•</span>
           <span>Zero Extra Charges</span>
         </div>
-      </div>
-
-      <!-- SUCCESS MODAL (FOR RAZORPAY ONLY) -->
-      <div id="successModal" class="hidden bg-emerald-950/90 border border-emerald-500 rounded-2xl p-5 text-center space-y-2">
-        <div class="text-3xl">🎉</div>
-        <h3 class="text-lg font-black text-white">પેમેન્ટ સફળ અને ઓર્ડર કન્ફર્મ!</h3>
-        <p class="text-xs text-emerald-200" id="receiptDetails"></p>
-        <p class="text-[11px] text-gray-300">તમારું અત્તર તૈયાર કરીને સમગ્ર ભારતમાં ફ્રી હોમ ડિલિવરી દ્વારા પહોંચાડવામાં આવશે.</p>
       </div>
 
     </section>
@@ -331,9 +331,9 @@
   <!-- SCRIPT ENGINE -->
   <script>
     // ==========================================================
-    // 1. તમારી Razorpay Key ID અહીં મૂકો:
+    // 1. તમારી Razorpay Live Key ID
     // ==========================================================
-    const RAZORPAY_KEY = "rzp_test_YOUR_KEY_HERE"; 
+    const RAZORPAY_KEY = "rzp_live_TcnN4bgnhTNHvC"; 
 
     // 2. તમારો WhatsApp નંબર:
     const WHATSAPP_NUMBER = "919327938950";
@@ -550,12 +550,42 @@
           theme: {
             color: "#f5b041"
           },
-          handler: function (response) {
+          handler: (response) => {
             document.getElementById('orderActionBtn').classList.add('hidden');
-            const modal = document.getElementById('successModal');
+            const modal = document.getElementById('paymentSuccessBox');
             modal.classList.remove('hidden');
             document.getElementById('receiptDetails').innerText = 
-              `Payment ID: ${response.razorpay_payment_id} | અમાઉન્ટ: ₹${ORDER_AMOUNT_INR} (Paid) | ડિલિવરી: સમગ્ર ભારતમાં ફ્રી`;
+              `Payment ID: ${response.razorpay_payment_id} | અમાઉન્ટ: ₹${ORDER_AMOUNT_INR} (Paid)`;
+
+            // પેમેન્ટ કન્ફર્મ થતાં જ WhatsApp પર ડિલિવરી સરનામું મોકલવા માટેનો મેસેજ
+            const paidMessage = 
+`નમસ્તે AURAFRAG! 🔥
+
+મેં ₹૫૯૯ નું ઓનલાઇન પેમેન્ટ સફળતાપૂર્વક કરી દીધું છે! ✅
+
+💳 *પેમેન્ટ વિગતો:*
+• પેમેન્ટ ID: ${response.razorpay_payment_id}
+• રકમ: ₹${ORDER_AMOUNT_INR} (Paid)
+
+🧪 *સિદ્ધ થયેલો કસ્ટમ ફોર્મ્યુલા:*
+• ફોર્મ્યુલા કોડ: ${this.code}
+• ૫૦% બેઝ: ${p.name}
+• ૩૦% હાર્ટ: ${s.name}
+• ૨૦% ટોપ: ${t.name}
+
+📦 *મારું ડિલિવરી સરનામું:*
+• પૂરું નામ: 
+• મોબાઈલ નંબર: 
+• ઘરનું પૂરું સરનામું (ગામ/શહેર સહિત): 
+• પિનકોડ: 
+
+કૃપા કરીને મારી કસ્ટમ બોટલ તૈયાર કરી કુરિયર રવાના કરશો!`;
+
+            // ૧.૫ સેકન્ડ પછી ઓટોમેટિક WhatsApp પર રીડાયરેક્ટ થશે
+            setTimeout(() => {
+              const redirectUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(paidMessage)}`;
+              window.location.href = redirectUrl;
+            }, 1500);
           }
         };
 
@@ -574,19 +604,19 @@
 મારે *Cash on Delivery (COD)* દ્વારા આ કસ્ટમ અત્તર મંગાવવું છે.
 
 🧪 *ફોર્મ્યુલા કોડ:* ${this.code}
-• 50% બેઝ: ${p.name}
-• 30% હાર્ટ: ${s.name}
-• 20% ટોપ: ${t.name}
+• ૫૦% બેઝ: ${p.name}
+• ૩૦% હાર્ટ: ${s.name}
+• ૨૦% ટોપ: ${t.name}
 
-💰 *કિંમત:* ₹${ORDER_AMOUNT_INR} (Free Home Delivery)
+💰 *કિંમત:* ₹${ORDER_AMOUNT_INR} (સમગ્ર ભારતમાં ફ્રી હોમ ડિલિવરી)
 
 📦 *મારું ડિલિવરી સરનામું:*
-• નામ: 
-• મોબાઈલ: 
-• ગામ/શહેર: 
+• પૂરું નામ: 
+• મોબાઈલ નંબર: 
+• ઘરનું પૂરું સરનામું (ગામ/શહેર સહિત): 
 • પિનકોડ: 
 
-કૃપા કરીને મારો ઓર્ડર કન્ફર્મ કરશો!`;
+કૃપા કરીને મારો COD ઓર્ડર કન્ફર્મ કરશો!`;
 
         const encoded = encodeURIComponent(message);
         window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
