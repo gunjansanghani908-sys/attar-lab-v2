@@ -25,7 +25,8 @@
             goldPrimary: '#f5b041',
             goldLight: '#ffd369',
             goldGlow: 'rgba(245, 176, 65, 0.35)',
-            cyberRed: '#ff2a55'
+            cyberRed: '#ff2a55',
+            waGreen: '#25D366'
           },
           fontFamily: {
             cinzel: ['Cinzel', 'serif'],
@@ -109,14 +110,16 @@
       100% { bottom: 100%; opacity: 0; transform: scale(1.3); }
     }
 
-    .btn-pay {
+    .btn-gold {
       background: linear-gradient(135deg, #ffd369 0%, #f5b041 100%);
       box-shadow: 0 0 25px rgba(245, 176, 65, 0.4);
       cursor: pointer;
     }
 
-    .btn-pay:active {
-      transform: scale(0.98);
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+      box-shadow: 0 0 25px rgba(37, 211, 102, 0.45);
+      cursor: pointer;
     }
 
     .timer-alert {
@@ -155,7 +158,7 @@
       </div>
     </div>
 
-    <!-- VIEW 1: INTERACTIVE SENSORY QUESTIONS -->
+    <!-- VIEW 1: QUESTIONS -->
     <main id="simulationView" class="space-y-4">
       <div class="text-left mb-1">
         <p class="text-[11px] font-mono tracking-widest text-cyberRed font-bold uppercase mb-1">
@@ -204,7 +207,7 @@
       </div>
     </section>
 
-    <!-- VIEW 3: FORMULA DOSSIER & DUAL CHECKOUT -->
+    <!-- VIEW 3: FORMULA DOSSIER & INSTANT ORDER -->
     <section id="dossierView" class="hidden space-y-4">
       
       <!-- Countdown Timer -->
@@ -235,94 +238,91 @@
         <div id="formulaListDetails" class="space-y-1.5 mt-3"></div>
       </div>
 
-      <!-- DUAL CHECKOUT FORM (ONLINE / COD) -->
-      <div class="bg-panelBg/95 border-2 border-goldPrimary/40 rounded-2xl p-4 sm:p-5 text-left shadow-2xl space-y-3">
-        <div class="flex items-center justify-between border-b border-white/10 pb-2">
-          <span class="text-xs font-mono text-goldLight font-bold uppercase tracking-wider">
-            ★ ડિલિવરી સરનામું અને ઓર્ડર
-          </span>
+      <!-- ORDER & PAYMENT SELECTION BOX (NO LONG FORM) -->
+      <div class="bg-panelBg/95 border-2 border-goldPrimary/40 rounded-2xl p-4 sm:p-5 text-left shadow-2xl space-y-4">
+        
+        <!-- Price & All India Delivery Badge -->
+        <div class="flex items-center justify-between border-b border-white/10 pb-3">
+          <div>
+            <span class="text-xs font-mono text-goldLight font-bold uppercase tracking-wider block">
+              ★ સ્પેશિયલ લિમિટેડ ઓફર
+            </span>
+            <div class="flex items-center gap-1.5 mt-0.5 text-xs text-emerald-400 font-semibold">
+              <span>🚚</span>
+              <span>All India Free Home Delivery</span>
+            </div>
+          </div>
           <div class="text-right">
             <span class="text-xs text-gray-400 line-through mr-1">₹899</span>
-            <span class="text-lg font-black text-goldLight" id="displayPrice">₹599</span>
+            <span class="text-xl font-black text-goldLight">₹599</span>
           </div>
         </div>
 
-        <!-- User Input Fields -->
-        <div class="space-y-2.5 pt-1">
-          <div>
-            <label class="block text-[11px] text-gray-400 font-bold uppercase mb-1">પૂરું નામ *</label>
-            <input type="text" id="custName" placeholder="દા.ત. રાહુલ શાહ" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-goldPrimary">
-          </div>
+        <!-- Payment Method Options -->
+        <div class="space-y-2.5">
+          <label class="block text-[11px] text-gray-300 font-bold uppercase">પેમેન્ટ પદ્ધતિ પસંદ કરો:</label>
 
-          <div class="grid grid-cols-2 gap-2">
-            <div>
-              <label class="block text-[11px] text-gray-400 font-bold uppercase mb-1">મોબાઈલ નંબર *</label>
-              <input type="tel" id="custPhone" placeholder="10 આંકડાનો મોબાઈલ નંબર" maxlength="10" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-goldPrimary">
-            </div>
-            <div>
-              <label class="block text-[11px] text-gray-400 font-bold uppercase mb-1">પિનકોડ *</label>
-              <input type="text" id="custPincode" placeholder="6 આંકડાનો પિનકોડ" maxlength="6" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-goldPrimary">
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-[11px] text-gray-400 font-bold uppercase mb-1">ઘરનું પૂરું સરનામું *</label>
-            <textarea id="custAddress" rows="2" placeholder="ઘર/ફ્લેટ નં, સોસાયટી, રોડ, શહેર" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-goldPrimary"></textarea>
-          </div>
-
-          <!-- PAYMENT SELECTION RADIO CARDS -->
-          <div class="pt-2">
-            <label class="block text-[11px] text-goldLight font-bold uppercase mb-2">પેમેન્ટ પદ્ધતિ પસંદ કરો:</label>
-            <div class="space-y-2">
-              
-              <!-- ONLINE PAYMENT (RAZORPAY) -->
-              <label class="flex items-center justify-between p-3 rounded-xl border border-goldPrimary/50 bg-black/50 cursor-pointer">
-                <div class="flex items-center gap-2.5">
-                  <input type="radio" name="payOption" value="ONLINE" checked onchange="labApp.setPaymentMode('ONLINE')" class="accent-goldPrimary">
-                  <div>
-                    <div class="text-sm font-bold text-white">ઓનલાઇન પેમેન્ટ (UPI / GPay / Cards)</div>
-                    <div class="text-[11px] text-emerald-400">ઝડપી ડિસ્પેચ + ૧૦૦% સુરક્ષિત ગેટવે</div>
-                  </div>
+          <!-- OPTION 1: ONLINE (RAZORPAY) -->
+          <label id="cardOnline" class="flex items-center justify-between p-3.5 rounded-xl border-2 border-goldPrimary bg-goldPrimary/10 cursor-pointer transition-all">
+            <div class="flex items-center gap-3">
+              <input type="radio" name="paymentOption" value="ONLINE" checked onchange="labApp.setMode('ONLINE')" class="accent-goldPrimary w-4 h-4">
+              <div>
+                <div class="text-sm font-bold text-white flex items-center gap-2">
+                  <span>ઓનલાઇન પેમેન્ટ (Prepaid)</span>
+                  <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/40">ઝડપી ડિસ્પેચ</span>
                 </div>
-                <span class="text-xs font-mono text-goldLight font-bold">₹599</span>
-              </label>
-
-              <!-- CASH ON DELIVERY (COD) -->
-              <label class="flex items-center justify-between p-3 rounded-xl border border-white/15 bg-black/50 cursor-pointer">
-                <div class="flex items-center gap-2.5">
-                  <input type="radio" name="payOption" value="COD" onchange="labApp.setPaymentMode('COD')" class="accent-goldPrimary">
-                  <div>
-                    <div class="text-sm font-bold text-white">કેશ ઓન ડિલિવરી (COD)</div>
-                    <div class="text-[11px] text-gray-400">ઘરે પાર્સલ આવે ત્યારે જ રોકડા આપો</div>
-                  </div>
-                </div>
-                <span class="text-xs font-mono text-gray-300 font-bold">₹599</span>
-              </label>
+                <div class="text-xs text-gray-300 mt-0.5">Google Pay / PhonePe / Paytm / Cards (Razorpay)</div>
+              </div>
             </div>
-          </div>
+            <span class="text-sm font-mono text-goldLight font-black">₹599</span>
+          </label>
+
+          <!-- OPTION 2: COD (WHATSAPP) -->
+          <label id="cardCOD" class="flex items-center justify-between p-3.5 rounded-xl border border-white/15 bg-black/40 cursor-pointer transition-all">
+            <div class="flex items-center gap-3">
+              <input type="radio" name="paymentOption" value="COD" onchange="labApp.setMode('COD')" class="accent-goldPrimary w-4 h-4">
+              <div>
+                <div class="text-sm font-bold text-white flex items-center gap-2">
+                  <span>કેશ ઓન ડિલિવરી (COD)</span>
+                  <span class="text-[10px] bg-white/10 text-gray-300 px-2 py-0.5 rounded">WhatsApp</span>
+                </div>
+                <div class="text-xs text-gray-400 mt-0.5">પાર્સલ ઘરે આવે ત્યારે જ રોકડા આપો</div>
+              </div>
+            </div>
+            <span class="text-sm font-mono text-gray-300 font-black">₹599</span>
+          </label>
         </div>
 
-        <!-- DYNAMIC CHECKOUT BUTTON -->
-        <button id="mainSubmitBtn" type="button" onclick="labApp.processOrder()" class="btn-pay w-full py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 text-black font-black text-base tracking-wide mt-3">
-          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+        <!-- FREE DELIVERY HIGHLIGHT BANNER -->
+        <div class="bg-black/60 border border-emerald-500/30 rounded-xl p-2.5 flex items-center justify-between text-xs text-emerald-300">
+          <span class="flex items-center gap-2">
+            <span class="text-base">📦</span>
+            <strong>સમગ્ર ભારતમાં ફ્રી હોમ ડિલિવરી</strong>
+          </span>
+          <span class="font-mono font-bold text-white">₹0 FREE</span>
+        </div>
+
+        <!-- DYNAMIC ACTION BUTTON -->
+        <button id="orderActionBtn" type="button" onclick="labApp.executeOrder()" class="btn-gold w-full py-4 px-4 rounded-xl flex items-center justify-center gap-2.5 text-black font-black text-base tracking-wide transition-all">
+          <svg id="btnIcon" class="w-5 h-5 fill-current" viewBox="0 0 24 24">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5z"/>
           </svg>
-          <span id="submitBtnText">₹૫૯૯ ઓનલાઇન ચૂકવો (GPay / PhonePe / UPI)</span>
+          <span id="btnText">₹૫૯૯ ઓનલાઇન ચૂકવો (Razorpay Instant)</span>
         </button>
 
-        <div class="text-[11px] text-gray-400 text-center flex items-center justify-center gap-2 pt-1 font-mono">
-          <span>🔒 ૧૦૦% સુરક્ષિત ખરીદી</span>
+        <div class="text-[11px] text-gray-400 text-center flex items-center justify-center gap-2 font-mono">
+          <span>🔒 ૧૦૦% સેફ ટ્રાન્ઝેક્શન</span>
           <span>•</span>
-          <span>ઓલ ઇન્ડિયા ડિલિવરી</span>
+          <span>Zero Extra Charges</span>
         </div>
       </div>
 
-      <!-- SUCCESS CONFIRMATION MODAL -->
+      <!-- SUCCESS MODAL (FOR RAZORPAY ONLY) -->
       <div id="successModal" class="hidden bg-emerald-950/90 border border-emerald-500 rounded-2xl p-5 text-center space-y-2">
         <div class="text-3xl">🎉</div>
-        <h3 class="text-lg font-black text-white">ઓર્ડર કન્ફર્મ થઈ ગયો છે!</h3>
+        <h3 class="text-lg font-black text-white">પેમેન્ટ સફળ અને ઓર્ડર કન્ફર્મ!</h3>
         <p class="text-xs text-emerald-200" id="receiptDetails"></p>
-        <p class="text-[11px] text-gray-300">તમારી કસ્ટમ ફોર્મ્યુલા બોટલ તૈયાર કરીને ૧-૨ દિવસમાં રવાના કરવામાં આવશે.</p>
+        <p class="text-[11px] text-gray-300">તમારું અત્તર તૈયાર કરીને સમગ્ર ભારતમાં ફ્રી હોમ ડિલિવરી દ્વારા પહોંચાડવામાં આવશે.</p>
       </div>
 
     </section>
@@ -331,9 +331,12 @@
   <!-- SCRIPT ENGINE -->
   <script>
     // ==========================================================
-    // નીચે તમારી Razorpay Key ID નાખો (Live: rzp_live_... / Test: rzp_test_...)
+    // 1. તમારી Razorpay Key ID અહીં મૂકો:
     // ==========================================================
     const RAZORPAY_KEY = "rzp_test_YOUR_KEY_HERE"; 
+
+    // 2. તમારો WhatsApp નંબર:
+    const WHATSAPP_NUMBER = "919327938950";
     const ORDER_AMOUNT_INR = 599;
 
     const CATALOG = {
@@ -397,7 +400,7 @@
         this.finalBlend = null;
         this.code = `AURAFRAG-${Math.floor(1000 + Math.random() * 9000)}`;
         this.timer = 600;
-        this.payMode = 'ONLINE';
+        this.mode = 'ONLINE';
       }
 
       init() {
@@ -508,54 +511,51 @@
         });
       }
 
-      setPaymentMode(mode) {
-        this.payMode = mode;
-        const btnText = document.getElementById('submitBtnText');
+      setMode(mode) {
+        this.mode = mode;
+        const btn = document.getElementById('orderActionBtn');
+        const text = document.getElementById('btnText');
+        const cardOnline = document.getElementById('cardOnline');
+        const cardCOD = document.getElementById('cardCOD');
+
         if (mode === 'ONLINE') {
-          btnText.innerText = "₹૫૯૯ ઓનલાઇન ચૂકવો (GPay / PhonePe / UPI)";
+          btn.className = "btn-gold w-full py-4 px-4 rounded-xl flex items-center justify-center gap-2.5 text-black font-black text-base tracking-wide transition-all";
+          text.innerText = "₹૫૯૯ ઓનલાઇન ચૂકવો (Razorpay Instant)";
+          cardOnline.className = "flex items-center justify-between p-3.5 rounded-xl border-2 border-goldPrimary bg-goldPrimary/10 cursor-pointer transition-all";
+          cardCOD.className = "flex items-center justify-between p-3.5 rounded-xl border border-white/15 bg-black/40 cursor-pointer transition-all";
         } else {
-          btnText.innerText = "ઓર્ડર કન્ફર્મ કરો (Cash on Delivery - ₹૫૯૯)";
+          btn.className = "btn-whatsapp w-full py-4 px-4 rounded-xl flex items-center justify-center gap-2.5 text-white font-black text-base tracking-wide transition-all";
+          text.innerText = "WhatsApp પર COD ઓર્ડર કન્ફર્મ કરો ➔";
+          cardCOD.className = "flex items-center justify-between p-3.5 rounded-xl border-2 border-waGreen bg-emerald-950/40 cursor-pointer transition-all";
+          cardOnline.className = "flex items-center justify-between p-3.5 rounded-xl border border-white/15 bg-black/40 cursor-pointer transition-all";
         }
       }
 
-      processOrder() {
-        const name = document.getElementById('custName').value.trim();
-        const phone = document.getElementById('custPhone').value.trim();
-        const pincode = document.getElementById('custPincode').value.trim();
-        const address = document.getElementById('custAddress').value.trim();
-
-        if (!name || phone.length < 10 || pincode.length < 6 || !address) {
-          alert("કૃપા કરીને તમારું પૂરું નામ, ૧૦ આંકડાનો મોબાઈલ નંબર, પિનકોડ અને સરનામું ભરો.");
-          return;
-        }
-
-        if (this.payMode === 'ONLINE') {
-          this.executeRazorpay(name, phone);
+      executeOrder() {
+        if (this.mode === 'ONLINE') {
+          this.triggerRazorpay();
         } else {
-          this.confirmCODOrder(name);
+          this.triggerWhatsAppCOD();
         }
       }
 
-      executeRazorpay(name, phone) {
+      triggerRazorpay() {
+        const [p, s, t] = this.finalBlend;
         const options = {
           key: RAZORPAY_KEY,
-          amount: ORDER_AMOUNT_INR * 100,
+          amount: ORDER_AMOUNT_INR * 100, // in paise
           currency: "INR",
           name: "AURAFRAG LAB",
-          description: `Custom 3-Attar Blend (${this.code})`,
-          prefill: {
-            name: name,
-            contact: phone
-          },
+          description: `Bespoke 3-Attar Blend (${this.code}) - All India Free Delivery`,
           theme: {
             color: "#f5b041"
           },
           handler: function (response) {
-            document.getElementById('mainSubmitBtn').classList.add('hidden');
+            document.getElementById('orderActionBtn').classList.add('hidden');
             const modal = document.getElementById('successModal');
             modal.classList.remove('hidden');
             document.getElementById('receiptDetails').innerText = 
-              `Payment ID: ${response.razorpay_payment_id} | ગ્રાહક: ${name} | અમાઉન્ટ: ₹${ORDER_AMOUNT_INR} (Paid)`;
+              `Payment ID: ${response.razorpay_payment_id} | અમાઉન્ટ: ₹${ORDER_AMOUNT_INR} (Paid) | ડિલિવરી: સમગ્ર ભારતમાં ફ્રી`;
           }
         };
 
@@ -566,12 +566,30 @@
         rzp.open();
       }
 
-      confirmCODOrder(name) {
-        document.getElementById('mainSubmitBtn').classList.add('hidden');
-        const modal = document.getElementById('successModal');
-        modal.classList.remove('hidden');
-        document.getElementById('receiptDetails').innerText = 
-          `ઓર્ડર પ્રકાર: Cash on Delivery (COD) | ગ્રાહક: ${name} | કિંમત: ₹${ORDER_AMOUNT_INR}`;
+      triggerWhatsAppCOD() {
+        const [p, s, t] = this.finalBlend;
+        const message = 
+`નમસ્તે AURAFRAG! 🔥
+
+મારે *Cash on Delivery (COD)* દ્વારા આ કસ્ટમ અત્તર મંગાવવું છે.
+
+🧪 *ફોર્મ્યુલા કોડ:* ${this.code}
+• 50% બેઝ: ${p.name}
+• 30% હાર્ટ: ${s.name}
+• 20% ટોપ: ${t.name}
+
+💰 *કિંમત:* ₹${ORDER_AMOUNT_INR} (Free Home Delivery)
+
+📦 *મારું ડિલિવરી સરનામું:*
+• નામ: 
+• મોબાઈલ: 
+• ગામ/શહેર: 
+• પિનકોડ: 
+
+કૃપા કરીને મારો ઓર્ડર કન્ફર્મ કરશો!`;
+
+        const encoded = encodeURIComponent(message);
+        window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
       }
 
       startTimer() {
