@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AURA Fragrance - The Hypnotic Scent</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>AURA: Sensory Projection Simulator</title>
   <style>
     :root {
-      --bg-dark: #08070d;
-      --gold: #d4af37;
-      --gold-light: #f7e096;
-      --text: #f0f0f5;
-      --text-muted: #a0a0b2;
-      --surface: #14121c;
-      --surface-border: #262235;
-      --accent-glow: rgba(212, 175, 55, 0.15);
+      --bg: #05040a;
+      --gold: #e5b94c;
+      --gold-dim: #7a6125;
+      --gold-glow: rgba(229, 185, 76, 0.35);
+      --text: #f3f3f7;
+      --text-muted: #8a8899;
+      --panel: rgba(18, 16, 26, 0.85);
+      --border: rgba(229, 185, 76, 0.2);
     }
 
     * {
@@ -21,600 +21,489 @@
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      user-select: none;
     }
 
     body {
-      background-color: var(--bg-dark);
+      background-color: var(--bg);
       color: var(--text);
-      line-height: 1.5;
       overflow-x: hidden;
-      padding-bottom: 90px; /* Space for sticky bar on mobile */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
-    /* Ambient Hypnotic Canvas Background */
-    #auraCanvas {
+    /* Ambient Simulation Canvas */
+    #simCanvas {
       position: fixed;
-      top: 0;
-      left: 0;
+      inset: 0;
       width: 100vw;
       height: 100vh;
-      z-index: -1;
-      pointer-events: none;
-      opacity: 0.6;
+      z-index: 0;
     }
 
-    .container {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 20px 16px;
+    .app-frame {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 440px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 24px 16px;
     }
 
-    /* Header & Badges */
-    .badge-bar {
+    /* Step Indicators */
+    .stepper {
       display: flex;
       justify-content: center;
       gap: 8px;
-      margin-bottom: 12px;
+      margin-bottom: 24px;
+    }
+
+    .step-dot {
+      width: 28px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 2px;
+      transition: all 0.4s ease;
+    }
+
+    .step-dot.active {
+      background: var(--gold);
+      box-shadow: 0 0 10px var(--gold-glow);
+    }
+
+    /* Screen Card */
+    .screen {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      backdrop-filter: blur(14px);
+      padding: 30px 22px;
+      text-align: center;
+      display: none;
+      animation: fadeIn 0.45s ease forwards;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .badge {
-      background: rgba(212, 175, 55, 0.1);
-      border: 1px solid var(--gold);
-      color: var(--gold-light);
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: 20px;
+      display: inline-block;
+      font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      border: 1px solid var(--gold-dim);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+      background: rgba(229, 185, 76, 0.05);
     }
 
-    .headline {
-      font-size: 26px;
-      line-height: 1.25;
-      text-align: center;
+    h2 {
+      font-size: 22px;
       font-weight: 800;
-      color: #fff;
+      line-height: 1.3;
       margin-bottom: 8px;
+      color: #fff;
     }
 
-    .headline span {
-      background: linear-gradient(135deg, var(--gold-light), var(--gold));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    h2 span {
+      color: var(--gold);
     }
 
-    .sub-headline {
-      text-align: center;
-      font-size: 14px;
+    p.sub {
+      font-size: 13px;
       color: var(--text-muted);
+      line-height: 1.5;
       margin-bottom: 24px;
     }
 
-    /* Visual Product Card */
-    .product-visual {
-      background: radial-gradient(circle at center, #241c38 0%, var(--surface) 70%);
-      border: 1px solid var(--surface-border);
-      border-radius: 16px;
-      padding: 30px 20px;
-      text-align: center;
-      position: relative;
-      margin-bottom: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .bottle-mockup {
+    /* Interactive Vortex Simulator (Screen 1) */
+    .vortex-trigger {
       width: 140px;
-      height: 200px;
-      margin: 0 auto 16px;
-      background: linear-gradient(180deg, rgba(212,175,55,0.4) 0%, rgba(10,10,15,0.8) 100%);
-      border: 2px solid var(--gold);
-      border-radius: 12px 12px 28px 28px;
+      height: 140px;
+      margin: 10px auto 28px;
+      border-radius: 50%;
+      border: 2px dashed var(--gold);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      position: relative;
-      box-shadow: 0 0 25px var(--accent-glow);
-    }
-
-    .bottle-cap {
-      width: 44px;
-      height: 24px;
-      background: var(--gold);
-      border-radius: 4px;
-      position: absolute;
-      top: -24px;
-    }
-
-    .bottle-label {
-      background: #0d0c14;
-      border: 1px solid var(--gold);
-      padding: 12px 16px;
-      border-radius: 4px;
-      text-align: center;
-    }
-
-    .bottle-label .brand {
-      font-size: 13px;
-      letter-spacing: 0.15em;
-      font-weight: 700;
-      color: var(--gold);
-    }
-
-    .bottle-label .sub {
-      font-size: 9px;
-      color: var(--text-muted);
-      letter-spacing: 0.1em;
-    }
-
-    /* Proof Points */
-    .specs-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-
-    .spec-item {
-      background: var(--surface);
-      border: 1px solid var(--surface-border);
-      border-radius: 8px;
-      padding: 10px 4px;
-      text-align: center;
-    }
-
-    .spec-item .value {
-      font-size: 13px;
-      font-weight: 700;
-      color: #fff;
-      display: block;
-    }
-
-    .spec-item .label {
-      font-size: 10px;
-      color: var(--text-muted);
-    }
-
-    /* Bundle Selector */
-    .section-title {
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .bundle-group {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-
-    .bundle-card {
-      background: var(--surface);
-      border: 1px solid var(--surface-border);
-      border-radius: 12px;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       cursor: pointer;
       position: relative;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
     }
 
-    .bundle-card.active {
-      border-color: var(--gold);
-      background: rgba(212, 175, 55, 0.05);
-      box-shadow: 0 0 15px var(--accent-glow);
+    .vortex-trigger:active {
+      transform: scale(0.94);
     }
 
-    .bundle-radio {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .vortex-trigger .core {
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle, var(--gold) 0%, transparent 80%);
+      border-radius: 50%;
+      animation: pulseCore 2s infinite alternate;
     }
 
-    .bundle-radio input {
-      accent-color: var(--gold);
-      transform: scale(1.2);
+    @keyframes pulseCore {
+      from { transform: scale(0.8); opacity: 0.6; }
+      to { transform: scale(1.3); opacity: 1; }
     }
 
-    .bundle-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #fff;
+    /* Range Slider Aura Radius (Screen 2) */
+    .slider-container {
+      margin: 20px 0;
+      text-align: left;
     }
 
-    .bundle-subtitle {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .bundle-price {
-      text-align: right;
-    }
-
-    .current-price {
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--gold-light);
-    }
-
-    .original-price {
-      font-size: 12px;
-      color: var(--text-muted);
-      text-decoration: line-through;
-    }
-
-    .tag-save {
-      position: absolute;
-      top: -9px;
-      right: 14px;
-      background: var(--gold);
-      color: #000;
-      font-size: 9px;
-      font-weight: 800;
-      padding: 2px 8px;
-      border-radius: 10px;
-      text-transform: uppercase;
-    }
-
-    /* Scent Composition */
-    .scent-notes {
-      background: var(--surface);
-      border: 1px solid var(--surface-border);
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 24px;
-    }
-
-    .note-row {
+    .slider-header {
       display: flex;
       justify-content: space-between;
       font-size: 12px;
-      padding: 6px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .note-row:last-child {
-      border-bottom: none;
-    }
-
-    .note-label {
+      margin-bottom: 8px;
       color: var(--gold);
-      font-weight: 600;
+      font-weight: 700;
     }
 
-    .note-desc {
-      color: var(--text-muted);
-    }
-
-    /* Fast Checkout Form */
-    .checkout-box {
-      background: var(--surface);
-      border: 1px solid var(--surface-border);
-      border-radius: 12px;
-      padding: 18px;
-      margin-bottom: 20px;
-    }
-
-    .input-group {
-      margin-bottom: 12px;
-    }
-
-    .input-group label {
-      display: block;
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
-    .input-group input,
-    .input-group textarea {
+    input[type=range] {
       width: 100%;
-      background: #08070d;
-      border: 1px solid var(--surface-border);
-      color: #fff;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 14px;
+      accent-color: var(--gold);
+      height: 6px;
+      background: #232030;
+      border-radius: 3px;
       outline: none;
     }
 
-    .input-group input:focus,
-    .input-group textarea:focus {
-      border-color: var(--gold);
+    .reaction-monitor {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 12px;
+      margin: 18px 0;
+      font-size: 12px;
+      text-align: left;
     }
 
-    .btn-submit {
+    .reaction-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+    }
+
+    .reaction-val {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* Buttons */
+    .btn-action {
       width: 100%;
-      background: linear-gradient(135deg, var(--gold-light), var(--gold));
-      color: #0d0c14;
+      background: linear-gradient(135deg, #f7e096, var(--gold));
+      color: #05040a;
       border: none;
       padding: 16px;
-      border-radius: 8px;
-      font-size: 16px;
+      border-radius: 10px;
+      font-size: 15px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+      box-shadow: 0 6px 20px rgba(229, 185, 76, 0.25);
+      transition: transform 0.15s ease;
     }
 
-    .btn-submit:active {
+    .btn-action:active {
       transform: scale(0.98);
     }
 
-    /* Sticky Bottom Action Bar for Mobile */
-    .sticky-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: #0f0e17;
-      border-top: 1px solid var(--surface-border);
-      padding: 12px 16px;
+    /* Final Screen Bottle & Offer */
+    .bottle-render {
+      width: 110px;
+      height: 160px;
+      margin: 0 auto 18px;
+      background: linear-gradient(180deg, rgba(229, 185, 76, 0.3) 0%, rgba(10, 8, 16, 0.9) 100%);
+      border: 2px solid var(--gold);
+      border-radius: 10px 10px 24px 24px;
+      position: relative;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      z-index: 999;
+      justify-content: center;
+      box-shadow: 0 0 35px var(--gold-glow);
     }
 
-    .sticky-price-block {
-      display: flex;
-      flex-direction: column;
+    .bottle-cap {
+      width: 36px;
+      height: 20px;
+      background: var(--gold);
+      position: absolute;
+      top: -20px;
+      border-radius: 3px;
     }
 
-    .sticky-price-label {
-      font-size: 10px;
+    .bottle-text {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      font-weight: 800;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 8px 12px;
+      background: #05040a;
+    }
+
+    /* Checkout Inputs */
+    .input-field {
+      width: 100%;
+      background: #08070d;
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 10px;
+      outline: none;
+    }
+
+    .input-field:focus {
+      border-color: var(--gold);
+    }
+
+    .price-tag {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    .price-tag s {
+      font-size: 13px;
       color: var(--text-muted);
-      text-transform: uppercase;
-    }
-
-    .sticky-price-val {
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--gold-light);
-    }
-
-    .sticky-btn {
-      background: linear-gradient(135deg, var(--gold-light), var(--gold));
-      color: #0d0c14;
-      padding: 12px 24px;
-      border-radius: 6px;
-      font-weight: 800;
-      font-size: 14px;
-      text-decoration: none;
-      text-transform: uppercase;
+      font-weight: 400;
+      margin-left: 6px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Dynamic Interactive Background Waves -->
-  <canvas id="auraCanvas"></canvas>
+  <canvas id="simCanvas"></canvas>
 
-  <div class="container">
-    <div class="badge-bar">
-      <span class="badge">100% Alcohol-Free</span>
-      <span class="badge">Pure Concentrated Oil</span>
+  <div class="app-frame">
+    <!-- Progress Indicator -->
+    <div class="stepper">
+      <div class="step-dot active" id="dot1"></div>
+      <div class="step-dot" id="dot2"></div>
+      <div class="step-dot" id="dot3"></div>
     </div>
 
-    <h1 class="headline">
-      The Hypnotic Aura.<br />
-      <span>They Won't Look Away.</span>
-    </h1>
-    <p class="sub-headline">
-      A heavy sillage attar designed to leave a magnetic, subconscious impression wherever you walk.
-    </p>
+    <!-- SCREEN 1: CALIBRATION SIMULATOR -->
+    <div class="screen active" id="stage1">
+      <span class="badge">Sensory Calibration</span>
+      <h2>Sync With Your <span>Hypnotic Field</span></h2>
+      <p class="sub">Touch and hold the core to measure how quickly your natural pulse charges an oil scent projection.</p>
 
-    <!-- Product Visual Hero -->
-    <div class="product-visual">
-      <div class="bottle-mockup">
+      <div class="vortex-trigger" id="vortexBtn">
+        <div class="core"></div>
+        <span style="font-size: 10px; color: var(--gold); margin-top: 8px; font-weight:700;">PRESS & HOLD</span>
+      </div>
+
+      <div style="font-size: 13px; color: var(--gold); font-weight: 700; margin-bottom: 8px;" id="chargeText">Charge: 0%</div>
+      <div style="height: 4px; background: #232030; border-radius: 2px; overflow: hidden; margin-bottom: 20px;">
+        <div id="chargeBar" style="width: 0%; height: 100%; background: var(--gold); transition: width 0.1s;"></div>
+      </div>
+    </div>
+
+    <!-- SCREEN 2: PROJECTION RADIUS SIMULATOR -->
+    <div class="screen" id="stage2">
+      <span class="badge">Sillage Simulation</span>
+      <h2>Control The <span>Distance</span></h2>
+      <p class="sub">Drag the projection ring slider. Watch how wide your personal presence expands into a room.</p>
+
+      <div class="slider-container">
+        <div class="slider-header">
+          <span>Projection Radius</span>
+          <span id="radiusLabel">3 Feet</span>
+        </div>
+        <input type="range" id="radiusRange" min="2" max="10" step="1" value="3" oninput="updateRadius(this.value)" />
+      </div>
+
+      <div class="reaction-monitor">
+        <div class="reaction-item">
+          <span>Subconscious Notice:</span>
+          <span class="reaction-val" id="noticeSpeed">Immediate (&lt; 2s)</span>
+        </div>
+        <div class="reaction-item">
+          <span>Target Response:</span>
+          <span class="reaction-val" id="responseType">Involuntary Head Turn</span>
+        </div>
+        <div class="reaction-item">
+          <span>Formulation:</span>
+          <span class="reaction-val">100% Alcohol-Free Pure Oil</span>
+        </div>
+      </div>
+
+      <button class="btn-action" onclick="goToStep(3)">Lock In Formula</button>
+    </div>
+
+    <!-- SCREEN 3: RESULT & FAST CHECKOUT -->
+    <div class="screen" id="stage3">
+      <span class="badge">Formula Calibrated</span>
+      <h2>Your Signature: <span>AURA EXTRAIT</span></h2>
+
+      <div class="bottle-render">
         <div class="bottle-cap"></div>
-        <div class="bottle-label">
-          <div class="brand">AURA</div>
-          <div class="sub">HYPNOTIC ATTAR</div>
-        </div>
+        <div class="bottle-text">AURA</div>
       </div>
-      <p style="font-size: 12px; color: var(--gold-light); font-weight: 600;">
-        Tap screen to stimulate hypnotic aura field
-      </p>
-    </div>
 
-    <!-- Quick Specifications -->
-    <div class="specs-grid">
-      <div class="spec-item">
-        <span class="value">16+ Hours</span>
-        <span class="label">Skin Longevity</span>
-      </div>
-      <div class="spec-item">
-        <span class="value">Zero</span>
-        <span class="label">Alcohol / Fillers</span>
-      </div>
-      <div class="spec-item">
-        <span class="value">Magnetic</span>
-        <span class="label">6-Foot Projection</span>
-      </div>
-    </div>
+      <div class="price-tag">₹499 <s>₹999</s> <span style="font-size: 11px; color:#2ecc71;">(50% Unlock Applied)</span></div>
 
-    <!-- Scent Composition -->
-    <div class="scent-notes">
-      <div class="section-title">The Hypnotic Formula</div>
-      <div class="note-row">
-        <span class="note-label">First Impression</span>
-        <span class="note-desc">Spicy Warm Saffron & Crisp Bergamot</span>
-      </div>
-      <div class="note-row">
-        <span class="note-label">The Core Lure</span>
-        <span class="note-desc">Smoked Amber, Deep Rose & Caramelized Oud</span>
-      </div>
-      <div class="note-row">
-        <span class="note-label">Lingering Memory</span>
-        <span class="note-desc">Royal White Musk & Aged Sandalwood</span>
-      </div>
-    </div>
+      <form onsubmit="finishOrder(event)">
+        <input type="text" class="input-field" placeholder="Full Name" required />
+        <input type="tel" class="input-field" placeholder="10-Digit Mobile Number" pattern="[0-9]{10}" required />
+        <input type="text" class="input-field" placeholder="Delivery Pincode & City" required />
+        <input type="text" class="input-field" placeholder="Complete Street Address" required />
 
-    <!-- Bundle Options -->
-    <div class="section-title">Select Your Supply</div>
-    <div class="bundle-group">
-      <!-- Option 1 -->
-      <label class="bundle-card" onclick="selectBundle(this, 399)">
-        <div class="bundle-radio">
-          <input type="radio" name="bundle" value="single" />
-          <div>
-            <div class="bundle-title">1x Aura Bottle (6ml)</div>
-            <div class="bundle-subtitle">Standard Tester Pack</div>
-          </div>
-        </div>
-        <div class="bundle-price">
-          <div class="current-price">₹399</div>
-          <div class="original-price">₹599</div>
-        </div>
-      </label>
-
-      <!-- Option 2 (Selected by Default) -->
-      <label class="bundle-card active" onclick="selectBundle(this, 699)">
-        <span class="tag-save">Most Popular • Save 42%</span>
-        <div class="bundle-radio">
-          <input type="radio" name="bundle" value="double" checked />
-          <div>
-            <div class="bundle-title">2x Aura Bottles (6ml each)</div>
-            <div class="bundle-subtitle">1 for Home, 1 for Pocket</div>
-          </div>
-        </div>
-        <div class="bundle-price">
-          <div class="current-price">₹699</div>
-          <div class="original-price">₹1,198</div>
-        </div>
-      </label>
-    </div>
-
-    <!-- Direct COD Form (Removes WhatsApp Friction) -->
-    <div class="checkout-box" id="orderFormSection">
-      <div class="section-title">Order with Cash on Delivery</div>
-      <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 16px;">
-        Zero online payment risk. Pay only when the delivery arrives at your door.
-      </p>
-
-      <form onsubmit="handleOrder(event)">
-        <div class="input-group">
-          <label>Full Name</label>
-          <input type="text" placeholder="e.g. Rahul Sharma" required />
-        </div>
-
-        <div class="input-group">
-          <label>Phone Number (For Delivery Confirmation)</label>
-          <input type="tel" placeholder="10-digit mobile number" required pattern="[0-9]{10}" />
-        </div>
-
-        <div class="input-group">
-          <label>Complete Delivery Address</label>
-          <textarea rows="3" placeholder="House/Flat No, Area, City, Pincode" required></textarea>
-        </div>
-
-        <button type="submit" class="btn-submit">
-          Confirm COD Order (<span id="btnPrice">₹699</span>)
-        </button>
+        <button type="submit" class="btn-action">Claim Bottle (Cash on Delivery)</button>
       </form>
     </div>
   </div>
 
-  <!-- Mobile Sticky Bar -->
-  <div class="sticky-bar">
-    <div class="sticky-price-block">
-      <span class="sticky-price-label">Cash on Delivery</span>
-      <span class="sticky-price-val" id="stickyPrice">₹699</span>
-    </div>
-    <a href="#orderFormSection" class="sticky-btn">Order Now</a>
-  </div>
-
-  <!-- Interactive Hypnotic Canvas Simulation Script -->
   <script>
-    const canvas = document.getElementById("auraCanvas");
+    // Canvas background hypnotic particle waves
+    const canvas = document.getElementById("simCanvas");
     const ctx = canvas.getContext("2d");
-
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+    let w = (canvas.width = window.innerWidth);
+    let h = (canvas.height = window.innerHeight);
 
     window.addEventListener("resize", () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
     });
 
-    let ripples = [];
+    let vortexSpeed = 0.005;
+    let waveRadiusScale = 1;
+    let particles = [];
 
-    class Ripple {
-      constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.radius = 5;
-        this.maxRadius = Math.max(width, height) * 0.45;
-        this.opacity = 0.8;
-        this.speed = 1.6;
-      }
+    for (let i = 0; i < 90; i++) {
+      particles.push({
+        angle: Math.random() * Math.PI * 2,
+        dist: Math.random() * Math.max(w, h) * 0.45,
+        speed: 0.2 + Math.random() * 0.5,
+        size: Math.random() * 2 + 1
+      });
+    }
 
-      update() {
-        this.radius += this.speed;
-        this.opacity -= 0.0035;
-      }
+    function drawSim() {
+      ctx.fillStyle = "rgba(5, 4, 10, 0.2)";
+      ctx.fillRect(0, 0, w, h);
 
-      draw() {
+      const cx = w / 2;
+      const cy = h / 2;
+
+      particles.forEach((p) => {
+        p.angle += vortexSpeed;
+        let effectiveDist = p.dist * waveRadiusScale;
+        let x = cx + Math.cos(p.angle) * effectiveDist;
+        let y = cy + Math.sin(p.angle) * effectiveDist;
+
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(212, 175, 55, ${Math.max(this.opacity, 0)})`;
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-      }
+        ctx.arc(x, y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(229, 185, 76, ${0.4 + Math.sin(p.angle) * 0.3})`;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(drawSim);
     }
+    drawSim();
 
-    // Auto generate pulses at center to create hypnotic loop
-    let autoPulseTimer = 0;
-    function animate() {
-      ctx.clearRect(0, 0, width, height);
+    // Stage 1 Hold Interaction
+    let charging = false;
+    let progress = 0;
+    let chargeInterval = null;
+    const vortexBtn = document.getElementById("vortexBtn");
 
-      autoPulseTimer++;
-      if (autoPulseTimer % 90 === 0) {
-        ripples.push(new Ripple(width / 2, height * 0.32));
-      }
-
-      for (let i = ripples.length - 1; i >= 0; i--) {
-        ripples[i].update();
-        ripples[i].draw();
-        if (ripples[i].opacity <= 0 || ripples[i].radius >= ripples[i].maxRadius) {
-          ripples.splice(i, 1);
+    function startCharge() {
+      charging = true;
+      vortexSpeed = 0.035;
+      chargeInterval = setInterval(() => {
+        if (progress < 100) {
+          progress += 2;
+          document.getElementById("chargeBar").style.width = progress + "%";
+          document.getElementById("chargeText").innerText = "Charge: " + progress + "%";
+        } else {
+          clearInterval(chargeInterval);
+          goToStep(2);
         }
+      }, 30);
+    }
+
+    function stopCharge() {
+      if (progress < 100) {
+        charging = false;
+        vortexSpeed = 0.005;
+        clearInterval(chargeInterval);
+        progress = 0;
+        document.getElementById("chargeBar").style.width = "0%";
+        document.getElementById("chargeText").innerText = "Charge: 0%";
       }
-
-      requestAnimationFrame(animate);
-    }
-    animate();
-
-    // User interaction adds ripples
-    window.addEventListener("pointerdown", (e) => {
-      ripples.push(new Ripple(e.clientX, e.clientY));
-    });
-
-    // Bundle Selection Logic
-    function selectBundle(cardElement, price) {
-      document.querySelectorAll(".bundle-card").forEach((c) => c.classList.remove("active"));
-      cardElement.classList.add("active");
-      cardElement.querySelector('input[type="radio"]').checked = true;
-
-      document.getElementById("btnPrice").innerText = "₹" + price;
-      document.getElementById("stickyPrice").innerText = "₹" + price;
     }
 
-    // Direct Form Handler
-    function handleOrder(e) {
+    vortexBtn.addEventListener("mousedown", startCharge);
+    vortexBtn.addEventListener("mouseup", stopCharge);
+    vortexBtn.addEventListener("touchstart", (e) => { e.preventDefault(); startCharge(); });
+    vortexBtn.addEventListener("touchend", stopCharge);
+
+    // Stage Navigation
+    function goToStep(step) {
+      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+      document.querySelectorAll(".step-dot").forEach(d => d.classList.remove("active"));
+
+      document.getElementById("stage" + step).classList.add("active");
+      document.getElementById("dot" + step).classList.add("active");
+
+      if (step === 2) {
+        vortexSpeed = 0.015;
+      }
+      if (step === 3) {
+        vortexSpeed = 0.008;
+      }
+    }
+
+    // Stage 2 Projection Simulator
+    function updateRadius(val) {
+      document.getElementById("radiusLabel").innerText = val + " Feet";
+      waveRadiusScale = 0.7 + (val / 10) * 0.8;
+
+      const notice = document.getElementById("noticeSpeed");
+      const resp = document.getElementById("responseType");
+
+      if (val <= 4) {
+        notice.innerText = "Intimate (< 1 Foot)";
+        resp.innerText = "Subconscious Lean-In";
+      } else if (val <= 7) {
+        notice.innerText = "Immediate (< 2s)";
+        resp.innerText = "Involuntary Head Turn";
+      } else {
+        notice.innerText = "Room Filling";
+        resp.innerText = "Complete Focus Dominance";
+      }
+    }
+
+    function finishOrder(e) {
       e.preventDefault();
-      alert("Order received! We will send a quick dispatch confirmation SMS shortly.");
+      alert("Sensory Match Verified! Your Cash on Delivery order has been dispatched.");
     }
   </script>
 </body>
