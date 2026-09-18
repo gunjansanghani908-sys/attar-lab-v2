@@ -1,536 +1,78 @@
-<!DOCTYPE html>
-<html lang="gu">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>AURAFRAG LAB | Bespoke Sensory Compounding Chamber</title>
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=JetBrains+Mono:wght@400;600;800&family=Noto+Sans+Gujarati:wght@500;700;800;900&display=swap" rel="stylesheet">
-  
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Razorpay Official Checkout SDK -->
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<!-- DUAL CHECKOUT FORM (RAZORPAY + COD) -->
+<div class="bg-panelBg/95 border-2 border-goldPrimary/40 rounded-2xl p-4 sm:p-5 text-left shadow-2xl space-y-3">
+  <div class="flex items-center justify-between border-b border-white/10 pb-2">
+    <span class="text-xs font-mono text-goldLight font-bold uppercase tracking-wider">
+      ★ ડિલિવરી સરનામું અને પેમેન્ટ
+    </span>
+    <div class="text-right">
+      <span class="text-xs text-gray-400 line-through mr-1">₹899</span>
+      <span class="text-lg font-black text-goldLight" id="displayAmount">₹599</span>
+    </div>
+  </div>
 
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            deepBg: '#040407',
-            panelBg: '#090a12',
-            goldPrimary: '#f5b041',
-            goldLight: '#ffd369',
-            goldGlow: 'rgba(245, 176, 65, 0.35)',
-            cyberRed: '#ff2a55'
-          },
-          fontFamily: {
-            cinzel: ['Cinzel', 'serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
-            gujarati: ['"Noto Sans Gujarati"', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
+  <!-- Form Fields -->
+  <div class="space-y-2.5 pt-1">
+    <div>
+      <label class="block text-[11px] text-gray-400 font-bold uppercase mb-1">પૂરું નામ *</label>
+      <input type="text" id="custName" placeholder="દા.ત. રાહુલ શાહ" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-goldPrimary">
+    </div>
 
-  <style>
-    body {
-      background-color: #040407;
-      background-image: 
-        radial-gradient(at 50% 0%, rgba(245, 176, 65, 0.14) 0px, transparent 65%),
-        radial-gradient(at 100% 100%, rgba(255, 42, 85, 0.07) 0px, transparent 55%),
-        linear-gradient(to bottom, rgba(4, 4, 7, 0.96), rgba(4, 4, 7, 0.98));
-      color: #f3f4f8;
-      overflow-x: hidden;
-      -webkit-tap-highlight-color: transparent;
-      font-family: 'Noto Sans Gujarati', sans-serif;
-    }
-
-    .bg-grid {
-      background-size: 32px 32px;
-      background-image: 
-        linear-gradient(to right, rgba(245, 176, 65, 0.035) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(245, 176, 65, 0.035) 1px, transparent 1px);
-    }
-
-    .lab-panel {
-      background: linear-gradient(155deg, rgba(14, 15, 24, 0.98), rgba(7, 8, 14, 0.99));
-      border: 1.5px solid rgba(245, 176, 65, 0.26);
-      box-shadow: 0 25px 80px rgba(0,0,0,0.95), 0 0 45px rgba(245, 176, 65, 0.09);
-      position: relative;
-    }
-
-    .choice-card {
-      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.005) 100%);
-    }
-
-    .choice-card:hover, .choice-card:active {
-      transform: translateY(-2px);
-      border-color: #f5b041;
-      background: linear-gradient(180deg, rgba(245, 176, 65, 0.14) 0%, rgba(245, 176, 65, 0.02) 100%);
-      box-shadow: 0 8px 24px rgba(245, 176, 65, 0.16);
-    }
-
-    .reactor-core {
-      position: relative;
-      width: 90px;
-      height: 135px;
-      border: 3px solid #f5b041;
-      border-radius: 6px 6px 30px 30px;
-      background: rgba(0, 0, 0, 0.6);
-      overflow: hidden;
-      box-shadow: 0 0 35px rgba(245, 176, 65, 0.35);
-    }
-
-    .fluid-layer {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 0%;
-      background: linear-gradient(0deg, #965f03 0%, #f5b041 50%, #ff2a55 100%);
-      transition: height 0.35s linear;
-    }
-
-    .bubble {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.7);
-      border-radius: 50%;
-      animation: bubbleFloat 2s infinite ease-in;
-    }
-
-    @keyframes bubbleFloat {
-      0% { bottom: 0; opacity: 0.8; transform: scale(0.6); }
-      100% { bottom: 100%; opacity: 0; transform: scale(1.3); }
-    }
-
-    .btn-pay {
-      background: linear-gradient(135deg, #ffd369 0%, #f5b041 100%);
-      box-shadow: 0 0 25px rgba(245, 176, 65, 0.4);
-      cursor: pointer;
-    }
-
-    .btn-pay:active {
-      transform: scale(0.98);
-    }
-
-    .timer-alert {
-      background: rgba(231, 76, 60, 0.12);
-      border: 1px solid rgba(231, 76, 60, 0.5);
-    }
-  </style>
-</head>
-
-<body class="bg-grid min-h-screen flex items-center justify-center p-3 sm:p-5 select-none">
-
-  <div class="w-full max-w-[640px] lab-panel rounded-3xl p-5 sm:p-7 backdrop-blur-2xl relative z-10">
-    
-    <!-- TOP STATUS BAR -->
-    <header class="flex items-center justify-between pb-3.5 mb-4 border-b border-goldPrimary/20 text-xs">
-      <div class="flex items-center space-x-2">
-        <span class="relative flex h-2.5 w-2.5">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
-        </span>
-        <span class="font-mono text-goldLight tracking-widest uppercase font-black text-[11px] sm:text-xs">
-          AURAFRAG LAB // BIO-SYNTHESIS
-        </span>
+    <div class="grid grid-cols-2 gap-2">
+      <div>
+        <label class="block text-[11px] text-gray-400 font-bold uppercase mb-1">મોબાઈલ નંબર *</label>
+        <input type="tel" id="custPhone" placeholder="10 આંકડાનો નંબર" maxlength="10" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-goldPrimary">
       </div>
-      <span class="text-emerald-400 font-mono text-[11px] font-bold">100% ALCOHOL-FREE</span>
-    </header>
-
-    <!-- STEP TRACKER -->
-    <div id="telemetryHeader" class="mb-4">
-      <div class="flex justify-between items-center text-[12px] font-mono text-gray-400 mb-1.5">
-        <span id="stepLabel" class="text-goldLight font-bold">SYNTHESIS PHASE // 01/04</span>
-        <span class="text-emerald-400 font-semibold tracking-wider">BESPOKE CUSTOM BLEND</span>
-      </div>
-      <div class="w-full h-1.5 bg-black/60 rounded-full overflow-hidden border border-goldPrimary/20">
-        <div id="chamberProgress" class="h-full bg-gradient-to-r from-goldPrimary via-yellow-400 to-cyberRed transition-all duration-500" style="width: 25%;"></div>
+      <div>
+        <label class="block text-[11px] text-gray-400 font-bold uppercase mb-1">પિનકોડ *</label>
+        <input type="text" id="custPincode" placeholder="6 આંકડાનો પિનકોડ" maxlength="6" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-goldPrimary">
       </div>
     </div>
 
-    <!-- VIEW 1: QUESTIONS -->
-    <main id="simulationView" class="space-y-4">
-      <div class="text-left mb-1">
-        <p class="text-[11px] font-mono tracking-widest text-cyberRed font-bold uppercase mb-1">
-          // OLFACTORY ATTRACTION MATRIX
-        </p>
-        <h1 id="chamberQuestion" class="text-base sm:text-lg font-black text-white leading-snug">
-          ૧. તમે તમારી હાજરીથી આસપાસ કેવું ચુંબકીય ખેંચાણ ઊભું કરવા માંગો છો?
-        </h1>
-        <p id="chamberSubtext" class="text-xs text-gray-400 mt-1">
-          એક વિકલ્પ પસંદ કરો. લેબ તમારા સ્વભાવ અનુસાર ૩ દુર્લભ અત્તર કમ્પાઉન્ડ કરશે.
-        </p>
-      </div>
+    <div>
+      <label class="block text-[11px] text-gray-400 font-bold uppercase mb-1">ઘરનું પૂરું સરનામું *</label>
+      <textarea id="custAddress" rows="2" placeholder="ઘર/ફ્લેટ નં, સોસાયટી, રોડ, શહેર" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-goldPrimary"></textarea>
+    </div>
 
-      <div id="choicesGrid" class="space-y-2.5 pt-1"></div>
-
-      <div class="pt-3 flex items-center justify-between text-[11px] text-gray-400 border-t border-white/5 font-mono">
-        <span>⚡ ૧,૮૪૨ લોકોએ આજે પોતાનો ફોર્મ્યુલા બનાવ્યો</span>
-        <span class="text-goldLight font-bold">PURE OIL CONCENTRATE</span>
-      </div>
-    </main>
-
-    <!-- VIEW 2: COMPOUNDING ANIMATION -->
-    <section id="compoundingView" class="hidden flex-col items-center justify-center py-7 text-center space-y-4">
-      <div class="reactor-core">
-        <div id="fluidLevel" class="fluid-layer"></div>
-        <div class="bubble" style="left: 20%; animation-delay: 0.1s; width: 6px; height: 6px;"></div>
-        <div class="bubble" style="left: 55%; animation-delay: 0.7s; width: 7px; height: 7px;"></div>
-        <div class="bubble" style="left: 40%; animation-delay: 1.2s; width: 5px; height: 5px;"></div>
-      </div>
-
-      <div>
-        <div id="compoundingStatus" class="font-mono text-sm tracking-widest text-goldLight font-black animate-pulse">
-          EXTRACTING BASE MOLECULES...
-        </div>
-        <div class="text-xs text-gray-400 mt-1 max-w-sm">
-          50% Base Sustain, 30% Heart Resonance, 20% Top Projection નો સંગમ થઈ રહ્યો છે...
-        </div>
-      </div>
-
-      <div class="w-full bg-black/80 rounded-xl p-3 text-left font-mono text-[11px] text-gray-300 border border-goldPrimary/20 space-y-1">
-        <div class="text-emerald-400 flex items-center justify-between">
-          <span>> ATOMIZING NATURAL ESSENTIAL OILS</span>
-          <span id="liveYield">64.2%</span>
-        </div>
-        <div class="text-goldLight">> INFUSING 14-HOUR MAGNETIC PROJECTION</div>
-      </div>
-    </section>
-
-    <!-- VIEW 3: RAZORPAY DIRECT CHECKOUT -->
-    <section id="dossierView" class="hidden space-y-4">
+    <!-- PAYMENT METHOD SELECTOR -->
+    <div class="pt-2">
+      <label class="block text-[11px] text-goldLight font-bold uppercase mb-2">પેમેન્ટ પદ્ધતિ પસંદ કરો:</label>
       
-      <!-- Timer -->
-      <div class="timer-alert rounded-xl py-2 px-3 text-center text-xs font-mono font-bold flex items-center justify-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-cyberRed animate-ping"></span>
-        <span>સ્પેશિયલ ડિસ્કાઉન્ટ સમાપ્ત થવામાં સમય:</span>
-        <span id="countdownClock" class="text-cyberRed font-black text-sm tracking-widest">09:59</span>
-      </div>
-
-      <!-- Result Card -->
-      <div class="bg-gradient-to-b from-white/[0.04] to-black/70 border border-goldPrimary/30 rounded-2xl p-4 text-center">
-        <div class="flex items-center justify-between text-[11px] font-mono text-gray-400 pb-2 border-b border-white/10">
-          <span id="dossierBatchCode" class="text-goldLight tracking-widest font-black">FORMULA #AURAFRAG-7492</span>
-          <span class="text-emerald-400 font-bold">100% BESPOKE MATCH</span>
-        </div>
-
-        <h2 class="text-lg font-black text-goldLight font-cinzel mt-2">TRINITY IMPERIAL EXTRAIT</h2>
-        <p class="text-xs text-gray-300 max-w-md mx-auto mt-1">
-          તમારી પસંદગી મુજબ તૈયાર કરેલું ૩ પ્યોર અત્તરનું મિશ્રણ, જે ત્વચા પર લાગતાં જ ૧૪ કલાક સુધી મોહક રૂઆબ જાળવી રાખશે.
-        </p>
-
-        <!-- Ratio Bar -->
-        <div class="mt-3">
-          <div id="resultRatioBar" class="w-full h-7 rounded-xl overflow-hidden flex border border-goldPrimary/30 bg-black/40"></div>
-        </div>
-
-        <!-- Notes Details -->
-        <div id="formulaListDetails" class="space-y-1.5 mt-3"></div>
-      </div>
-
-      <!-- CHECKOUT FORM -->
-      <div class="bg-panelBg/95 border-2 border-goldPrimary/40 rounded-2xl p-4 sm:p-5 text-left shadow-2xl space-y-3">
-        <div class="flex items-center justify-between border-b border-white/10 pb-2">
-          <span class="text-xs font-mono text-goldLight font-bold uppercase tracking-wider">
-            ★ ડિલિવરી સરનામું અને ઓર્ડર
-          </span>
-          <div class="text-right">
-            <span class="text-xs text-gray-400 line-through mr-1">₹899</span>
-            <span class="text-lg font-black text-goldLight">₹599</span>
-          </div>
-        </div>
-
-        <!-- Form Fields -->
-        <div class="space-y-2.5 pt-1">
-          <div>
-            <label class="block text-[11px] text-gray-400 font-bold uppercase mb-1">પૂરું નામ *</label>
-            <input type="text" id="custName" placeholder="દા.ત. રાહુલ શાહ" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-goldPrimary">
-          </div>
-
-          <div class="grid grid-cols-2 gap-2">
+      <div class="space-y-2">
+        <!-- Option 1: Razorpay / Prepaid -->
+        <label class="flex items-center justify-between p-3 rounded-xl border border-goldPrimary/40 bg-black/40 cursor-pointer">
+          <div class="flex items-center gap-2.5">
+            <input type="radio" name="payMethod" value="ONLINE" checked onchange="togglePayMode('ONLINE')" class="accent-goldPrimary">
             <div>
-              <label class="block text-[11px] text-gray-400 font-bold uppercase mb-1">મોબાઈલ નંબર *</label>
-              <input type="tel" id="custPhone" placeholder="10 આંકડાનો મોબાઈલ નંબર" maxlength="10" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-goldPrimary">
-            </div>
-            <div>
-              <label class="block text-[11px] text-gray-400 font-bold uppercase mb-1">પિનકોડ *</label>
-              <input type="text" id="custPincode" placeholder="6 આંકડાનો પિનકોડ" maxlength="6" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-goldPrimary">
+              <div class="text-sm font-bold text-white">ઓનલાઇન પેમેન્ટ (UPI / GPay / Cards)</div>
+              <div class="text-[11px] text-emerald-400">ઝડપી ડિસ્પેચ + સુરક્ષિત પેમેન્ટ</div>
             </div>
           </div>
+          <span class="text-xs font-mono text-goldLight font-bold">₹599</span>
+        </label>
 
-          <div>
-            <label class="block text-[11px] text-gray-400 font-bold uppercase mb-1">ઘરનું પૂરું સરનામું *</label>
-            <textarea id="custAddress" rows="2" placeholder="ઘર/ફ્લેટ નં, સોસાયટી, રોડ, શહેર" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-goldPrimary"></textarea>
+        <!-- Option 2: Cash on Delivery -->
+        <label class="flex items-center justify-between p-3 rounded-xl border border-white/10 bg-black/40 cursor-pointer">
+          <div class="flex items-center gap-2.5">
+            <input type="radio" name="payMethod" value="COD" onchange="togglePayMode('COD')" class="accent-goldPrimary">
+            <div>
+              <div class="text-sm font-bold text-white">કેશ ઓન ડિલિવરી (COD)</div>
+              <div class="text-[11px] text-gray-400">ઘરે પાર્સલ આવે ત્યારે જ રોકડા આપો</div>
+            </div>
           </div>
-        </div>
-
-        <!-- RAZORPAY DIRECT BUTTON -->
-        <button id="payNowBtn" type="button" onclick="labApp.initiateRazorpayPayment()" class="btn-pay w-full py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 text-black font-black text-base tracking-wide mt-3">
-          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5z"/>
-          </svg>
-          <span>₹૫૯૯ ઓનલાઇન ચૂકવો (GPay / PhonePe / UPI)</span>
-        </button>
-
-        <div class="text-[11px] text-gray-400 text-center flex items-center justify-center gap-2 pt-1 font-mono">
-          <span>🔒 Razorpay સિક્યોર પેમેન્ટ</span>
-          <span>•</span>
-          <span>બધા UPI / કાર્ડ્સ સ્વીકાર્ય</span>
-        </div>
+          <span class="text-xs font-mono text-gray-300 font-bold">₹599</span>
+        </label>
       </div>
-
-      <!-- SUCCESS MODAL -->
-      <div id="successModal" class="hidden bg-emerald-950/90 border border-emerald-500 rounded-2xl p-4 text-center space-y-2">
-        <div class="text-3xl">🎉</div>
-        <h3 class="text-base font-black text-white">ઓર્ડર કન્ફર્મ થઈ ગયો છે!</h3>
-        <p class="text-xs text-emerald-200" id="receiptDetails"></p>
-        <p class="text-[11px] text-gray-300">તમારું અત્તર તૈયાર કરીને ટૂંક સમયમાં કુરિયર રવાના કરવામાં આવશે.</p>
-      </div>
-
-    </section>
+    </div>
   </div>
 
-  <!-- SCRIPT -->
-  <script>
-    // ==========================================================
-    // નીચે તમારી Razorpay Key ID નાખો (Live or Test)
-    // ==========================================================
-    const RAZORPAY_KEY = "rzp_live_TcnN4bgnhTNHvC"; 
-    const ORDER_AMOUNT_INR = 599;
+  <!-- ACTION BUTTON -->
+  <button id="mainSubmitBtn" type="button" onclick="labApp.handleCheckout()" class="btn-pay w-full py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 text-black font-black text-base tracking-wide mt-3">
+    <span id="btnActionText">₹૫૯૯ ઓનલાઇન ચૂકવો (GPay / UPI)</span>
+  </button>
 
-    const CATALOG = {
-      xChocolate:   { name: "X-Chocolate Noir", color: "#8B0000" },
-      chocoBlast:   { name: "Choco Blast Royale", color: "#d63031" },
-      frenchRose:   { name: "Damascus Blood Rose", color: "#e84393" },
-      cherish:      { name: "Cherish Seduction", color: "#fd79a8" },
-      copper:       { name: "Smoked Copper Wood", color: "#c0392b" },
-      classic:      { name: "Classic Royal Sovereign", color: "#1f4068" },
-      coolWater:    { name: "Glacial Deep Cool", color: "#2980b9" },
-      diamondSandal:{ name: "Imperial Diamond Sandal", color: "#d35400" },
-      whiteMusk:    { name: "White Musk Nirvana", color: "#27ae60" },
-      fawaki:       { name: "Fawaki Eden Mist", color: "#16a085" },
-      blueLady:     { name: "Blue Lady Hypnotic", color: "#6c5ce7" },
-      mexico:       { name: "Mexico Wild Leather", color: "#e67e22" }
-    };
-
-    const QUESTIONS = [
-      {
-        q: "૧. તમે તમારી હાજરીથી આસપાસ કેવું ચુંબકીય ખેંચાણ ઊભું કરવા માંગો છો?",
-        sub: "એક વિકલ્પ પસંદ કરો. લેબ તમારા સ્વભાવ મુજબ ૩ અત્તર કમ્પાઉન્ડ કરશે.",
-        options: [
-          { title: "Dark Attraction & Seduction (મદહોશ કરતું આકર્ષણ)", desc: "જ્યારે તેઓ નજીક આવે ત્યારે તમારી સુગંધથી માત્ર તમારા તરફ ખેંચાય.", icon: "🔥", picks: ["xChocolate", "frenchRose", "chocoBlast"] },
-          { title: "Alpha Dominance & Authority (વજનદાર રુઆબ)", desc: "મીટિંગ કે સભામાં પગ મૂકતાં જ લોકો તમારી પર્સનાલિટીનો પ્રભાવ માને.", icon: "👑", picks: ["copper", "classic", "diamondSandal"] },
-          { title: "Sacred Peace & Divine Aura (શાંતિ અને સ્નેહ)", desc: "પાક અને આહલાદક સુગંધ જે નજીક આવનારના દિલને શાંતિ આપે.", icon: "🌿", picks: ["whiteMusk", "fawaki", "diamondSandal"] }
-        ]
-      },
-      {
-        q: "૨. સામી વ્યક્તિના મગજ પર કેવો મનોવૈજ્ઞાનિક પ્રભાવ છોડવો છે?",
-        sub: "સુગંધ સીધી મગજના લિમ્બિક સિસ્ટમ પર અસર કરે છે.",
-        options: [
-          { title: "Uncontrollable Magnetism (નજીક આવવાની બેચેની)", desc: "તેમનું ધ્યાન વારંવાર તમારી તરફ જ ખેંચાયા કરે.", icon: "💋", picks: ["xChocolate", "cherish", "blueLady"] },
-          { title: "Undeniable Respect (ગંભીર સન્માન)", desc: "રૂમમાં શાંતિ છવાઈ જાય અને તમારી વાતને વજન મળે.", icon: "⚡", picks: ["copper", "classic"] },
-          { title: "Haunting Memory (દિવસો સુધી યાદ રહેતો નશો)", desc: "તમે ગયા પછી પણ તમારી મહેક કલાકો સુધી ગુંજતી રહે.", icon: "🔮", picks: ["frenchRose", "mexico", "cherish"] }
-        ]
-      },
-      {
-        q: "૩. તમારી ત્વચા માટે કયો બેઝ સૌથી વધુ વજનદાર હોવો જોઈએ?",
-        sub: "આ તમારા ફોર્મ્યુલાનો ૫૦% મુખ્ય આધાર (Base Note) નક્કી કરશે.",
-        options: [
-          { title: "Warm Cocoa & Dark Amber (ગરમ અને નશીલું)", desc: "ડાર્ક ચોકલેટ અને એમ્બરનો મોહક સંગમ.", icon: "🍫", picks: ["xChocolate", "chocoBlast"] },
-          { title: "Smoked Oud & Sandalwood (શાહી અને મર્દાના)", desc: "શુદ્ધ ચંદન અને ઊદની ખાનદાની રઈસી દર્શાવતી તાસીર.", icon: "🪵", picks: ["diamondSandal", "copper"] },
-          { title: "Rain Earth & White Musk (પવિત્ર અને શીતળ)", desc: "ભીની માટી અને શુદ્ધ સફેદ કસ્તુરીની આત્મીય મહેક.", icon: "💧", picks: ["whiteMusk", "fawaki"] }
-        ]
-      },
-      {
-        q: "૪. તમે અત્તરનો ફેલાવો (Projection) કેવો રાખવા માંગો છો?",
-        sub: "ખુશ્બૂ ફેલાવવાની તાકાત લોક કરવામાં આવી રહી છે.",
-        options: [
-          { title: "14-Hour Beast Mode (આખો રૂમ મહેકી ઊઠે)", desc: "સવારથી રાત સુધી પ્રચંડ ખુશ્બૂ ટકી રહેશે.", icon: "💣", picks: ["copper", "xChocolate", "diamondSandal"] },
-          { title: "Intimate Whisper Lock (નજીક આવનાર માટે)", desc: "ફક્ત તમારા એકદમ નિકટ આવનારને જ અનુભવાય.", icon: "🥀", picks: ["frenchRose", "whiteMusk", "cherish"] }
-        ]
-      }
-    ];
-
-    class LaboratoryEngine {
-      constructor() {
-        this.step = 0;
-        this.votes = {};
-        for (let k in CATALOG) { this.votes[k] = 0; }
-        this.finalBlend = null;
-        this.code = `AURAFRAG-${Math.floor(1000 + Math.random() * 9000)}`;
-        this.timer = 600;
-      }
-
-      init() {
-        this.renderStep();
-        this.startTimer();
-      }
-
-      renderStep() {
-        const data = QUESTIONS[this.step];
-        document.getElementById('stepLabel').innerText = `SYNTHESIS PHASE // 0${this.step + 1}/04`;
-        document.getElementById('chamberProgress').style.width = `${((this.step + 1) / 4) * 100}%`;
-        document.getElementById('chamberQuestion').innerText = data.q;
-        document.getElementById('chamberSubtext').innerText = data.sub;
-
-        const grid = document.getElementById('choicesGrid');
-        grid.innerHTML = '';
-
-        data.options.forEach(opt => {
-          const card = document.createElement('div');
-          card.className = "choice-card rounded-xl p-3.5 sm:p-4 cursor-pointer flex items-start gap-3";
-          card.innerHTML = `
-            <div class="text-2xl pt-0.5 flex-shrink-0">${opt.icon}</div>
-            <div class="flex-1">
-              <h3 class="text-sm sm:text-base font-black text-white leading-tight mb-1">${opt.title}</h3>
-              <p class="text-xs text-gray-300 leading-snug">${opt.desc}</p>
-            </div>
-            <div class="text-goldPrimary/60 text-xs font-mono font-bold self-center">[પસંદ કરો]</div>
-          `;
-          card.onclick = () => {
-            opt.picks.forEach((k, idx) => {
-              if (this.votes[k] !== undefined) this.votes[k] += (3 - idx) * 10 + 15;
-            });
-            this.step++;
-            if (this.step < 4) {
-              this.renderStep();
-            } else {
-              this.runCompounding();
-            }
-          };
-          grid.appendChild(card);
-        });
-      }
-
-      runCompounding() {
-        document.getElementById('simulationView').classList.add('hidden');
-        document.getElementById('telemetryHeader').classList.add('hidden');
-        const cView = document.getElementById('compoundingView');
-        cView.classList.remove('hidden');
-        cView.classList.add('flex');
-
-        let fluid = document.getElementById('fluidLevel');
-        let status = document.getElementById('compoundingStatus');
-        let yText = document.getElementById('liveYield');
-
-        setTimeout(() => { fluid.style.height = "40%"; status.innerText = "STABILIZING BASE RESINS..."; yText.innerText = "75.4%"; }, 600);
-        setTimeout(() => { fluid.style.height = "75%"; status.innerText = "LOCKING 50:30:20 PROJECTION..."; yText.innerText = "94.2%"; }, 1300);
-
-        setTimeout(() => {
-          this.calculateBlend();
-          cView.classList.remove('flex');
-          cView.classList.add('hidden');
-          this.renderDossier();
-        }, 2200);
-      }
-
-      calculateBlend() {
-        const sorted = Object.keys(this.votes).sort((a, b) => this.votes[b] - this.votes[a]);
-        const ratios = [50, 30, 20];
-        this.finalBlend = [0, 1, 2].map(i => ({
-          name: CATALOG[sorted[i]].name,
-          color: CATALOG[sorted[i]].color,
-          percent: ratios[i]
-        }));
-      }
-
-      renderDossier() {
-        document.getElementById('dossierView').classList.remove('hidden');
-        document.getElementById('dossierBatchCode').innerText = `FORMULA #${this.code}`;
-
-        const bar = document.getElementById('resultRatioBar');
-        bar.innerHTML = '';
-        this.finalBlend.forEach(item => {
-          const s = document.createElement('div');
-          s.style.width = `${item.percent}%`;
-          s.style.backgroundColor = item.color;
-          s.className = "h-full flex items-center justify-center font-mono font-black text-xs text-white";
-          s.innerText = `${item.percent}%`;
-          bar.appendChild(s);
-        });
-
-        const list = document.getElementById('formulaListDetails');
-        list.innerHTML = '';
-        const roles = ["૫૦% બેઝ નોટ (લાંબો પ્રભાવ)", "૩૦% હાર્ટ નોટ (દિલનું આકર્ષણ)", "૨૦% ટોપ નોટ (પ્રથમ વાર)"];
-        this.finalBlend.forEach((item, idx) => {
-          const row = document.createElement('div');
-          row.className = "flex items-center justify-between p-2.5 rounded-xl border border-white/10 bg-black/40 text-xs";
-          row.innerHTML = `
-            <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full" style="background:${item.color}"></span>
-              <div>
-                <span class="font-bold text-white">${item.name}</span>
-                <span class="text-[10px] text-gray-400 block">${roles[idx]}</span>
-              </div>
-            </div>
-            <span class="font-mono font-bold text-goldLight">${item.percent}%</span>
-          `;
-          list.appendChild(row);
-        });
-      }
-
-      initiateRazorpayPayment() {
-        const name = document.getElementById('custName').value.trim();
-        const phone = document.getElementById('custPhone').value.trim();
-        const pincode = document.getElementById('custPincode').value.trim();
-        const address = document.getElementById('custAddress').value.trim();
-
-        if (!name || phone.length < 10 || pincode.length < 6 || !address) {
-          alert("કૃપા કરીને તમારું પૂરું નામ, ૧૦ આંકડાનો મોબાઈલ નંબર, પિનકોડ અને સરનામું ભરો.");
-          return;
-        }
-
-        const options = {
-          key: RAZORPAY_KEY,
-          amount: ORDER_AMOUNT_INR * 100,
-          currency: "INR",
-          name: "AURAFRAG LAB",
-          description: `Custom 3-Attar Blend (${this.code})`,
-          prefill: {
-            name: name,
-            contact: phone
-          },
-          theme: {
-            color: "#f5b041"
-          },
-          handler: function (response) {
-            document.getElementById('payNowBtn').classList.add('hidden');
-            const modal = document.getElementById('successModal');
-            modal.classList.remove('hidden');
-            document.getElementById('receiptDetails').innerText = 
-              `Payment ID: ${response.razorpay_payment_id} | ગ્રાહક: ${name} | અમાઉન્ટ: ₹${ORDER_AMOUNT_INR}`;
-          }
-        };
-
-        const rzp = new Razorpay(options);
-        rzp.on('payment.failed', function (response) {
-          alert("પેમેન્ટ અપૂર્ણ રહ્યું: " + response.error.description);
-        });
-        rzp.open();
-      }
-
-      startTimer() {
-        setInterval(() => {
-          if (this.timer > 0) {
-            this.timer--;
-            const m = Math.floor(this.timer / 60).toString().padStart(2, '0');
-            const s = (this.timer % 60).toString().padStart(2, '0');
-            const el = document.getElementById('countdownClock');
-            if (el) el.innerText = `${m}:${s}`;
-          }
-        }, 1000);
-      }
-    }
-
-    const labApp = new LaboratoryEngine();
-    window.addEventListener('DOMContentLoaded', () => labApp.init());
-  </script>
-</body>
-</html>
+  <div class="text-[11px] text-gray-400 text-center flex items-center justify-center gap-2 pt-1 font-mono">
+    <span>🔒 100% સુરક્ષિત ઓર્ડર</span>
+    <span>•</span>
+    <span>ઓલ ઇન્ડિયા ડિલિવરી</span>
+  </div>
+</div>
