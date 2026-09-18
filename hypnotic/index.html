@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>AURA - સબકોન્શિયસ મોહક અત્તર સિમ્યુલેશન</title>
+  <title>AURA - સબકોન્શિયસ હિપ્નોટિક અત્તર ટેસ્ટ</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,15 +11,15 @@
   
   <style>
     :root {
-      --bg: #05040a;
+      --bg: #040308;
       --gold: #e5b94c;
       --gold-bright: #ffd700;
       --gold-glow: rgba(229, 185, 76, 0.45);
-      --gold-dim: #7a6125;
-      --card-bg: rgba(14, 11, 22, 0.9);
-      --text: #f5f4f8;
-      --text-muted: #9e9cb2;
-      --border-lux: rgba(229, 185, 76, 0.28);
+      --purple-glow: rgba(147, 51, 234, 0.35);
+      --card-bg: rgba(13, 10, 22, 0.88);
+      --text: #f8f7fc;
+      --text-muted: #a3a1b8;
+      --border: rgba(229, 185, 76, 0.25);
       --whatsapp: #25d366;
     }
 
@@ -27,7 +27,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Noto Sans Gujarati', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: 'Noto Sans Gujarati', -apple-system, BlinkMacSystemFont, sans-serif;
       user-select: none;
       -webkit-tap-highlight-color: transparent;
     }
@@ -35,8 +35,8 @@
     body {
       background-color: var(--bg);
       color: var(--text);
-      overflow-x: hidden;
       min-height: 100vh;
+      overflow-x: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -44,8 +44,8 @@
       position: relative;
     }
 
-    /* Ambient Simulation Canvas */
-    #ambientCanvas {
+    /* Hypnotic Background Canvas */
+    #vortexCanvas {
       position: fixed;
       inset: 0;
       width: 100vw;
@@ -57,12 +57,12 @@
     .vignette {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at center, transparent 30%, rgba(3, 2, 7, 0.95) 95%);
+      background: radial-gradient(circle at center, transparent 20%, rgba(4, 3, 8, 0.92) 90%);
       pointer-events: none;
       z-index: 1;
     }
 
-    /* Container */
+    /* Main Container */
     .app-frame {
       position: relative;
       z-index: 10;
@@ -72,141 +72,223 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 22px 16px 36px;
+      padding: 24px 16px 36px;
     }
 
-    /* Header */
+    /* Brand Header */
     .brand-header {
       text-align: center;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
 
     .brand-title {
       font-family: 'Cinzel', serif;
       font-size: 28px;
-      letter-spacing: 0.25em;
+      letter-spacing: 0.28em;
       font-weight: 900;
-      background: linear-gradient(180deg, #fff7d6 0%, #e5b94c 50%, #8c6a1e 100%);
+      background: linear-gradient(180deg, #fff7d6 0%, #ffd700 45%, #b38728 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 16px rgba(229, 185, 76, 0.4));
+      filter: drop-shadow(0 0 16px rgba(229, 185, 76, 0.45));
     }
 
-    .brand-sub {
+    .brand-tag {
       font-size: 11px;
-      letter-spacing: 0.2em;
       color: var(--gold);
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       font-weight: 700;
       margin-top: 2px;
     }
 
-    /* Progress Indicators */
+    /* Stepper Bar */
     .stepper {
       display: flex;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       margin-bottom: 22px;
     }
 
-    .step-bar {
-      width: 32px;
-      height: 3.5px;
-      background: rgba(255, 255, 255, 0.12);
-      border-radius: 3px;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    .step-pill {
+      width: 24px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 2px;
+      transition: all 0.35s ease;
     }
 
-    .step-bar.active {
+    .step-pill.active {
       background: linear-gradient(90deg, var(--gold), var(--gold-bright));
       box-shadow: 0 0 10px var(--gold-glow);
-      width: 46px;
+      width: 38px;
     }
 
-    /* Screen Cards */
+    /* Screen Transition Cards */
     .screen-card {
       background: var(--card-bg);
-      border: 1px solid var(--border-lux);
-      border-radius: 22px;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      padding: 26px 18px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      padding: 28px 20px;
       text-align: center;
       display: none;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
-      animation: fadeIn 0.45s ease forwards;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.85);
+      animation: slideIn 0.4s ease forwards;
     }
 
     .screen-card.active {
       display: block;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(14px) scale(0.98); }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(12px) scale(0.97); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    .gold-badge {
+    .step-badge {
       display: inline-block;
       font-size: 11px;
       color: var(--gold-bright);
       background: rgba(229, 185, 76, 0.1);
-      border: 1px solid var(--gold-dim);
+      border: 1px solid var(--border);
       padding: 4px 14px;
       border-radius: 20px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
     }
 
-    h1.heading {
-      font-size: 21px;
+    h2.heading {
+      font-size: 20px;
       font-weight: 900;
-      line-height: 1.35;
-      margin-bottom: 8px;
+      line-height: 1.4;
+      margin-bottom: 10px;
       color: #ffffff;
     }
 
-    h1.heading span.gold-text {
-      background: linear-gradient(135deg, #fff 10%, var(--gold-bright) 60%, var(--gold) 100%);
+    h2.heading span.gold-highlight {
+      background: linear-gradient(135deg, #ffffff 15%, var(--gold-bright) 65%, var(--gold) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 10px rgba(229, 185, 76, 0.4));
+      filter: drop-shadow(0 0 10px rgba(229, 185, 76, 0.35));
     }
 
-    p.sub-desc {
+    p.sub-heading {
       font-size: 13.5px;
       color: var(--text-muted);
-      line-height: 1.55;
+      line-height: 1.6;
       margin-bottom: 22px;
     }
 
-    /* Stage 1: Scanner */
-    .scanner-hub {
+    /* Card Options (Grid / List) */
+    .gender-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .option-card {
+      background: rgba(19, 14, 30, 0.7);
+      border: 1px solid rgba(229, 185, 76, 0.2);
+      border-radius: 16px;
+      padding: 20px 14px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.22s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .option-card:hover, .option-card:active {
+      border-color: var(--gold-bright);
+      background: rgba(40, 28, 62, 0.75);
+      box-shadow: 0 0 20px var(--gold-glow);
+      transform: scale(0.98);
+    }
+
+    .option-icon {
+      font-size: 32px;
+      filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.4));
+    }
+
+    .option-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .option-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+
+    .option-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .option-item-wide {
+      background: rgba(19, 14, 30, 0.75);
+      border: 1px solid rgba(229, 185, 76, 0.22);
+      border-radius: 16px;
+      padding: 16px 16px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: all 0.22s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+
+    .option-item-wide:hover, .option-item-wide:active {
+      border-color: var(--gold-bright);
+      background: rgba(40, 28, 62, 0.85);
+      box-shadow: 0 0 20px var(--gold-glow);
+      transform: scale(0.98);
+    }
+
+    .opt-badge-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(229, 185, 76, 0.15);
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: var(--gold-bright);
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* Slide 4: Vortex Calibration Area */
+    .vortex-eye-area {
       position: relative;
-      width: 155px;
-      height: 155px;
-      margin: 10px auto 22px;
+      width: 165px;
+      height: 165px;
+      margin: 12px auto 20px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
     }
 
-    .scan-ring-outer {
+    .vortex-spin-ring {
       position: absolute;
-      inset: -8px;
+      inset: -6px;
       border-radius: 50%;
-      border: 1px solid rgba(229, 185, 76, 0.2);
-      box-shadow: 0 0 20px rgba(229, 185, 76, 0.15);
-    }
-
-    .scan-ring-inner {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      border: 2px dashed rgba(229, 185, 76, 0.4);
-      animation: spinRing 12s linear infinite;
+      border: 2px dashed rgba(229, 185, 76, 0.45);
+      animation: spinRing 10s linear infinite;
     }
 
     @keyframes spinRing {
@@ -214,385 +296,239 @@
       100% { transform: rotate(360deg); }
     }
 
-    .fingerprint-btn {
-      width: 105px;
-      height: 105px;
+    .hypnotic-eye-core {
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
-      background: radial-gradient(circle, #1f1830 0%, #0a0812 85%);
-      border: 2px solid var(--gold);
+      background: radial-gradient(circle, #2d1d49 0%, #120c22 70%, #050409 100%);
+      border: 2px solid var(--gold-bright);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 25px rgba(229, 185, 76, 0.25);
+      box-shadow: 0 0 25px rgba(229, 185, 76, 0.35);
       position: relative;
       overflow: hidden;
-      transition: all 0.2s ease;
+      transition: all 0.2s;
     }
 
-    .fingerprint-btn.charging {
-      border-color: var(--gold-bright);
-      box-shadow: 0 0 40px var(--gold-glow);
+    .hypnotic-eye-core.holding {
+      box-shadow: 0 0 45px var(--gold-glow), 0 0 25px var(--purple-glow);
       transform: scale(0.96);
     }
 
-    .fp-laser {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, #ffd700, transparent);
-      box-shadow: 0 0 10px #ffd700;
-      display: none;
+    .eye-pupil {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--gold-bright);
+      box-shadow: 0 0 16px var(--gold-bright);
+      animation: pulsePupil 1.8s infinite alternate;
     }
 
-    .charging .fp-laser {
-      display: block;
-      animation: sweepLaser 1.2s ease-in-out infinite alternate;
+    @keyframes pulsePupil {
+      from { transform: scale(0.85); }
+      to { transform: scale(1.3); }
     }
 
-    @keyframes sweepLaser {
-      from { top: 12%; }
-      to { top: 88%; }
-    }
-
-    .fp-icon {
-      width: 42px;
-      height: 42px;
-      stroke: var(--gold);
-      fill: none;
-      stroke-width: 1.8;
-      stroke-linecap: round;
-    }
-
-    .charging .fp-icon {
-      stroke: var(--gold-bright);
-      filter: drop-shadow(0 0 6px #ffd700);
-    }
-
-    .scanner-tip {
+    .eye-press-text {
       font-size: 11px;
       color: var(--gold-bright);
-      margin-top: 6px;
-      font-weight: 700;
-    }
-
-    .telemetry-box {
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(229, 185, 76, 0.15);
-      border-radius: 12px;
-      padding: 10px 14px;
-      margin-bottom: 12px;
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-    }
-
-    .telemetry-val {
-      color: var(--gold-bright);
       font-weight: 800;
-      font-family: monospace;
+      margin-top: 8px;
     }
 
-    .progress-track {
+    .calib-progress-track {
       height: 6px;
-      background: #1b1726;
+      background: #1c152b;
       border-radius: 3px;
       overflow: hidden;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
-    .progress-fill {
+    .calib-progress-fill {
       width: 0%;
       height: 100%;
-      background: linear-gradient(90deg, var(--gold-dim), var(--gold-bright));
+      background: linear-gradient(90deg, #9333ea, var(--gold-bright));
       box-shadow: 0 0 10px var(--gold-glow);
       transition: width 0.08s linear;
     }
 
-    /* Stage 2: Interactive Simulation Arena */
-    .sim-arena {
-      position: relative;
-      width: 100%;
-      height: 200px;
-      background: radial-gradient(circle at center, #1a122e 0%, #07050e 85%);
-      border: 1px solid var(--border-lux);
-      border-radius: 16px;
-      overflow: hidden;
-      margin-bottom: 18px;
-      box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.9);
-    }
-
-    #crowdCanvas {
-      width: 100%;
-      height: 100%;
+    /* Final Screen Formula Breakdown */
+    .formula-badge-top {
+      font-size: 12px;
+      color: var(--gold-bright);
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
       display: block;
     }
 
-    .slider-zone {
+    .formula-card {
+      background: rgba(18, 13, 29, 0.85);
+      border: 1px solid rgba(229, 185, 76, 0.28);
+      border-radius: 18px;
+      padding: 16px;
       margin-bottom: 18px;
       text-align: left;
     }
 
-    .slider-label-row {
+    .formula-header {
+      font-size: 13.5px;
+      font-weight: 900;
+      color: #fff;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .slider-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: #fff;
+    .ingredient-row {
+      margin-bottom: 14px;
     }
 
-    .slider-level-tag {
+    .ingredient-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .ing-meta {
+      display: flex;
+      justify-content: space-between;
       font-size: 12.5px;
+      margin-bottom: 6px;
+    }
+
+    .ing-name {
+      color: #fff;
       font-weight: 800;
+    }
+
+    .ing-pct {
       color: var(--gold-bright);
-      background: rgba(229, 185, 76, 0.15);
-      border: 1px solid var(--gold-dim);
-      padding: 3px 10px;
-      border-radius: 12px;
+      font-weight: 900;
     }
 
-    input[type=range].aura-slider {
-      -webkit-appearance: none;
-      width: 100%;
-      height: 8px;
+    .ing-bar-bg {
+      height: 7px;
+      background: #241b3a;
       border-radius: 4px;
-      background: #231c36;
-      outline: none;
+      overflow: hidden;
     }
 
-    input[type=range].aura-slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #fff 10%, var(--gold-bright) 60%, var(--gold-dim) 100%);
-      cursor: pointer;
-      box-shadow: 0 0 15px #ffd700;
-      border: 2px solid #000;
+    .ing-bar-fill {
+      height: 100%;
+      border-radius: 4px;
     }
 
-    /* Live Dynamic Reaction Card (Updates on Slider Input) */
-    .dynamic-intel-card {
-      background: rgba(10, 8, 16, 0.75);
-      border: 1px solid rgba(229, 185, 76, 0.25);
+    .fill-primary {
+      width: 50%;
+      background: linear-gradient(90deg, #b38728, #ffd700);
+      box-shadow: 0 0 10px var(--gold-glow);
+    }
+
+    .fill-secondary {
+      width: 30%;
+      background: linear-gradient(90deg, #7e22ce, #c084fc);
+    }
+
+    .fill-tertiary {
+      width: 20%;
+      background: linear-gradient(90deg, #be123c, #fb7185);
+    }
+
+    .ing-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* Bottle Highlight Card */
+    .bottle-offer-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: linear-gradient(135deg, rgba(229, 185, 76, 0.12) 0%, rgba(20, 15, 32, 0.8) 100%);
+      border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 14px 16px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
       text-align: left;
-      margin-bottom: 20px;
-      transition: border-color 0.3s ease;
     }
 
-    .intel-grid {
+    .mini-bottle {
+      width: 52px;
+      height: 76px;
+      background: linear-gradient(180deg, rgba(255, 215, 0, 0.3) 0%, #150f24 85%);
+      border: 1.5px solid var(--gold-bright);
+      border-radius: 8px 8px 18px 18px;
+      position: relative;
       display: flex;
-      flex-direction: column;
-      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px var(--gold-glow);
     }
 
-    .intel-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
+    .mini-bottle::before {
+      content: '';
+      position: absolute;
+      top: -12px;
+      width: 20px;
+      height: 12px;
+      background: var(--gold-bright);
+      border-radius: 2px;
     }
 
-    .intel-icon {
-      font-size: 17px;
-      line-height: 1.2;
+    .bottle-label-text {
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
+      font-weight: 900;
+      color: var(--gold-bright);
+      letter-spacing: 0.1em;
     }
 
-    .intel-meta {
+    .bottle-offer-details {
       flex: 1;
     }
 
-    .intel-head {
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--gold-bright);
-      margin-bottom: 2px;
-      display: block;
-    }
-
-    .intel-body {
-      font-size: 12.5px;
-      color: var(--text-muted);
-      line-height: 1.45;
-    }
-
-    .scenario-box {
-      margin-top: 6px;
-      padding-top: 8px;
-      border-top: 1px dashed rgba(229, 185, 76, 0.18);
-      font-size: 12px;
-      color: #dedce8;
-      font-weight: 600;
-      line-height: 1.45;
-    }
-
-    /* Primary Action Buttons */
-    .btn-lux-primary {
-      width: 100%;
-      background: linear-gradient(135deg, #fff3b0 0%, #ffd700 35%, #b38728 90%);
-      color: #0c0802;
-      border: none;
-      padding: 16px;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: 900;
-      letter-spacing: 0.03em;
-      cursor: pointer;
-      box-shadow: 0 8px 24px rgba(229, 185, 76, 0.35);
-      transition: transform 0.15s;
-    }
-
-    .btn-lux-primary:active {
-      transform: scale(0.98);
-    }
-
-    /* Stage 3: Offer & Bottle */
-    .bottle-display {
-      position: relative;
-      width: 130px;
-      height: 175px;
-      margin: 10px auto 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .bottle-glow-halo {
-      position: absolute;
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 215, 0, 0.25) 0%, transparent 70%);
-      filter: blur(14px);
-      animation: pulseHalo 3.5s ease-in-out infinite alternate;
-    }
-
-    @keyframes pulseHalo {
-      from { transform: scale(0.85); opacity: 0.5; }
-      to { transform: scale(1.25); opacity: 1; }
-    }
-
-    .glass-bottle {
-      width: 86px;
-      height: 130px;
-      background: linear-gradient(180deg, rgba(255, 225, 110, 0.32) 0%, rgba(30, 20, 10, 0.95) 75%, #050409 100%);
-      border: 2px solid var(--gold-bright);
-      border-radius: 12px 12px 26px 26px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 25px rgba(229, 185, 76, 0.35), inset 0 0 15px rgba(255, 215, 0, 0.2);
-      z-index: 2;
-    }
-
-    .bottle-cap {
-      width: 36px;
-      height: 22px;
-      background: linear-gradient(90deg, #b38728, #ffd700, #b38728);
-      position: absolute;
-      top: -22px;
-      border-radius: 3px;
-      box-shadow: 0 -2px 10px rgba(229, 185, 76, 0.35);
-    }
-
-    .bottle-label-card {
-      border: 1px solid var(--gold-bright);
-      padding: 8px 6px;
-      border-radius: 4px;
-      background: rgba(0, 0, 0, 0.75);
-      text-align: center;
-      width: 70px;
-    }
-
-    .label-brand {
-      font-family: 'Cinzel', serif;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 0.18em;
-      color: var(--gold-bright);
-    }
-
-    .label-desc {
-      font-size: 7px;
-      color: #dfdbed;
-      letter-spacing: 0.1em;
-      margin-top: 2px;
-      font-weight: 700;
-    }
-
-    .offer-banner {
-      background: linear-gradient(90deg, rgba(229, 185, 76, 0.14), rgba(229, 185, 76, 0.02));
-      border-left: 3px solid var(--gold-bright);
-      padding: 8px 12px;
-      text-align: left;
-      border-radius: 0 8px 8px 0;
-      margin-bottom: 14px;
-      font-size: 12px;
-      color: #e5e3f0;
-      line-height: 1.5;
-    }
-
-    .pricing-row {
+    .pricing-wrap {
       display: flex;
       align-items: baseline;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 14px;
+      gap: 8px;
+      margin-bottom: 4px;
     }
 
-    .old-price {
-      font-size: 15px;
+    .cut-price {
+      font-size: 14px;
       color: var(--text-muted);
       text-decoration: line-through;
     }
 
-    .sale-price {
-      font-size: 32px;
+    .deal-price {
+      font-size: 26px;
       font-weight: 900;
       color: var(--gold-bright);
-      text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+      text-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
     }
 
-    .discount-pill {
+    .discount-tag {
       font-size: 11px;
+      font-weight: 800;
       background: #10b981;
       color: #000;
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 6px;
+      padding: 2px 7px;
+      border-radius: 5px;
     }
 
-    .trust-checklist {
-      background: rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      padding: 12px 14px;
-      text-align: left;
-      font-size: 12.5px;
-      line-height: 1.8;
+    .trust-bullets {
+      font-size: 12px;
       color: #dedce8;
-      margin-bottom: 18px;
+      line-height: 1.6;
     }
 
-    .trust-checklist span {
-      color: var(--gold-bright);
-      font-weight: 800;
-      margin-right: 6px;
-    }
-
-    /* Glowing WhatsApp Button */
-    .btn-whatsapp-lux {
+    /* WhatsApp Action Button */
+    .btn-whatsapp-action {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -601,21 +537,21 @@
       background: linear-gradient(135deg, #25d366 0%, #15803d 100%);
       color: #ffffff;
       text-decoration: none;
-      padding: 17px 16px;
+      padding: 16px 14px;
       border-radius: 12px;
       font-size: 16px;
       font-weight: 900;
-      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
       position: relative;
       overflow: hidden;
-      transition: transform 0.15s;
+      cursor: pointer;
     }
 
-    .btn-whatsapp-lux:active {
+    .btn-whatsapp-action:active {
       transform: scale(0.98);
     }
 
-    .btn-whatsapp-lux::after {
+    .btn-whatsapp-action::after {
       content: '';
       position: absolute;
       top: -50%;
@@ -623,538 +559,474 @@
       width: 200%;
       height: 200%;
       background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.25) 50%, transparent 60%);
-      animation: gleam 3s infinite;
+      animation: sweepGleam 2.8s infinite;
       pointer-events: none;
     }
 
-    @keyframes gleam {
+    @keyframes sweepGleam {
       0% { transform: translateX(-100%); }
       100% { transform: translateX(100%); }
     }
 
-    .urgency-text {
-      font-size: 10.5px;
-      color: #8c889f;
-      margin-top: 12px;
-      line-height: 1.5;
+    .cod-trust-line {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 10px;
+      font-weight: 600;
     }
 
-    .urgency-text b {
+    .cod-trust-line b {
       color: var(--gold-bright);
     }
   </style>
 </head>
 <body>
 
-  <!-- Background Canvas -->
-  <canvas id="ambientCanvas"></canvas>
+  <!-- Ambient Hypnotic Vortex Background -->
+  <canvas id="vortexCanvas"></canvas>
   <div class="vignette"></div>
 
+  <!-- Main Experience Wrapper -->
   <main class="app-frame">
-    <!-- Brand Header -->
+    <!-- Header -->
     <header class="brand-header">
       <div class="brand-title">AURA</div>
-      <div class="brand-sub">સબકોન્શિયસ મોહક અત્તર</div>
+      <div class="brand-tag">સબકોન્શિયસ હિપ્નોટિક અત્તર</div>
     </header>
 
-    <!-- Stepper Tracker -->
+    <!-- Stepper (5 slides total) -->
     <div class="stepper">
-      <div class="step-bar active" id="bar1"></div>
-      <div class="step-bar" id="bar2"></div>
-      <div class="step-bar" id="bar3"></div>
+      <div class="step-pill active" id="pill1"></div>
+      <div class="step-pill" id="pill2"></div>
+      <div class="step-pill" id="pill3"></div>
+      <div class="step-pill" id="pill4"></div>
+      <div class="step-pill" id="pill5"></div>
     </div>
 
-    <!-- STAGE 1: MIND FREQUENCY PULSE SCANNER -->
-    <section class="screen-card active" id="stage1">
-      <span class="gold-badge">તબક્કો ૧ • માઇન્ડ ફ્રીક્વન્સી સ્કેનર</span>
-      <h1 class="heading">
-        તમારા શરીરમાં રહેલા <br />
-        <span class="gold-text">વશીકરણ પ્રભાવને</span> જગાડો
-      </h1>
-      <p class="sub-desc">
-        સામેવાળી વ્યક્તિનું મગજ તમારી ખુશ્બૂથી મંત્રમુગ્ધ થશે કે નહીં? નીચે સ્કેનર રીંગ પર અંગૂઠો દબાવી રાખો.
+    <!-- SLIDE 1: GENDER SELECTION -->
+    <section class="screen-card active" id="slide1">
+      <span class="step-badge">પગલું ૧ • શરીર ઊર્જા (Aura Polar)</span>
+      <h2 class="heading">
+        તમારી <span class="gold-highlight">જેન્ડર (જાતિ)</span> કઈ છે?
+      </h2>
+      <p class="sub-heading">
+        શરીરની કેમિસ્ટ્રી મુજબ યોગ્ય હિપ્નોટિક બેઝ પસંદ કરવા માટે પ્રથમ તમારી જાતિ સિલેક્ટ કરો:
       </p>
 
-      <div class="scanner-hub" id="scannerHub">
-        <div class="scan-ring-outer"></div>
-        <div class="scan-ring-inner"></div>
-        <div class="fingerprint-btn" id="fpBtn">
-          <div class="fp-laser"></div>
-          <svg class="fp-icon" viewBox="0 0 24 24">
-            <path d="M12 2C6.48 2 2 6.48 2 12c0 2.85 1.2 5.42 3.12 7.24"/>
-            <path d="M5.5 10.5C6.5 8 9 6.5 12 6.5s5.5 1.5 6.5 4"/>
-            <path d="M8 12.5c.5-1.5 2-2.5 4-2.5s3.5 1 4 2.5"/>
-            <path d="M12 14v4"/>
-            <path d="M15 15.5c-.8.8-1.8 1.3-3 1.3s-2.2-.5-3-1.3"/>
-            <path d="M19 12c0-1.8-.7-3.4-1.8-4.7"/>
-            <path d="M18.8 19.2C20.8 17.4 22 14.8 22 12"/>
-          </svg>
-          <span class="scanner-tip" id="fpTip">અંગૂઠો મૂકો</span>
+      <div class="gender-grid">
+        <div class="option-card" onclick="selectGender('પુરુષ (Male)')">
+          <span class="option-icon">👑</span>
+          <span class="option-title">પુરુષ (Male)</span>
+          <span class="option-sub">દમદાર રૂઆબ & કમાન્ડિંગ પાવર</span>
         </div>
-      </div>
 
-      <div class="telemetry-box">
-        <span style="color: var(--text-muted); font-weight: 600;">ઓરા ફ્રિક્વન્સી ટેલિમેટ્રી:</span>
-        <span class="telemetry-val" id="telemetryStatus">CALIBRATING...</span>
-      </div>
-
-      <div class="progress-track">
-        <div class="progress-fill" id="scanFill"></div>
-      </div>
-
-      <div style="font-size: 11px; color: var(--gold); font-weight:700;" id="scanNote">
-        સિગ્નલ સિન્ક કરવા ૨-૩ સેકન્ડ દબાવી રાખો...
+        <div class="option-card" onclick="selectGender('સ્ત્રી (Female)')">
+          <span class="option-icon">✨</span>
+          <span class="option-title">સ્ત્રી (Female)</span>
+          <span class="option-sub">મોહક આકર્ષણ & રોયલ નજાકત</span>
+        </div>
       </div>
     </section>
 
-    <!-- STAGE 2: SUBCONSCIOUS PROJECTION & CROWD REACTION -->
-    <section class="screen-card" id="stage2">
-      <span class="gold-badge">તબક્કો ૨ • સબકોન્શિયસ પ્રોજેક્શન ટેસ્ટ</span>
-      <h1 class="heading">
-        ખુશ્બૂનો રૂઆબ: <br />
-        <span class="gold-text">લોકો આપમેળે પાછળ જોશે</span>
-      </h1>
-      <p class="sub-desc">
-        સ્લાઈડર આગળ ખસેડો. નીચે જુઓ કે અલગ અલગ લેવલે તમારી આસપાસના લોકોના મગજ પર કેવી અસર થાય છે.
+    <!-- SLIDE 2: SUBCONSCIOUS IMPACT SELECTION -->
+    <section class="screen-card" id="slide2">
+      <span class="step-badge">પગલું ૨ • સબકોન્શિયસ ટાર્ગેટ</span>
+      <h2 class="heading">
+        તમે લોકોના અર્ધજાગ્રત મન પર <br />
+        <span class="gold-highlight">કેવો પ્રભાવ</span> પાડવા માંગો છો?
+      </h2>
+      <p class="sub-heading">
+        તમારી હાજરીથી સામેવાળી વ્યક્તિના મગજમાં શું અનુભવાવું જોઈએ?
       </p>
 
-      <!-- Live Crowd Canvas Simulator -->
-      <div class="sim-arena">
-        <canvas id="crowdCanvas"></canvas>
-      </div>
-
-      <!-- Interactive 5-Level Slider -->
-      <div class="slider-zone">
-        <div class="slider-label-row">
-          <span class="slider-title">વશીકરણ ઘેરાવ (Radius):</span>
-          <span class="slider-level-tag" id="levelTag">લેવલ ૩: ૮ ફૂટ (પ્રભાવશાળી રૂઆબ)</span>
-        </div>
-        <input 
-          type="range" 
-          class="aura-slider" 
-          id="levelSlider" 
-          min="1" 
-          max="5" 
-          step="1" 
-          value="3" 
-          oninput="handleLevelSliderChange(this.value)" 
-        />
-      </div>
-
-      <!-- DYNAMIC INTEL DASHBOARD: INSTANTLY CHANGES ON SLIDER MOVE -->
-      <div class="dynamic-intel-card" id="dynamicCard">
-        <div class="intel-grid">
-          <div class="intel-row">
-            <span class="intel-icon">👁️</span>
-            <div class="intel-meta">
-              <span class="intel-head" id="dynNoticeTitle">ધ્યાન ખેંચાવાનો સમય: ત્વરિત (૧ સેકન્ડમાં)</span>
-              <span class="intel-body" id="dynNoticeDesc">તમારી નજીકથી પસાર થનાર વ્યક્તિ અટક્યા વગર રહી જ નહીં શકે.</span>
-            </div>
-          </div>
-          <div class="intel-row">
-            <span class="intel-icon">🧠</span>
-            <div class="intel-meta">
-              <span class="intel-head" id="dynReactionTitle">સબકોન્શિયસ પ્રતિક્રિયા: અનૈચ્છિક નજર ફેરવવી</span>
-              <span class="intel-body" id="dynReactionDesc">સામેવાળાના મગજમાં તમારા પ્રત્યે અજાણ્યું આકર્ષણ અને આદર પેદા થાય છે.</span>
-            </div>
+      <div class="option-stack">
+        <div class="option-item-wide" onclick="selectGoal('તીવ્ર આકર્ષણ અને પ્રેમ (Hypnotic Magnetism)', 'આકર્ષણ & રોમાન્સ')">
+          <div class="opt-badge-num">A</div>
+          <div>
+            <div class="option-title">તીવ્ર આકર્ષણ અને મોહ</div>
+            <div class="option-sub">સામેવાળી વ્યક્તિ તમારા તરફ આપમેળે ખેંચાય અને વાત કરવા તડપે.</div>
           </div>
         </div>
-        <div class="scenario-box" id="dynScenario">
-          ⚡ <b>લાઇવ અસર:</b> તમે રૂમમાં કે મીટિંગમાં પ્રવેશશો ત્યારે લોકો પોતાની વાત અધૂરી મૂકીને તમારા તરફ મોહિત થઈને જોશે.
+
+        <div class="option-item-wide" onclick="selectGoal('બિઝનેસ અને રોફ (Power & Authority)', 'સત્તા & પ્રભાવશાળી રૂઆબ')">
+          <div class="opt-badge-num">B</div>
+          <div>
+            <div class="option-title">બિઝનેસ, સત્તા અને રોફ</div>
+            <div class="option-sub">રૂમમાં પગ મૂકતાં જ લોકો તમારી વાતને માન આપે અને દબદબો અનુભવે.</div>
+          </div>
+        </div>
+
+        <div class="option-item-wide" onclick="selectGoal('રહસ્યમય ઓળખ (Dark Mystery & Seduction)', 'રહસ્યમય શાહી છાપ')">
+          <div class="opt-badge-num">C</div>
+          <div>
+            <div class="option-title">રહસ્યમય શાહી ઓળખ</div>
+            <div class="option-sub">એવી છાપ જે લોકોના મગજમાંથી દિવસો સુધી ભૂંસાય નહીં.</div>
+          </div>
         </div>
       </div>
-
-      <button class="btn-lux-primary" onclick="proceedToStep(3)">
-        આ પાવર લૉક કરો (Lock Formula) →
-      </button>
     </section>
 
-    <!-- STAGE 3: UNLOCKED EXCLUSIVE ATTAR & WHATSAPP REDIRECT -->
-    <section class="screen-card" id="stage3">
-      <span class="gold-badge">તમારી ફોર્મ્યુલા અનલોક થઈ ગઈ</span>
-      <h1 class="heading">
-        <span class="gold-text">AURA: સબકોન્શિયસ મોહક અત્તર</span>
-      </h1>
+    <!-- SLIDE 3: TARGET PROJECTION ENVIRONMENT -->
+    <section class="screen-card" id="slide3">
+      <span class="step-badge">પગલું ૩ • પ્રભાવનું ક્ષેત્ર</span>
+      <h2 class="heading">
+        તમારો <span class="gold-highlight">સૌથી મોટો ગોલ</span> શું છે?
+      </h2>
+      <p class="sub-heading">
+        આ અત્તર લગાવ્યા પછી વાસ્તવિક જીવનમાં તમારું લક્ષ્ય શું છે?
+      </p>
 
-      <!-- Luxury Bottle Visual -->
-      <div class="bottle-display">
-        <div class="bottle-glow-halo"></div>
-        <div class="glass-bottle">
-          <div class="bottle-cap"></div>
-          <div class="bottle-label-card">
-            <div class="label-brand">AURA</div>
-            <div class="label-desc">EXTRAIT OIL</div>
+      <div class="option-stack">
+        <div class="option-item-wide" onclick="selectTarget('સામેવાળી વ્યક્તિ મારી નજીક આવવા મજબૂર થાય')">
+          <div class="opt-badge-num">૧</div>
+          <div>
+            <div class="option-title">અંગત નિકટતા</div>
+            <div class="option-sub">સામેવાળી વ્યક્તિ નજીક આવવા અને વધુ સમય વિતાવવા ઉત્સુક બને.</div>
+          </div>
+        </div>
+
+        <div class="option-item-wide" onclick="selectTarget('આખી સભા કે રૂમમાં ફક્ત મારી જ ચર્ચા થાય')">
+          <div class="opt-badge-num">૨</div>
+          <div>
+            <div class="option-title">સમગ્ર સભા પર આધિપત્ય</div>
+            <div class="option-sub">દરેક વ્યક્તિ પૂછે: "આ કોનું અત્તર આટલું મોહક મહેકી રહ્યું છે?"</div>
+          </div>
+        </div>
+
+        <div class="option-item-wide" onclick="selectTarget('કોઈ મારો ચહેરો અને સુગંધ ક્યારેય ભૂલી ન શકે')">
+          <div class="opt-badge-num">૩</div>
+          <div>
+            <div class="option-title">અવિસ્મરણીય સ્મૃતિ (Memory Anchor)</div>
+            <div class="option-sub">તમે ત્યાંથી નીકળી જશો તો પણ તમારી ખુશ્બૂ તેની યાદોમાં ગૂંજતી રહેશે.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: HYPNOTIC EYE CALIBRATION -->
+    <section class="screen-card" id="slide4">
+      <span class="step-badge">પગલું ૪ • ફ્રીક્વન્સી સિન્ક</span>
+      <h2 class="heading">
+        <span class="gold-highlight">હિપ્નોટિક કોર</span> સિન્ક કરો
+      </h2>
+      <p class="sub-heading">
+        તમારા અર્ધજાગ્રત મન સાથે સુગંધના મોલેક્યુલ્સ મેળવવા નીચે આપેલ સેન્ટર પર ૨ સેકન્ડ આંગળી દબાવી રાખો:
+      </p>
+
+      <div class="vortex-eye-area" id="eyeArea">
+        <div class="vortex-spin-ring"></div>
+        <div class="hypnotic-eye-core" id="eyeCore">
+          <div class="eye-pupil"></div>
+          <span class="eye-press-text" id="eyeTip">અહીં દબાવો</span>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:6px;">
+        <span style="color:var(--text-muted);">ઓરા સિન્ક રેટ:</span>
+        <span style="color:var(--gold-bright); font-weight:800;" id="calibPct">૦%</span>
+      </div>
+
+      <div class="calib-progress-track">
+        <div class="calib-progress-fill" id="calibBar"></div>
+      </div>
+
+      <div style="font-size:11px; color:var(--gold); font-weight:700;" id="eyeStatus">
+        સ્પર્શ કરી રાખો...
+      </div>
+    </section>
+
+    <!-- SLIDE 5: CUSTOM 50:30:20 FORMULA REVEAL & WHATSAPP CHECKOUT -->
+    <section class="screen-card" id="slide5">
+      <span class="formula-badge-top">✔ ટેસ્ટ પૂર્ણ • તમારા માટે તૈયાર ખાસ ફોર્મ્યુલા</span>
+      <h2 class="heading" style="font-size: 19px; margin-bottom: 12px;">
+        તમારા સબકોન્શિયસ ગોલ માટે <br />
+        <span class="gold-highlight">સિદ્ધ થયેલું ૩ ખુશ્બૂનું મિશ્રણ</span>
+      </h2>
+
+      <!-- 50:30:20 Mixture Ratio Breakdown -->
+      <div class="formula-card">
+        <div class="formula-header">
+          <span>સુગંધનું સ્પેશિયલ રેશિયો (Blend):</span>
+          <span style="color:var(--gold-bright);">૫૦ : ૩૦ : ૨૦</span>
+        </div>
+
+        <!-- 50% Component -->
+        <div class="ingredient-row">
+          <div class="ing-meta">
+            <span class="ing-name" id="ing1Name">૫૦% પ્રાઇમરી એન્કર નોટ (Royal Amber & Oud)</span>
+            <span class="ing-pct">૫૦%</span>
+          </div>
+          <div class="ing-bar-bg">
+            <div class="ing-bar-fill fill-primary"></div>
+          </div>
+          <div class="ing-desc" id="ing1Desc">શરીર પર કલાકો સુધી ટકી રહેતો દમદાર પાયો અને રોયલ રૂઆબ.</div>
+        </div>
+
+        <!-- 30% Component -->
+        <div class="ingredient-row">
+          <div class="ing-meta">
+            <span class="ing-name" id="ing2Name">૩૦% મેગ્નેટિઝમ લ્યોર (Spiced Saffron & Velvet Musk)</span>
+            <span class="ing-pct">૩૦%</span>
+          </div>
+          <div class="ing-bar-bg">
+            <div class="ing-bar-fill fill-secondary"></div>
+          </div>
+          <div class="ing-desc" id="ing2Desc">સામેવાળાના મગજમાં અજાણ્યું મોહ અને આકર્ષણ જગાડતી ખુશ્બૂ.</div>
+        </div>
+
+        <!-- 20% Component -->
+        <div class="ingredient-row">
+          <div class="ing-meta">
+            <span class="ing-name" id="ing3Name">૨૦% સબકોન્શિયસ મેમરી (Smoked Woods & Rose)</span>
+            <span class="ing-pct">૨૦%</span>
+          </div>
+          <div class="ing-bar-bg">
+            <div class="ing-bar-fill fill-tertiary"></div>
+          </div>
+          <div class="ing-desc" id="ing3Desc">તમે ત્યાંથી ગયા પછી પણ લોકોના મનમાં તમારો ચહેરો યાદ અપાવે.</div>
+        </div>
+      </div>
+
+      <!-- Bottle & Offer -->
+      <div class="bottle-offer-card">
+        <div class="mini-bottle">
+          <span class="bottle-label-text">AURA</span>
+        </div>
+        <div class="bottle-offer-details">
+          <div class="pricing-wrap">
+            <span class="cut-price">₹૮૯૯</span>
+            <span class="deal-price">₹૫૯૯</span>
+            <span class="discount-tag">₹૩૦૦ ની બચત</span>
+          </div>
+          <div class="trust-bullets">
+            ✔ ૧૬+ કલાક લોંગ લાસ્ટિંગ • ૧૦૦% આલ્કોહોલ ફ્રી<br />
+            ✔ <b>Cash on Delivery (COD)</b> ઉપલબ્ધ
           </div>
         </div>
       </div>
 
-      <div class="offer-banner">
-        <b>"આ માત્ર સુગંધ નથી..."</b><br />
-        આ સામેવાળાના સબકોન્શિયસ માઇન્ડ પર રાજ કરતો ૧૦૦% અલ્કોહોલ ફ્રી મોહક રૂઆબ છે.
-      </div>
-
-      <div class="pricing-row">
-        <span class="old-price">₹૯૯૯</span>
-        <span class="sale-price">₹૪૯૯</span>
-        <span class="discount-pill">૫૦% છૂટ સક્રિય</span>
-      </div>
-
-      <div class="trust-checklist">
-        <div><span>✔</span> <b>૧૬+ કલાક સુધી</b> ટકી રહેતી મોહક સુગંધ</div>
-        <div><span>✔</span> <b>કેશ ઓન ડિલિવરી (COD):</b> ઘરે પાર્સલ આવે ત્યારે જ પૈસા આપો</div>
-        <div><span>✔</span> <b>૧૦૦% શુદ્ધ અર્ક તેલ:</b> ઝીરો આલ્કોહોલ, ઝીરો કેમિકલ</div>
-      </div>
-
-      <!-- Glowing WhatsApp Action Link (9327938950) -->
-      <a id="whatsappTrigger" href="#" target="_blank" class="btn-whatsapp-lux">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+      <!-- Direct WhatsApp Action Link for 9327938950 -->
+      <a id="waOrderBtn" href="#" target="_blank" class="btn-whatsapp-action">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.698.073-1.133-.07-.272-.089-.623-.21-1.077-.406-1.924-.83-3.176-2.779-3.272-2.906-.096-.128-.777-1.034-.777-1.973 0-.94.492-1.402.668-1.593.175-.19.382-.239.51-.239.127 0 .255.002.366.007.119.006.279-.045.437.335.163.393.556 1.356.604 1.455.048.099.08.216.016.343-.064.128-.096.208-.192.32-.096.112-.202.25-.288.336-.096.096-.197.2-.085.392.112.192.499.824 1.072 1.335.738.657 1.36.861 1.552.957.192.096.304.08.416-.048.112-.128.48-.559.608-.751.128-.192.256-.16.432-.096.176.064 1.12.528 1.312.624.192.096.32.144.368.224.048.08.048.464-.096.869z"/>
         </svg>
-        WhatsApp પર ઓર્ડર કન્ફર્મ કરો
+        WhatsApp પર આ ફોર્મ્યુલા ઓર્ડર કરો
       </a>
 
-      <p class="urgency-text">
-        <b>ચેતવણી:</b> લિમિટેડ બેચ માત્ર ૫૦ બોટલ તૈયાર છે. ડિસ્કાઉન્ટ સ્લોટ ગમે ત્યારે બંધ થઈ શકે છે.
+      <p class="cod-trust-line">
+        ઘરે પાર્સલ આવે ત્યારે જ પૈસા આપો • <b>શુદ્ધ અત્તર તેલ</b>
       </p>
     </section>
   </main>
 
   <script>
-    /* Hypnotic Background Canvas */
-    const bgCanvas = document.getElementById("ambientCanvas");
-    const bgCtx = bgCanvas.getContext("2d");
-    let screenW = (bgCanvas.width = window.innerWidth);
-    let screenH = (bgCanvas.height = window.innerHeight);
+    /* HYPNOTIC BACKGROUND CANVAS SIMULATION */
+    const canvas = document.getElementById("vortexCanvas");
+    const ctx = canvas.getContext("2d");
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
 
     window.addEventListener("resize", () => {
-      screenW = bgCanvas.width = window.innerWidth;
-      screenH = bgCanvas.height = window.innerHeight;
-      initCrowdCanvas();
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
     });
 
-    const particles = [];
-    for (let i = 0; i < 90; i++) {
-      particles.push({
-        angle: Math.random() * Math.PI * 2,
-        dist: Math.random() * Math.max(screenW, screenH) * 0.5,
-        speed: 0.003 + Math.random() * 0.005,
-        size: Math.random() * 2 + 0.8,
-        alpha: 0.2 + Math.random() * 0.5
-      });
-    }
+    const rings = 18;
+    let angleOffset = 0;
+    let vortexSpinRate = 0.005;
 
-    let bgRotSpeed = 0.003;
-    function renderBg() {
-      bgCtx.fillStyle = "rgba(5, 4, 10, 0.25)";
-      bgCtx.fillRect(0, 0, screenW, screenH);
+    function drawVortex() {
+      ctx.fillStyle = "rgba(4, 3, 8, 0.28)";
+      ctx.fillRect(0, 0, width, height);
 
-      const cx = screenW / 2;
-      const cy = screenH * 0.42;
+      const cx = width / 2;
+      const cy = height * 0.45;
 
-      particles.forEach((p) => {
-        p.angle += bgRotSpeed;
-        const x = cx + Math.cos(p.angle) * p.dist;
-        const y = cy + Math.sin(p.angle) * p.dist;
+      angleOffset += vortexSpinRate;
 
-        bgCtx.beginPath();
-        bgCtx.arc(x, y, p.size, 0, Math.PI * 2);
-        bgCtx.fillStyle = `rgba(229, 185, 76, ${p.alpha})`;
-        bgCtx.fill();
-      });
+      for (let i = 1; i <= rings; i++) {
+        const radius = i * 22;
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, 0, Math.PI * 2);
 
-      requestAnimationFrame(renderBg);
-    }
-    renderBg();
+        const gradient = ctx.createLinearGradient(cx - radius, cy - radius, cx + radius, cy + radius);
+        gradient.addColorStop(0, "rgba(229, 185, 76, 0.18)");
+        gradient.addColorStop(0.5, "rgba(147, 51, 234, 0.15)");
+        gradient.addColorStop(1, "rgba(255, 215, 0, 0.22)");
 
-    /* STAGE 1: Scanner Logic */
-    const fpBtn = document.getElementById("fpBtn");
-    const scanFill = document.getElementById("scanFill");
-    const telemetryStatus = document.getElementById("telemetryStatus");
-    const fpTip = document.getElementById("fpTip");
-    const scanNote = document.getElementById("scanNote");
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = i % 2 === 0 ? 1.5 : 0.8;
+        ctx.stroke();
 
-    let scanning = false;
-    let scanVal = 0;
-    let scanTimer = null;
-    const freqList = [
-      "432 Hz [Alpha Wave Sync]",
-      "528 Hz [Hypnotic Frequency]",
-      "741 Hz [Subconscious Magnet]",
-      "963 Hz [Aura Dominance]"
-    ];
+        // Pulsing orbital nodes
+        const nodeAngle = angleOffset * (i % 2 === 0 ? 1 : -1) + (i * 0.4);
+        const nx = cx + Math.cos(nodeAngle) * radius;
+        const ny = cy + Math.sin(nodeAngle) * radius;
 
-    function startScan(e) {
-      if (e) e.preventDefault();
-      if (scanning) return;
-      scanning = true;
-      fpBtn.classList.add("charging");
-      fpTip.innerText = "સ્કેનિંગ...";
-      scanNote.innerText = "શરીરના પલ્સ અને મોહક ઓરાનું વિશ્લેષણ ચાલુ છે...";
-      bgRotSpeed = 0.02;
-
-      scanTimer = setInterval(() => {
-        if (scanVal < 100) {
-          scanVal += 2.5;
-          scanFill.style.width = scanVal + "%";
-          const idx = Math.floor((scanVal / 100) * freqList.length);
-          telemetryStatus.innerText = freqList[Math.min(idx, freqList.length - 1)];
-
-          if (navigator.vibrate && scanVal % 12 === 0) {
-            navigator.vibrate(20);
-          }
-        } else {
-          clearInterval(scanTimer);
-          if (navigator.vibrate) navigator.vibrate([60, 40, 80]);
-          fpTip.innerText = "૧૦૦% સફળ";
-          scanNote.innerText = "ઓરા સફળતાપૂર્વક કેલિબ્રેટ થઈ ગયો!";
-          setTimeout(() => proceedToStep(2), 400);
-        }
-      }, 35);
-    }
-
-    function stopScan() {
-      if (!scanning) return;
-      if (scanVal < 100) {
-        clearInterval(scanTimer);
-        scanning = false;
-        scanVal = 0;
-        scanFill.style.width = "0%";
-        fpBtn.classList.remove("charging");
-        fpTip.innerText = "અંગૂઠો મૂકો";
-        telemetryStatus.innerText = "CALIBRATING...";
-        scanNote.innerText = "આંગળી હટાવશો નહીં, ફરી પ્રયાસ કરો.";
-        bgRotSpeed = 0.003;
+        ctx.beginPath();
+        ctx.arc(nx, ny, i % 3 === 0 ? 3 : 2, 0, Math.PI * 2);
+        ctx.fillStyle = i % 2 === 0 ? "#ffd700" : "#c084fc";
+        ctx.shadowColor = "#ffd700";
+        ctx.shadowBlur = 6;
+        ctx.fill();
+        ctx.shadowBlur = 0;
       }
+
+      requestAnimationFrame(drawVortex);
     }
+    drawVortex();
 
-    fpBtn.addEventListener("mousedown", startScan);
-    fpBtn.addEventListener("mouseup", stopScan);
-    fpBtn.addEventListener("mouseleave", stopScan);
-    fpBtn.addEventListener("touchstart", startScan, { passive: false });
-    fpBtn.addEventListener("touchend", stopScan);
-    fpBtn.addEventListener("touchcancel", stopScan);
-
-    /* STAGE 2: Crowd Canvas Simulation */
-    const crowdCanvas = document.getElementById("crowdCanvas");
-    const crowdCtx = crowdCanvas.getContext("2d");
-    let cWidth = 0, cHeight = 0;
-
-    function initCrowdCanvas() {
-      const rect = crowdCanvas.parentElement.getBoundingClientRect();
-      cWidth = crowdCanvas.width = rect.width;
-      cHeight = crowdCanvas.height = rect.height;
-    }
-    initCrowdCanvas();
-
-    const silhouettes = [];
-    for (let i = 0; i < 16; i++) {
-      silhouettes.push({
-        x: Math.random() * (cWidth || 360),
-        y: Math.random() * (cHeight || 200),
-        angle: Math.random() * Math.PI * 2,
-        targetAngle: 0,
-        size: 9 + Math.random() * 4,
-        turned: false
-      });
-    }
-
-    let currentRadiusScale = 3; // default Level 3
-
-    function renderCrowd() {
-      crowdCtx.clearRect(0, 0, cWidth, cHeight);
-
-      const userX = cWidth / 2;
-      const userY = cHeight / 2;
-      const radiusPx = (currentRadiusScale / 5) * (cWidth * 0.44);
-
-      // Expanding Aura Glow
-      crowdCtx.beginPath();
-      crowdCtx.arc(userX, userY, radiusPx, 0, Math.PI * 2);
-      crowdCtx.fillStyle = "rgba(229, 185, 76, 0.09)";
-      crowdCtx.fill();
-      crowdCtx.strokeStyle = "rgba(255, 215, 0, 0.5)";
-      crowdCtx.lineWidth = 1.5;
-      crowdCtx.setLineDash([4, 4]);
-      crowdCtx.stroke();
-      crowdCtx.setLineDash([]);
-
-      // User Core
-      crowdCtx.beginPath();
-      crowdCtx.arc(userX, userY, 13, 0, Math.PI * 2);
-      crowdCtx.fillStyle = "#ffd700";
-      crowdCtx.shadowColor = "#ffd700";
-      crowdCtx.shadowBlur = 18;
-      crowdCtx.fill();
-      crowdCtx.shadowBlur = 0;
-
-      // Crowd silhouettes
-      silhouettes.forEach((s) => {
-        const dx = userX - s.x;
-        const dy = userY - s.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist <= radiusPx + 14) {
-          s.targetAngle = Math.atan2(dy, dx);
-          s.turned = true;
-        } else {
-          s.targetAngle = s.angle;
-          s.turned = false;
-        }
-
-        s.angle += (s.targetAngle - s.angle) * 0.12;
-
-        // Draw body
-        crowdCtx.beginPath();
-        crowdCtx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-        crowdCtx.fillStyle = s.turned ? "rgba(255, 215, 0, 0.9)" : "rgba(105, 100, 125, 0.45)";
-        crowdCtx.fill();
-
-        // Gaze line
-        const gx = s.x + Math.cos(s.angle) * (s.size * 1.5);
-        const gy = s.y + Math.sin(s.angle) * (s.size * 1.5);
-        crowdCtx.beginPath();
-        crowdCtx.moveTo(s.x, s.y);
-        crowdCtx.lineTo(gx, gy);
-        crowdCtx.strokeStyle = s.turned ? "#ffd700" : "rgba(150, 150, 170, 0.4)";
-        crowdCtx.lineWidth = 2;
-        crowdCtx.stroke();
-      });
-
-      requestAnimationFrame(renderCrowd);
-    }
-    renderCrowd();
-
-    const psychologicalLevels = {
-      "1": {
-        tag: "લેવલ ૧: ૨ ફૂટ (ઇન્ટિમેટ આકર્ષણ)",
-        noticeTitle: "ધ્યાન ખેંચાવાનો સમય: નિકટ આવતાં જ",
-        noticeDesc: "જ્યારે કોઈ તમારી અંગત જગ્યામાં આવશે, ત્યારે તે એક રહસ્યમય સુગંધથી અંજાઈ જશે.",
-        reactionTitle: "સબકોન્શિયસ પ્રતિક્રિયા: અજાણી નિકટતાનો અનુભવ",
-        reactionDesc: "સામેવાળી વ્યક્તિ તમારી વાત સાંભળવા આગળ ઝૂકશે અને વધુ સમય પાસે રહેવા ઈચ્છશે.",
-        scenario: "⚡ <b>લાઇવ અસર:</b> વન-ઓન-વન મીટિંગ કે ડેટ પર સામેવાળી વ્યક્તિ તમારી ખુશ્બૂમાં મગ્ન થઈ જશે.",
-        whatsappText: "લેવલ ૧: ૨ ફૂટ (ઇન્ટિમેટ આકર્ષણ)"
-      },
-      "2": {
-        tag: "લેવલ ૨: ૪ ફૂટ (પર્સનલ મેગ્નેટિઝમ)",
-        noticeTitle: "ધ્યાન ખેંચાવાનો સમય: ૨ સેકન્ડમાં",
-        noticeDesc: "તમે બાજુમાંથી પસાર થતાં જ હવામાં એક શાહી અને નશીલો રૂઆબ ફેલાશે.",
-        reactionTitle: "સબકોન્શિયસ પ્રતિક્રિયા: અટક્યા વગર પાછળ નજર",
-        reactionDesc: "સામેવાળી વ્યક્તિ આપમેળે વાતચીત અટકાવીને તમારા તરફ જોવા મજબૂર બનશે.",
-        scenario: "⚡ <b>લાઇવ અસર:</b> ઓફિસ કે કેફેમાં પ્રવેશતાં જ લોકોનું ધ્યાન તમારા અત્તરના રૂઆબ તરફ ખેંચાશે.",
-        whatsappText: "લેવલ ૨: ૪ ફૂટ (પર્સનલ મેગ્નેટિઝમ)"
-      },
-      "3": {
-        tag: "લેવલ ૩: ૮ ફૂટ (પ્રભાવશાળી રૂઆબ)",
-        noticeTitle: "ધ્યાન ખેંચાવાનો સમય: ત્વરિત (૧ સેકન્ડમાં)",
-        noticeDesc: "તમારી નજીકથી પસાર થનાર વ્યક્તિ અટક્યા વગર રહી જ નહીં શકે.",
-        reactionTitle: "સબકોન્શિયસ પ્રતિક્રિયા: અનૈચ્છિક નજર ફેરવવી",
-        reactionDesc: "સામેવાળાના મગજમાં તમારા પ્રત્યે અજાણ્યું આકર્ષણ અને આદર પેદા થાય છે.",
-        scenario: "⚡ <b>લાઇવ અસર:</b> તમે રૂમમાં કે મીટિંગમાં પ્રવેશશો ત્યારે લોકો પોતાની વાત અધૂરી મૂકીને તમારા તરફ મોહિત થઈને જોશે.",
-        whatsappText: "લેવલ ૩: ૮ ફૂટ (પ્રભાવશાળી રૂઆબ)"
-      },
-      "4": {
-        tag: "લેવલ ૪: ૧૨ ફૂટ (રૂમ કમાન્ડિંગ પાવર)",
-        noticeTitle: "ધ્યાન ખેંચાવાનો સમય: રૂમમાં પગ મૂકતાં જ",
-        noticeDesc: "તમારી એન્ટ્રી થતાં જ આખા રૂમનું વાતાવરણ તમારા અત્તરના પ્રભાવ હેઠળ આવી જાય છે.",
-        reactionTitle: "સબકોન્શિયસ પ્રતિક્રિયા: સામૂહિક આશ્ચર્ય અને પ્રશંસા",
-        reactionDesc: "દરેક વ્યક્તિના સબકોન્શિયસ માઇન્ડમાં તમારો જાદુઈ અને પ્રભાવશાળી દબદબો સ્થાપિત થાય છે.",
-        scenario: "⚡ <b>લાઇવ અસર:</b> લગ્નપ્રસંગ કે ફંક્શનમાં લોકો પૂછ્યા વગર નહીં રહી શકે કે 'આ કયું અત્તર લગાવ્યું છે?'.",
-        whatsappText: "લેવલ ૪: ૧૨ ફૂટ (રૂમ કમાન્ડિંગ પાવર)"
-      },
-      "5": {
-        tag: "લેવલ ૫: ૧૬+ ફૂટ / આખો હોલ (સંપૂર્ણ વશીકરણ)",
-        noticeTitle: "ધ્યાન ખેંચાવાનો સમય: સમગ્ર હોલ પર પ્રભુત્વ",
-        noticeDesc: "આખો હોલ તમારી હિપ્નોટિક સુગંધથી મહેકી ઊઠે છે. અત્તરની ખુશ્બૂ કલાકો સુધી હવામાં જળવાઈ રહે છે.",
-        reactionTitle: "સબકોન્શિયસ પ્રતિક્રિયા: ટોળા પર સંપૂર્ણ આધિપત્ય",
-        reactionDesc: "લોકો તમારાથી મોહિત થઈને પાગલ જેવી સ્થિતિમાં તમારા વ્યક્તિત્વના પ્રભાવમાં ઘેરાઈ જાય છે.",
-        scenario: "⚡ <b>લાઇવ અસર:</b> તમે ત્યાંથી નીકળી જશો તો પણ તમારી સુગંધ પાછળ રહી જશે અને લોકો તમને યાદ કરતા રહેશે.",
-        whatsappText: "લેવલ ૫: ૧૬+ ફૂટ (સંપૂર્ણ વશીકરણ)"
+    /* QUIZ STATE DATA */
+    const userAnswers = {
+      gender: "પુરુષ (Male)",
+      goal: "તીવ્ર આકર્ષણ અને મોહ",
+      target: "સામેવાળી વ્યક્તિ મારી નજીક આવવા મજબૂર થાય",
+      formula: {
+        p1: "૫૦% રોયલ અંબર & કરિશ્મા ઊદ (Royal Amber & Oud)",
+        p2: "૩૦% સબકોન્શિયસ સેફ્રોન & કસ્તુરી મસ્ક (Spiced Saffron & Musk)",
+        p3: "૨૦% સ્મોક્ડ વુડ્સ & વેલ્વેટ રોઝ (Smoked Woods & Velvet Rose)"
       }
     };
 
-    let selectedLevelKey = "3";
+    /* STEP NAVIGATION */
+    function goToSlide(slideIndex) {
+      document.querySelectorAll(".screen-card").forEach((card) => card.classList.remove("active"));
+      document.getElementById("slide" + slideIndex).classList.add("active");
 
-    function handleLevelSliderChange(val) {
-      selectedLevelKey = String(val);
-      currentRadiusScale = parseInt(val);
-
-      const data = psychologicalLevels[selectedLevelKey];
-      if (!data) return;
-
-      // Update Slider Tag
-      document.getElementById("levelTag").innerText = data.tag;
-
-      // Update Dynamic Psychological Dashboard Live
-      document.getElementById("dynNoticeTitle").innerText = data.noticeTitle;
-      document.getElementById("dynNoticeDesc").innerText = data.noticeDesc;
-      document.getElementById("dynReactionTitle").innerText = data.reactionTitle;
-      document.getElementById("dynReactionDesc").innerText = data.reactionDesc;
-      document.getElementById("dynScenario").innerHTML = data.scenario;
-
-      // Subtle pulse feedback on card
-      const card = document.getElementById("dynamicCard");
-      card.style.borderColor = "rgba(255, 215, 0, 0.7)";
-      setTimeout(() => {
-        card.style.borderColor = "rgba(229, 185, 76, 0.25)";
-      }, 200);
-
-      updateWhatsAppCheckoutUrl();
-    }
-
-    /* Stepper & Navigation Logic */
-    function proceedToStep(stepNum) {
-      document.querySelectorAll(".screen-card").forEach((c) => c.classList.remove("active"));
-      document.getElementById("stage" + stepNum).classList.add("active");
-
-      for (let i = 1; i <= 3; i++) {
-        const bar = document.getElementById("bar" + i);
-        if (i <= stepNum) {
-          bar.classList.add("active");
+      for (let i = 1; i <= 5; i++) {
+        const pill = document.getElementById("pill" + i);
+        if (i <= slideIndex) {
+          pill.classList.add("active");
         } else {
-          bar.classList.remove("active");
+          pill.classList.remove("active");
         }
       }
 
-      if (stepNum === 2) {
-        setTimeout(initCrowdCanvas, 80);
+      if (slideIndex === 4) {
+        vortexSpinRate = 0.02; // speed up vortex during calibration
       }
-
-      if (stepNum === 3) {
-        bgRotSpeed = 0.008;
-        updateWhatsAppCheckoutUrl();
+      if (slideIndex === 5) {
+        vortexSpinRate = 0.007;
+        buildFinalFormulaAndWhatsApp();
       }
     }
 
-    /* Dynamic WhatsApp URL Builder for 9327938950 */
-    function updateWhatsAppCheckoutUrl() {
+    /* SLIDE 1 SELECTION */
+    function selectGender(genderChoice) {
+      userAnswers.gender = genderChoice;
+      goToSlide(2);
+    }
+
+    /* SLIDE 2 SELECTION */
+    function selectGoal(goalChoice, brief) {
+      userAnswers.goal = goalChoice;
+      goToSlide(3);
+    }
+
+    /* SLIDE 3 SELECTION */
+    function selectTarget(targetChoice) {
+      userAnswers.target = targetChoice;
+      goToSlide(4);
+    }
+
+    /* SLIDE 4: VORTEX EYE HOLD CALIBRATION */
+    const eyeCore = document.getElementById("eyeCore");
+    const calibBar = document.getElementById("calibBar");
+    const calibPct = document.getElementById("calibPct");
+    const eyeTip = document.getElementById("eyeTip");
+    const eyeStatus = document.getElementById("eyeStatus");
+
+    let isHolding = false;
+    let holdProgress = 0;
+    let holdTimer = null;
+
+    function startHold(e) {
+      if (e) e.preventDefault();
+      if (isHolding) return;
+      isHolding = true;
+      eyeCore.classList.add("holding");
+      eyeTip.innerText = "સિન્કિંગ...";
+      eyeStatus.innerText = "અર્ધજાગ્રત ફ્રીક્વન્સી સાથે કનેક્ટ થઈ રહ્યું છે...";
+      vortexSpinRate = 0.035;
+
+      holdTimer = setInterval(() => {
+        if (holdProgress < 100) {
+          holdProgress += 3;
+          calibBar.style.width = holdProgress + "%";
+          calibPct.innerText = holdProgress + "%";
+
+          if (navigator.vibrate && holdProgress % 15 === 0) {
+            navigator.vibrate(25);
+          }
+        } else {
+          clearInterval(holdTimer);
+          if (navigator.vibrate) navigator.vibrate([60, 40, 90]);
+          eyeTip.innerText = "૧૦૦% સફળ";
+          eyeStatus.innerText = "પરફેક્ટ! તમારું મિશ્રણ તૈયાર થઈ ગયું!";
+          setTimeout(() => goToSlide(5), 450);
+        }
+      }, 40);
+    }
+
+    function endHold() {
+      if (!isHolding) return;
+      if (holdProgress < 100) {
+        clearInterval(holdTimer);
+        isHolding = false;
+        holdProgress = 0;
+        calibBar.style.width = "0%";
+        calibPct.innerText = "૦%";
+        eyeCore.classList.remove("holding");
+        eyeTip.innerText = "અહીં દબાવો";
+        eyeStatus.innerText = "આંગળી હટાવશો નહીં, ફરી પ્રયાસ કરો.";
+        vortexSpinRate = 0.015;
+      }
+    }
+
+    eyeCore.addEventListener("mousedown", startHold);
+    eyeCore.addEventListener("mouseup", endHold);
+    eyeCore.addEventListener("mouseleave", endHold);
+    eyeCore.addEventListener("touchstart", startHold, { passive: false });
+    eyeCore.addEventListener("touchend", endHold);
+    eyeCore.addEventListener("touchcancel", endHold);
+
+    /* SLIDE 5: DYNAMIC FORMULA & WHATSAPP GENERATOR FOR 9327938950 */
+    function buildFinalFormulaAndWhatsApp() {
+      // Dynamic adjustments based on Gender & Goal
+      let ing1 = "૫૦% રોયલ અંબર & ઊદ એક્સટ્રેક્ટ (Royal Amber & Oud)";
+      let ing2 = "૩૦% સ્મોક્ડ સેફ્રોન & કસ્તુરી મસ્ક (Spiced Saffron & Musk)";
+      let ing3 = "૨૦% વેલ્વેટ રોઝ & ચંદન વુડ્સ (Velvet Rose & Sandalwood)";
+
+      if (userAnswers.gender.includes("સ્ત્રી")) {
+        ing1 = "૫૦% ગોલ્ડન અંબર & કશ્મીરી કેસર (Golden Amber & Saffron)";
+        ing2 = "૩૦% રોયલ વ્હાઇટ મસ્ક & દમાસ્ક રોઝ (White Musk & Damask Rose)";
+        ing3 = "૨૦% ચંદન એક્સટ્રેક્ટ & હની વુડ્સ (Sandalwood & Honey Woods)";
+      }
+
+      document.getElementById("ing1Name").innerText = ing1;
+      document.getElementById("ing2Name").innerText = ing2;
+      document.getElementById("ing3Name").innerText = ing3;
+
       const phoneNumber = "919327938950";
-      const lvl = psychologicalLevels[selectedLevelKey] || psychologicalLevels["3"];
-
       const message = 
-        `નમસ્તે, મેં વેબસાઇટ પર AURA સબકોન્શિયસ મોહક અત્તર સિમ્યુલેશન પૂરું કર્યું છે.\n\n` +
-        `• પસંદ કરેલ પાવર: ${lvl.whatsappText}\n` +
-        `• ઑફર કિંમત: ₹499 (૫૦% છૂટ સાથે)\n` +
-        `• ડિલિવરી: કેશ ઓન ડિલિવરી (COD)\n\n` +
-        `મારે આ અત્તર મંગાવવું છે. કૃપા કરીને મારું ડિલિવરી સરનામું નોંધીને ઓર્ડર કન્ફર્મ કરો.`;
+        `નમસ્તે, મેં વેબસાઇટ પર AURA સબકોન્શિયસ હિપ્નોટિક અત્તર ટેસ્ટ આપ્યો છે.\n\n` +
+        `• જેન્ડર: ${userAnswers.gender}\n` +
+        `• મારો ગોલ: ${userAnswers.goal}\n` +
+        `• ટાર્ગેટ: ${userAnswers.target}\n\n` +
+        `🧪 મારા માટે તૈયાર થયેલું 50:30:20 મિશ્રણ:\n` +
+        `૧. ${ing1}\n` +
+        `૨. ${ing2}\n` +
+        `૩. ${ing3}\n\n` +
+        `• ઑફર કિંમત: ₹599 (₹899 ને બદલે - ₹300 છૂટ)\n` +
+        `• ચુકવણી: કેશ ઓન ડિલિવરી (COD)\n\n` +
+        `મારે આ સ્પેશિયલ અત્તર મંગાવવું છે. કૃપા કરીને મારું એડ્રેસ નોંધીને ઓર્ડર મોકલી આપો.`;
 
-      const encodedMsg = encodeURIComponent(message);
-      const link = `https://wa.me/${phoneNumber}?text=${encodedMsg}`;
-      
-      const btn = document.getElementById("whatsappTrigger");
-      if (btn) {
-        btn.href = link;
+      const encodedUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+      const orderBtn = document.getElementById("waOrderBtn");
+      if (orderBtn) {
+        orderBtn.href = encodedUrl;
       }
     }
-
-    // Initialize initial WhatsApp payload
-    updateWhatsAppCheckoutUrl();
   </script>
 </body>
 </html>
-```
-<!-- STREAMING_FILE_END -->
-
-### Highlights of the Updated Experience:
-1. **Instant Dynamic Text Synchronization:** Moving the range slider across the 5 levels instantly updates the live reaction card underneath—switching the notice time, psychological subconscious reactions, and scenario breakdowns in natural, persuasive Gujarati.
-2. **Synchronized Crowd Silhouettes:** Moving the slider expands the glowing aura radius on the live canvas, triggering more silhouettes to turn and orient their gaze toward the user.
-3. **Smart WhatsApp Message Routing:** The final call-to-action carries the exact selected level (e.g., `લેવલ ૪: ૧૨ ફૂટ (રૂમ કમાન્ડિંગ પાવર)`) into the pre-filled message sent to **9327938950**, removing all ordering hesitation.
