@@ -25,9 +25,7 @@
             goldPrimary: '#f5b041',
             goldLight: '#ffd369',
             goldGlow: 'rgba(245, 176, 65, 0.35)',
-            cyberRed: '#ff2a55',
-            rzpBlue: '#0c2340',
-            rzpAccent: '#3399cc'
+            cyberRed: '#ff2a55'
           },
           fontFamily: {
             cinzel: ['Cinzel', 'serif'],
@@ -64,13 +62,6 @@
       border: 1.5px solid rgba(245, 176, 65, 0.26);
       box-shadow: 0 25px 80px rgba(0,0,0,0.95), 0 0 45px rgba(245, 176, 65, 0.09);
       position: relative;
-    }
-
-    .lab-panel::after {
-      content: "";
-      position: absolute;
-      top: -1px; left: 10%; right: 10%; height: 2px;
-      background: linear-gradient(90deg, transparent, #f5b041, transparent);
     }
 
     .choice-card {
@@ -118,13 +109,13 @@
       100% { bottom: 100%; opacity: 0; transform: scale(1.3); }
     }
 
-    .btn-razorpay {
+    .btn-pay {
       background: linear-gradient(135deg, #ffd369 0%, #f5b041 100%);
       box-shadow: 0 0 25px rgba(245, 176, 65, 0.4);
-      transition: all 0.2s ease;
+      cursor: pointer;
     }
 
-    .btn-razorpay:active {
+    .btn-pay:active {
       transform: scale(0.98);
     }
 
@@ -164,9 +155,7 @@
       </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- VIEW 1: SENSORY QUESTIONS MATRIX -->
-    <!-- ============================================ -->
+    <!-- VIEW 1: QUESTIONS -->
     <main id="simulationView" class="space-y-4">
       <div class="text-left mb-1">
         <p class="text-[11px] font-mono tracking-widest text-cyberRed font-bold uppercase mb-1">
@@ -176,11 +165,10 @@
           ૧. તમે તમારી હાજરીથી આસપાસ કેવું ચુંબકીય ખેંચાણ ઊભું કરવા માંગો છો?
         </h1>
         <p id="chamberSubtext" class="text-xs text-gray-400 mt-1">
-          એક વિકલ્પ પસંદ કરો. લેબ એલ્ગોરિધમ તમારા સ્વભાવ અનુસાર ૩ દુર્લભ અત્તર કમ્પાઉન્ડ કરશે.
+          એક વિકલ્પ પસંદ કરો. લેબ તમારા સ્વભાવ અનુસાર ૩ દુર્લભ અત્તર કમ્પાઉન્ડ કરશે.
         </p>
       </div>
 
-      <!-- Interactive Choices Grid -->
       <div id="choicesGrid" class="space-y-2.5 pt-1"></div>
 
       <div class="pt-3 flex items-center justify-between text-[11px] text-gray-400 border-t border-white/5 font-mono">
@@ -189,9 +177,7 @@
       </div>
     </main>
 
-    <!-- ============================================ -->
-    <!-- VIEW 2: COMPOUNDING SIMULATION -->
-    <!-- ============================================ -->
+    <!-- VIEW 2: COMPOUNDING ANIMATION -->
     <section id="compoundingView" class="hidden flex-col items-center justify-center py-7 text-center space-y-4">
       <div class="reactor-core">
         <div id="fluidLevel" class="fluid-layer"></div>
@@ -218,9 +204,7 @@
       </div>
     </section>
 
-    <!-- ============================================ -->
-    <!-- VIEW 3: FORMULA & INSTANT RAZORPAY CHECKOUT -->
-    <!-- ============================================ -->
+    <!-- VIEW 3: RAZORPAY DIRECT CHECKOUT -->
     <section id="dossierView" class="hidden space-y-4">
       
       <!-- Timer -->
@@ -247,15 +231,15 @@
           <div id="resultRatioBar" class="w-full h-7 rounded-xl overflow-hidden flex border border-goldPrimary/30 bg-black/40"></div>
         </div>
 
-        <!-- 3 Notes Breakdown -->
+        <!-- Notes Details -->
         <div id="formulaListDetails" class="space-y-1.5 mt-3"></div>
       </div>
 
-      <!-- DIRECT CHECKOUT FORM (RAZORPAY) -->
+      <!-- CHECKOUT FORM -->
       <div class="bg-panelBg/95 border-2 border-goldPrimary/40 rounded-2xl p-4 sm:p-5 text-left shadow-2xl space-y-3">
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between border-b border-white/10 pb-2">
           <span class="text-xs font-mono text-goldLight font-bold uppercase tracking-wider">
-            ★ ડાયરેક્ટ ઓર્ડર ફોર્મ
+            ★ ડિલિવરી સરનામું અને ઓર્ડર
           </span>
           <div class="text-right">
             <span class="text-xs text-gray-400 line-through mr-1">₹899</span>
@@ -263,8 +247,8 @@
           </div>
         </div>
 
-        <!-- Inputs -->
-        <div class="space-y-2.5">
+        <!-- Form Fields -->
+        <div class="space-y-2.5 pt-1">
           <div>
             <label class="block text-[11px] text-gray-400 font-bold uppercase mb-1">પૂરું નામ *</label>
             <input type="text" id="custName" placeholder="દા.ત. રાહુલ શાહ" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-goldPrimary">
@@ -273,7 +257,7 @@
           <div class="grid grid-cols-2 gap-2">
             <div>
               <label class="block text-[11px] text-gray-400 font-bold uppercase mb-1">મોબાઈલ નંબર *</label>
-              <input type="tel" id="custPhone" placeholder="10 આંકડાનો નંબર" maxlength="10" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-goldPrimary">
+              <input type="tel" id="custPhone" placeholder="10 આંકડાનો મોબાઈલ નંબર" maxlength="10" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-goldPrimary">
             </div>
             <div>
               <label class="block text-[11px] text-gray-400 font-bold uppercase mb-1">પિનકોડ *</label>
@@ -282,41 +266,41 @@
           </div>
 
           <div>
-            <label class="block text-[11px] text-gray-400 font-bold uppercase mb-1">ઘરનું પૂરું સરનામું (ગામ/શહેર સહિત) *</label>
+            <label class="block text-[11px] text-gray-400 font-bold uppercase mb-1">ઘરનું પૂરું સરનામું *</label>
             <textarea id="custAddress" rows="2" placeholder="ઘર/ફ્લેટ નં, સોસાયટી, રોડ, શહેર" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-goldPrimary"></textarea>
           </div>
         </div>
 
-        <!-- RAZORPAY CTA BUTTON -->
-        <button id="payNowBtn" onclick="labApp.initiateRazorpayPayment()" class="btn-razorpay w-full py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 text-black font-black text-base tracking-wide mt-2">
+        <!-- RAZORPAY DIRECT BUTTON -->
+        <button id="payNowBtn" type="button" onclick="labApp.initiateRazorpayPayment()" class="btn-pay w-full py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 text-black font-black text-base tracking-wide mt-3">
           <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5z"/>
           </svg>
-          <span>₹૫૯૯ ચૂકવો (Pay via UPI / GPay / Cards)</span>
+          <span>₹૫૯૯ ઓનલાઇન ચૂકવો (GPay / PhonePe / UPI)</span>
         </button>
 
         <div class="text-[11px] text-gray-400 text-center flex items-center justify-center gap-2 pt-1 font-mono">
-          <span>🔒 100% Safe Razorpay Gateway</span>
+          <span>🔒 Razorpay સિક્યોર પેમેન્ટ</span>
           <span>•</span>
-          <span>Google Pay / PhonePe / Paytm Available</span>
+          <span>બધા UPI / કાર્ડ્સ સ્વીકાર્ય</span>
         </div>
       </div>
 
-      <!-- SUCCESS RECEIPT MODAL -->
+      <!-- SUCCESS MODAL -->
       <div id="successModal" class="hidden bg-emerald-950/90 border border-emerald-500 rounded-2xl p-4 text-center space-y-2">
-        <div class="text-2xl">🎉</div>
-        <h3 class="text-base font-black text-white">ઓર્ડર સફળતાપૂર્વક કન્ફર્મ થયો!</h3>
+        <div class="text-3xl">🎉</div>
+        <h3 class="text-base font-black text-white">ઓર્ડર કન્ફર્મ થઈ ગયો છે!</h3>
         <p class="text-xs text-emerald-200" id="receiptDetails"></p>
-        <p class="text-[11px] text-gray-300">તમારું અત્તર તૈયાર કરીને ૧-૨ દિવસમાં કુરિયર રવાના કરી દેવાશે.</p>
+        <p class="text-[11px] text-gray-300">તમારું અત્તર તૈયાર કરીને ટૂંક સમયમાં કુરિયર રવાના કરવામાં આવશે.</p>
       </div>
 
     </section>
   </div>
 
-  <!-- SCRIPT LOGIC -->
+  <!-- SCRIPT -->
   <script>
     // ==========================================================
-    // અગત્યનું: અહીં તમારો Razorpay Key ID નાખો (Live or Test)
+    // નીચે તમારી Razorpay Key ID નાખો (Live or Test)
     // ==========================================================
     const RAZORPAY_KEY = "rzp_live_TcnN4bgnhTNHvC"; 
     const ORDER_AMOUNT_INR = 599;
@@ -505,7 +489,7 @@
 
         const options = {
           key: RAZORPAY_KEY,
-          amount: ORDER_AMOUNT_INR * 100, // Amount in paise
+          amount: ORDER_AMOUNT_INR * 100,
           currency: "INR",
           name: "AURAFRAG LAB",
           description: `Custom 3-Attar Blend (${this.code})`,
