@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>AURA - દૈવી આધ્યાત્મિક અત્તર સિમ્યુલેશન</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Noto+Sans+Gujarati:wght@400;600;700;800;900&family=Rozha+One&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-night: #08050e;
+      --bg-temple: #140b22;
+      --gold-temple: #ffd700;
+      --gold-deep: #f39c12;
+      --gold-glow: rgba(255, 215, 0, 0.45);
+      --amber-flame: #ff7700;
+      --card-bg: rgba(20, 12, 34, 0.93);
+      --card-border: rgba(255, 215, 0, 0.28);
+      --text: #fdfbf7;
+      --text-muted: #bdafcb;
+      --whatsapp: #25d366;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans Gujarati', -apple-system, BlinkMacSystemFont, sans-serif;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-night);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Sacred Cosmic Temple Canvas */
+    #templeCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .temple-vignette {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 30%, rgba(8, 5, 14, 0.94) 95%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Outer Wrapper */
+    .app-frame {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 450px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 24px 16px 36px;
+    }
+
+    /* Sacred Header */
+    .sacred-header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .om-symbol {
+      font-size: 28px;
+      color: var(--gold-temple);
+      display: inline-block;
+      text-shadow: 0 0 16px var(--gold-glow);
+      animation: floatOm 3s ease-in-out infinite alternate;
+      margin-bottom: 2px;
+    }
+
+    @keyframes floatOm {
+      from { transform: translateY(0px) scale(1); filter: brightness(1); }
+      to { transform: translateY(-4px) scale(1.06); filter: brightness(1.25); }
+    }
+
+    .brand-title {
+      font-family: 'Rozha One', 'Cinzel Decorative', serif;
+      font-size: 26px;
+      letter-spacing: 0.18em;
+      font-weight: 900;
+      background: linear-gradient(180deg, #fff7d6 0%, #ffd700 50%, #d48806 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 14px rgba(255, 215, 0, 0.4));
+    }
+
+    .brand-subtitle {
+      font-size: 11px;
+      color: var(--gold-deep);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    /* Spiritual Progress Stepper */
+    .stepper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .step-pill {
+      width: 24px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 2px;
+      transition: all 0.35s ease;
+    }
+
+    .step-pill.active {
+      background: linear-gradient(90deg, var(--gold-deep), var(--gold-temple));
+      box-shadow: 0 0 10px var(--gold-glow);
+      width: 38px;
+    }
+
+    /* Screen Card Styles */
+    .screen-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      padding: 26px 18px;
+      text-align: center;
+      display: none;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.85);
+      animation: divineFade 0.4s ease forwards;
+    }
+
+    .screen-card.active {
+      display: block;
+    }
+
+    @keyframes divineFade {
+      from { opacity: 0; transform: translateY(12px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .step-badge {
+      display: inline-block;
+      font-size: 11px;
+      color: var(--gold-temple);
+      background: rgba(255, 215, 0, 0.1);
+      border: 1px solid var(--card-border);
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    h2.heading {
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.4;
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+
+    h2.heading span.gold-highlight {
+      background: linear-gradient(135deg, #ffffff 10%, var(--gold-temple) 60%, var(--gold-deep) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.35));
+    }
+
+    p.sub-heading {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    /* Slide 1 Deity Grid */
+    .deity-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 11px;
+      margin-bottom: 8px;
+    }
+
+    .deity-card {
+      background: rgba(28, 17, 48, 0.75);
+      border: 1px solid rgba(255, 215, 0, 0.22);
+      border-radius: 16px;
+      padding: 14px 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-align: left;
+      transition: all 0.22s ease;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+    }
+
+    .deity-card:active, .deity-card:hover {
+      border-color: var(--gold-temple);
+      background: rgba(50, 28, 86, 0.85);
+      box-shadow: 0 0 20px var(--gold-glow);
+      transform: scale(0.985);
+    }
+
+    .deity-icon {
+      font-size: 30px;
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 215, 0, 0.12);
+      border: 1px solid var(--gold-deep);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.35));
+    }
+
+    .deity-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .deity-notes {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Slide 2 Goal Options */
+    .goal-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .goal-item {
+      background: rgba(28, 17, 48, 0.75);
+      border: 1px solid rgba(255, 215, 0, 0.22);
+      border-radius: 16px;
+      padding: 16px 14px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: all 0.22s ease;
+    }
+
+    .goal-item:active, .goal-item:hover {
+      border-color: var(--gold-temple);
+      background: rgba(50, 28, 86, 0.85);
+      box-shadow: 0 0 20px var(--gold-glow);
+      transform: scale(0.985);
+    }
+
+    .goal-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255, 215, 0, 0.12);
+      border: 1px solid var(--gold-temple);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: var(--gold-temple);
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* Slide 3 Sacred Diya Scanner */
+    .diya-altar {
+      position: relative;
+      width: 170px;
+      height: 170px;
+      margin: 12px auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .aura-ring {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 2px dashed rgba(255, 215, 0, 0.4);
+      animation: spinAura 12s linear infinite;
+    }
+
+    @keyframes spinAura {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .diya-core {
+      width: 125px;
+      height: 125px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #3d1b06 0%, #200f07 60%, #0c0612 100%);
+      border: 2px solid var(--gold-temple);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 28px rgba(255, 119, 0, 0.45);
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .diya-core.charging {
+      box-shadow: 0 0 50px rgba(255, 215, 0, 0.7), 0 0 35px rgba(255, 119, 0, 0.6);
+      transform: scale(0.96);
+    }
+
+    .diya-flame {
+      width: 22px;
+      height: 38px;
+      background: linear-gradient(180deg, #ffffff 0%, #ffd700 35%, #ff4500 100%);
+      border-radius: 50% 50% 20% 20% / 70% 70% 30% 30%;
+      filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.9));
+      animation: flameWiggle 1.4s ease-in-out infinite alternate;
+    }
+
+    @keyframes flameWiggle {
+      0% { transform: scale(0.95) rotate(-2deg); }
+      100% { transform: scale(1.12) rotate(2deg); }
+    }
+
+    .diya-clay-base {
+      width: 44px;
+      height: 14px;
+      background: #8b3a00;
+      border-radius: 0 0 14px 14px;
+      margin-top: 4px;
+      border-top: 2px solid var(--gold-deep);
+    }
+
+    .diya-touch-text {
+      font-size: 11px;
+      color: var(--gold-temple);
+      font-weight: 800;
+      margin-top: 6px;
+    }
+
+    .charge-track {
+      height: 6px;
+      background: #251838;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .charge-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #ff7700, #ffd700);
+      box-shadow: 0 0 12px var(--gold-glow);
+      transition: width 0.08s linear;
+    }
+
+    /* Slide 4 Formulation Card */
+    .formula-card {
+      background: rgba(22, 13, 37, 0.88);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 16px;
+      text-align: left;
+    }
+
+    .formula-header {
+      font-size: 13.5px;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .ing-row {
+      margin-bottom: 13px;
+    }
+
+    .ing-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .ing-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12.5px;
+      margin-bottom: 5px;
+    }
+
+    .ing-title {
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    .ing-percent {
+      color: var(--gold-temple);
+      font-weight: 900;
+    }
+
+    .bar-bg {
+      height: 7px;
+      background: #25163c;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    .fill-50 {
+      width: 50%;
+      background: linear-gradient(90deg, #d48806, #ffd700);
+      box-shadow: 0 0 10px var(--gold-glow);
+    }
+
+    .fill-30 {
+      width: 30%;
+      background: linear-gradient(90deg, #c2410c, #fb923c);
+    }
+
+    .fill-20 {
+      width: 20%;
+      background: linear-gradient(90deg, #15803d, #4ade80);
+    }
+
+    .ing-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* Deity Offering Box */
+    .offering-box {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.12) 0%, rgba(26, 14, 44, 0.85) 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    .spiritual-bottle {
+      width: 52px;
+      height: 76px;
+      background: linear-gradient(180deg, rgba(255, 215, 0, 0.35) 0%, #1c0e2c 85%);
+      border: 1.5px solid var(--gold-temple);
+      border-radius: 8px 8px 18px 18px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 18px var(--gold-glow);
+    }
+
+    .spiritual-bottle::before {
+      content: '';
+      position: absolute;
+      top: -12px;
+      width: 20px;
+      height: 12px;
+      background: var(--gold-temple);
+      border-radius: 2px;
+    }
+
+    .bottle-gold-text {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 8.5px;
+      font-weight: 900;
+      color: var(--gold-temple);
+      letter-spacing: 0.12em;
+      text-align: center;
+    }
+
+    .pricing-div {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .old-price {
+      font-size: 15px;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    .prasad-price {
+      font-size: 27px;
+      font-weight: 900;
+      color: var(--gold-temple);
+      text-shadow: 0 0 12px rgba(255, 215, 0, 0.45);
+    }
+
+    .prasad-tag {
+      font-size: 11px;
+      font-weight: 800;
+      background: #f59e0b;
+      color: #000;
+      padding: 2px 7px;
+      border-radius: 5px;
+    }
+
+    .sacred-bullets {
+      font-size: 12px;
+      color: #e4ddf0;
+      line-height: 1.6;
+    }
+
+    /* Direct WhatsApp Button */
+    .btn-sacred-whatsapp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      background: linear-gradient(135deg, #25d366 0%, #15803d 100%);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 17px 16px;
+      border-radius: 14px;
+      font-size: 16.5px;
+      font-weight: 900;
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .btn-sacred-whatsapp:active {
+      transform: scale(0.98);
+    }
+
+    .btn-sacred-whatsapp::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.28) 50%, transparent 60%);
+      animation: gleam 2.8s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes gleam {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .wa-subtext {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 12px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Sacred Temple Sparks & Smoke Canvas -->
+  <canvas id="templeCanvas"></canvas>
+  <div class="temple-vignette"></div>
+
+  <main class="app-frame">
+    <!-- Divine Header -->
+    <header class="sacred-header">
+      <div class="om-symbol">ॐ</div>
+      <div class="brand-title">AURA DIVINE</div>
+      <div class="brand-subtitle">પવિત્ર દૈવી અત્તર સિમ્યુલેશન</div>
+    </header>
+
+    <!-- Spiritual Stepper (4 steps) -->
+    <div class="stepper">
+      <div class="step-pill active" id="pill1"></div>
+      <div class="step-pill" id="pill2"></div>
+      <div class="step-pill" id="pill3"></div>
+      <div class="step-pill" id="pill4"></div>
+    </div>
+
+    <!-- SLIDE 1: SELECT DEITY / VIBE -->
+    <section class="screen-card active" id="slide1">
+      <span class="step-badge">પગલું ૧ • આધ્યાત્મિક સંકલ્પ</span>
+      <h2 class="heading">
+        તમારા <span class="gold-highlight">ઈષ્ટદેવ / પૂજા સંકલ્પ</span> પસંદ કરો
+      </h2>
+      <p class="sub-heading">
+        તમારી ભક્તિ ઊર્જા સાથે મેળ ખાતી પવિત્ર ખુશ્બૂનું માર્ગદર્શન મેળવો:
+      </p>
+
+      <div class="deity-grid">
+        <!-- Mahadev Option -->
+        <div class="deity-card" onclick="selectDeity('મહાદેવ શિવ ભક્તિ', 'ધ્યાન & શાંતિ', 'શ્વેત ચંદન & ભસ્મ અંબર')">
+          <div class="deity-icon">🔱</div>
+          <div>
+            <div class="deity-title">મહાદેવ / શિવ ભક્તિ</div>
+            <div class="deity-notes">શાંતિ, ધ્યાન, વૈરાગ્ય • શ્વેત ચંદન, ભસ્મ-અંબર & લોબાન</div>
+          </div>
+        </div>
+
+        <!-- Krishna Option -->
+        <div class="deity-card" onclick="selectDeity('શ્રી રાધા-કૃષ્ણ ભક્તિ', 'પ્રેમ & આકર્ષણ', 'કાશ્મીરી કેસર, કસ્તુરી & કદંબ')">
+          <div class="deity-icon">🦚</div>
+          <div>
+            <div class="deity-title">શ્રી રાધા-કૃષ્ણ ભક્તિ</div>
+            <div class="deity-notes">પ્રેમ, દિવ્ય મોહ, પ્રસન્નતા • કાશ્મીરી કેસર, કસ્તુરી & કદંબ</div>
+          </div>
+        </div>
+
+        <!-- Hanumanji Option -->
+        <div class="deity-card" onclick="selectDeity('હનુમાનજી શક્તિ ઉપાસના', 'સકારાત્મક ઊર્જા', 'સિંદૂર-ગુલાબ, લવિંગ & અગરવુડ')">
+          <div class="deity-icon">🚩</div>
+          <div>
+            <div class="deity-title">શ્રી હનુમાનજી / શક્તિ ઉપાસના</div>
+            <div class="deity-notes">સકારાત્મક ઊર્જા, નકારાત્મકતાનો નાશ • સિંદૂરી ગુલાબ & લવિંગ</div>
+          </div>
+        </div>
+
+        <!-- Lakshmi Narayan Option -->
+        <div class="deity-card" onclick="selectDeity('લક્ષ્મી-નારાયણ સમૃદ્ધિ', 'વાસ્તુ & ધન શાંતિ', 'પવિત્ર કમળ, મલયાગિરી ચંદન & તુલસી')">
+          <div class="deity-icon">🪷</div>
+          <div>
+            <div class="deity-title">લક્ષ્મી-નારાયણ / વાસ્તુ સમૃદ્ધિ</div>
+            <div class="deity-notes">ઘરમાં શાંતિ, લક્ષ્મી કૃપા • દિવ્ય કમળ, શુદ્ધ ચંદન & તુલસી</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: SPIRITUAL GOAL SELECTION -->
+    <section class="screen-card" id="slide2">
+      <span class="step-badge">પગલું ૨ • પૂજા અને મનનો હેતુ</span>
+      <h2 class="heading">
+        આ અત્તરથી તમારો <br />
+        <span class="gold-highlight">મુખ્ય આધ્યાત્મિક હેતુ</span> શું છે?
+      </h2>
+      <p class="sub-heading">
+        તમારા દૈનિક જીવનમાં આ દૈવી ખુશ્બૂ કયો ચમત્કારિક બદલાવ લાવે?
+      </p>
+
+      <div class="goal-stack">
+        <div class="goal-item" onclick="selectGoal('પૂજા, પાઠ અને ધ્યાનમાં અખંડ એકાગ્રતા')">
+          <div class="goal-badge">૧</div>
+          <div>
+            <div class="deity-title">ધ્યાન અને પૂજામાં એકાગ્રતા</div>
+            <div class="deity-notes">પૂજા સમયે મન ભટકે નહીં અને ઈશ્વર ચિંતનમાં ઊંડું લીન થાય.</div>
+          </div>
+        </div>
+
+        <div class="goal-item" onclick="selectGoal('ઘર અને મનમાંથી નકારાત્મક ઊર્જા અને તણાવ દૂર કરવો')">
+          <div class="goal-badge">૨</div>
+          <div>
+            <div class="deity-title">નકારાત્મક ઊર્જા & વાસ્તુ શુદ્ધિ</div>
+            <div class="deity-notes">ઘરનું વાતાવરણ મંદિર જેવું પવિત્ર બને અને મનનો ભાર હળવો થાય.</div>
+          </div>
+        </div>
+
+        <div class="goal-item" onclick="selectGoal('દિવસભર મન શાંત, પ્રસન્ન અને પવિત્ર રહે')">
+          <div class="goal-badge">૩</div>
+          <div>
+            <div class="deity-title">દિવસભર શાંતિ અને પવિત્ર વાઇબ્સ</div>
+            <div class="deity-notes">કામ પર કે મુસાફરીમાં આખો દિવસ તમારી આસપાસ દૈવી આભા રહે.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: SACRED JYOTI / DIYA CHARGE SIMULATOR -->
+    <section class="screen-card" id="slide3">
+      <span class="step-badge">પગલું ૩ • દૈવી જ્યોતિ સિન્ક</span>
+      <h2 class="heading">
+        <span class="gold-highlight">પવિત્ર જ્યોતિ</span> સ્પર્શ કરો
+      </h2>
+      <p class="sub-heading">
+        તમારી આધ્યાત્મિક આભા સાથે સુગંધના પવિત્ર અર્કને સિન્ક કરવા નીચે દીપક પર આંગળી દબાવી રાખો:
+      </p>
+
+      <div class="diya-altar" id="diyaAltar">
+        <div class="aura-ring"></div>
+        <div class="diya-core" id="diyaCore">
+          <div class="diya-flame"></div>
+          <div class="diya-clay-base"></div>
+          <span class="diya-touch-text" id="diyaTip">અહીં દબાવી રાખો</span>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:6px;">
+        <span style="color:var(--text-muted);">દૈવી આભા સંગમ:</span>
+        <span style="color:var(--gold-temple); font-weight:800;" id="chargePct">૦%</span>
+      </div>
+
+      <div class="charge-track">
+        <div class="charge-fill" id="chargeBar"></div>
+      </div>
+
+      <div style="font-size:11.5px; color:var(--gold-deep); font-weight:700;" id="diyaStatus">
+        સ્પર્શ કરી રાખો (મંત્ર વાઇબ્રેશન)...
+      </div>
+    </section>
+
+    <!-- SLIDE 4: 50:30:20 SACRED BLEND REVEAL & WHATSAPP ACTION -->
+    <section class="screen-card" id="slide4">
+      <span class="step-badge" style="background:rgba(34,197,94,0.15); border-color:#22c55e; color:#4ade80;">✔ સંકલ્પ પૂર્ણ • ૧૦૦% શુદ્ધ પૂજા ગ્રેડ</span>
+      <h2 class="heading" style="font-size: 19px; margin-bottom: 10px;">
+        તમારી ભક્તિ માટે <br />
+        <span class="gold-highlight">સિદ્ધ થયેલું ૫૦:૩૦:૨૦ દૈવી અત્તર</span>
+      </h2>
+
+      <!-- 50:30:20 Breakdown Card -->
+      <div class="formula-card">
+        <div class="formula-header">
+          <span>પવિત્ર અર્ક મિશ્રણ (Sacred Blend):</span>
+          <span style="color:var(--gold-temple);">૫૦ : ૩૦ : ૨૦</span>
+        </div>
+
+        <!-- 50% Component -->
+        <div class="ing-row">
+          <div class="ing-top">
+            <span class="ing-title" id="sacredIng1">૫૦% મલયાગિરી શ્વેત ચંદન & અમૃત અર્ક</span>
+            <span class="ing-percent">૫૦%</span>
+          </div>
+          <div class="bar-bg">
+            <div class="bar-fill fill-50"></div>
+          </div>
+          <div class="ing-sub" id="sacredDesc1">મનને તાત્કાલિક શાંત કરતો અને ધ્યાનને ઊંડું કરતો પવિત્ર આધાર.</div>
+        </div>
+
+        <!-- 30% Component -->
+        <div class="ing-row">
+          <div class="ing-top">
+            <span class="ing-title" id="sacredIng2">૩૦% કાશ્મીરી કેસર & કસ્તુરી મસ્ક</span>
+            <span class="ing-percent">૩૦%</span>
+          </div>
+          <div class="bar-bg">
+            <div class="bar-fill fill-30"></div>
+          </div>
+          <div class="ing-sub" id="sacredDesc2">ઈશ્વરીય પ્રેમ, સકારાત્મક આભા અને પ્રસન્નતા ફેલાવતો અર્ક.</div>
+        </div>
+
+        <!-- 20% Component -->
+        <div class="ing-row">
+          <div class="ing-top">
+            <span class="ing-title" id="sacredIng3">૨૦% પવિત્ર તુલસી & ગૂગળ-લોબાન ધૂપ</span>
+            <span class="ing-percent">૨૦%</span>
+          </div>
+          <div class="bar-bg">
+            <div class="bar-fill fill-20"></div>
+          </div>
+          <div class="ing-sub" id="sacredDesc3">વાસ્તુદોષ અને નકારાત્મક વિચારોનો નાશ કરનાર શુદ્ધ વાઇબ્સ.</div>
+        </div>
+      </div>
+
+      <!-- Sacred Offering Price Box -->
+      <div class="offering-box">
+        <div class="spiritual-bottle">
+          <span class="bottle-gold-text">AURA<br/>DIVINE</span>
+        </div>
+        <div>
+          <div class="pricing-div">
+            <span class="old-price">₹૮૯૯</span>
+            <span class="prasad-price">₹૫૯૯</span>
+            <span class="prasad-tag">સ્પેશિયલ પ્રસાદ ઑફર</span>
+          </div>
+          <div class="sacred-bullets">
+            ✔ ૧૦૦% આલ્કોહોલ ફ્રી • પૂજા, પાઠ અને મંદિર માટે પવિત્ર<br />
+            ✔ એક પણ ટીપું કેમિકલ વગરનું શુદ્ધ અત્તર તેલ
+          </div>
+        </div>
+      </div>
+
+      <!-- Direct Clean WhatsApp Trigger to 9327938950 -->
+      <a id="divineWaBtn" href="#" target="_blank" class="btn-sacred-whatsapp">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.698.073-1.133-.07-.272-.089-.623-.21-1.077-.406-1.924-.83-3.176-2.779-3.272-2.906-.096-.128-.777-1.034-.777-1.973 0-.94.492-1.402.668-1.593.175-.19.382-.239.51-.239.127 0 .255.002.366.007.119.006.279-.045.437.335.163.393.556 1.356.604 1.455.048.099.08.216.016.343-.064.128-.096.208-.192.32-.096.112-.202.25-.288.336-.096.096-.197.2-.085.392.112.192.499.824 1.072 1.335.738.657 1.36.861 1.552.957.192.096.304.08.416-.048.112-.128.48-.559.608-.751.128-.192.256-.16.432-.096.176.064 1.12.528 1.312.624.192.096.32.144.368.224.048.08.048.464-.096.869z"/>
+        </svg>
+        WhatsApp પર દૈવી અત્તર મંગાવો
+      </a>
+
+      <p class="wa-subtext">
+        બટન દબાવતાં જ તમારા ઈષ્ટદેવના બ્લેન્ડ સાથે WhatsApp ચેટ ખૂલશે
+      </p>
+    </section>
+  </main>
+
+  <script>
+    // Temple Particles (Incense Smoke & Golden Sparks)
+    const canvas = document.getElementById("templeCanvas");
+    const ctx = canvas.getContext("2d");
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    window.addEventListener("resize", () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const particles = [];
+    const particleCount = 42;
+
+    class TempleSpark {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = height + Math.random() * 40;
+        this.size = Math.random() * 2.6 + 1;
+        this.speedY = Math.random() * 1.2 + 0.4;
+        this.speedX = (Math.random() - 0.5) * 0.7;
+        this.alpha = Math.random() * 0.6 + 0.2;
+        this.life = 0;
+        this.maxLife = Math.random() * 120 + 100;
+        this.color = Math.random() > 0.4 ? "#ffd700" : "#ff7700";
+      }
+      update() {
+        this.y -= this.speedY;
+        this.x += this.speedX + Math.sin(this.life * 0.05) * 0.4;
+        this.life++;
+        if (this.life >= this.maxLife || this.y < -10) {
+          this.reset();
+        }
+      }
+      draw() {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = this.alpha * (1 - this.life / this.maxLife);
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new TempleSpark());
+    }
+
+    function animateTemple() {
+      ctx.clearRect(0, 0, width, height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateTemple);
+    }
+    animateTemple();
+
+    // User Devotional State
+    const spiritualSelections = {
+      deity: "મહાદેવ શિવ ભક્તિ",
+      vibe: "ધ્યાન & શાંતિ",
+      notes: "શ્વેત ચંદન & ભસ્મ અંબર",
+      goal: "પૂજા, પાઠ અને ધ્યાનમાં અખંડ એકાગ્રતા"
+    };
+
+    // Screen Navigation
+    function goToSlide(slideNum) {
+      document.querySelectorAll(".screen-card").forEach(c => c.classList.remove("active"));
+      document.getElementById("slide" + slideNum).classList.add("active");
+
+      for (let i = 1; i <= 4; i++) {
+        const pill = document.getElementById("pill" + i);
+        if (i <= slideNum) {
+          pill.classList.add("active");
+        } else {
+          pill.classList.remove("active");
+        }
+      }
+
+      if (slideNum === 4) {
+        buildDivineFormula();
+      }
+    }
+
+    function selectDeity(deityName, vibe, notes) {
+      spiritualSelections.deity = deityName;
+      spiritualSelections.vibe = vibe;
+      spiritualSelections.notes = notes;
+      goToSlide(2);
+    }
+
+    function selectGoal(goalText) {
+      spiritualSelections.goal = goalText;
+      goToSlide(3);
+    }
+
+    // Diya Hold-to-Charge Simulator
+    const diyaCore = document.getElementById("diyaCore");
+    const chargeBar = document.getElementById("chargeBar");
+    const chargePct = document.getElementById("chargePct");
+    const diyaTip = document.getElementById("diyaTip");
+    const diyaStatus = document.getElementById("diyaStatus");
+
+    let isCharging = false;
+    let diyaCharge = 0;
+    let diyaTimer = null;
+
+    function startDiyaCharge(e) {
+      if (e) e.preventDefault();
+      if (isCharging) return;
+      isCharging = true;
+      diyaCore.classList.add("charging");
+      diyaTip.innerText = "આભા સિન્ક...";
+      diyaStatus.innerText = "પવિત્ર મંત્ર તરંગો સાથે સિન્ક થઈ રહ્યું છે...";
+
+      diyaTimer = setInterval(() => {
+        if (diyaCharge < 100) {
+          diyaCharge += 3;
+          chargeBar.style.width = diyaCharge + "%";
+          chargePct.innerText = diyaCharge + "%";
+
+          if (navigator.vibrate && diyaCharge % 15 === 0) {
+            navigator.vibrate(25);
+          }
+        } else {
+          clearInterval(diyaTimer);
+          if (navigator.vibrate) navigator.vibrate([60, 40, 80]);
+          diyaTip.innerText = "૧૦૦% સિદ્ધ";
+          diyaStatus.innerText = "સંકલ્પ પૂર્ણ! પવિત્ર દૈવી ફોર્મ્યુલા પ્રગટ થઈ!";
+          setTimeout(() => goToSlide(4), 450);
+        }
+      }, 40);
+    }
+
+    function endDiyaCharge() {
+      if (!isCharging) return;
+      if (diyaCharge < 100) {
+        clearInterval(diyaTimer);
+        isCharging = false;
+        diyaCharge = 0;
+        chargeBar.style.width = "0%";
+        chargePct.innerText = "૦%";
+        diyaCore.classList.remove("charging");
+        diyaTip.innerText = "અહીં દબાવી રાખો";
+        diyaStatus.innerText = "આંગળી હટાવશો નહીં, ફરી પ્રયાસ કરો.";
+      }
+    }
+
+    diyaCore.addEventListener("mousedown", startDiyaCharge);
+    diyaCore.addEventListener("mouseup", endDiyaCharge);
+    diyaCore.addEventListener("mouseleave", endDiyaCharge);
+    diyaCore.addEventListener("touchstart", startDiyaCharge, { passive: false });
+    diyaCore.addEventListener("touchend", endDiyaCharge);
+    diyaCore.addEventListener("touchcancel", endDiyaCharge);
+
+    // Build 50:30:20 Formulation and WhatsApp Pre-filled URL
+    function buildDivineFormula() {
+      let ing1 = "૫૦% મલયાગિરી શ્વેત ચંદન & ભસ્મ અર્ક";
+      let desc1 = "મનને તાત્કાલિક શાંત કરતો અને ધ્યાનને ઊંડું કરતો પવિત્ર આધાર.";
+      let ing2 = "૩૦% શુદ્ધ કસ્તુરી મસ્ક & દિવ્ય કેસર";
+      let desc2 = "સાધના અને આભામાં અલૌકિક તેજ પ્રગટાવતો પવિત્ર અર્ક.";
+      let ing3 = "૨૦% પવિત્ર ગૂગળ, લોબાન & તુલસી અર્ક";
+      let desc3 = "વાસ્તુદોષ અને નકારાત્મક ઊર્જાનો નાશ કરનાર પવિત્ર ધૂપ સુરક્ષા.";
+
+      if (spiritualSelections.deity.includes("કૃષ્ણ")) {
+        ing1 = "૫૦% કાશ્મીરી કેસર & મલયાગિરી ચંદન";
+        desc1 = "શ્રી કૃષ્ણ ભક્તિની મનમોહક અને દિવ્ય આનંદ આપતી ખુશ્બૂ.";
+        ing2 = "૩૦% દિવ્ય કસ્તુરી મસ્ક & કદંબ પુષ્પ";
+        desc2 = "મન અને હૃદયમાં પ્રેમ અને દૈવી પ્રસન્નતાનો સંચાર.";
+        ing3 = "૨૦% પવિત્ર શ્યામ તુલસી અર્ક";
+        desc3 = "મંદિર જેવી પવિત્રતા અને મનમાં અતૂટ શાંતિ.";
+      } else if (spiritualSelections.deity.includes("હનુમાનજી")) {
+        ing1 = "૫૦% સિંદૂરી ગુલાબ & રક્ત ચંદન";
+        desc1 = "દિર્ઘ સંકલ્પ અને ભયમુક્ત ઊર્જા આપતો શાહી અર્ક.";
+        ing2 = "૩૦% પવિત્ર લવિંગ, કપૂર & અગરવુડ";
+        desc2 = "નકારાત્મક શક્તિઓ અને મનના ડરનો નાશ કરતી ઉગ્ર પવિત્રતા.";
+        ing3 = "૨૦% લોબાન & ગૂગળ ધૂપ અર્ક";
+        desc3 = "ઘર અને શરીરની આસપાસ સકારાત્મક ઊર્જાનું સુરક્ષા કવચ.";
+      } else if (spiritualSelections.deity.includes("લક્ષ્મી")) {
+        ing1 = "૫૦% શ્વેત કમળ & મલયાગિરી ચંદન";
+        desc1 = "ઘરમાં લક્ષ્મીજીની કૃપા અને વાસ્તુદોષ નિવારણ કરતો આધાર.";
+        ing2 = "૩૦% કાશ્મીરી કેસર & સુવર્ણ ચંપા";
+        desc2 = "ધન-ધાન્ય અને મનની સમૃદ્ધિ વધારતો મોહક સુગંધ સંગમ.";
+        ing3 = "૨૦% પવિત્ર તુલસી & ગંગાજળ અર્ક";
+        desc3 = "દૈનિક પૂજા અને ઘરમાં સુખ-શાંતિનો વાસ કરાવતો અર્ક.";
+      }
+
+      document.getElementById("sacredIng1").innerText = ing1;
+      document.getElementById("sacredDesc1").innerText = desc1;
+      document.getElementById("sacredIng2").innerText = ing2;
+      document.getElementById("sacredDesc2").innerText = desc2;
+      document.getElementById("sacredIng3").innerText = ing3;
+      document.getElementById("sacredDesc3").innerText = desc3;
+
+      // WhatsApp URL Construction directly to 9327938950
+      const phoneNumber = "919327938950";
+      const message = 
+        `જય શ્રી કૃષ્ણ / હર હર મહાદેવ 🙏\n` +
+        `મેં વેબસાઇટ પર AURA દૈવી આધ્યાત્મિક અત્તર ટેસ્ટ આપ્યો છે.\n\n` +
+        `• મારા ઈષ્ટદેવ: ${spiritualSelections.deity}\n` +
+        `• મારો હેતુ: ${spiritualSelections.goal}\n\n` +
+        `🪔 મારા માટે તૈયાર થયેલું ૫૦:૩૦:૨૦ પવિત્ર મિશ્રણ:\n` +
+        `૧. ${ing1}\n` +
+        `૨. ${ing2}\n` +
+        `૩. ${ing3}\n\n` +
+        `• ૧૦૦% આલ્કોહોલ ફ્રી પ્યોર અત્તર\n` +
+        `• પ્રસાદ ઑફર કિંમત: ₹599 (₹899 ને બદલે)\n\n` +
+        `કૃપા કરીને આ પવિત્ર અત્તર મારા સરનામે મોકલવા ઓર્ડર વિગત આપો.`;
+
+      const encodedUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+      const waBtn = document.getElementById("divineWaBtn");
+      if (waBtn) {
+        waBtn.href = encodedUrl;
+      }
+    }
+  </script>
+</body>
+</html>
