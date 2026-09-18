@@ -991,9 +991,9 @@
         <!-- Success Message on Razorpay Complete -->
         <div id="paymentSuccessBox" class="success-alert">
           <div style="font-size:24px; margin-bottom:4px;">🙏</div>
-          <h3 style="font-size:16px; font-weight:900; color:#fff; margin-bottom:4px;">દૈવી પ્રસાદ ઓર્ડર કન્ફર્મ!</h3>
+          <h3 style="font-size:16px; font-weight:900; color:#fff; margin-bottom:4px;">પેમેન્ટ સફળ!</h3>
           <p style="font-size:12px; color:#a7f3d0;" id="successDetails"></p>
-          <p style="font-size:11px; color:#ddd; margin-top:4px;">તમારું સિદ્ધ અત્તર તૈયાર કરી સમગ્ર ભારતમાં ફ્રી હોમ ડિલિવરી દ્વારા પહોંચાડવામાં આવશે.</p>
+          <p style="font-size:11px; color:#ffd700; margin-top:4px;">સરનામું મોકલવા WhatsApp ખૂલી રહ્યું છે...</p>
         </div>
       </div>
 
@@ -1005,7 +1005,7 @@
 
   <script>
     // ==========================================================
-    // 1. Razorpay Key ID (તમારો Key ID અહીં મૂકો)
+    // 1. Razorpay Key ID
     // ==========================================================
     const RAZORPAY_KEY = "rzp_live_TcnN4bgnhTNHvC";
 
@@ -1261,7 +1261,7 @@
       }
     }
 
-    // Razorpay Flow
+    // Razorpay Flow with Instant WhatsApp Redirect
     function triggerRazorpayPayment() {
       const options = {
         key: RAZORPAY_KEY,
@@ -1277,7 +1277,40 @@
           const successBox = document.getElementById("paymentSuccessBox");
           successBox.style.display = "block";
           document.getElementById("successDetails").innerText = 
-            `Payment ID: ${response.razorpay_payment_id} | અમાઉન્ટ: ₹${ORDER_AMOUNT_INR} (Paid) | ડિલિવરી: સમગ્ર ભારતમાં ફ્રી`;
+            `Payment ID: ${response.razorpay_payment_id} | અમાઉન્ટ: ₹${ORDER_AMOUNT_INR} (Paid)`;
+
+          // પેમેન્ટ કન્ફર્મ થતાં જ WhatsApp પર ડિલિવરી એડ્રેસ મોકલવા માટેનું મેસેજ
+          const paidMessage = 
+`જય શ્રી કૃષ્ણ / હર હર મહાદેવ 🙏
+
+મેં AURA દૈવી અત્તર માટે ₹૫૯૯ નું ઓનલાઇન પેમેન્ટ સફળતાપૂર્વક કરી દીધું છે! ✅
+
+💳 *પેમેન્ટ વિગતો:*
+• પેમેન્ટ ID: ${response.razorpay_payment_id}
+• રકમ: ₹${ORDER_AMOUNT_INR} (Paid)
+
+🕉️ *આધ્યાત્મિક સંકલ્પ વિગત:*
+• ઈષ્ટદેવ: ${spiritualSelections.deity}
+• હેતુ: ${spiritualSelections.goal}
+
+🪔 *સિદ્ધ થયેલું ૫૦:૩૦:૨૦ પવિત્ર અર્ક:*
+૧. ${spiritualSelections.ing1}
+૨. ${spiritualSelections.ing2}
+૩. ${spiritualSelections.ing3}
+
+📦 *મારું ડિલિવરી સરનામું:*
+• પૂરું નામ: 
+• મોબાઈલ નંબર: 
+• ઘરનું પૂરું સરનામું (ગામ/શહેર સહિત): 
+• પિનકોડ: 
+
+કૃપા કરીને મારો પ્રસાદ ઓર્ડર તૈયાર કરી રવાના કરશો!`;
+
+          // ૧.૫ સેકન્ડ પછી ઓટોમેટિક WhatsApp પર રીડાયરેક્ટ થશે
+          setTimeout(() => {
+            const redirectUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(paidMessage)}`;
+            window.location.href = redirectUrl;
+          }, 1500);
         }
       };
 
@@ -1309,7 +1342,7 @@
 📦 *મારું ડિલિવરી સરનામું:*
 • પૂરું નામ: 
 • મોબાઈલ નંબર: 
-• ગામ/શહેર: 
+• ઘરનું પૂરું સરનામું: 
 • પિનકોડ: 
 
 કૃપા કરીને મારો COD ઓર્ડર કન્ફર્મ કરશો!`;
