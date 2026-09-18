@@ -3,22 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Custom Attar Synthesis Lab | કસ્ટમ અત્તર સિન્થેસિસ લેબ</title>
+  <title>Bespoke Attar Compounding Lab | કસ્ટમ અત્તર સિન્થેસિસ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Noto+Sans+Devanagari:wght@500;700;800;900&family=Noto+Sans+Gujarati:wght@500;700;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #050508;
-      --card-bg: rgba(14, 14, 20, 0.98);
-      --gold: #f1c40f;
-      --gold-light: #fef08a;
-      --gold-glow: rgba(241, 196, 15, 0.4);
+      --bg: #040407;
+      --panel: rgba(14, 15, 23, 0.98);
+      --gold: #f5b041;
+      --gold-bright: #ffd369;
+      --gold-glow: rgba(245, 176, 65, 0.35);
       --wa-green: #25D366;
-      --wa-green-glow: rgba(37, 211, 102, 0.5);
-      --border-color: rgba(241, 196, 15, 0.3);
-      --text-main: #ffffff;
-      --text-sub: #b0b0be;
+      --wa-green-hover: #1eb956;
+      --wa-glow: rgba(37, 211, 102, 0.5);
+      --border: rgba(245, 176, 65, 0.28);
+      --text: #ffffff;
+      --sub: #a8a8bb;
     }
 
     * {
@@ -30,8 +31,8 @@
     body {
       min-height: 100vh;
       font-family: 'Noto Sans Devanagari', 'Noto Sans Gujarati', sans-serif;
-      background: radial-gradient(circle at 50% 10%, #1a1a2b 0%, var(--bg) 100%);
-      color: var(--text-main);
+      background: radial-gradient(circle at 50% 15%, #18192a 0%, var(--bg) 100%);
+      color: var(--text);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -39,38 +40,65 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    .container {
+    .lab-chamber {
       width: 100%;
-      max-width: 660px;
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 24px;
-      padding: 26px 20px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
-      backdrop-filter: blur(25px);
+      max-width: 640px;
+      background: var(--panel);
+      border: 1.5px solid var(--border);
+      border-radius: 22px;
+      padding: 24px 18px;
+      box-shadow: 0 25px 75px rgba(0, 0, 0, 0.95);
       position: relative;
+      overflow: hidden;
     }
 
-    .top-header {
+    .lab-chamber::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .header-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
-    .brand-tag {
+    .lab-tag {
       font-family: 'Cinzel', serif;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       letter-spacing: 2px;
-      color: var(--gold);
+      color: var(--gold-bright);
       font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .lang-switch {
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: #e74c3c;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #e74c3c;
+      animation: blink 1.2s infinite ease-in-out;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .lang-toggle {
       display: inline-flex;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--border-color);
-      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 18px;
       padding: 2px;
       gap: 2px;
     }
@@ -78,151 +106,157 @@
     .lang-btn {
       background: transparent;
       border: none;
-      color: var(--text-sub);
+      color: var(--sub);
       font-weight: 700;
-      font-size: 0.8rem;
-      padding: 5px 12px;
-      border-radius: 14px;
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 12px;
       cursor: pointer;
-      transition: all 0.2s;
       font-family: inherit;
+      transition: all 0.2s;
     }
 
     .lang-btn.active {
       background: var(--gold);
-      color: #060608;
+      color: #050508;
     }
 
-    .step-counter {
-      font-size: 0.85rem;
-      color: var(--gold-light);
-      font-weight: 700;
-      margin-bottom: 8px;
+    .telemetry-row {
       display: flex;
       justify-content: space-between;
+      font-size: 0.82rem;
+      color: var(--sub);
+      font-family: 'Space Grotesk', sans-serif;
+      margin-bottom: 8px;
+      font-weight: 700;
     }
 
-    .progress-bar-container {
+    .track {
       width: 100%;
-      height: 6px;
+      height: 5px;
       background: rgba(255, 255, 255, 0.08);
       border-radius: 4px;
       margin-bottom: 22px;
       overflow: hidden;
     }
 
-    .progress-bar {
+    .fill {
       height: 100%;
       width: 20%;
-      background: linear-gradient(90deg, var(--gold), #ff9900);
-      transition: width 0.35s ease;
+      background: linear-gradient(90deg, var(--gold), #ff7b00);
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    h2.question-text {
+    .question-title {
       font-size: 1.35rem;
       line-height: 1.45;
       font-weight: 800;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       color: #ffffff;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      text-shadow: 0 2px 5px rgba(0,0,0,0.6);
     }
 
-    .options-grid {
+    .options-container {
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
 
-    .option-btn {
+    .opt-card {
       background: rgba(255, 255, 255, 0.03);
-      border: 1.5px solid rgba(241, 196, 15, 0.22);
+      border: 1.5px solid rgba(245, 176, 65, 0.22);
       border-radius: 14px;
-      padding: 16px 18px;
+      padding: 16px 16px;
       color: #ffffff;
-      font-size: 1rem;
+      font-size: 0.98rem;
       line-height: 1.45;
       font-weight: 600;
       cursor: pointer;
       text-align: left;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.18s ease;
       display: flex;
       align-items: center;
       gap: 12px;
       font-family: inherit;
     }
 
-    .option-btn:hover {
-      border-color: var(--gold);
-      background: rgba(241, 196, 15, 0.12);
+    .opt-card:hover {
+      border-color: var(--gold-bright);
+      background: rgba(245, 176, 65, 0.12);
       transform: translateY(-2px);
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
     }
 
-    .opt-icon {
+    .opt-card:active {
+      transform: scale(0.98);
+    }
+
+    .spark {
+      color: var(--gold-bright);
       font-size: 1.1rem;
-      color: var(--gold);
       flex-shrink: 0;
     }
 
-    /* Simulation Lab Screen */
-    .blending-screen {
+    /* Laboratory Compounding Simulation View */
+    .compounding-view {
       display: none;
       flex-direction: column;
       align-items: center;
       text-align: center;
       padding: 35px 10px;
-      gap: 18px;
+      gap: 16px;
     }
 
-    .beaker-loader {
-      width: 72px;
+    .cylinder {
+      width: 68px;
       height: 98px;
-      border: 3.5px solid var(--gold);
+      border: 3px solid var(--gold-bright);
       border-top: none;
-      border-radius: 0 0 22px 22px;
+      border-radius: 0 0 20px 20px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 0 25px var(--gold-glow);
+      box-shadow: 0 0 30px var(--gold-glow);
     }
 
-    .liquid {
+    .liquid-wave {
       position: absolute;
       bottom: 0;
       width: 100%;
       height: 0%;
-      background: linear-gradient(180deg, var(--gold), #c28809);
-      animation: fillFlask 2.2s forwards ease-in-out;
+      background: linear-gradient(180deg, var(--gold-bright), #b8730b);
+      animation: synthesis 2.3s forwards cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    @keyframes fillFlask {
+    @keyframes synthesis {
       0% { height: 0%; }
-      100% { height: 88%; }
+      100% { height: 86%; }
     }
 
-    .blending-screen h2 {
+    .sim-title {
       font-size: 1.35rem;
       font-weight: 800;
-      color: var(--gold-light);
+      color: var(--gold-bright);
     }
 
-    .blending-screen p {
-      font-size: 0.95rem;
-      color: var(--text-sub);
+    .sim-sub {
+      font-size: 0.92rem;
+      color: var(--sub);
+      font-family: 'Space Grotesk', sans-serif;
     }
 
-    /* Result Screen */
-    .result-screen {
+    /* Result View */
+    .result-view {
       display: none;
       text-align: center;
-      animation: fadeIn 0.45s ease forwards;
+      animation: fadeIn 0.4s ease forwards;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .timer-badge {
+    .lock-banner {
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -231,41 +265,40 @@
       color: #ff6b6b;
       font-family: 'Space Grotesk', sans-serif;
       font-size: 0.88rem;
-      font-weight: 700;
+      font-weight: 800;
       padding: 6px 14px;
       border-radius: 20px;
       margin-bottom: 12px;
-      letter-spacing: 0.5px;
     }
 
-    .custom-code {
+    .formula-badge {
       font-family: 'Cinzel', serif;
-      font-size: 0.92rem;
-      letter-spacing: 1.8px;
-      color: var(--gold-light);
-      margin-bottom: 6px;
-      font-weight: 800;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      color: var(--gold-bright);
+      font-weight: 900;
+      margin-bottom: 4px;
     }
 
-    .result-title {
-      font-size: 1.6rem;
+    .result-heading {
+      font-size: 1.55rem;
       font-weight: 900;
       color: #ffffff;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
-    .stacked-bar-container {
+    .ratio-bar {
       width: 100%;
       height: 38px;
       background: rgba(255, 255, 255, 0.05);
       border-radius: 19px;
       display: flex;
       overflow: hidden;
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--border);
       margin-bottom: 16px;
     }
 
-    .blend-segment {
+    .bar-slice {
       height: 100%;
       display: flex;
       align-items: center;
@@ -276,91 +309,78 @@
       text-shadow: 0 1px 3px rgba(0,0,0,0.9);
     }
 
-    .formula-list {
+    .notes-breakdown {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 9px;
       text-align: left;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
-    .formula-item {
+    .note-row {
       background: rgba(255, 255, 255, 0.035);
-      border: 1px solid rgba(241, 196, 15, 0.18);
+      border: 1px solid rgba(245, 176, 65, 0.18);
       border-radius: 12px;
-      padding: 12px 16px;
+      padding: 12px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .brand-meta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand-dot {
-      width: 13px;
-      height: 13px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .brand-name {
-      font-weight: 700;
+    .note-title {
+      font-weight: 800;
       font-size: 1.05rem;
       color: #ffffff;
     }
 
-    .brand-role {
+    .note-tier {
       font-size: 0.8rem;
-      color: var(--gold-light);
+      color: var(--gold-bright);
       font-weight: 600;
     }
 
-    .brand-ratio {
+    .note-ratio {
       font-family: 'Cinzel', serif;
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       font-weight: 900;
-      color: var(--gold);
+      color: var(--gold-bright);
     }
 
-    /* WhatsApp Direct Action Section */
-    .offer-box {
-      background: linear-gradient(180deg, rgba(37, 211, 102, 0.15) 0%, rgba(37, 211, 102, 0.04) 100%);
-      border: 1.5px dashed var(--wa-green);
+    /* DIRECT WHATSAPP ACTION BLOCK - ZERO FRICTION */
+    .whatsapp-conversion-chamber {
+      background: linear-gradient(180deg, rgba(37, 211, 102, 0.16) 0%, rgba(37, 211, 102, 0.03) 100%);
+      border: 2px dashed var(--wa-green);
       border-radius: 16px;
-      padding: 18px 16px;
+      padding: 18px 15px;
       margin-bottom: 18px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
     }
 
-    .offer-title {
+    .cta-deal-title {
       color: #6ef09f;
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       font-weight: 900;
       margin-bottom: 4px;
     }
 
-    .offer-sub {
+    .cta-deal-sub {
       color: #d1f3dc;
       font-size: 0.9rem;
       line-height: 1.45;
       margin-bottom: 14px;
     }
 
-    .whatsapp-order-btn {
+    .wa-prime-btn {
       width: 100%;
       background: linear-gradient(135deg, #25D366, #128C7E);
-      color: #03200d;
+      color: #031c0c;
       border: none;
-      padding: 16px 18px;
+      padding: 16px 16px;
       border-radius: 12px;
       font-size: 1.05rem;
       font-weight: 900;
       cursor: pointer;
-      box-shadow: 0 8px 24px var(--wa-green-glow);
+      box-shadow: 0 8px 24px var(--wa-glow);
       transition: all 0.2s ease;
       display: flex;
       align-items: center;
@@ -375,32 +395,32 @@
       50% { transform: scale(1.02); }
     }
 
-    .whatsapp-order-btn:hover {
+    .wa-prime-btn:hover {
       background: linear-gradient(135deg, #2ae772, #149c8d);
       transform: translateY(-2px);
     }
 
-    .wts-svg {
-      width: 24px;
-      height: 24px;
+    .wa-icon-svg {
+      width: 25px;
+      height: 25px;
       fill: currentColor;
     }
 
-    .desc-box {
-      background: rgba(241, 196, 15, 0.06);
+    .verdict-narrative {
+      background: rgba(245, 176, 65, 0.06);
       border-left: 3px solid var(--gold);
-      padding: 14px 16px;
+      padding: 14px 15px;
       border-radius: 0 10px 10px 0;
       text-align: left;
       font-size: 0.92rem;
       line-height: 1.55;
-      color: #e3e3ea;
+      color: #e2e2ec;
       margin-bottom: 14px;
     }
 
-    .bespoke-note {
+    .bespoke-dispatch-tag {
       font-size: 0.8rem;
-      color: var(--text-sub);
+      color: var(--sub);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -408,85 +428,89 @@
     }
 
     @media (max-width: 600px) {
-      .container { padding: 20px 14px; }
-      h2.question-text { font-size: 1.18rem; }
-      .option-btn { font-size: 0.92rem; padding: 13px 14px; }
-      .formula-item { padding: 12px 14px; }
-      .whatsapp-order-btn { font-size: 0.96rem; padding: 14px; }
+      .lab-chamber { padding: 20px 14px; }
+      .question-title { font-size: 1.2rem; }
+      .opt-card { font-size: 0.92rem; padding: 13px 13px; }
+      .wa-prime-btn { font-size: 0.98rem; padding: 14px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <div class="top-header">
-      <div class="brand-tag">ROOAB ATTR LAB</div>
-      <div class="lang-switch">
+  <div class="lab-chamber">
+    <!-- Top Bar -->
+    <div class="header-bar">
+      <div class="lab-tag">
+        <span class="pulse-dot"></span>
+        <span>ROOAB SYNTHESIS LAB</span>
+      </div>
+      <div class="lang-toggle">
         <button class="lang-btn active" id="btn-hi" onclick="app.setLanguage('hi')">हिंदी</button>
         <button class="lang-btn" id="btn-gu" onclick="app.setLanguage('gu')">ગુજરાતી</button>
       </div>
     </div>
 
-    <div class="step-counter" id="stepCounterBox">
+    <!-- Live Telemetry -->
+    <div class="telemetry-row" id="telemetryRow">
       <span id="stepCounter">सवाल 1 / 5</span>
-      <span style="color: var(--gold);">100% Bespoke Made-to-Order</span>
+      <span style="color: var(--gold-bright);">100% Bespoke Made-to-Order</span>
     </div>
 
-    <div class="progress-bar-container" id="progressTrack">
-      <div class="progress-bar" id="progressBar"></div>
+    <div class="track" id="progressTrack">
+      <div class="fill" id="progressBar"></div>
     </div>
 
-    <!-- Quiz Question Screen -->
+    <!-- Active Question View -->
     <div id="quizBlock">
-      <h2 class="question-text" id="questionTitle">Loading...</h2>
-      <div class="options-grid" id="optionsGrid"></div>
+      <h2 class="question-title" id="questionTitle">Loading...</h2>
+      <div class="options-container" id="optionsGrid"></div>
     </div>
 
-    <!-- Live Compounding Animation -->
-    <div class="blending-screen" id="blendingBlock">
-      <div class="beaker-loader">
-        <div class="liquid"></div>
+    <!-- Compounding Simulation Screen -->
+    <div class="compounding-view" id="blendingBlock">
+      <div class="cylinder">
+        <div class="liquid-wave"></div>
       </div>
-      <h2 id="loaderTitle">आपकी 3 अत्तरों की सिग्नेचर फ़ॉर्मूलेशन तैयार हो रही है...</h2>
-      <p id="loaderSub">50% Base, 30% Heart और 20% Top नोट्स का अनुपात तैयार किया जा रहा है</p>
+      <h2 class="sim-title" id="loaderTitle">कस्टम कम्पाउंडिंग शुरू हो रही है...</h2>
+      <p class="sim-sub" id="loaderSub">50% Base, 30% Heart & 20% Top नोट्स को संतुलित किया जा रहा है</p>
     </div>
 
-    <!-- Results Screen -->
-    <div class="result-screen" id="resultBlock">
+    <!-- Result & High-Intent Conversion Screen -->
+    <div class="result-view" id="resultBlock">
       
-      <!-- 10 Minute Expiry Reservation Lock -->
-      <div class="timer-badge">
+      <!-- 10-Minute Expiry Countdown -->
+      <div class="lock-banner">
         <span>⏱️ फ़ॉर्मूलेशन रिज़र्वेशन:</span>
         <span id="lockTimer">09:59</span>
       </div>
 
-      <div class="custom-code" id="blendCode">TRINITY FORMULA: #ATTAR-9021</div>
-      <h1 class="result-title" id="resultTitle">आपका व्यक्तिगत 3-अत्तर ब्लेंड</h1>
-      
-      <!-- Blend Bar Breakdown -->
-      <div class="stacked-bar-container" id="stackedBar"></div>
+      <div class="formula-badge" id="blendCode">TRINITY FORMULA: #ROOAB-9201</div>
+      <h1 class="result-heading" id="resultTitle">आपका व्यक्तिगत 3-अत्तर ब्लेंड</h1>
 
-      <!-- Formula Notes List -->
-      <div class="formula-list" id="formulaList"></div>
+      <!-- Compounded Ratio Bar -->
+      <div class="ratio-bar" id="stackedBar"></div>
 
-      <!-- WHATSAPP CTA BOX: DIRECTLY BELOW FORMULA -->
-      <div class="offer-box">
-        <div class="offer-title" id="offerHeadline">🎁 ₹150 की विशेष छूट तुरंत अनलॉक करें</div>
-        <div class="offer-sub" id="offerDesc">यह फ़ॉर्मूलेशन हमारे मास्टर परफ्यूमर को भेजें ताकि आपकी विशेष बॉटल तैयार की जा सके।</div>
+      <!-- Notes Breakdown -->
+      <div class="notes-breakdown" id="formulaList"></div>
 
-        <button class="whatsapp-order-btn" id="orderBtn" onclick="app.orderOnWhatsApp()">
-          <svg class="wts-svg" viewBox="0 0 24 24">
+      <!-- WHATSAPP CONVERSION CHAMBER: PLACED DIRECTLY BELOW FORMULA -->
+      <div class="whatsapp-conversion-chamber">
+        <div class="cta-deal-title" id="offerHeadline">🎁 ₹150 की विशेष छूट तुरंत अनलॉक करें</div>
+        <div class="cta-deal-sub" id="offerDesc">यह गोपनीय फ़ॉर्मूलेशन हमारे मास्टर परफ्यूमर को भेजें ताकि आपकी विशेष बॉटल तैयार की जा सके।</div>
+
+        <button class="wa-prime-btn" id="orderBtn" onclick="app.orderOnWhatsApp()">
+          <svg class="wa-icon-svg" viewBox="0 0 24 24">
             <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.586-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.199.534 1.285.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.303c-.086.087-.176.182-.075.355.101.174.449.741.964 1.2 1.017.904 1.83 1.18 2.062 1.295.231.116.368.101.505-.058.138-.159.593-.693.751-.931.159-.239.317-.202.534-.116.216.087 1.372.647 1.609.766.237.119.395.176.452.274.058.101.058.577-.086.982z"/>
           </svg>
           <span id="orderBtnLabel">WhatsApp पर फ़ॉर्मूला भेजें और छूट पाएं</span>
         </button>
       </div>
 
-      <!-- Verdict Explanation -->
-      <div class="desc-box" id="blendVerdict"></div>
+      <!-- Compounding Narrative Analysis -->
+      <div class="verdict-narrative" id="blendVerdict"></div>
 
-      <div class="bespoke-note">
-        <span>🧪 यह कोई रेडीमेड अत्तर नहीं है — आपकी पसंद के अनुसार फ्रेश बनाया जाता है।</span>
+      <div class="bespoke-dispatch-tag">
+        <span>🧪 कोई रेडीमेड केमिकल नहीं — ऑर्डर कन्फर्म होते ही आपके लिए फ्रेश तैयार किया जाएगा।</span>
       </div>
     </div>
   </div>
@@ -515,12 +539,12 @@
 
     const I18N = {
       hi: {
-        stepText: "सवाल {cur} / {total}",
-        loaderTitle: "आपकी 3 अत्तरों की सिग्नेचर फ़ॉर्मूलेशन तैयार हो रही है...",
-        loaderSub: "50% Base, 30% Heart और 20% Top नोट्स का अनुपात तैयार किया जा रहा है",
+        stepText: "कम्पाउंडिंग स्टेप {cur} / {total}",
+        loaderTitle: "कस्टम कम्पाउंडिंग शुरू हो रही है...",
+        loaderSub: "50% Base, 30% Heart & 20% Top नोट्स को संतुलित किया जा रहा है",
         resultTitle: "आपका व्यक्तिगत 3-अत्तर ब्लेंड",
         offerHeadline: "🎁 ₹150 की विशेष छूट तुरंत अनलॉक करें",
-        offerDesc: "यह फ़ॉर्मूलेशन हमारे मास्टर परफ्यूमर को भेजें ताकि आपकी विशेष बॉटल तैयार की जा सके।",
+        offerDesc: "यह गोपनीय फ़ॉर्मूलेशन हमारे मास्टर परफ्यूमर को भेजें ताकि आपकी विशेष बॉटल तैयार की जा सके।",
         orderBtnText: "WhatsApp पर फ़ॉर्मूला भेजें और छूट पाएं",
         roles: ["Base Note (मुख्य आधार)", "Heart Note (हार्ट नोट)", "Top Note (टॉप नोट)"],
         verdictText: (p, s, t) => `<strong>फ़ॉर्मूलेशन विश्लेषण:</strong> आपकी पसंद के आधार पर यह विशेष 3-अत्तर ब्लेंड तैयार किया गया है। इसमें <strong>${p.name}</strong> का <strong>${p.percent}%</strong> मुख्य बेस है जो खुशबू को टिकाऊपन और गहराई देता है। <strong>${s.percent}% ${s.name}</strong> इसकी आंतरिक कशिश (Heart) को संभालता है, और <strong>${t.percent}% ${t.name}</strong> पहले स्प्रे में तुरंत आकर्षित करने वाली ताज़गी छोड़ता है।`,
@@ -536,8 +560,8 @@
         rootQuestion: {
           q: "1. आप यह अत्तर किस मक़सद के लिए तैयार करवाना चाहते हैं?",
           options: [
-            { text: "💼 Work & Professional — गंभीर, शार्प और ऑफिस में वजनदार रुतबा", segment: "work", seedPicks: ["classic", "copper"] },
-            { text: "❤️ Attraction & Romance — चुंबकीय खिंचाव, मदहोशी और दिलकश महक", segment: "attraction", seedPicks: ["xChocolate", "frenchRose"] },
+            { text: "💼 Work & Dominance — गंभीर, शार्प और ऑफिस में वजनदार रुतबा", segment: "work", seedPicks: ["classic", "copper"] },
+            { text: "❤️ Attraction & Magnetism — मदहोश खिंचाव, गर्दन के करीब खींचे रखने वाली महक", segment: "attraction", seedPicks: ["xChocolate", "frenchRose"] },
             { text: "🌿 Family & Peace — सुकून, सादगी और अपनों के बीच पवित्रता का एहसास", segment: "family", seedPicks: ["whiteMusk", "fawaki"] }
           ]
         },
@@ -581,23 +605,23 @@
               ]
             },
             {
-              q: "3. आपकी नज़दीकियों की तासीर में कौन सा नशा घुलना चाहिए?",
+              q: "3. जब वो आपके करीब आएं, तो सांसों के बीच क्या नशा घुलना चाहिए?",
               options: [
-                { text: "पिघलती हुई डार्क चॉकलेट और गर्म कोको का तीव्र कामुक अहसास", picks: ["xChocolate", "chocoBlast"] },
-                { text: "दमिश्क के भीगे सुर्ख गुलाब और मखमली कस्तूरी की मीठी महक", picks: ["frenchRose", "cherish"] }
+                { text: "पिघलती डार्क चॉकलेट और गर्म कोको का तीव्र, मदहोश कर देने वाला अहसास", picks: ["xChocolate", "chocoBlast"] },
+                { text: "दमिश्क के सुर्ख भीगे गुलाब और मखमली कस्तूरी की सम्मोहक महक", picks: ["frenchRose", "cherish"] }
               ]
             },
             {
-              q: "4. जब वो आपके बिल्कुल करीब आएँ, तो सांसों की दूरी पर क्या महसूस हो?",
+              q: "4. जब वो आपके एकदम पास हों, तो आपके जाने के बाद क्या असर छूटे?",
               options: [
-                { text: "एक ऐसा नशा जो उन्हें आपकी बाहों से दूर जाने ही न दे (Uncontrollable Addiction)", picks: ["chocoBlast", "cherish"] },
-                { text: "एक अनसुलझा सम्मोहन जो आपके जाने के बाद भी उन्हें बेचैन रखे (Hypnotic Aura)", picks: ["blueLady", "fantasia"] }
+                { text: "एक ऐसा नशा जो उन्हें आपके आलिंगन से दूर जाने ही न दे (Uncontrollable Addiction)", picks: ["chocoBlast", "cherish"] },
+                { text: "एक अनसुलझा सम्मोहन जो आपके जाने के बाद भी उन्हें बेचैन रखे (Hypnotic Sillage)", picks: ["blueLady", "fantasia"] }
               ]
             },
             {
-              q: "5. इस अत्तर से आप सामने वाले पर क्या अंतिम छाप छोड़ना चाहते हैं?",
+              q: "5. इस अत्तर से आप सामने वाले के दिल पर क्या अंतिम मुहर लगाना चाहते हैं?",
               options: [
-                { text: "'मुझसे दूर रहना अब तुम्हारी हद में नहीं' — गहरा और मदहोश आकर्षण", picks: ["xChocolate", "mexico"] },
+                { text: "'मुझसे दूर रहना अब तुम्हारे वश में नहीं' — गहरा और नशीला खिंचाव", picks: ["xChocolate", "mexico"] },
                 { text: "'तेरा जिस्म और रूह सिर्फ मेरी महक से पहचानी जाए' — एक न भूलने वाली हसीन याद", picks: ["frenchRose", "nazneen"] }
               ]
             }
@@ -635,9 +659,9 @@
         }
       },
       gu: {
-        stepText: "સવાલ {cur} / {total}",
-        loaderTitle: "તમારું સિગ્નેચર અત્તર બ્લૅન્ડ તૈયાર થઈ રહ્યું છે...",
-        loaderSub: "૫૦% Base, ૩૦% Heart અને ૨૦% Top નોટ્સનું સંતુલન ગણાઈ રહ્યું છે",
+        stepText: "સિન્થેસિસ સ્ટેપ {cur} / {total}",
+        loaderTitle: "કસ્ટમ કમ્પાઉન્ડિંગ શરૂ થઈ રહ્યું છે...",
+        loaderSub: "૫૦% Base, ૩૦% Heart & ૨૦% Top નોટ્સનું સંતુલન ગણાઈ રહ્યું છે",
         resultTitle: "તમારું વ્યક્તિગત ૩-અત્તર બ્લૅન્ડ",
         offerHeadline: "🎁 ₹150 નું ડિસ્કાઉન્ટ તુરંત અનલોક કરો",
         offerDesc: "આ ફોર્મ્યુલેશન અમારા પરફ્યુમરને મોકલો જેથી તમારી ખાસ બોટલ તૈયાર કરી શકાય.",
@@ -656,8 +680,8 @@
         rootQuestion: {
           q: "૧. તમે આ અત્તર કયા મકસદ (Purpose) માટે તૈયાર કરાવવા માંગો છો?",
           options: [
-            { text: "💼 Work & Professional — ગંભીર, શાર્પ અને ઓફિસમાં વજનદાર રુઆબ", segment: "work", seedPicks: ["classic", "copper"] },
-            { text: "❤️ Attraction & Romance — ચુંબકીય ખેંચાણ, મદહોશી અને આકર્ષક સુગંધ", segment: "attraction", seedPicks: ["xChocolate", "frenchRose"] },
+            { text: "💼 Work & Dominance — ગંભીર, શાર્પ અને ઓફિસમાં વજનદાર રુઆબ", segment: "work", seedPicks: ["classic", "copper"] },
+            { text: "❤️ Attraction & Magnetism — મદહોશ ખેંચાણ, ગરદનની નજીક ખેંચી રાખતી સુગંધ", segment: "attraction", seedPicks: ["xChocolate", "frenchRose"] },
             { text: "🌿 Family & Peace — શાંતિ, સાદગી અને સ્વજનો વચ્ચે પવિત્રતાનો અહેસાસ", segment: "family", seedPicks: ["whiteMusk", "fawaki"] }
           ]
         },
@@ -701,23 +725,23 @@
               ]
             },
             {
-              q: "૩. તમારી નિકટતાની તાસીરમાં કયો નશો ઘૂળવો જોઈએ?",
+              q: "૩. જ્યારે તેઓ તમારી નજીક આવે, ત્યારે શ્વાસો વચ્ચે કયો નશો ઘૂળવો જોઈએ?",
               options: [
-                { text: "ઓગળતી ડાર્ક ચોકલેટ અને ગરમ કોકોનો તીવ્ર અહેસાસ", picks: ["xChocolate", "chocoBlast"] },
-                { text: "તાજા દમિશ્ક ગુલાબ અને મખમલી કસ્તુરીની મીઠી મહેક", picks: ["frenchRose", "cherish"] }
+                { text: "ઓગળતી ડાર્ક ચોકલેટ અને ગરમ કોકોનો તીવ્ર, મદહોશ કરનારો અહેસાસ", picks: ["xChocolate", "chocoBlast"] },
+                { text: "દમિશ્કના ગુલાબ અને મખમલી કસ્તુરીની સંમોહક મહેક", picks: ["frenchRose", "cherish"] }
               ]
             },
             {
-              q: "૪. જ્યારે તેઓ તમારી એકદમ નજીક આવે, ત્યારે શ્વાસો વચ્ચે શું અનુભવાય?",
+              q: "૪. જ્યારે તેઓ તમારી એકદમ નજીક હોય, ત્યારે તમારા ગયા પછી શું અસર છૂટવી જોઈએ?",
               options: [
-                { text: "એવો નશો જે તેમને તમારા આલિંગનથી દૂર ન જવા દે (Addiction)", picks: ["chocoBlast", "cherish"] },
-                { text: "એવું રહસ્યમય સંમોહન જે તમારા ગયા પછી પણ તેમને બેચેન રાખે (Hypnotic)", picks: ["blueLady", "fantasia"] }
+                { text: "એવો નશો જે તેમને તમારા આલિંગનથી દૂર ન જવા દે (Uncontrollable Addiction)", picks: ["chocoBlast", "cherish"] },
+                { text: "એવું રહસ્યમય સંમોહન જે તમારા ગયા પછી પણ તેમને બેચેન રાખે (Hypnotic Sillage)", picks: ["blueLady", "fantasia"] }
               ]
             },
             {
-              q: "૫. આ અત્તરથી સામેવાળા વ્યક્તિના દિલ પર શું અંતિમ છાપ છોડવી છે?",
+              q: "૫. આ અત્તરથી સામેવાળા વ્યક્તિના દિલ પર શું અંતિમ મુહર મારવી છે?",
               options: [
-                { text: "'મારાથી દૂર રહેવું હવે તારા વશમાં નથી' — અસીમ આકર્ષણ", picks: ["xChocolate", "mexico"] },
+                { text: "'મારાથી દૂર રહેવું હવે તારા વશમાં નથી' — અસીમ અને નશીલું આકર્ષણ", picks: ["xChocolate", "mexico"] },
                 { text: "'તમારું અસ્તિત્વ ફક્ત મારી મહેકથી ઓળખાય' — એક અવિસ્મરણીય યાદ", picks: ["frenchRose", "nazneen"] }
               ]
             }
@@ -756,7 +780,7 @@
       }
     };
 
-    class TrinityEngine {
+    class CompoundingCore {
       constructor() {
         this.brandScores = {};
         for (let key in CATALOG) {
@@ -764,15 +788,15 @@
         }
       }
 
-      vote(picks) {
+      registerVote(picks) {
         picks.forEach(key => {
           if (this.brandScores[key] !== undefined) {
-            this.brandScores[key] += 12;
+            this.brandScores[key] += 15;
           }
         });
       }
 
-      getTopThreeBlend() {
+      computeTopThree() {
         const sorted = Object.keys(this.brandScores)
           .sort((a, b) => this.brandScores[b] - this.brandScores[a]);
 
@@ -786,18 +810,18 @@
       }
     }
 
-    class AppController {
+    class LabController {
       constructor() {
         this.lang = 'hi';
         this.currentStep = 0;
         this.totalSteps = 5;
         this.selectedSegment = null;
-        this.engine = new TrinityEngine();
+        this.core = new CompoundingCore();
         this.finalBlend = null;
         this.formulationCode = `#ROOAB-${Math.floor(1000 + Math.random() * 9000)}`;
         this.whatsappNumber = "919327938950";
         this.timerInterval = null;
-        this.timeLeft = 600; // 10 Minutes
+        this.timeLeft = 600; // 10 minutes exact
       }
 
       init() {
@@ -830,53 +854,53 @@
         if (this.currentStep === 0) {
           document.getElementById('questionTitle').innerText = dict.rootQuestion.q;
           dict.rootQuestion.options.forEach(opt => {
-            const btn = document.createElement('button');
-            btn.className = 'option-btn';
-            btn.innerHTML = `<span class="opt-icon">✦</span> <span>${opt.text}</span>`;
-            btn.onclick = () => {
+            const card = document.createElement('button');
+            card.className = 'opt-card';
+            card.innerHTML = `<span class="spark">✦</span> <span>${opt.text}</span>`;
+            card.onclick = () => {
               this.selectedSegment = opt.segment;
-              this.engine.vote(opt.seedPicks);
+              this.core.registerVote(opt.seedPicks);
               this.currentStep = 1;
               this.renderStep();
             };
-            grid.appendChild(btn);
+            grid.appendChild(card);
           });
         } else {
           const branchQ = dict.branchTrees[this.selectedSegment][this.currentStep - 1];
           document.getElementById('questionTitle').innerText = branchQ.q;
           branchQ.options.forEach(opt => {
-            const btn = document.createElement('button');
-            btn.className = 'option-btn';
-            btn.innerHTML = `<span class="opt-icon">✦</span> <span>${opt.text}</span>`;
-            btn.onclick = () => {
-              this.engine.vote(opt.picks);
+            const card = document.createElement('button');
+            card.className = 'opt-card';
+            card.innerHTML = `<span class="spark">✦</span> <span>${opt.text}</span>`;
+            card.onclick = () => {
+              this.core.registerVote(opt.picks);
               this.currentStep++;
               if (this.currentStep < this.totalSteps) {
                 this.renderStep();
               } else {
-                this.showBlending();
+                this.triggerCompoundingSequence();
               }
             };
-            grid.appendChild(btn);
+            grid.appendChild(card);
           });
         }
       }
 
-      showBlending() {
+      triggerCompoundingSequence() {
         const dict = I18N[this.lang];
         document.getElementById('quizBlock').style.display = 'none';
         document.getElementById('progressTrack').style.display = 'none';
-        document.getElementById('stepCounterBox').style.display = 'none';
+        document.getElementById('telemetryRow').style.display = 'none';
         document.getElementById('loaderTitle').innerText = dict.loaderTitle;
         document.getElementById('loaderSub').innerText = dict.loaderSub;
         document.getElementById('blendingBlock').style.display = 'flex';
 
         setTimeout(() => {
           document.getElementById('blendingBlock').style.display = 'none';
-          this.finalBlend = this.engine.getTopThreeBlend();
+          this.finalBlend = this.core.computeTopThree();
           this.renderResultUI(this.finalBlend);
           this.startCountdown();
-        }, 2200);
+        }, 2300);
       }
 
       startCountdown() {
@@ -886,7 +910,7 @@
         this.timerInterval = setInterval(() => {
           if (this.timeLeft <= 0) {
             clearInterval(this.timerInterval);
-            timerEl.innerText = "00:00";
+            timerEl.innerText = "00:00 (EXPIRED)";
             return;
           }
           this.timeLeft--;
@@ -911,26 +935,26 @@
         list.innerHTML = '';
 
         blend.forEach((item, index) => {
-          const seg = document.createElement('div');
-          seg.className = 'blend-segment';
-          seg.style.width = `${item.percent}%`;
-          seg.style.background = item.color;
-          seg.innerText = `${item.percent}%`;
-          bar.appendChild(seg);
+          const slice = document.createElement('div');
+          slice.className = 'bar-slice';
+          slice.style.width = `${item.percent}%`;
+          slice.style.background = item.color;
+          slice.innerText = `${item.percent}%`;
+          bar.appendChild(slice);
 
-          const card = document.createElement('div');
-          card.className = 'formula-item';
-          card.innerHTML = `
-            <div class="brand-meta">
-              <div class="brand-dot" style="background: ${item.color};"></div>
+          const row = document.createElement('div');
+          row.className = 'note-row';
+          row.innerHTML = `
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:13px; height:13px; border-radius:50%; background:${item.color};"></div>
               <div>
-                <div class="brand-name">${item.name}</div>
-                <div class="brand-role">${dict.roles[index]}</div>
+                <div class="note-title">${item.name}</div>
+                <div class="note-tier">${dict.roles[index]}</div>
               </div>
             </div>
-            <div class="brand-ratio">${item.percent}%</div>
+            <div class="note-ratio">${item.percent}%</div>
           `;
-          list.appendChild(card);
+          list.appendChild(row);
         });
 
         document.getElementById('blendVerdict').innerHTML = dict.verdictText(blend[0], blend[1], blend[2]);
@@ -943,13 +967,13 @@
         const rawMessage = dict.wtsTemplate(this.formulationCode, p, s, t);
         const encoded = encodeURIComponent(rawMessage);
         
-        // Direct WhatsApp redirection
+        // Instant direct WhatsApp jump
         const targetUrl = `https://wa.me/${this.whatsappNumber}?text=${encoded}`;
         window.location.href = targetUrl;
       }
     }
 
-    const app = new AppController();
+    const app = new LabController();
     app.init();
   </script>
 </body>
