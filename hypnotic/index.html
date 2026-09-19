@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>AURAFRAG LAB | કામુક રૂઆબ & કસ્ટમ અત્તર કમ્પાઉન્ડિંગ</title>
+  <title>AURAFRAG LAB | કામુક રૂઆબ & કસ્ટમ ફેરોમોન કમ્પાઉન્ડિંગ</title>
 
   <!-- Meta Pixel Base Code -->
   <script>
@@ -49,11 +49,12 @@
       theme: {
         extend: {
           colors: {
-            deepBg: '#050407',
-            panelBg: '#0d0c14',
+            deepBg: '#050308',
+            panelBg: '#0e0a14',
             goldPrimary: '#e5a93b',
             goldLight: '#ffd875',
-            seduceRed: '#e8175d',
+            crimsonLust: '#ff0844',
+            darkWine: '#6b001d',
             waGreen: '#25D366'
           },
           fontFamily: {
@@ -68,11 +69,11 @@
 
   <style>
     body {
-      background-color: #050407;
+      background-color: #050308;
       background-image: 
-        radial-gradient(at 50% 0%, rgba(229, 169, 59, 0.16) 0px, transparent 60%),
-        radial-gradient(at 100% 100%, rgba(232, 23, 93, 0.12) 0px, transparent 60%),
-        linear-gradient(to bottom, rgba(5, 4, 7, 0.96), rgba(5, 4, 7, 0.99));
+        radial-gradient(circle at 50% 0%, rgba(255, 8, 68, 0.18) 0%, transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(229, 169, 59, 0.12) 0%, transparent 60%),
+        linear-gradient(to bottom, rgba(5, 3, 8, 0.97), rgba(5, 3, 8, 0.99));
       color: #f5f5f7;
       overflow-x: hidden;
       -webkit-tap-highlight-color: transparent;
@@ -82,14 +83,14 @@
     .bg-grid {
       background-size: 32px 32px;
       background-image: 
-        linear-gradient(to right, rgba(229, 169, 59, 0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(229, 169, 59, 0.04) 1px, transparent 1px);
+        linear-gradient(to right, rgba(229, 169, 59, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 8, 68, 0.025) 1px, transparent 1px);
     }
 
     .lab-panel {
-      background: linear-gradient(160deg, rgba(16, 14, 26, 0.98), rgba(8, 7, 14, 0.99));
-      border: 1.5px solid rgba(229, 169, 59, 0.28);
-      box-shadow: 0 25px 80px rgba(0,0,0,0.95), 0 0 45px rgba(229, 169, 59, 0.12);
+      background: linear-gradient(160deg, rgba(20, 12, 28, 0.98), rgba(9, 6, 14, 0.99));
+      border: 1.5px solid rgba(229, 169, 59, 0.3);
+      box-shadow: 0 25px 80px rgba(0,0,0,0.95), 0 0 50px rgba(255, 8, 68, 0.15);
       position: relative;
     }
 
@@ -101,9 +102,50 @@
 
     .choice-card:hover, .choice-card:active {
       transform: translateY(-2px);
+      border-color: #ff0844;
+      background: linear-gradient(180deg, rgba(255, 8, 68, 0.18) 0%, rgba(229, 169, 59, 0.06) 100%);
+      box-shadow: 0 8px 24px rgba(255, 8, 68, 0.25);
+    }
+
+    .choice-card.selected {
       border-color: #e5a93b;
-      background: linear-gradient(180deg, rgba(229, 169, 59, 0.16) 0%, rgba(232, 23, 93, 0.05) 100%);
-      box-shadow: 0 8px 24px rgba(229, 169, 59, 0.2);
+      background: linear-gradient(180deg, rgba(229, 169, 59, 0.22) 0%, rgba(255, 8, 68, 0.1) 100%);
+    }
+
+    /* Thumb Scanner Pulse Ring */
+    .scanner-pad {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 8, 68, 0.4);
+      box-shadow: 0 0 35px rgba(255, 8, 68, 0.3), inset 0 0 25px rgba(255, 8, 68, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      touch-action: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .scanner-pad.scanning {
+      border-color: #e5a93b;
+      box-shadow: 0 0 50px rgba(229, 169, 59, 0.7), inset 0 0 35px rgba(255, 8, 68, 0.6);
+      transform: scale(0.96);
+    }
+
+    .scanner-ring {
+      position: absolute;
+      inset: -10px;
+      border-radius: 50%;
+      border: 2px dashed rgba(229, 169, 59, 0.5);
+      animation: rotateRing 6s linear infinite;
+    }
+
+    @keyframes rotateRing {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     .reactor-core {
@@ -112,9 +154,9 @@
       height: 145px;
       border: 3px solid #e5a93b;
       border-radius: 8px 8px 36px 36px;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.75);
       overflow: hidden;
-      box-shadow: 0 0 40px rgba(229, 169, 59, 0.4);
+      box-shadow: 0 0 40px rgba(229, 169, 59, 0.45);
     }
 
     .fluid-layer {
@@ -122,13 +164,13 @@
       bottom: 0;
       width: 100%;
       height: 0%;
-      background: linear-gradient(0deg, #590925 0%, #e8175d 40%, #e5a93b 100%);
+      background: linear-gradient(0deg, #4a0011 0%, #ff0844 50%, #e5a93b 100%);
       transition: height 0.4s ease-out;
     }
 
     .bubble {
       position: absolute;
-      background: rgba(255, 255, 255, 0.75);
+      background: rgba(255, 255, 255, 0.8);
       border-radius: 50%;
       animation: bubbleFloat 2.2s infinite ease-in;
     }
@@ -149,11 +191,6 @@
       box-shadow: 0 0 25px rgba(37, 211, 102, 0.45);
       cursor: pointer;
     }
-
-    .timer-badge {
-      background: rgba(232, 23, 93, 0.14);
-      border: 1px solid rgba(232, 23, 93, 0.5);
-    }
   </style>
 </head>
 
@@ -165,50 +202,142 @@
     <header class="flex items-center justify-between pb-3.5 mb-4 border-b border-goldPrimary/20 text-xs">
       <div class="flex items-center space-x-2">
         <span class="relative flex h-2.5 w-2.5">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-seduceRed opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-seduceRed"></span>
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-crimsonLust opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-crimsonLust"></span>
         </span>
         <span class="font-mono text-goldLight tracking-widest uppercase font-black text-[11px] sm:text-xs">
-          AURAFRAG LAB // SEDUCTIVE COMPOUNDING
+          AURAFRAG LAB // INTIMATE RESONANCE
         </span>
       </div>
       <span class="text-emerald-400 font-mono text-[11px] font-bold">૧૦૦% શુદ્ધ અત્તર (NO ALCOHOL)</span>
     </header>
 
-    <!-- STEP PROGRESS BAR -->
-    <div id="telemetryHeader" class="mb-4">
-      <div class="flex justify-between items-center text-[12px] font-mono text-gray-400 mb-1.5">
-        <span id="stepLabel" class="text-goldLight font-bold">આકર્ષણ તબક્કો // ૦૧/૦૪</span>
-        <span class="text-seduceRed font-semibold tracking-wider">BESPOKE ATTRACTION FORMULA</span>
-      </div>
-      <div class="w-full h-1.5 bg-black/60 rounded-full overflow-hidden border border-goldPrimary/20">
-        <div id="chamberProgress" class="h-full bg-gradient-to-r from-goldPrimary via-yellow-400 to-seduceRed transition-all duration-500" style="width: 25%;"></div>
-      </div>
-    </div>
-
-    <!-- VIEW 1: QUESTIONS -->
-    <main id="simulationView" class="space-y-4">
+    <!-- STEP 1: GENDER VECTORS -->
+    <section id="stepGender" class="space-y-4">
       <div class="text-left mb-1">
-        <p class="text-[11px] font-mono tracking-widest text-seduceRed font-bold uppercase mb-1">
-          // OLFACTORY ATTRACTION MATRIX
+        <p class="text-[11px] font-mono tracking-widest text-crimsonLust font-bold uppercase mb-1">
+          // PHASE 01 : આકર્ષણ ધ્રુવ (ATTRACTION POLARITY)
         </p>
-        <h1 id="chamberQuestion" class="text-base sm:text-lg font-black text-white leading-snug">
-          ૧. તમે સામેવાળી વ્યક્તિ પર કેવો મોહક અને નશીલો પ્રભાવ પાડવા માંગો છો?
+        <h1 class="text-base sm:text-lg font-black text-white leading-snug">
+          ૧. તમે કોણ છો અને કોના દિલ-દિમાગ પર રાજ કરવા માંગો છો?
         </h1>
-        <p id="chamberSubtext" class="text-xs text-gray-400 mt-1">
-          તમારી પસંદગી અનુસાર લેબ અલ્ગોરિધમ ૩ દુર્લભ અત્તરના ટીપાં કમ્પાઉન્ડ કરશે.
+        <p class="text-xs text-gray-400 mt-1">
+          સુગંધ તમારી ત્વચાની ગરમી અને સામેવાળી વ્યક્તિના આકર્ષણ પર કામ કરશે.
         </p>
       </div>
 
-      <div id="choicesGrid" class="space-y-2.5 pt-1"></div>
-
-      <div class="pt-3 flex items-center justify-between text-[11px] text-gray-400 border-t border-white/5 font-mono">
-        <span>🔥 ૧,૮૪૨ લોકોએ આજે પોતાનો ફોર્મ્યુલા બનાવ્યો</span>
-        <span class="text-goldLight font-bold">14-HOUR PROJECTION</span>
+      <!-- User Gender -->
+      <div class="space-y-2">
+        <label class="text-xs font-bold text-gray-300 block">તમારું લિંગ (You are):</label>
+        <div class="grid grid-cols-2 gap-3">
+          <div onclick="labEngine.selectUserGender('M', this)" class="choice-card user-gender-card rounded-xl p-3.5 text-center cursor-pointer">
+            <span class="text-2xl block mb-1">🧔🏻‍♂️</span>
+            <span class="text-sm font-black text-white">પુરુષ (Male)</span>
+          </div>
+          <div onclick="labEngine.selectUserGender('F', this)" class="choice-card user-gender-card rounded-xl p-3.5 text-center cursor-pointer">
+            <span class="text-2xl block mb-1">💃🏻</span>
+            <span class="text-sm font-black text-white">સ્ત્રી (Female)</span>
+          </div>
+        </div>
       </div>
-    </main>
 
-    <!-- VIEW 2: COMPOUNDING SIMULATION -->
+      <!-- Target Gender -->
+      <div class="space-y-2 pt-2">
+        <label class="text-xs font-bold text-gray-300 block">જેને મોહિત કરવા માંગો છો (Attract):</label>
+        <div class="grid grid-cols-2 gap-3">
+          <div onclick="labEngine.selectTargetGender('F', this)" class="choice-card target-gender-card rounded-xl p-3.5 text-center cursor-pointer">
+            <span class="text-2xl block mb-1">🌹</span>
+            <span class="text-sm font-black text-white">સ્ત્રીને આકર્ષવી છે</span>
+          </div>
+          <div onclick="labEngine.selectTargetGender('M', this)" class="choice-card target-gender-card rounded-xl p-3.5 text-center cursor-pointer">
+            <span class="text-2xl block mb-1">👑</span>
+            <span class="text-sm font-black text-white">પુરુષને આકર્ષવો છે</span>
+          </div>
+        </div>
+      </div>
+
+      <button id="btnNext1" onclick="labEngine.goToStepAge()" disabled class="btn-gold opacity-40 cursor-not-allowed w-full py-3.5 px-4 rounded-xl text-black font-black text-sm tracking-wide transition-all mt-4">
+        આગળ વધો (ઉંમર પસંદ કરો) ➔
+      </button>
+    </section>
+
+    <!-- STEP 2: AGE RESONANCE -->
+    <section id="stepAge" class="hidden space-y-4">
+      <div class="text-left mb-1">
+        <p class="text-[11px] font-mono tracking-widest text-crimsonLust font-bold uppercase mb-1">
+          // PHASE 02 : ઉંમર અને કામુક તીવ્રતા
+        </p>
+        <h2 class="text-base sm:text-lg font-black text-white leading-snug">
+          ૨. તમારી અને એમની ઉંમરનો તબક્કો પસંદ કરો
+        </h2>
+        <p class="text-xs text-gray-400 mt-1">
+          ઉંમર પ્રમાણે સુગંધના મોલેક્યુલ્સ (ચોકલેટ, કસ્તુરી કે ચંદન) નું પ્રમાણ સેટ થશે.
+        </p>
+      </div>
+
+      <div class="space-y-2">
+        <label class="text-xs font-bold text-gray-300 block">તમારી ઉંમર:</label>
+        <div class="grid grid-cols-4 gap-2 text-center">
+          <div onclick="labEngine.setUserAge('18-24', this)" class="choice-card user-age-card rounded-lg p-2.5 cursor-pointer text-xs font-bold text-white">૧૮-૨૪</div>
+          <div onclick="labEngine.setUserAge('25-34', this)" class="choice-card user-age-card rounded-lg p-2.5 cursor-pointer text-xs font-bold text-white">૨૫-૩૪</div>
+          <div onclick="labEngine.setUserAge('35-44', this)" class="choice-card user-age-card rounded-lg p-2.5 cursor-pointer text-xs font-bold text-white">૩૫-૪૪</div>
+          <div onclick="labEngine.setUserAge('45+', this)" class="choice-card user-age-card rounded-lg p-2.5 cursor-pointer text-xs font-bold text-white">૪૫+</div>
+        </div>
+      </div>
+
+      <div class="space-y-2 pt-2">
+        <label class="text-xs font-bold text-gray-300 block">એમની ઉંમર:</label>
+        <div class="grid grid-cols-4 gap-2 text-center">
+          <div onclick="labEngine.setTargetAge('18-24', this)" class="choice-card target-age-card rounded-lg p-2.5 cursor-pointer text-xs font-bold text-white">૧૮-૨૪</div>
+          <div onclick="labEngine.setTargetAge('25-34', this)" class="choice-card target-age-card rounded-lg p-2.5 cursor-pointer text-xs font-bold text-white">૨૫-૩૪</div>
+          <div onclick="labEngine.setTargetAge('35-44', this)" class="choice-card target-age-card rounded-lg p-2.5 cursor-pointer text-xs font-bold text-white">૩૫-૪૪</div>
+          <div onclick="labEngine.setTargetAge('45+', this)" class="choice-card target-age-card rounded-lg p-2.5 cursor-pointer text-xs font-bold text-white">૪૫+</div>
+        </div>
+      </div>
+
+      <button id="btnNext2" onclick="labEngine.goToStepFingerprint()" disabled class="btn-gold opacity-40 cursor-not-allowed w-full py-3.5 px-4 rounded-xl text-black font-black text-sm tracking-wide transition-all mt-4">
+        બાયો-રેઝોનન્સ સ્કેનર પર જાઓ ➔
+      </button>
+    </section>
+
+    <!-- STEP 3: THUMB SCANNER (VISCERAL FREQUENCY TEST) -->
+    <section id="stepFingerprint" class="hidden flex-col items-center justify-center py-6 text-center space-y-4">
+      <div class="text-center max-w-sm">
+        <p class="text-[11px] font-mono tracking-widest text-crimsonLust font-bold uppercase mb-1">
+          // PHASE 03 : PHEROMONE PULSE SCANNER
+        </p>
+        <h2 class="text-lg font-black text-white">
+          તમારો અંગૂઠો સેન્સર પર ૩ સેકન્ડ દબાવી રાખો
+        </h2>
+        <p class="text-xs text-gray-400 mt-1">
+          તમારા શરીરની ઉષ્મા અને કામુક ફ્રીક્વન્સી કેપ્ચર થઈ રહી છે...
+        </p>
+      </div>
+
+      <div class="relative py-4 flex items-center justify-center">
+        <div id="scannerPad" class="scanner-pad">
+          <div class="scanner-ring"></div>
+          <div class="text-4xl pointer-events-none">🔥</div>
+        </div>
+      </div>
+
+      <!-- Scanner Live Telemetry -->
+      <div class="w-full bg-black/70 rounded-xl p-3 font-mono text-xs text-left border border-white/10 space-y-1">
+        <div class="flex justify-between text-gray-300">
+          <span>STATUS:</span>
+          <span id="scanStatusText" class="text-crimsonLust font-black animate-pulse">અંગૂઠો મૂકી દબાવી રાખો...</span>
+        </div>
+        <div class="flex justify-between text-gray-300">
+          <span>BODY PULSE FREQUENCY:</span>
+          <span id="scanFreqText" class="text-goldLight font-bold">--- Hz</span>
+        </div>
+        <div class="w-full bg-gray-900 h-1.5 rounded-full overflow-hidden mt-1">
+          <div id="scanProgressBar" class="h-full bg-gradient-to-r from-crimsonLust to-goldPrimary transition-all duration-100" style="width: 0%;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 4: COMPOUNDING SIMULATION -->
     <section id="compoundingView" class="hidden flex-col items-center justify-center py-7 text-center space-y-4">
       <div class="reactor-core">
         <div id="fluidLevel" class="fluid-layer"></div>
@@ -219,7 +348,7 @@
 
       <div>
         <div id="compoundingStatus" class="font-mono text-sm tracking-widest text-goldLight font-black animate-pulse">
-          EXTRACTING BASE MOLECULES...
+          FUSING VISCERAL ESSENTIALS...
         </div>
         <div class="text-xs text-gray-400 mt-1 max-w-sm">
           ૫૦% બેઝ સસ્ટેન, ૩૦% હાર્ટ એટ્રેક્શન, ૨૦% ટોપ પ્રોજેક્શન એકત્રિત થઈ રહ્યું છે...
@@ -229,32 +358,32 @@
       <div class="w-full bg-black/80 rounded-xl p-3 text-left font-mono text-[11px] text-gray-300 border border-goldPrimary/20 space-y-1">
         <div class="text-emerald-400 flex items-center justify-between">
           <span>> ATOMIZING NATURAL ESSENTIAL OILS</span>
-          <span id="liveYield">64.2%</span>
+          <span id="liveYield">78.4%</span>
         </div>
-        <div class="text-goldLight">> LOCKING 14-HOUR MAGNETIC PROJECTION</div>
+        <div class="text-crimsonLust">> LOCKING 14-HOUR MAGNETIC PROJECTION</div>
       </div>
     </section>
 
-    <!-- VIEW 3: FORMULA DOSSIER & INSTANT ORDER -->
+    <!-- STEP 5: FORMULA DOSSIER & INSTANT ORDER -->
     <section id="dossierView" class="hidden space-y-4">
       
       <!-- Countdown Timer -->
-      <div class="timer-badge rounded-xl py-2 px-3 text-center text-xs font-mono font-bold flex items-center justify-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-seduceRed animate-ping"></span>
-        <span>ખાસ ઓફર સમાપ્ત થવામાં બાકી સમય:</span>
-        <span id="countdownClock" class="text-seduceRed font-black text-sm tracking-widest">09:59</span>
+      <div class="bg-crimsonLust/15 border border-crimsonLust/50 rounded-xl py-2 px-3 text-center text-xs font-mono font-bold flex items-center justify-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-crimsonLust animate-ping"></span>
+        <span>સ્પેશિયલ ઓફર સમાપ્ત થવામાં બાકી સમય:</span>
+        <span id="countdownClock" class="text-crimsonLust font-black text-sm tracking-widest">09:59</span>
       </div>
 
       <!-- Result Card -->
       <div class="bg-gradient-to-b from-white/[0.04] to-black/70 border border-goldPrimary/30 rounded-2xl p-4 text-center">
         <div class="flex items-center justify-between text-[11px] font-mono text-gray-400 pb-2 border-b border-white/10">
-          <span id="dossierBatchCode" class="text-goldLight tracking-widest font-black">FORMULA #AURAFRAG-7492</span>
-          <span class="text-emerald-400 font-bold">૧૦૦% BESPOKE MATCH</span>
+          <span id="dossierBatchCode" class="text-goldLight tracking-widest font-black">FORMULA #AURAFRAG-8821</span>
+          <span class="text-emerald-400 font-bold">૧૦૦% કામુક સુસંગતતા</span>
         </div>
 
-        <h2 class="text-lg font-black text-goldLight font-cinzel mt-2">TRINITY IMPERIAL EXTRAIT</h2>
+        <h2 class="text-lg font-black text-goldLight font-cinzel mt-2">TRINITY LUST EXTRAIT</h2>
         <p class="text-xs text-gray-300 max-w-md mx-auto mt-1">
-          તમારા શરીરની તાસીર મુજબ તૈયાર કરેલું ૩ પ્યોર અત્તરનું મિશ્રણ. પહેલી નજરે ગમે તે દેખાય, પણ છેલ્લી યાદ તમારી આ જ ખુશ્બૂની રહેશે.
+          તમારી પસંદગી અને પલ્સ મુજબ તૈયાર થયેલું ૩ પ્યોર અત્તરનું મિશ્રણ. પહેલી નજર કદાચ ચહેરા પર પડે... પણ છેલ્લી યાદ તમારી આ જ ખુશ્બૂની રહેશે.
         </p>
 
         <!-- Ratio Bar (50:30:20) -->
@@ -277,7 +406,7 @@
             </span>
             <div class="flex items-center gap-1.5 mt-0.5 text-xs text-emerald-400 font-semibold">
               <span>🚚</span>
-              <span>સમગ્ર ભારતમાં ફ્રી હોમ ડિલિવરી</span>
+              <span>ઓલ ઇન્ડિયા ફ્રી હોમ ડિલિવરી</span>
             </div>
           </div>
           <div class="text-right">
@@ -293,7 +422,7 @@
           <!-- OPTION 1: ONLINE (RAZORPAY) -->
           <label id="cardOnline" class="flex items-center justify-between p-3.5 rounded-xl border-2 border-goldPrimary bg-goldPrimary/10 cursor-pointer transition-all">
             <div class="flex items-center gap-3">
-              <input type="radio" name="paymentOption" value="ONLINE" checked onchange="labApp.setMode('ONLINE')" class="accent-goldPrimary w-4 h-4">
+              <input type="radio" name="paymentOption" value="ONLINE" checked onchange="labEngine.setPaymentMode('ONLINE')" class="accent-goldPrimary w-4 h-4">
               <div>
                 <div class="text-sm font-bold text-white flex items-center gap-2">
                   <span>ઓનલાઇન પેમેન્ટ (Prepaid)</span>
@@ -308,13 +437,13 @@
           <!-- OPTION 2: COD (WHATSAPP) -->
           <label id="cardCOD" class="flex items-center justify-between p-3.5 rounded-xl border border-white/15 bg-black/40 cursor-pointer transition-all">
             <div class="flex items-center gap-3">
-              <input type="radio" name="paymentOption" value="COD" onchange="labApp.setMode('COD')" class="accent-goldPrimary w-4 h-4">
+              <input type="radio" name="paymentOption" value="COD" onchange="labEngine.setPaymentMode('COD')" class="accent-goldPrimary w-4 h-4">
               <div>
                 <div class="text-sm font-bold text-white flex items-center gap-2">
                   <span>કેશ ઓન ડિલિવરી (COD)</span>
                   <span class="text-[10px] bg-white/10 text-gray-300 px-2 py-0.5 rounded">WhatsApp</span>
                 </div>
-                <div class="text-xs text-gray-400 mt-0.5">પાર્સલ ઘરે પહોંચે ત્યારે જ રોકડા આપો</div>
+                <div class="text-xs text-gray-400 mt-0.5">પાર્સલ ઘરે આવે ત્યારે જ રોકડા આપો</div>
               </div>
             </div>
             <span class="text-sm font-mono text-gray-300 font-black">₹599</span>
@@ -325,14 +454,14 @@
         <div class="bg-black/60 border border-emerald-500/30 rounded-xl p-2.5 flex items-center justify-between text-xs text-emerald-300">
           <span class="flex items-center gap-2">
             <span class="text-base">📦</span>
-            <strong>ઓલ ઇન્ડિયા ફ્રી કુરિયર ડિલિવરી</strong>
+            <strong>સમગ્ર ભારતમાં ફ્રી હોમ ડિલિવરી</strong>
           </span>
           <span class="font-mono font-bold text-white">₹0 ફ્રી</span>
         </div>
 
         <!-- DYNAMIC ACTION BUTTON -->
-        <button id="orderActionBtn" type="button" onclick="labApp.executeOrder()" class="btn-gold w-full py-4 px-4 rounded-xl flex items-center justify-center gap-2.5 text-black font-black text-base tracking-wide transition-all">
-          <svg id="btnIcon" class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+        <button id="orderActionBtn" type="button" onclick="labEngine.executeOrder()" class="btn-gold w-full py-4 px-4 rounded-xl flex items-center justify-center gap-2.5 text-black font-black text-base tracking-wide transition-all">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5z"/>
           </svg>
           <span id="btnText">₹૫૯૯ ઓનલાઇન ચૂકવો (Razorpay Instant)</span>
@@ -342,9 +471,9 @@
         <div id="paymentSuccessBox" class="hidden bg-emerald-950/90 border border-emerald-500 rounded-2xl p-5 text-center space-y-2"></div>
 
         <div class="text-[11px] text-gray-400 text-center flex items-center justify-center gap-2 font-mono">
-          <span>🔒 ૧૦૦% સેફ ટ્રાન્ઝેક્શન</span>
+          <span>🔒 ૧૦૦% સુરક્ષિત વ્યવહાર</span>
           <span>•</span>
-          <span>Zero Extra Charges</span>
+          <span>કોઈ વધારાનો ચાર્જ નહીં</span>
         </div>
       </div>
 
@@ -370,107 +499,139 @@
       mexico:       { name: "Mexico Wild Leather", color: "#e67e22" }
     };
 
-    const QUESTIONS = [
-      {
-        q: "૧. તમે તમારી હાજરીથી આસપાસ કેવું ચુંબકીય ખેંચાણ ઊભું કરવા માંગો છો?",
-        sub: "તમારી પસંદગી અનુસાર લેબ ૩ દુર્લભ અત્તરના ટીપાં કમ્પાઉન્ડ કરશે.",
-        options: [
-          { title: "Dark Seduction & Magnetism (કામુક અને મદહોશ આકર્ષણ)", desc: "તમે પાસેથી પસાર થાઓ એટલે એમની નજર અને ધડકન માત્ર તમારી તરફ ખેંચાય.", icon: "🔥", picks: ["xChocolate", "frenchRose", "cherish"] },
-          { title: "Royal Authority & Alpha Ruab (શાહી વજનદાર રૂઆબ)", desc: "સભા કે મીટિંગમાં પગ મૂકતાં જ લોકો તમારા ગંભીર વ્યક્તિત્વથી પ્રભાવિત થાય.", icon: "👑", picks: ["copper", "classic", "diamondSandal"] },
-          { title: "Divine Aura & Serene Touch (પાક આહલાદક શાંતિ)", desc: "નજીક આવનાર વ્યક્તિના મનને અસીમ સુકૂન અને સ્નેહનો અહેસાસ કરાવે.", icon: "🌿", picks: ["whiteMusk", "fawaki", "diamondSandal"] }
-        ]
-      },
-      {
-        q: "૨. સામી વ્યક્તિના દિલ અને દિમાગ પર કેવો પ્રભાવ છોડવો છે?",
-        sub: "સુગંધ સીધી માનસિક સંવેદનાઓ પર અકસીર અસર કરે છે.",
-        options: [
-          { title: "Uncontrollable Attraction (નજીક આવવાની તાલાવેલી)", desc: "તેમનું ધ્યાન વારંવાર તમારી તરફ જ ભટક્યા કરે.", icon: "💋", picks: ["xChocolate", "cherish", "blueLady"] },
-          { title: "Haunting Memory (દિવસો સુધી યાદ રહેતી ખુશ્બૂ)", desc: "તમે ગયા પછી પણ કલાકો સુધી તમારી સુગંધનો નશો રૂમમાં ગુંજતો રહે.", icon: "🔮", picks: ["frenchRose", "mexico", "cherish"] },
-          { title: "Pure Respect (પ્રભાવશાળી સન્માન)", desc: "તમારી હાજરી માત્રથી રૂમમાં એક ગંભીર અને શાહી સન્માન છવાઈ જાય.", icon: "⚡", picks: ["copper", "classic"] }
-        ]
-      },
-      {
-        q: "૩. તમારી ત્વચા માટે કયો બેઝ સૌથી વધુ વજનદાર રાખવો છે?",
-        sub: "આ તમારા અત્તરનો ૫૦% મુખ્ય આધાર (Base Note) નક્કી કરશે.",
-        options: [
-          { title: "Warm Cocoa & Dark Amber (નશીલું અને ગરમ)", desc: "ડાર્ક ચોકલેટ અને એમ્બરનો ગાઢ, રોમેન્ટિક સંગમ.", icon: "🍫", picks: ["xChocolate", "mexico"] },
-          { title: "Smoked Oud & Sandalwood (શાહી અને મર્દાના)", desc: "શુદ્ધ ચંદન અને લાકડાની રઈસી દર્શાવતી ખાનદાની સુગંધ.", icon: "🪵", picks: ["diamondSandal", "copper"] },
-          { title: "White Musk & Rain Earth (શીતળ અને પવિત્ર)", desc: "ભીની માટી અને શુદ્ધ સફેદ કસ્તુરીની નજાકત ભરેલી સુગંધ.", icon: "💧", picks: ["whiteMusk", "fawaki"] }
-        ]
-      },
-      {
-        q: "૪. તમે અત્તરનો ફેલાવો (Projection) કેવો રાખવા માંગો છો?",
-        sub: "ખુશ્બૂ ફેલાવવાની તાકાત લૉક કરવામાં આવી રહી છે.",
-        options: [
-          { title: "14-Hour Magnetic Beast (આખો રૂમ મહેકી ઊઠે)", desc: "સવારથી રાત સુધી તમારો પ્રચંડ રૂઆબ બરકરાર રહેશે.", icon: "💣", picks: ["copper", "xChocolate", "diamondSandal"] },
-          { title: "Intimate Whisper Lock (એકદમ અંગત અને નિકટ)", desc: "ફક્ત તમારી ખૂબ નજીક આવનાર ખાસ વ્યક્તિને જ અનુભવાય.", icon: "🥀", picks: ["frenchRose", "whiteMusk", "cherish"] }
-        ]
-      }
-    ];
-
-    class LaboratoryEngine {
+    class SeductiveLabEngine {
       constructor() {
-        this.step = 0;
-        this.votes = {};
-        for (let k in CATALOG) { this.votes[k] = 0; }
+        this.userGender = null;
+        this.targetGender = null;
+        this.userAge = null;
+        this.targetAge = null;
         this.finalBlend = null;
         this.code = `AURAFRAG-${Math.floor(1000 + Math.random() * 9000)}`;
         this.timer = 600;
-        this.mode = 'ONLINE';
+        this.paymentMode = 'ONLINE';
+        this.scanProgress = 0;
+        this.scanInterval = null;
         this.hasViewContentFired = false;
       }
 
       init() {
-        this.renderStep();
+        this.setupScannerEvents();
         this.startTimer();
       }
 
-      renderStep() {
-        const data = QUESTIONS[this.step];
-        document.getElementById('stepLabel').innerText = `આકર્ષણ તબક્કો // ૦${this.step + 1}/૦૪`;
-        document.getElementById('chamberProgress').style.width = `${((this.step + 1) / 4) * 100}%`;
-        document.getElementById('chamberQuestion').innerText = data.q;
-        document.getElementById('chamberSubtext').innerText = data.sub;
-
-        const grid = document.getElementById('choicesGrid');
-        grid.innerHTML = '';
-
-        data.options.forEach(opt => {
-          const card = document.createElement('div');
-          card.className = "choice-card rounded-xl p-3.5 sm:p-4 cursor-pointer flex items-start gap-3";
-          card.innerHTML = `
-            <div class="text-2xl pt-0.5 flex-shrink-0">${opt.icon}</div>
-            <div class="flex-1">
-              <h3 class="text-sm sm:text-base font-black text-white leading-tight mb-1">${opt.title}</h3>
-              <p class="text-xs text-gray-300 leading-snug">${opt.desc}</p>
-            </div>
-            <div class="text-goldPrimary/70 text-xs font-mono font-bold self-center">[પસંદ કરો]</div>
-          `;
-          card.onclick = () => {
-            if (typeof fbq === 'function') {
-              fbq('trackCustom', 'AttarQuizStep', {
-                step_number: this.step + 1,
-                selected_option: opt.title
-              });
-            }
-
-            opt.picks.forEach((k, idx) => {
-              if (this.votes[k] !== undefined) this.votes[k] += (3 - idx) * 10 + 15;
-            });
-            this.step++;
-            if (this.step < 4) {
-              this.renderStep();
-            } else {
-              this.runCompounding();
-            }
-          };
-          grid.appendChild(card);
-        });
+      selectUserGender(val, el) {
+        this.userGender = val;
+        document.querySelectorAll('.user-gender-card').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+        this.checkStep1Ready();
       }
 
-      runCompounding() {
-        document.getElementById('simulationView').classList.add('hidden');
-        document.getElementById('telemetryHeader').classList.add('hidden');
+      selectTargetGender(val, el) {
+        this.targetGender = val;
+        document.querySelectorAll('.target-gender-card').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+        this.checkStep1Ready();
+      }
+
+      checkStep1Ready() {
+        const btn = document.getElementById('btnNext1');
+        if (this.userGender && this.targetGender) {
+          btn.disabled = false;
+          btn.classList.remove('opacity-40', 'cursor-not-allowed');
+        }
+      }
+
+      goToStepAge() {
+        if (typeof fbq === 'function') {
+          fbq('trackCustom', 'AttarQuizStep', { step_number: 1, userGender: this.userGender, targetGender: this.targetGender });
+        }
+        document.getElementById('stepGender').classList.add('hidden');
+        document.getElementById('stepAge').classList.remove('hidden');
+      }
+
+      setUserAge(val, el) {
+        this.userAge = val;
+        document.querySelectorAll('.user-age-card').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+        this.checkStep2Ready();
+      }
+
+      setTargetAge(val, el) {
+        this.targetAge = val;
+        document.querySelectorAll('.target-age-card').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+        this.checkStep2Ready();
+      }
+
+      checkStep2Ready() {
+        const btn = document.getElementById('btnNext2');
+        if (this.userAge && this.targetAge) {
+          btn.disabled = false;
+          btn.classList.remove('opacity-40', 'cursor-not-allowed');
+        }
+      }
+
+      goToStepFingerprint() {
+        if (typeof fbq === 'function') {
+          fbq('trackCustom', 'AttarQuizStep', { step_number: 2, userAge: this.userAge, targetAge: this.targetAge });
+        }
+        document.getElementById('stepAge').classList.add('hidden');
+        const sView = document.getElementById('stepFingerprint');
+        sView.classList.remove('hidden');
+        sView.classList.add('flex');
+      }
+
+      setupScannerEvents() {
+        const pad = document.getElementById('scannerPad');
+
+        const startScan = (e) => {
+          e.preventDefault();
+          pad.classList.add('scanning');
+          document.getElementById('scanStatusText').innerText = "પલ્સ પકડાઈ રહ્યો છે... દબાવી રાખો!";
+          
+          if (navigator.vibrate) navigator.vibrate(50);
+
+          this.scanInterval = setInterval(() => {
+            this.scanProgress += 3.5;
+            if (this.scanProgress > 100) this.scanProgress = 100;
+            
+            document.getElementById('scanProgressBar').style.width = `${this.scanProgress}%`;
+            const freq = Math.floor(400 + (this.scanProgress * 1.5));
+            document.getElementById('scanFreqText').innerText = `${freq} Hz (Sensual Resonance)`;
+
+            if (this.scanProgress >= 100) {
+              clearInterval(this.scanInterval);
+              if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+              this.completeScan();
+            }
+          }, 70);
+        };
+
+        const stopScan = (e) => {
+          if (this.scanProgress < 100) {
+            clearInterval(this.scanInterval);
+            this.scanProgress = 0;
+            pad.classList.remove('scanning');
+            document.getElementById('scanProgressBar').style.width = '0%';
+            document.getElementById('scanStatusText').innerText = "અંગૂઠો અધવચ્ચેથી હટાવી દીધો! ફરી દબાવો.";
+            document.getElementById('scanFreqText').innerText = "--- Hz";
+          }
+        };
+
+        pad.addEventListener('mousedown', startScan);
+        pad.addEventListener('mouseup', stopScan);
+        pad.addEventListener('touchstart', startScan);
+        pad.addEventListener('touchend', stopScan);
+      }
+
+      completeScan() {
+        if (typeof fbq === 'function') {
+          fbq('trackCustom', 'AttarQuizStep', { step_number: 3, scanStatus: 'completed' });
+        }
+
+        document.getElementById('stepFingerprint').classList.remove('flex');
+        document.getElementById('stepFingerprint').classList.add('hidden');
+
         const cView = document.getElementById('compoundingView');
         cView.classList.remove('hidden');
         cView.classList.add('flex');
@@ -479,25 +640,32 @@
         let status = document.getElementById('compoundingStatus');
         let yText = document.getElementById('liveYield');
 
-        setTimeout(() => { fluid.style.height = "40%"; status.innerText = "STABILIZING BASE RESINS..."; yText.innerText = "72.4%"; }, 600);
-        setTimeout(() => { fluid.style.height = "80%"; status.innerText = "LOCKING 50:30:20 RATIO..."; yText.innerText = "96.1%"; }, 1300);
+        setTimeout(() => { fluid.style.height = "45%"; status.innerText = "EXTRACTING RAW PHEROMONES..."; yText.innerText = "82.1%"; }, 600);
+        setTimeout(() => { fluid.style.height = "85%"; status.innerText = "LOCKING 50:30:20 INTIMATE RATIO..."; yText.innerText = "97.4%"; }, 1400);
 
         setTimeout(() => {
           this.calculateBlend();
           cView.classList.remove('flex');
           cView.classList.add('hidden');
           this.renderDossier();
-        }, 2200);
+        }, 2300);
       }
 
       calculateBlend() {
-        const sorted = Object.keys(this.votes).sort((a, b) => this.votes[b] - this.votes[a]);
-        const ratios = [50, 30, 20];
-        this.finalBlend = [0, 1, 2].map(i => ({
-          name: CATALOG[sorted[i]].name,
-          color: CATALOG[sorted[i]].color,
-          percent: ratios[i]
-        }));
+        // Formulate based on attraction vectors
+        if (this.targetGender === 'F') {
+          this.finalBlend = [
+            { name: CATALOG.xChocolate.name, color: CATALOG.xChocolate.color, percent: 50, desc: "૫૦% બેઝ નોટ (મદહોશ ડાર્ક ચોકલેટ તાસીર)" },
+            { name: CATALOG.frenchRose.name, color: CATALOG.frenchRose.color, percent: 30, desc: "૩૦% હાર્ટ નોટ (લાલ ગુલાબનું સંવેદનશીલ આકર્ષણ)" },
+            { name: CATALOG.cherish.name, color: CATALOG.cherish.color, percent: 20, desc: "૨૦% ટોપ નોટ (નજીક ખેંચી લાવતો નશો)" }
+          ];
+        } else {
+          this.finalBlend = [
+            { name: CATALOG.copper.name, color: CATALOG.copper.color, percent: 50, desc: "૫૦% બેઝ નોટ (ખાનદાની લાકડાની રઈસી)" },
+            { name: CATALOG.diamondSandal.name, color: CATALOG.diamondSandal.color, percent: 30, desc: "૩૦% હાર્ટ નોટ (શાહી ચંદનનો વજનદાર રૂઆબ)" },
+            { name: CATALOG.classic.name, color: CATALOG.classic.color, percent: 20, desc: "૨૦% ટોપ નોટ (પ્રથમ નજરનો મોહક પ્રભાવ)" }
+          ];
+        }
       }
 
       renderDossier() {
@@ -507,7 +675,7 @@
         if (!this.hasViewContentFired && typeof fbq === 'function') {
           fbq('track', 'ViewContent', {
             content_name: 'Bespoke Attar - ' + this.code,
-            content_category: 'Bespoke Perfume',
+            content_category: 'Sensual Perfume',
             content_ids: [this.code],
             content_type: 'product',
             value: ORDER_AMOUNT_INR,
@@ -529,8 +697,7 @@
 
         const list = document.getElementById('formulaListDetails');
         list.innerHTML = '';
-        const roles = ["૫૦% બેઝ નોટ (લાંબો ૧૪ કલાક પ્રભાવ)", "૩૦% હાર્ટ નોટ (દિલનું મોહક આકર્ષણ)", "૨૦% ટોપ નોટ (પ્રથમ નજરનો વાર)"];
-        this.finalBlend.forEach((item, idx) => {
+        this.finalBlend.forEach((item) => {
           const row = document.createElement('div');
           row.className = "flex items-center justify-between p-2.5 rounded-xl border border-white/10 bg-black/40 text-xs";
           row.innerHTML = `
@@ -538,7 +705,7 @@
               <span class="w-2.5 h-2.5 rounded-full" style="background:${item.color}"></span>
               <div>
                 <span class="font-bold text-white">${item.name}</span>
-                <span class="text-[10px] text-gray-400 block">${roles[idx]}</span>
+                <span class="text-[10px] text-gray-400 block">${item.desc}</span>
               </div>
             </div>
             <span class="font-mono font-bold text-goldLight">${item.percent}%</span>
@@ -547,8 +714,8 @@
         });
       }
 
-      setMode(mode) {
-        this.mode = mode;
+      setPaymentMode(mode) {
+        this.paymentMode = mode;
         const btn = document.getElementById('orderActionBtn');
         const text = document.getElementById('btnText');
         const cardOnline = document.getElementById('cardOnline');
@@ -571,17 +738,17 @@
         if (typeof fbq === 'function') {
           fbq('track', 'InitiateCheckout', {
             content_name: 'Bespoke Attar - ' + this.code,
-            content_category: 'Bespoke Perfume',
+            content_category: 'Sensual Perfume',
             content_ids: [this.code],
             content_type: 'product',
             value: ORDER_AMOUNT_INR,
             currency: 'INR',
             num_items: 1,
-            payment_option: this.mode
+            payment_option: this.paymentMode
           });
         }
 
-        if (this.mode === 'ONLINE') {
+        if (this.paymentMode === 'ONLINE') {
           this.triggerRazorpay();
         } else {
           this.triggerWhatsAppCOD();
@@ -595,7 +762,7 @@
           amount: ORDER_AMOUNT_INR * 100,
           currency: "INR",
           name: "AURAFRAG LAB",
-          description: `Bespoke 3-Attar Blend (${this.code}) - Free Delivery`,
+          description: `Bespoke Sensory Blend (${this.code}) - Free Delivery`,
           theme: {
             color: "#e5a93b"
           },
@@ -621,7 +788,7 @@
 • પેમેન્ટ ID: ${response.razorpay_payment_id}
 • રકમ: ₹${ORDER_AMOUNT_INR} (Paid)
 
-🧪 *સિદ્ધ થયેલો કસ્ટમ ફોર્મ્યુલા:*
+🧪 *સિદ્ધ થયેલો કસ્ટમ કામુક ફોર્મ્યુલા:*
 • ફોર્મ્યુલા કોડ: ${this.code}
 • ૫૦% બેઝ: ${p.name}
 • ૩૦% હાર્ટ: ${s.name}
@@ -630,11 +797,11 @@
 📦 *મારું ડિલિવરી સરનામું:*
 • પૂરું નામ: 
 • મોબાઈલ નંબર: 
-• ઘરનું સરનામું (શેરી/વિસ્તાર): 
+• ઘરનું સરનામું (ગલી/સોસાયટી): 
 • ગામ / શહેર: 
 • પિનકોડ: 
 
-કૃપા કરીને મારી કસ્ટમ બોટલ તૈયાર કરી વહેલી તકે ડિસ્પેચ કરશો!`;
+કૃપા કરીને મારી કસ્ટમ બોટલ વહેલી તકે ડિસ્પેચ કરશો!`;
 
             const redirectUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(paidMessage)}`;
 
@@ -645,7 +812,7 @@
               <div class="text-3xl">🎉</div>
               <h3 class="text-lg font-black text-white">પેમેન્ટ સફળતાપૂર્વક થઈ ગયું!</h3>
               <p class="text-xs text-emerald-200">Payment ID: ${response.razorpay_payment_id}</p>
-              <p class="text-xs text-yellow-300 font-bold mt-2">ડિલિવરી સરનામું મોકલવા માટે નીચેના બટન પર ક્લિક કરો:</p>
+              <p class="text-xs text-yellow-300 font-bold mt-2">ડિલિવરી સરનામું મોકલવા નીચેના બટન પર ક્લિક કરો:</p>
               <a href="${redirectUrl}" class="btn-whatsapp mt-3 inline-flex items-center justify-center w-full py-3.5 px-4 rounded-xl text-white font-black text-sm tracking-wide">
                 WhatsApp પર સરનામું મોકલો ➔
               </a>
@@ -715,8 +882,8 @@
       }
     }
 
-    const labApp = new LaboratoryEngine();
-    window.addEventListener('DOMContentLoaded', () => labApp.init());
+    const labEngine = new SeductiveLabEngine();
+    window.addEventListener('DOMContentLoaded', () => labEngine.init());
   </script>
 </body>
 </html>
