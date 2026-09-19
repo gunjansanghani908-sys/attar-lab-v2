@@ -25,7 +25,6 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     
-    // અગત્યનું: અહીં તમારો Pixel ID નાખો
     fbq('init', '1718140289270179');
     fbq('track', 'PageView');
   </script>
@@ -1021,11 +1020,9 @@
 
   <script>
     // ==========================================================
-    // 1. Razorpay Key ID
+    // 1. Razorpay Key ID & Config
     // ==========================================================
     const RAZORPAY_KEY = "rzp_live_TcnN4bgnhTNHvC";
-
-    // 2. WhatsApp Target Number
     const WHATSAPP_NUMBER = "919327938950";
     const ORDER_AMOUNT_INR = 599;
 
@@ -1129,6 +1126,15 @@
       spiritualSelections.deity = deityName;
       spiritualSelections.vibe = vibe;
       spiritualSelections.notes = notes;
+
+      // Meta ViewContent Event
+      if (typeof fbq === 'function') {
+        fbq('track', 'ViewContent', {
+          content_name: deityName,
+          content_category: 'Spiritual Selection'
+        });
+      }
+
       goToSlide(2);
     }
 
@@ -1170,6 +1176,14 @@
           if (navigator.vibrate) navigator.vibrate([60, 40, 80]);
           diyaTip.innerText = "૧૦૦% સિદ્ધ";
           diyaStatus.innerText = "સંકલ્પ પૂર્ણ! પવિત્ર દૈવી ફોર્મ્યુલા પ્રગટ થઈ!";
+
+          // Meta Customization Complete Event
+          if (typeof fbq === 'function') {
+            fbq('track', 'CustomizeProduct', {
+              content_name: spiritualSelections.deity
+            });
+          }
+
           setTimeout(() => goToSlide(4), 450);
         }
       }, 40);
@@ -1250,6 +1264,15 @@
       const cardCOD = document.getElementById("cardCOD");
       const footerText = document.getElementById("footerSubtext");
 
+      // Meta InitiateCheckout Event on Mode Selection
+      if (typeof fbq === 'function') {
+        fbq('track', 'InitiateCheckout', {
+          value: ORDER_AMOUNT_INR,
+          currency: 'INR',
+          content_name: `AURA - ${spiritualSelections.deity} (${mode})`
+        });
+      }
+
       if (mode === "ONLINE") {
         cardOnline.className = "pay-card selected-online";
         cardCOD.className = "pay-card";
@@ -1269,6 +1292,16 @@
 
     // Main Order Trigger
     function executeFinalOrder() {
+      // Meta AddToCart Event on CTA click
+      if (typeof fbq === 'function') {
+        fbq('track', 'AddToCart', {
+          value: ORDER_AMOUNT_INR,
+          currency: 'INR',
+          content_name: `AURA Divine Perfume (${spiritualSelections.deity})`,
+          content_type: 'product'
+        });
+      }
+
       if (currentPaymentMode === "ONLINE") {
         triggerRazorpayPayment();
       } else {
@@ -1288,12 +1321,12 @@
           color: "#ffd700"
         },
         handler: function (response) {
-          // Meta Purchase Event Fire
+          // Meta Purchase Event on successful payment
           if (typeof fbq === 'function') {
             fbq('track', 'Purchase', {
               value: ORDER_AMOUNT_INR,
               currency: 'INR',
-              content_name: 'AURA Divine Perfume',
+              content_name: `AURA Divine Perfume (${spiritualSelections.deity})`,
               content_type: 'product'
             });
           }
@@ -1346,12 +1379,12 @@
 
     // WhatsApp COD Flow with Meta Tracking
     function triggerWhatsAppCODOrder() {
-      // Meta Purchase/Lead Tracking for COD
+      // Meta Purchase Track for COD Leads
       if (typeof fbq === 'function') {
         fbq('track', 'Purchase', {
           value: ORDER_AMOUNT_INR,
           currency: 'INR',
-          content_name: 'AURA Divine Perfume (COD)',
+          content_name: `AURA Divine Perfume COD (${spiritualSelections.deity})`,
           content_type: 'product'
         });
       }
