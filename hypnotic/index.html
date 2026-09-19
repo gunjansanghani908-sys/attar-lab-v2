@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>AURAFRAG LAB | Bespoke Sensory Compounding Chamber</title>
+  <title>AURAFRAG LAB | કામુક રૂઆબ & કસ્ટમ અત્તર કમ્પાઉન્ડિંગ</title>
 
   <!-- Meta Pixel Base Code -->
   <script>
@@ -37,7 +37,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=JetBrains+Mono:wght@400;600;800&family=Noto+Sans+Gujarati:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=JetBrains+Mono:wght@400;600;800&family=Noto+Sans+Gujarati:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -49,12 +49,11 @@
       theme: {
         extend: {
           colors: {
-            deepBg: '#040407',
-            panelBg: '#090a12',
-            goldPrimary: '#f5b041',
-            goldLight: '#ffd369',
-            goldGlow: 'rgba(245, 176, 65, 0.35)',
-            cyberRed: '#ff2a55',
+            deepBg: '#050407',
+            panelBg: '#0d0c14',
+            goldPrimary: '#e5a93b',
+            goldLight: '#ffd875',
+            seduceRed: '#e8175d',
             waGreen: '#25D366'
           },
           fontFamily: {
@@ -69,12 +68,12 @@
 
   <style>
     body {
-      background-color: #040407;
+      background-color: #050407;
       background-image: 
-        radial-gradient(at 50% 0%, rgba(245, 176, 65, 0.14) 0px, transparent 65%),
-        radial-gradient(at 100% 100%, rgba(255, 42, 85, 0.07) 0px, transparent 55%),
-        linear-gradient(to bottom, rgba(4, 4, 7, 0.96), rgba(4, 4, 7, 0.98));
-      color: #f3f4f8;
+        radial-gradient(at 50% 0%, rgba(229, 169, 59, 0.16) 0px, transparent 60%),
+        radial-gradient(at 100% 100%, rgba(232, 23, 93, 0.12) 0px, transparent 60%),
+        linear-gradient(to bottom, rgba(5, 4, 7, 0.96), rgba(5, 4, 7, 0.99));
+      color: #f5f5f7;
       overflow-x: hidden;
       -webkit-tap-highlight-color: transparent;
       font-family: 'Noto Sans Gujarati', sans-serif;
@@ -83,39 +82,39 @@
     .bg-grid {
       background-size: 32px 32px;
       background-image: 
-        linear-gradient(to right, rgba(245, 176, 65, 0.035) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(245, 176, 65, 0.035) 1px, transparent 1px);
+        linear-gradient(to right, rgba(229, 169, 59, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(229, 169, 59, 0.04) 1px, transparent 1px);
     }
 
     .lab-panel {
-      background: linear-gradient(155deg, rgba(14, 15, 24, 0.98), rgba(7, 8, 14, 0.99));
-      border: 1.5px solid rgba(245, 176, 65, 0.26);
-      box-shadow: 0 25px 80px rgba(0,0,0,0.95), 0 0 45px rgba(245, 176, 65, 0.09);
+      background: linear-gradient(160deg, rgba(16, 14, 26, 0.98), rgba(8, 7, 14, 0.99));
+      border: 1.5px solid rgba(229, 169, 59, 0.28);
+      box-shadow: 0 25px 80px rgba(0,0,0,0.95), 0 0 45px rgba(229, 169, 59, 0.12);
       position: relative;
     }
 
     .choice-card {
       transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      background: linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.005) 100%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.005) 100%);
     }
 
     .choice-card:hover, .choice-card:active {
       transform: translateY(-2px);
-      border-color: #f5b041;
-      background: linear-gradient(180deg, rgba(245, 176, 65, 0.14) 0%, rgba(245, 176, 65, 0.02) 100%);
-      box-shadow: 0 8px 24px rgba(245, 176, 65, 0.16);
+      border-color: #e5a93b;
+      background: linear-gradient(180deg, rgba(229, 169, 59, 0.16) 0%, rgba(232, 23, 93, 0.05) 100%);
+      box-shadow: 0 8px 24px rgba(229, 169, 59, 0.2);
     }
 
     .reactor-core {
       position: relative;
-      width: 90px;
-      height: 135px;
-      border: 3px solid #f5b041;
-      border-radius: 6px 6px 30px 30px;
-      background: rgba(0, 0, 0, 0.6);
+      width: 96px;
+      height: 145px;
+      border: 3px solid #e5a93b;
+      border-radius: 8px 8px 36px 36px;
+      background: rgba(0, 0, 0, 0.7);
       overflow: hidden;
-      box-shadow: 0 0 35px rgba(245, 176, 65, 0.35);
+      box-shadow: 0 0 40px rgba(229, 169, 59, 0.4);
     }
 
     .fluid-layer {
@@ -123,15 +122,15 @@
       bottom: 0;
       width: 100%;
       height: 0%;
-      background: linear-gradient(0deg, #965f03 0%, #f5b041 50%, #ff2a55 100%);
-      transition: height 0.35s linear;
+      background: linear-gradient(0deg, #590925 0%, #e8175d 40%, #e5a93b 100%);
+      transition: height 0.4s ease-out;
     }
 
     .bubble {
       position: absolute;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.75);
       border-radius: 50%;
-      animation: bubbleFloat 2s infinite ease-in;
+      animation: bubbleFloat 2.2s infinite ease-in;
     }
 
     @keyframes bubbleFloat {
@@ -140,8 +139,8 @@
     }
 
     .btn-gold {
-      background: linear-gradient(135deg, #ffd369 0%, #f5b041 100%);
-      box-shadow: 0 0 25px rgba(245, 176, 65, 0.4);
+      background: linear-gradient(135deg, #ffd875 0%, #e5a93b 100%);
+      box-shadow: 0 0 25px rgba(229, 169, 59, 0.45);
       cursor: pointer;
     }
 
@@ -151,61 +150,61 @@
       cursor: pointer;
     }
 
-    .timer-alert {
-      background: rgba(231, 76, 60, 0.12);
-      border: 1px solid rgba(231, 76, 60, 0.5);
+    .timer-badge {
+      background: rgba(232, 23, 93, 0.14);
+      border: 1px solid rgba(232, 23, 93, 0.5);
     }
   </style>
 </head>
 
 <body class="bg-grid min-h-screen flex items-center justify-center p-3 sm:p-5 select-none">
 
-  <div class="w-full max-w-[640px] lab-panel rounded-3xl p-5 sm:p-7 backdrop-blur-2xl relative z-10">
+  <div class="w-full max-w-[620px] lab-panel rounded-3xl p-5 sm:p-7 backdrop-blur-2xl relative z-10">
     
     <!-- TOP STATUS BAR -->
     <header class="flex items-center justify-between pb-3.5 mb-4 border-b border-goldPrimary/20 text-xs">
       <div class="flex items-center space-x-2">
         <span class="relative flex h-2.5 w-2.5">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-seduceRed opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-seduceRed"></span>
         </span>
         <span class="font-mono text-goldLight tracking-widest uppercase font-black text-[11px] sm:text-xs">
-          AURAFRAG LAB // BIO-SYNTHESIS
+          AURAFRAG LAB // SEDUCTIVE COMPOUNDING
         </span>
       </div>
-      <span class="text-emerald-400 font-mono text-[11px] font-bold">100% ALCOHOL-FREE</span>
+      <span class="text-emerald-400 font-mono text-[11px] font-bold">૧૦૦% શુદ્ધ અત્તર (NO ALCOHOL)</span>
     </header>
 
     <!-- STEP PROGRESS BAR -->
     <div id="telemetryHeader" class="mb-4">
       <div class="flex justify-between items-center text-[12px] font-mono text-gray-400 mb-1.5">
-        <span id="stepLabel" class="text-goldLight font-bold">SYNTHESIS PHASE // 01/04</span>
-        <span class="text-emerald-400 font-semibold tracking-wider">BESPOKE CUSTOM BLEND</span>
+        <span id="stepLabel" class="text-goldLight font-bold">આકર્ષણ તબક્કો // ૦૧/૦૪</span>
+        <span class="text-seduceRed font-semibold tracking-wider">BESPOKE ATTRACTION FORMULA</span>
       </div>
       <div class="w-full h-1.5 bg-black/60 rounded-full overflow-hidden border border-goldPrimary/20">
-        <div id="chamberProgress" class="h-full bg-gradient-to-r from-goldPrimary via-yellow-400 to-cyberRed transition-all duration-500" style="width: 25%;"></div>
+        <div id="chamberProgress" class="h-full bg-gradient-to-r from-goldPrimary via-yellow-400 to-seduceRed transition-all duration-500" style="width: 25%;"></div>
       </div>
     </div>
 
     <!-- VIEW 1: QUESTIONS -->
     <main id="simulationView" class="space-y-4">
       <div class="text-left mb-1">
-        <p class="text-[11px] font-mono tracking-widest text-cyberRed font-bold uppercase mb-1">
+        <p class="text-[11px] font-mono tracking-widest text-seduceRed font-bold uppercase mb-1">
           // OLFACTORY ATTRACTION MATRIX
         </p>
         <h1 id="chamberQuestion" class="text-base sm:text-lg font-black text-white leading-snug">
-          ૧. તમે તમારી હાજરીથી આસપાસ કેવું ચુંબકીય ખેંચાણ ઊભું કરવા માંગો છો?
+          ૧. તમે સામેવાળી વ્યક્તિ પર કેવો મોહક અને નશીલો પ્રભાવ પાડવા માંગો છો?
         </h1>
         <p id="chamberSubtext" class="text-xs text-gray-400 mt-1">
-          એક વિકલ્પ પસંદ કરો. લેબ એલ્ગોરિધમ તમારા સ્વભાવ અનુસાર ૩ દુર્લભ અત્તર કમ્પાઉન્ડ કરશે.
+          તમારી પસંદગી અનુસાર લેબ અલ્ગોરિધમ ૩ દુર્લભ અત્તરના ટીપાં કમ્પાઉન્ડ કરશે.
         </p>
       </div>
 
       <div id="choicesGrid" class="space-y-2.5 pt-1"></div>
 
       <div class="pt-3 flex items-center justify-between text-[11px] text-gray-400 border-t border-white/5 font-mono">
-        <span>⚡ ૧,૮૪૨ લોકોએ આજે પોતાનો ફોર્મ્યુલા બનાવ્યો</span>
-        <span class="text-goldLight font-bold">PURE OIL CONCENTRATE</span>
+        <span>🔥 ૧,૮૪૨ લોકોએ આજે પોતાનો ફોર્મ્યુલા બનાવ્યો</span>
+        <span class="text-goldLight font-bold">14-HOUR PROJECTION</span>
       </div>
     </main>
 
@@ -214,8 +213,8 @@
       <div class="reactor-core">
         <div id="fluidLevel" class="fluid-layer"></div>
         <div class="bubble" style="left: 20%; animation-delay: 0.1s; width: 6px; height: 6px;"></div>
-        <div class="bubble" style="left: 55%; animation-delay: 0.7s; width: 7px; height: 7px;"></div>
-        <div class="bubble" style="left: 40%; animation-delay: 1.2s; width: 5px; height: 5px;"></div>
+        <div class="bubble" style="left: 55%; animation-delay: 0.6s; width: 7px; height: 7px;"></div>
+        <div class="bubble" style="left: 40%; animation-delay: 1.1s; width: 5px; height: 5px;"></div>
       </div>
 
       <div>
@@ -223,7 +222,7 @@
           EXTRACTING BASE MOLECULES...
         </div>
         <div class="text-xs text-gray-400 mt-1 max-w-sm">
-          50% Base Sustain, 30% Heart Resonance, 20% Top Projection નો સંગમ થઈ રહ્યો છે...
+          ૫૦% બેઝ સસ્ટેન, ૩૦% હાર્ટ એટ્રેક્શન, ૨૦% ટોપ પ્રોજેક્શન એકત્રિત થઈ રહ્યું છે...
         </div>
       </div>
 
@@ -232,7 +231,7 @@
           <span>> ATOMIZING NATURAL ESSENTIAL OILS</span>
           <span id="liveYield">64.2%</span>
         </div>
-        <div class="text-goldLight">> INFUSING 14-HOUR MAGNETIC PROJECTION</div>
+        <div class="text-goldLight">> LOCKING 14-HOUR MAGNETIC PROJECTION</div>
       </div>
     </section>
 
@@ -240,22 +239,22 @@
     <section id="dossierView" class="hidden space-y-4">
       
       <!-- Countdown Timer -->
-      <div class="timer-alert rounded-xl py-2 px-3 text-center text-xs font-mono font-bold flex items-center justify-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-cyberRed animate-ping"></span>
-        <span>સ્પેશિયલ ડિસ્કાઉન્ટ સમાપ્ત થવામાં સમય:</span>
-        <span id="countdownClock" class="text-cyberRed font-black text-sm tracking-widest">09:59</span>
+      <div class="timer-badge rounded-xl py-2 px-3 text-center text-xs font-mono font-bold flex items-center justify-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-seduceRed animate-ping"></span>
+        <span>ખાસ ઓફર સમાપ્ત થવામાં બાકી સમય:</span>
+        <span id="countdownClock" class="text-seduceRed font-black text-sm tracking-widest">09:59</span>
       </div>
 
       <!-- Result Card -->
       <div class="bg-gradient-to-b from-white/[0.04] to-black/70 border border-goldPrimary/30 rounded-2xl p-4 text-center">
         <div class="flex items-center justify-between text-[11px] font-mono text-gray-400 pb-2 border-b border-white/10">
           <span id="dossierBatchCode" class="text-goldLight tracking-widest font-black">FORMULA #AURAFRAG-7492</span>
-          <span class="text-emerald-400 font-bold">100% BESPOKE MATCH</span>
+          <span class="text-emerald-400 font-bold">૧૦૦% BESPOKE MATCH</span>
         </div>
 
         <h2 class="text-lg font-black text-goldLight font-cinzel mt-2">TRINITY IMPERIAL EXTRAIT</h2>
         <p class="text-xs text-gray-300 max-w-md mx-auto mt-1">
-          તમારી પસંદગી મુજબ તૈયાર કરેલું ૩ પ્યોર અત્તરનું મિશ્રણ, જે ત્વચા પર લાગતાં જ ૧૪ કલાક સુધી મોહક રૂઆબ જાળવી રાખશે.
+          તમારા શરીરની તાસીર મુજબ તૈયાર કરેલું ૩ પ્યોર અત્તરનું મિશ્રણ. પહેલી નજરે ગમે તે દેખાય, પણ છેલ્લી યાદ તમારી આ જ ખુશ્બૂની રહેશે.
         </p>
 
         <!-- Ratio Bar (50:30:20) -->
@@ -278,7 +277,7 @@
             </span>
             <div class="flex items-center gap-1.5 mt-0.5 text-xs text-emerald-400 font-semibold">
               <span>🚚</span>
-              <span>All India Free Home Delivery</span>
+              <span>સમગ્ર ભારતમાં ફ્રી હોમ ડિલિવરી</span>
             </div>
           </div>
           <div class="text-right">
@@ -300,7 +299,7 @@
                   <span>ઓનલાઇન પેમેન્ટ (Prepaid)</span>
                   <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/40">ઝડપી ડિસ્પેચ</span>
                 </div>
-                <div class="text-xs text-gray-300 mt-0.5">Google Pay / PhonePe / Paytm / Cards (Razorpay)</div>
+                <div class="text-xs text-gray-300 mt-0.5">Google Pay / PhonePe / Paytm / Cards / UPI</div>
               </div>
             </div>
             <span class="text-sm font-mono text-goldLight font-black">₹599</span>
@@ -315,7 +314,7 @@
                   <span>કેશ ઓન ડિલિવરી (COD)</span>
                   <span class="text-[10px] bg-white/10 text-gray-300 px-2 py-0.5 rounded">WhatsApp</span>
                 </div>
-                <div class="text-xs text-gray-400 mt-0.5">પાર્સલ ઘરે આવે ત્યારે જ રોકડા આપો</div>
+                <div class="text-xs text-gray-400 mt-0.5">પાર્સલ ઘરે પહોંચે ત્યારે જ રોકડા આપો</div>
               </div>
             </div>
             <span class="text-sm font-mono text-gray-300 font-black">₹599</span>
@@ -326,9 +325,9 @@
         <div class="bg-black/60 border border-emerald-500/30 rounded-xl p-2.5 flex items-center justify-between text-xs text-emerald-300">
           <span class="flex items-center gap-2">
             <span class="text-base">📦</span>
-            <strong>સમગ્ર ભારતમાં ફ્રી હોમ ડિલિવરી</strong>
+            <strong>ઓલ ઇન્ડિયા ફ્રી કુરિયર ડિલિવરી</strong>
           </span>
-          <span class="font-mono font-bold text-white">₹0 FREE</span>
+          <span class="font-mono font-bold text-white">₹0 ફ્રી</span>
         </div>
 
         <!-- DYNAMIC ACTION BUTTON -->
@@ -359,13 +358,11 @@
     const ORDER_AMOUNT_INR = 599;
 
     const CATALOG = {
-      xChocolate:   { name: "X-Chocolate Noir", color: "#8B0000" },
-      chocoBlast:   { name: "Choco Blast Royale", color: "#d63031" },
+      xChocolate:   { name: "Dark Chocolate Noir", color: "#8B0000" },
       frenchRose:   { name: "Damascus Blood Rose", color: "#e84393" },
-      cherish:      { name: "Cherish Seduction", color: "#fd79a8" },
+      cherish:      { name: "Cherish Intimate Seduction", color: "#fd79a8" },
       copper:       { name: "Smoked Copper Wood", color: "#c0392b" },
       classic:      { name: "Classic Royal Sovereign", color: "#1f4068" },
-      coolWater:    { name: "Glacial Deep Cool", color: "#2980b9" },
       diamondSandal:{ name: "Imperial Diamond Sandal", color: "#d35400" },
       whiteMusk:    { name: "White Musk Nirvana", color: "#27ae60" },
       fawaki:       { name: "Fawaki Eden Mist", color: "#16a085" },
@@ -376,37 +373,37 @@
     const QUESTIONS = [
       {
         q: "૧. તમે તમારી હાજરીથી આસપાસ કેવું ચુંબકીય ખેંચાણ ઊભું કરવા માંગો છો?",
-        sub: "એક વિકલ્પ પસંદ કરો. લેબ તમારા સ્વભાવ મુજબ ૩ અત્તર કમ્પાઉન્ડ કરશે.",
+        sub: "તમારી પસંદગી અનુસાર લેબ ૩ દુર્લભ અત્તરના ટીપાં કમ્પાઉન્ડ કરશે.",
         options: [
-          { title: "Dark Attraction & Seduction (મદહોશ કરતું આકર્ષણ)", desc: "જ્યારે તેઓ નજીક આવે ત્યારે તમારી સુગંધથી માત્ર તમારા તરફ ખેંચાય.", icon: "🔥", picks: ["xChocolate", "frenchRose", "chocoBlast"] },
-          { title: "Alpha Dominance & Authority (વજનદાર રુઆબ)", desc: "મીટિંગ કે સભામાં પગ મૂકતાં જ લોકો તમારી પર્સનાલિટીનો પ્રભાવ માને.", icon: "👑", picks: ["copper", "classic", "diamondSandal"] },
-          { title: "Sacred Peace & Divine Aura (શાંતિ અને સ્નેહ)", desc: "પાક અને આહલાદક સુગંધ જે નજીક આવનારના દિલને શાંતિ આપે.", icon: "🌿", picks: ["whiteMusk", "fawaki", "diamondSandal"] }
+          { title: "Dark Seduction & Magnetism (કામુક અને મદહોશ આકર્ષણ)", desc: "તમે પાસેથી પસાર થાઓ એટલે એમની નજર અને ધડકન માત્ર તમારી તરફ ખેંચાય.", icon: "🔥", picks: ["xChocolate", "frenchRose", "cherish"] },
+          { title: "Royal Authority & Alpha Ruab (શાહી વજનદાર રૂઆબ)", desc: "સભા કે મીટિંગમાં પગ મૂકતાં જ લોકો તમારા ગંભીર વ્યક્તિત્વથી પ્રભાવિત થાય.", icon: "👑", picks: ["copper", "classic", "diamondSandal"] },
+          { title: "Divine Aura & Serene Touch (પાક આહલાદક શાંતિ)", desc: "નજીક આવનાર વ્યક્તિના મનને અસીમ સુકૂન અને સ્નેહનો અહેસાસ કરાવે.", icon: "🌿", picks: ["whiteMusk", "fawaki", "diamondSandal"] }
         ]
       },
       {
-        q: "૨. સામી વ્યક્તિના મગજ પર કેવો મનોવૈજ્ઞાનિક પ્રભાવ છોડવો છે?",
-        sub: "સુગંધ સીધી મગજના લિમ્બિક સિસ્ટમ પર અસર કરે છે.",
+        q: "૨. સામી વ્યક્તિના દિલ અને દિમાગ પર કેવો પ્રભાવ છોડવો છે?",
+        sub: "સુગંધ સીધી માનસિક સંવેદનાઓ પર અકસીર અસર કરે છે.",
         options: [
-          { title: "Uncontrollable Magnetism (નજીક આવવાની બેચેની)", desc: "તેમનું ધ્યાન વારંવાર તમારી તરફ જ ખેંચાયા કરે.", icon: "💋", picks: ["xChocolate", "cherish", "blueLady"] },
-          { title: "Undeniable Respect (ગંભીર સન્માન)", desc: "રૂમમાં શાંતિ છવાઈ જાય અને તમારી વાતને વજન મળે.", icon: "⚡", picks: ["copper", "classic"] },
-          { title: "Haunting Memory (દિવસો સુધી યાદ રહેતો નશો)", desc: "તમે ગયા પછી પણ તમારી મહેક કલાકો સુધી ગુંજતી રહે.", icon: "🔮", picks: ["frenchRose", "mexico", "cherish"] }
+          { title: "Uncontrollable Attraction (નજીક આવવાની તાલાવેલી)", desc: "તેમનું ધ્યાન વારંવાર તમારી તરફ જ ભટક્યા કરે.", icon: "💋", picks: ["xChocolate", "cherish", "blueLady"] },
+          { title: "Haunting Memory (દિવસો સુધી યાદ રહેતી ખુશ્બૂ)", desc: "તમે ગયા પછી પણ કલાકો સુધી તમારી સુગંધનો નશો રૂમમાં ગુંજતો રહે.", icon: "🔮", picks: ["frenchRose", "mexico", "cherish"] },
+          { title: "Pure Respect (પ્રભાવશાળી સન્માન)", desc: "તમારી હાજરી માત્રથી રૂમમાં એક ગંભીર અને શાહી સન્માન છવાઈ જાય.", icon: "⚡", picks: ["copper", "classic"] }
         ]
       },
       {
-        q: "૩. તમારી ત્વચા માટે કયો બેઝ સૌથી વધુ વજનદાર હોવો જોઈએ?",
-        sub: "આ તમારા ફોર્મ્યુલાનો ૫૦% મુખ્ય આધાર (Base Note) નક્કી કરશે.",
+        q: "૩. તમારી ત્વચા માટે કયો બેઝ સૌથી વધુ વજનદાર રાખવો છે?",
+        sub: "આ તમારા અત્તરનો ૫૦% મુખ્ય આધાર (Base Note) નક્કી કરશે.",
         options: [
-          { title: "Warm Cocoa & Dark Amber (ગરમ અને નશીલું)", desc: "ડાર્ક ચોકલેટ અને એમ્બરનો મોહક સંગમ.", icon: "🍫", picks: ["xChocolate", "chocoBlast"] },
-          { title: "Smoked Oud & Sandalwood (શાહી અને મર્દાના)", desc: "શુદ્ધ ચંદન અને ઊદની ખાનદાની રઈસી દર્શાવતી તાસીર.", icon: "🪵", picks: ["diamondSandal", "copper"] },
-          { title: "Rain Earth & White Musk (પવિત્ર અને શીતળ)", desc: "ભીની માટી અને શુદ્ધ સફેદ કસ્તુરીની આત્મીય મહેક.", icon: "💧", picks: ["whiteMusk", "fawaki"] }
+          { title: "Warm Cocoa & Dark Amber (નશીલું અને ગરમ)", desc: "ડાર્ક ચોકલેટ અને એમ્બરનો ગાઢ, રોમેન્ટિક સંગમ.", icon: "🍫", picks: ["xChocolate", "mexico"] },
+          { title: "Smoked Oud & Sandalwood (શાહી અને મર્દાના)", desc: "શુદ્ધ ચંદન અને લાકડાની રઈસી દર્શાવતી ખાનદાની સુગંધ.", icon: "🪵", picks: ["diamondSandal", "copper"] },
+          { title: "White Musk & Rain Earth (શીતળ અને પવિત્ર)", desc: "ભીની માટી અને શુદ્ધ સફેદ કસ્તુરીની નજાકત ભરેલી સુગંધ.", icon: "💧", picks: ["whiteMusk", "fawaki"] }
         ]
       },
       {
         q: "૪. તમે અત્તરનો ફેલાવો (Projection) કેવો રાખવા માંગો છો?",
-        sub: "ખુશ્બૂ ફેલાવવાની તાકાત લોક કરવામાં આવી રહી છે.",
+        sub: "ખુશ્બૂ ફેલાવવાની તાકાત લૉક કરવામાં આવી રહી છે.",
         options: [
-          { title: "14-Hour Beast Mode (આખો રૂમ મહેકી ઊઠે)", desc: "સવારથી રાત સુધી પ્રચંડ ખુશ્બૂ ટકી રહેશે.", icon: "💣", picks: ["copper", "xChocolate", "diamondSandal"] },
-          { title: "Intimate Whisper Lock (નજીક આવનાર માટે)", desc: "ફક્ત તમારા એકદમ નિકટ આવનારને જ અનુભવાય.", icon: "🥀", picks: ["frenchRose", "whiteMusk", "cherish"] }
+          { title: "14-Hour Magnetic Beast (આખો રૂમ મહેકી ઊઠે)", desc: "સવારથી રાત સુધી તમારો પ્રચંડ રૂઆબ બરકરાર રહેશે.", icon: "💣", picks: ["copper", "xChocolate", "diamondSandal"] },
+          { title: "Intimate Whisper Lock (એકદમ અંગત અને નિકટ)", desc: "ફક્ત તમારી ખૂબ નજીક આવનાર ખાસ વ્યક્તિને જ અનુભવાય.", icon: "🥀", picks: ["frenchRose", "whiteMusk", "cherish"] }
         ]
       }
     ];
@@ -430,7 +427,7 @@
 
       renderStep() {
         const data = QUESTIONS[this.step];
-        document.getElementById('stepLabel').innerText = `SYNTHESIS PHASE // 0${this.step + 1}/04`;
+        document.getElementById('stepLabel').innerText = `આકર્ષણ તબક્કો // ૦${this.step + 1}/૦૪`;
         document.getElementById('chamberProgress').style.width = `${((this.step + 1) / 4) * 100}%`;
         document.getElementById('chamberQuestion').innerText = data.q;
         document.getElementById('chamberSubtext').innerText = data.sub;
@@ -447,7 +444,7 @@
               <h3 class="text-sm sm:text-base font-black text-white leading-tight mb-1">${opt.title}</h3>
               <p class="text-xs text-gray-300 leading-snug">${opt.desc}</p>
             </div>
-            <div class="text-goldPrimary/60 text-xs font-mono font-bold self-center">[પસંદ કરો]</div>
+            <div class="text-goldPrimary/70 text-xs font-mono font-bold self-center">[પસંદ કરો]</div>
           `;
           card.onclick = () => {
             if (typeof fbq === 'function') {
@@ -482,8 +479,8 @@
         let status = document.getElementById('compoundingStatus');
         let yText = document.getElementById('liveYield');
 
-        setTimeout(() => { fluid.style.height = "40%"; status.innerText = "STABILIZING BASE RESINS..."; yText.innerText = "75.4%"; }, 600);
-        setTimeout(() => { fluid.style.height = "75%"; status.innerText = "LOCKING 50:30:20 PROJECTION..."; yText.innerText = "94.2%"; }, 1300);
+        setTimeout(() => { fluid.style.height = "40%"; status.innerText = "STABILIZING BASE RESINS..."; yText.innerText = "72.4%"; }, 600);
+        setTimeout(() => { fluid.style.height = "80%"; status.innerText = "LOCKING 50:30:20 RATIO..."; yText.innerText = "96.1%"; }, 1300);
 
         setTimeout(() => {
           this.calculateBlend();
@@ -532,7 +529,7 @@
 
         const list = document.getElementById('formulaListDetails');
         list.innerHTML = '';
-        const roles = ["૫૦% બેઝ નોટ (લાંબો પ્રભાવ)", "૩૦% હાર્ટ નોટ (દિલનું આકર્ષણ)", "૨૦% ટોપ નોટ (પ્રથમ વાર)"];
+        const roles = ["૫૦% બેઝ નોટ (લાંબો ૧૪ કલાક પ્રભાવ)", "૩૦% હાર્ટ નોટ (દિલનું મોહક આકર્ષણ)", "૨૦% ટોપ નોટ (પ્રથમ નજરનો વાર)"];
         this.finalBlend.forEach((item, idx) => {
           const row = document.createElement('div');
           row.className = "flex items-center justify-between p-2.5 rounded-xl border border-white/10 bg-black/40 text-xs";
@@ -598,9 +595,9 @@
           amount: ORDER_AMOUNT_INR * 100,
           currency: "INR",
           name: "AURAFRAG LAB",
-          description: `Bespoke 3-Attar Blend (${this.code}) - All India Free Delivery`,
+          description: `Bespoke 3-Attar Blend (${this.code}) - Free Delivery`,
           theme: {
-            color: "#f5b041"
+            color: "#e5a93b"
           },
           handler: (response) => {
             if (typeof fbq === 'function') {
@@ -624,7 +621,7 @@
 • પેમેન્ટ ID: ${response.razorpay_payment_id}
 • રકમ: ₹${ORDER_AMOUNT_INR} (Paid)
 
-🧪 *મારો કસ્ટમ ફોર્મ્યુલા:*
+🧪 *સિદ્ધ થયેલો કસ્ટમ ફોર્મ્યુલા:*
 • ફોર્મ્યુલા કોડ: ${this.code}
 • ૫૦% બેઝ: ${p.name}
 • ૩૦% હાર્ટ: ${s.name}
@@ -637,7 +634,7 @@
 • ગામ / શહેર: 
 • પિનકોડ: 
 
-કૃપા કરીને મારો ઓર્ડર વહેલી તકે ડિસ્પેચ કરશો!`;
+કૃપા કરીને મારી કસ્ટમ બોટલ તૈયાર કરી વહેલી તકે ડિસ્પેચ કરશો!`;
 
             const redirectUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(paidMessage)}`;
 
@@ -648,7 +645,7 @@
               <div class="text-3xl">🎉</div>
               <h3 class="text-lg font-black text-white">પેમેન્ટ સફળતાપૂર્વક થઈ ગયું!</h3>
               <p class="text-xs text-emerald-200">Payment ID: ${response.razorpay_payment_id}</p>
-              <p class="text-xs text-yellow-300 font-bold mt-2">ડિલિવરી સરનામું મોકલવા નીચેના બટન પર ક્લિક કરો:</p>
+              <p class="text-xs text-yellow-300 font-bold mt-2">ડિલિવરી સરનામું મોકલવા માટે નીચેના બટન પર ક્લિક કરો:</p>
               <a href="${redirectUrl}" class="btn-whatsapp mt-3 inline-flex items-center justify-center w-full py-3.5 px-4 rounded-xl text-white font-black text-sm tracking-wide">
                 WhatsApp પર સરનામું મોકલો ➔
               </a>
