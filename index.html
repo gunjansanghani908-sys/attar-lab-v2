@@ -7,7 +7,7 @@
 
   <!-- Meta Pixel Base Code -->
   <script>
-    const META_PIXEL_ID = "1718140289270179"; // <-- Replace with your Meta Pixel ID
+    const META_PIXEL_ID = "1718140289270179";
 
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -23,7 +23,7 @@
   </script>
   <noscript>
     <img height="1" width="1" style="display:none" 
-         src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID_HERE&ev=PageView&noscript=1"/>
+         src="https://www.facebook.com/tr?id=1718140289270179&ev=PageView&noscript=1"/>
   </noscript>
   <!-- End Meta Pixel Base Code -->
 
@@ -339,13 +339,8 @@
           <span id="btnText">₹૫૯૯ ઓનલાઇન ચૂકવો (Razorpay Instant)</span>
         </button>
 
-        <!-- SUCCESS NOTIFICATION BOX -->
-        <div id="paymentSuccessBox" class="hidden bg-emerald-950/90 border border-emerald-500 rounded-2xl p-5 text-center space-y-2">
-          <div class="text-3xl">🎉</div>
-          <h3 class="text-lg font-black text-white">પેમેન્ટ સફળ!</h3>
-          <p class="text-xs text-emerald-200" id="receiptDetails"></p>
-          <p class="text-[11px] text-yellow-300">સરનામું મોકલવા WhatsApp ખૂલી રહ્યું છે...</p>
-        </div>
+        <!-- SUCCESS NOTIFICATION & REDIRECT BOX -->
+        <div id="paymentSuccessBox" class="hidden bg-emerald-950/90 border border-emerald-500 rounded-2xl p-5 text-center space-y-2"></div>
 
         <div class="text-[11px] text-gray-400 text-center flex items-center justify-center gap-2 font-mono">
           <span>🔒 ૧૦૦% સેફ ટ્રાન્ઝેક્શન</span>
@@ -455,7 +450,6 @@
             <div class="text-goldPrimary/60 text-xs font-mono font-bold self-center">[પસંદ કરો]</div>
           `;
           card.onclick = () => {
-            // Track user quiz progress
             if (typeof fbq === 'function') {
               fbq('trackCustom', 'AttarQuizStep', {
                 step_number: this.step + 1,
@@ -513,7 +507,6 @@
         document.getElementById('dossierView').classList.remove('hidden');
         document.getElementById('dossierBatchCode').innerText = `FORMULA #${this.code}`;
 
-        // META PIXEL: ViewContent when formulation unlocks
         if (!this.hasViewContentFired && typeof fbq === 'function') {
           fbq('track', 'ViewContent', {
             content_name: 'Bespoke Attar - ' + this.code,
@@ -578,7 +571,6 @@
       }
 
       executeOrder() {
-        // META PIXEL: InitiateCheckout
         if (typeof fbq === 'function') {
           fbq('track', 'InitiateCheckout', {
             content_name: 'Bespoke Attar - ' + this.code,
@@ -611,7 +603,6 @@
             color: "#f5b041"
           },
           handler: (response) => {
-            // META PIXEL: Purchase
             if (typeof fbq === 'function') {
               fbq('track', 'Purchase', {
                 content_name: 'Bespoke Attar - ' + this.code,
@@ -624,12 +615,6 @@
               });
             }
 
-            document.getElementById('orderActionBtn').classList.add('hidden');
-            const modal = document.getElementById('paymentSuccessBox');
-            modal.classList.remove('hidden');
-            document.getElementById('receiptDetails').innerText = 
-              `Payment ID: ${response.razorpay_payment_id} | અમાઉન્ટ: ₹${ORDER_AMOUNT_INR} (Paid)`;
-
             const paidMessage = 
 `નમસ્તે AURAFRAG! 🔥
 
@@ -639,7 +624,7 @@
 • પેમેન્ટ ID: ${response.razorpay_payment_id}
 • રકમ: ₹${ORDER_AMOUNT_INR} (Paid)
 
-🧪 *સિદ્ધ થયેલો કસ્ટમ ફોર્મ્યુલા:*
+🧪 *મારો કસ્ટમ ફોર્મ્યુલા:*
 • ફોર્મ્યુલા કોડ: ${this.code}
 • ૫૦% બેઝ: ${p.name}
 • ૩૦% હાર્ટ: ${s.name}
@@ -648,13 +633,28 @@
 📦 *મારું ડિલિવરી સરનામું:*
 • પૂરું નામ: 
 • મોબાઈલ નંબર: 
-• ઘરનું પૂરું સરનામું (ગામ/શહેર સહિત): 
+• ઘરનું સરનામું (શેરી/વિસ્તાર): 
+• ગામ / શહેર: 
 • પિનકોડ: 
 
-કૃપા કરીને મારી કસ્ટમ બોટલ તૈયાર કરી કુરિયર રવાના કરશો!`;
+કૃપા કરીને મારો ઓર્ડર વહેલી તકે ડિસ્પેચ કરશો!`;
+
+            const redirectUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(paidMessage)}`;
+
+            document.getElementById('orderActionBtn').classList.add('hidden');
+            const modal = document.getElementById('paymentSuccessBox');
+            modal.classList.remove('hidden');
+            modal.innerHTML = `
+              <div class="text-3xl">🎉</div>
+              <h3 class="text-lg font-black text-white">પેમેન્ટ સફળતાપૂર્વક થઈ ગયું!</h3>
+              <p class="text-xs text-emerald-200">Payment ID: ${response.razorpay_payment_id}</p>
+              <p class="text-xs text-yellow-300 font-bold mt-2">ડિલિવરી સરનામું મોકલવા માટે નીચેના બટન પર ક્લિક કરો:</p>
+              <a href="${redirectUrl}" class="btn-whatsapp mt-3 inline-flex items-center justify-center w-full py-3.5 px-4 rounded-xl text-white font-black text-sm tracking-wide">
+                WhatsApp પર સરનામું મોકલો ➔
+              </a>
+            `;
 
             setTimeout(() => {
-              const redirectUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(paidMessage)}`;
               window.location.href = redirectUrl;
             }, 1500);
           }
@@ -670,7 +670,6 @@
       triggerWhatsAppCOD() {
         const [p, s, t] = this.finalBlend;
 
-        // META PIXEL: Lead
         if (typeof fbq === 'function') {
           fbq('track', 'Lead', {
             content_name: 'COD Order - ' + this.code,
@@ -701,7 +700,6 @@
 કૃપા કરીને મારો COD ઓર્ડર કન્ફર્મ કરશો!`;
 
         const encoded = encodeURIComponent(message);
-        
         setTimeout(() => {
           window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
         }, 250);
