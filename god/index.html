@@ -12,6 +12,29 @@
   <!-- Razorpay Official Checkout SDK -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
+  <!-- ========================================== -->
+  <!-- META PIXEL BASE CODE (SALES & PURCHASE)     -->
+  <!-- ========================================== -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    
+    // અગત્યનું: અહીં તમારો Pixel ID નાખો
+    fbq('init', '1718140289270179');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none" 
+         src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID_HERE&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- ========================================== -->
+
   <style>
     :root {
       --bg-night: #08050e;
@@ -754,7 +777,6 @@
       </p>
 
       <div class="deity-grid">
-        <!-- Mahadev Option -->
         <div class="deity-card" onclick="selectDeity('મહાદેવ શિવ ભક્તિ', 'ધ્યાન & શાંતિ', 'શ્વેત ચંદન & ભસ્મ અંબર')">
           <div class="deity-icon">🔱</div>
           <div>
@@ -763,7 +785,6 @@
           </div>
         </div>
 
-        <!-- Krishna Option -->
         <div class="deity-card" onclick="selectDeity('શ્રી રાધા-કૃષ્ણ ભક્તિ', 'પ્રેમ & આકર્ષણ', 'કાશ્મીરી કેસર, કસ્તુરી & કદંબ')">
           <div class="deity-icon">🦚</div>
           <div>
@@ -772,7 +793,6 @@
           </div>
         </div>
 
-        <!-- Hanumanji Option -->
         <div class="deity-card" onclick="selectDeity('હનુમાનજી શક્તિ ઉપાસના', 'સકારાત્મક ઊર્જા', 'સિંદૂર-ગુલાબ, લવિંગ & અગરવુડ')">
           <div class="deity-icon">🚩</div>
           <div>
@@ -781,7 +801,6 @@
           </div>
         </div>
 
-        <!-- Lakshmi Narayan Option -->
         <div class="deity-card" onclick="selectDeity('લક્ષ્મી-નારાયણ સમૃદ્ધિ', 'વાસ્તુ & ધન શાંતિ', 'પવિત્ર કમળ, મલયાગિરી ચંદન & તુલસી')">
           <div class="deity-icon">🪷</div>
           <div>
@@ -878,7 +897,6 @@
           <span style="color:var(--gold-temple);">૫૦ : ૩૦ : ૨૦</span>
         </div>
 
-        <!-- 50% Component -->
         <div class="ing-row">
           <div class="ing-top">
             <span class="ing-title" id="sacredIng1">૫૦% મલયાગિરી શ્વેત ચંદન & અમૃત અર્ક</span>
@@ -890,7 +908,6 @@
           <div class="ing-sub" id="sacredDesc1">મનને તાત્કાલિક શાંત કરતો અને ધ્યાનને ઊંડું કરતો પવિત્ર આધાર.</div>
         </div>
 
-        <!-- 30% Component -->
         <div class="ing-row">
           <div class="ing-top">
             <span class="ing-title" id="sacredIng2">૩૦% કાશ્મીરી કેસર & કસ્તુરી મસ્ક</span>
@@ -902,7 +919,6 @@
           <div class="ing-sub" id="sacredDesc2">ઈશ્વરીય પ્રેમ, સકારાત્મક આભા અને પ્રસન્નતા ફેલાવતો અર્ક.</div>
         </div>
 
-        <!-- 20% Component -->
         <div class="ing-row">
           <div class="ing-top">
             <span class="ing-title" id="sacredIng3">૨૦% પવિત્ર તુલસી & ગૂગળ-લોબાન ધૂપ</span>
@@ -1013,7 +1029,6 @@
     const WHATSAPP_NUMBER = "919327938950";
     const ORDER_AMOUNT_INR = 599;
 
-    // Active Selection State
     let currentPaymentMode = "ONLINE";
 
     // Temple Particles (Incense Smoke & Golden Sparks)
@@ -1261,7 +1276,7 @@
       }
     }
 
-    // Razorpay Flow with Instant WhatsApp Redirect
+    // Razorpay Flow with Instant WhatsApp Redirect & Meta Purchase Tracking
     function triggerRazorpayPayment() {
       const options = {
         key: RAZORPAY_KEY,
@@ -1273,13 +1288,22 @@
           color: "#ffd700"
         },
         handler: function (response) {
+          // Meta Purchase Event Fire
+          if (typeof fbq === 'function') {
+            fbq('track', 'Purchase', {
+              value: ORDER_AMOUNT_INR,
+              currency: 'INR',
+              content_name: 'AURA Divine Perfume',
+              content_type: 'product'
+            });
+          }
+
           document.getElementById("masterActionBtn").style.display = "none";
           const successBox = document.getElementById("paymentSuccessBox");
           successBox.style.display = "block";
           document.getElementById("successDetails").innerText = 
             `Payment ID: ${response.razorpay_payment_id} | અમાઉન્ટ: ₹${ORDER_AMOUNT_INR} (Paid)`;
 
-          // પેમેન્ટ કન્ફર્મ થતાં જ WhatsApp પર ડિલિવરી એડ્રેસ મોકલવા માટેનું મેસેજ
           const paidMessage = 
 `જય શ્રી કૃષ્ણ / હર હર મહાદેવ 🙏
 
@@ -1306,7 +1330,6 @@
 
 કૃપા કરીને મારો પ્રસાદ ઓર્ડર તૈયાર કરી રવાના કરશો!`;
 
-          // ૧.૫ સેકન્ડ પછી ઓટોમેટિક WhatsApp પર રીડાયરેક્ટ થશે
           setTimeout(() => {
             const redirectUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(paidMessage)}`;
             window.location.href = redirectUrl;
@@ -1321,8 +1344,18 @@
       rzp.open();
     }
 
-    // WhatsApp COD Flow
+    // WhatsApp COD Flow with Meta Tracking
     function triggerWhatsAppCODOrder() {
+      // Meta Purchase/Lead Tracking for COD
+      if (typeof fbq === 'function') {
+        fbq('track', 'Purchase', {
+          value: ORDER_AMOUNT_INR,
+          currency: 'INR',
+          content_name: 'AURA Divine Perfume (COD)',
+          content_type: 'product'
+        });
+      }
+
       const message = 
 `જય શ્રી કૃષ્ણ / હર હર મહાદેવ 🙏
 
