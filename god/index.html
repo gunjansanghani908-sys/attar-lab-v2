@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>AURA - દૈવી આધ્યાત્મિક અત્તર સિમ્યુલેશન</title>
+  <title>AURA - વાસ્તુ & દૈવી કસ્ટમાઇઝ્ડ અત્તર</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,9 +12,7 @@
   <!-- Razorpay Official Checkout SDK -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
-  <!-- ========================================== -->
-  <!-- META PIXEL BASE CODE (SALES & PURCHASE)     -->
-  <!-- ========================================== -->
+  <!-- META PIXEL BASE CODE -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -32,23 +30,18 @@
     <img height="1" width="1" style="display:none" 
          src="https://www.facebook.com/tr?id=1718140289270179&ev=PageView&noscript=1"/>
   </noscript>
-  <!-- ========================================== -->
 
-  <!-- ========================================== -->
-  <!-- VERCEL WEB ANALYTICS                       -->
-  <!-- ========================================== -->
+  <!-- VERCEL ANALYTICS -->
   <script defer src="/_vercel/insights/script.js"></script>
-  <!-- ========================================== -->
 
   <style>
     :root {
-      --bg-night: #08050e;
-      --bg-temple: #140b22;
+      --bg-night: #06040a;
+      --bg-temple: #12091e;
       --gold-temple: #ffd700;
       --gold-deep: #f39c12;
       --gold-glow: rgba(255, 215, 0, 0.45);
-      --amber-flame: #ff7700;
-      --card-bg: rgba(20, 12, 34, 0.93);
+      --card-bg: rgba(18, 10, 30, 0.94);
       --card-border: rgba(255, 215, 0, 0.28);
       --text: #fdfbf7;
       --text-muted: #bdafcb;
@@ -76,7 +69,6 @@
       position: relative;
     }
 
-    /* Sacred Cosmic Temple Canvas */
     #templeCanvas {
       position: fixed;
       inset: 0;
@@ -89,17 +81,16 @@
     .temple-vignette {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at center, transparent 30%, rgba(8, 5, 14, 0.94) 95%);
+      background: radial-gradient(circle at center, transparent 35%, rgba(6, 4, 10, 0.96) 95%);
       pointer-events: none;
       z-index: 1;
     }
 
-    /* Outer Wrapper */
     .app-frame {
       position: relative;
       z-index: 10;
       width: 100%;
-      max-width: 450px;
+      max-width: 460px;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -107,30 +98,28 @@
       padding: 24px 16px 36px;
     }
 
-    /* Sacred Header */
     .sacred-header {
       text-align: center;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .om-symbol {
-      font-size: 28px;
+      font-size: 30px;
       color: var(--gold-temple);
       display: inline-block;
-      text-shadow: 0 0 16px var(--gold-glow);
+      text-shadow: 0 0 18px var(--gold-glow);
       animation: floatOm 3s ease-in-out infinite alternate;
-      margin-bottom: 2px;
     }
 
     @keyframes floatOm {
       from { transform: translateY(0px) scale(1); filter: brightness(1); }
-      to { transform: translateY(-4px) scale(1.06); filter: brightness(1.25); }
+      to { transform: translateY(-4px) scale(1.08); filter: brightness(1.3); }
     }
 
     .brand-title {
       font-family: 'Rozha One', 'Cinzel Decorative', serif;
-      font-size: 26px;
-      letter-spacing: 0.18em;
+      font-size: 24px;
+      letter-spacing: 0.14em;
       font-weight: 900;
       background: linear-gradient(180deg, #fff7d6 0%, #ffd700 50%, #d48806 100%);
       -webkit-background-clip: text;
@@ -139,21 +128,19 @@
     }
 
     .brand-subtitle {
-      font-size: 11px;
+      font-size: 11.5px;
       color: var(--gold-deep);
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+      letter-spacing: 0.14em;
       font-weight: 700;
-      margin-top: 2px;
+      margin-top: 3px;
     }
 
-    /* Spiritual Progress Stepper */
     .stepper {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 8px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .step-pill {
@@ -170,18 +157,17 @@
       width: 38px;
     }
 
-    /* Screen Card Styles */
     .screen-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 24px;
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      padding: 26px 18px;
+      padding: 24px 18px;
       text-align: center;
       display: none;
-      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.85);
-      animation: divineFade 0.4s ease forwards;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.88);
+      animation: divineFade 0.35s ease forwards;
     }
 
     .screen-card.active {
@@ -206,9 +192,9 @@
     }
 
     h2.heading {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 800;
-      line-height: 1.4;
+      line-height: 1.45;
       margin-bottom: 8px;
       color: #ffffff;
     }
@@ -221,43 +207,41 @@
     }
 
     p.sub-heading {
-      font-size: 13px;
+      font-size: 12.5px;
       color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 20px;
+      line-height: 1.5;
+      margin-bottom: 18px;
     }
 
-    /* Slide 1 Deity Grid */
     .deity-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 11px;
-      margin-bottom: 8px;
+      gap: 10px;
+      margin-bottom: 10px;
     }
 
     .deity-card {
-      background: rgba(28, 17, 48, 0.75);
+      background: rgba(28, 15, 46, 0.75);
       border: 1px solid rgba(255, 215, 0, 0.22);
       border-radius: 16px;
-      padding: 14px 14px;
+      padding: 13px 14px;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 13px;
       text-align: left;
-      transition: all 0.22s ease;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+      transition: all 0.2s ease;
     }
 
     .deity-card:active, .deity-card:hover {
       border-color: var(--gold-temple);
-      background: rgba(50, 28, 86, 0.85);
-      box-shadow: 0 0 20px var(--gold-glow);
+      background: rgba(50, 26, 82, 0.88);
+      box-shadow: 0 0 18px var(--gold-glow);
       transform: scale(0.985);
     }
 
     .deity-icon {
-      font-size: 30px;
+      font-size: 26px;
       width: 44px;
       height: 44px;
       background: rgba(255, 215, 0, 0.12);
@@ -267,53 +251,50 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.35));
     }
 
     .deity-title {
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 800;
       color: #fff;
-      margin-bottom: 2px;
     }
 
     .deity-notes {
       font-size: 11.5px;
       color: var(--text-muted);
-      line-height: 1.4;
+      margin-top: 2px;
     }
 
-    /* Slide 2 Goal Options */
     .goal-stack {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-bottom: 10px;
+      gap: 11px;
+      margin-bottom: 12px;
     }
 
     .goal-item {
-      background: rgba(28, 17, 48, 0.75);
+      background: rgba(28, 15, 46, 0.75);
       border: 1px solid rgba(255, 215, 0, 0.22);
       border-radius: 16px;
-      padding: 16px 14px;
+      padding: 14px;
       text-align: left;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 14px;
-      transition: all 0.22s ease;
+      gap: 12px;
+      transition: all 0.2s ease;
     }
 
     .goal-item:active, .goal-item:hover {
       border-color: var(--gold-temple);
-      background: rgba(50, 28, 86, 0.85);
-      box-shadow: 0 0 20px var(--gold-glow);
+      background: rgba(50, 26, 82, 0.88);
+      box-shadow: 0 0 18px var(--gold-glow);
       transform: scale(0.985);
     }
 
     .goal-badge {
-      width: 34px;
-      height: 34px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       background: rgba(255, 215, 0, 0.12);
       border: 1px solid var(--gold-temple);
@@ -322,28 +303,27 @@
       justify-content: center;
       font-weight: 900;
       color: var(--gold-temple);
-      font-size: 14px;
+      font-size: 13px;
       flex-shrink: 0;
     }
 
-    /* Slide 3 Sacred Diya Scanner */
-    .diya-altar {
+    .yantra-altar {
       position: relative;
-      width: 170px;
-      height: 170px;
-      margin: 12px auto 20px;
+      width: 175px;
+      height: 175px;
+      margin: 10px auto 18px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
     }
 
-    .aura-ring {
+    .cosmic-ring {
       position: absolute;
-      inset: -6px;
+      inset: -8px;
       border-radius: 50%;
-      border: 2px dashed rgba(255, 215, 0, 0.4);
-      animation: spinAura 12s linear infinite;
+      border: 2px dashed rgba(255, 215, 0, 0.45);
+      animation: spinAura 14s linear infinite;
     }
 
     @keyframes spinAura {
@@ -351,50 +331,32 @@
       100% { transform: rotate(360deg); }
     }
 
-    .diya-core {
-      width: 125px;
-      height: 125px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #3d1b06 0%, #200f07 60%, #0c0612 100%);
+    .yantra-center {
+      width: 135px;
+      height: 135px;
+      border-radius: 20px;
+      background: radial-gradient(circle, #2a143d 0%, #160a22 65%, #08030e 100%);
       border: 2px solid var(--gold-temple);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 28px rgba(255, 119, 0, 0.45);
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.35);
+      transition: all 0.25s ease;
       position: relative;
-      transition: all 0.2s ease;
     }
 
-    .diya-core.charging {
-      box-shadow: 0 0 50px rgba(255, 215, 0, 0.7), 0 0 35px rgba(255, 119, 0, 0.6);
+    .yantra-center.energizing {
+      box-shadow: 0 0 45px rgba(255, 215, 0, 0.8), 0 0 25px rgba(255, 119, 0, 0.6);
       transform: scale(0.96);
     }
 
-    .diya-flame {
-      width: 22px;
-      height: 38px;
-      background: linear-gradient(180deg, #ffffff 0%, #ffd700 35%, #ff4500 100%);
-      border-radius: 50% 50% 20% 20% / 70% 70% 30% 30%;
-      filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.9));
-      animation: flameWiggle 1.4s ease-in-out infinite alternate;
+    .yantra-symbol {
+      font-size: 42px;
+      filter: drop-shadow(0 0 10px var(--gold-glow));
     }
 
-    @keyframes flameWiggle {
-      0% { transform: scale(0.95) rotate(-2deg); }
-      100% { transform: scale(1.12) rotate(2deg); }
-    }
-
-    .diya-clay-base {
-      width: 44px;
-      height: 14px;
-      background: #8b3a00;
-      border-radius: 0 0 14px 14px;
-      margin-top: 4px;
-      border-top: 2px solid var(--gold-deep);
-    }
-
-    .diya-touch-text {
+    .yantra-touch-text {
       font-size: 11px;
       color: var(--gold-temple);
       font-weight: 800;
@@ -403,316 +365,153 @@
 
     .charge-track {
       height: 6px;
-      background: #251838;
+      background: #25163b;
       border-radius: 3px;
       overflow: hidden;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .charge-fill {
       width: 0%;
       height: 100%;
-      background: linear-gradient(90deg, #ff7700, #ffd700);
+      background: linear-gradient(90deg, #f39c12, #ffd700);
       box-shadow: 0 0 12px var(--gold-glow);
       transition: width 0.08s linear;
     }
 
-    /* Slide 4 Formulation Card */
-    .formula-card {
-      background: rgba(22, 13, 37, 0.88);
-      border: 1px solid var(--card-border);
-      border-radius: 18px;
-      padding: 16px;
+    .concept-disclaimer {
+      background: rgba(255, 215, 0, 0.07);
+      border: 1px solid rgba(255, 215, 0, 0.25);
+      border-radius: 14px;
+      padding: 12px 14px;
       margin-bottom: 16px;
       text-align: left;
     }
 
-    .formula-header {
-      font-size: 13.5px;
-      font-weight: 900;
-      color: #fff;
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 14px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    .concept-disclaimer p {
+      font-size: 11.5px;
+      line-height: 1.55;
+      color: #f1e9db;
     }
 
-    .ing-row {
-      margin-bottom: 13px;
-    }
-
-    .ing-row:last-child {
-      margin-bottom: 0;
-    }
-
-    .ing-top {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12.5px;
-      margin-bottom: 5px;
-    }
-
-    .ing-title {
-      color: #ffffff;
-      font-weight: 800;
-    }
-
-    .ing-percent {
-      color: var(--gold-temple);
-      font-weight: 900;
-    }
-
-    .bar-bg {
-      height: 7px;
-      background: #25163c;
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .bar-fill {
-      height: 100%;
-      border-radius: 4px;
-    }
-
-    .fill-50 {
-      width: 50%;
-      background: linear-gradient(90deg, #d48806, #ffd700);
-      box-shadow: 0 0 10px var(--gold-glow);
-    }
-
-    .fill-30 {
-      width: 30%;
-      background: linear-gradient(90deg, #c2410c, #fb923c);
-    }
-
-    .fill-20 {
-      width: 20%;
-      background: linear-gradient(90deg, #15803d, #4ade80);
-    }
-
-    .ing-sub {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 3px;
-    }
-
-    /* Deity Offering Box */
-    .offering-box {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      background: linear-gradient(135deg, rgba(255, 215, 0, 0.12) 0%, rgba(26, 14, 44, 0.85) 100%);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
+    .custom-inputs-box {
+      background: rgba(28, 16, 44, 0.7);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      border-radius: 16px;
       padding: 14px;
       margin-bottom: 16px;
       text-align: left;
     }
 
-    .spiritual-bottle {
-      width: 52px;
-      height: 76px;
-      background: linear-gradient(180deg, rgba(255, 215, 0, 0.35) 0%, #1c0e2c 85%);
-      border: 1.5px solid var(--gold-temple);
-      border-radius: 8px 8px 18px 18px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      box-shadow: 0 0 18px var(--gold-glow);
-    }
-
-    .spiritual-bottle::before {
-      content: '';
-      position: absolute;
-      top: -12px;
-      width: 20px;
-      height: 12px;
-      background: var(--gold-temple);
-      border-radius: 2px;
-    }
-
-    .bottle-gold-text {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 8.5px;
-      font-weight: 900;
-      color: var(--gold-temple);
-      letter-spacing: 0.12em;
-      text-align: center;
-    }
-
-    .pricing-div {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-      margin-bottom: 4px;
-    }
-
-    .old-price {
-      font-size: 15px;
-      color: var(--text-muted);
-      text-decoration: line-through;
-    }
-
-    .prasad-price {
-      font-size: 27px;
-      font-weight: 900;
-      color: var(--gold-temple);
-      text-shadow: 0 0 12px rgba(255, 215, 0, 0.45);
-    }
-
-    .prasad-tag {
-      font-size: 11px;
-      font-weight: 800;
-      background: #f59e0b;
-      color: #000;
-      padding: 2px 7px;
-      border-radius: 5px;
-    }
-
-    .sacred-bullets {
+    .input-label {
       font-size: 12px;
-      color: #e4ddf0;
-      line-height: 1.6;
+      font-weight: 700;
+      color: var(--gold-temple);
+      margin-bottom: 5px;
+      display: block;
     }
 
-    /* Checkout & Payment Selector Block */
-    .payment-selection-box {
-      background: rgba(14, 8, 26, 0.95);
-      border: 1.5px solid var(--card-border);
-      border-radius: 18px;
-      padding: 16px;
-      margin-bottom: 14px;
-      text-align: left;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-    }
-
-    .payment-box-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 10px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+    .custom-input {
+      width: 100%;
+      background: rgba(10, 5, 18, 0.85);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: #fff;
+      font-size: 13.5px;
       margin-bottom: 12px;
+      outline: none;
     }
 
-    .delivery-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 11px;
-      color: #4ade80;
-      font-weight: 800;
-      background: rgba(34, 197, 94, 0.12);
-      border: 1px solid rgba(34, 197, 94, 0.3);
-      padding: 3px 9px;
-      border-radius: 20px;
+    .custom-input:focus {
+      border-color: var(--gold-temple);
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.35);
     }
 
-    .pay-card {
+    .bottle-options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .bottle-tier-card {
+      background: rgba(28, 16, 44, 0.65);
+      border: 1.5px solid rgba(255, 215, 0, 0.2);
+      border-radius: 14px;
+      padding: 12px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 13px 12px;
-      border-radius: 14px;
       cursor: pointer;
-      margin-bottom: 10px;
       transition: all 0.2s ease;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      text-align: left;
+      position: relative;
     }
 
-    .pay-card.selected-online {
-      background: rgba(255, 215, 0, 0.08);
-      border: 1.5px solid var(--gold-temple);
-      box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
+    .bottle-tier-card.selected {
+      border-color: var(--gold-temple);
+      background: rgba(52, 27, 85, 0.9);
+      box-shadow: 0 0 18px rgba(255, 215, 0, 0.3);
     }
 
-    .pay-card.selected-cod {
-      background: rgba(37, 211, 102, 0.08);
-      border: 1.5px solid var(--whatsapp);
-      box-shadow: 0 0 15px rgba(37, 211, 102, 0.15);
+    .tier-badge {
+      position: absolute;
+      top: -9px;
+      right: 12px;
+      background: linear-gradient(90deg, #ff7700, #ffd700);
+      color: #000;
+      font-size: 9px;
+      font-weight: 900;
+      padding: 2px 8px;
+      border-radius: 10px;
+      letter-spacing: 0.05em;
     }
 
-    .pay-card-left {
+    .tier-left {
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-    .pay-radio {
+    .tier-radio {
       accent-color: var(--gold-temple);
-      width: 17px;
-      height: 17px;
-      cursor: pointer;
+      width: 18px;
+      height: 18px;
     }
 
-    .pay-card-title {
-      font-size: 13.5px;
+    .tier-title {
+      font-size: 14px;
       font-weight: 800;
-      color: #ffffff;
+      color: #fff;
     }
 
-    .pay-card-sub {
+    .tier-sub {
       font-size: 11px;
       color: var(--text-muted);
-      margin-top: 2px;
     }
 
-    .pay-card-badge {
-      font-size: 9.5px;
-      font-weight: 800;
-      padding: 2px 6px;
-      border-radius: 4px;
-      text-transform: uppercase;
-      margin-left: 6px;
+    .tier-price {
+      font-size: 19px;
+      font-weight: 900;
+      color: var(--gold-temple);
     }
 
-    .badge-prepaid {
-      background: rgba(34, 197, 94, 0.2);
-      color: #4ade80;
-      border: 1px solid rgba(34, 197, 94, 0.4);
-    }
-
-    .badge-cod {
-      background: rgba(255, 255, 255, 0.1);
-      color: #ddd;
-    }
-
-    /* Free Home Delivery Highlight */
-    .delivery-strip {
-      background: rgba(34, 197, 94, 0.08);
-      border: 1px solid rgba(34, 197, 94, 0.25);
-      border-radius: 12px;
-      padding: 10px 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 12px;
-      color: #a7f3d0;
-      margin-bottom: 14px;
-    }
-
-    /* Master Dynamic Action Button */
     .btn-master-action {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 9px;
       width: 100%;
-      padding: 16px 14px;
+      padding: 15px 14px;
       border-radius: 14px;
-      font-size: 16px;
+      font-size: 15.5px;
       font-weight: 900;
       border: none;
       outline: none;
       cursor: pointer;
       transition: all 0.2s ease;
       text-decoration: none;
-      position: relative;
-      overflow: hidden;
     }
 
     .btn-master-action:active {
@@ -721,49 +520,37 @@
 
     .btn-gold-action {
       background: linear-gradient(135deg, #ffd700 0%, #f39c12 100%);
-      color: #0c0612;
-      box-shadow: 0 0 24px rgba(255, 215, 0, 0.45);
+      color: #0d0714;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+      margin-bottom: 10px;
     }
 
-    .btn-wa-action {
-      background: linear-gradient(135deg, #25d366 0%, #15803d 100%);
-      color: #ffffff;
-      box-shadow: 0 0 24px rgba(37, 211, 102, 0.45);
+    .btn-cod-action {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border: 1px solid rgba(255, 215, 0, 0.35);
     }
 
-    .success-alert {
-      display: none;
-      background: rgba(16, 185, 129, 0.15);
-      border: 1.5px solid #10b981;
-      border-radius: 14px;
-      padding: 16px;
-      text-align: center;
-      margin-top: 14px;
-    }
-
-    .wa-subtext {
-      font-size: 12px;
+    .order-note {
+      font-size: 11px;
       color: var(--text-muted);
-      margin-top: 12px;
-      font-weight: 600;
+      margin-top: 10px;
+      line-height: 1.4;
     }
   </style>
 </head>
 <body>
 
-  <!-- Ambient Sacred Temple Sparks Canvas -->
   <canvas id="templeCanvas"></canvas>
   <div class="temple-vignette"></div>
 
   <main class="app-frame">
-    <!-- Divine Header -->
     <header class="sacred-header">
       <div class="om-symbol">ॐ</div>
       <div class="brand-title">AURA DIVINE</div>
-      <div class="brand-subtitle">પવિત્ર દૈવી અત્તર સિમ્યુલેશન</div>
+      <div class="brand-subtitle">વાસ્તુ & ઇષ્ટદેવ કસ્ટમાઇઝ્ડ અત્તર ✨</div>
     </header>
 
-    <!-- Spiritual Stepper (4 steps) -->
     <div class="stepper">
       <div class="step-pill active" id="pill1"></div>
       <div class="step-pill" id="pill2"></div>
@@ -771,657 +558,153 @@
       <div class="step-pill" id="pill4"></div>
     </div>
 
-    <!-- SLIDE 1: SELECT DEITY / VIBE -->
+    <!-- STEP 1 -->
     <section class="screen-card active" id="slide1">
       <span class="step-badge">પગલું ૧ • આધ્યાત્મિક સંકલ્પ</span>
       <h2 class="heading">
-        તમારા <span class="gold-highlight">ઈષ્ટદેવ / પૂજા સંકલ્પ</span> પસંદ કરો
+        તમારા <span class="gold-highlight">ઇષ્ટદેવ</span> પસંદ કરો
       </h2>
       <p class="sub-heading">
-        તમારી ભક્તિ ઊર્જા સાથે મેળ ખાતી પવિત્ર ખુશ્બૂનું માર્ગદર્શન મેળવો:
+        જેમના દૈવી ભાવ સાથે તમે તમારા અત્તરને કસ્ટમાઇઝ કરવા માંગો છો:
       </p>
 
       <div class="deity-grid">
-        <div class="deity-card" onclick="selectDeity('મહાદેવ શિવ ભક્તિ', 'ધ્યાન & શાંતિ', 'શ્વેત ચંદન & ભસ્મ અંબર')">
+        <div class="deity-card" onclick="selectDeity('મહાદેવ શિવ ભક્તિ', 'શ્વેત ચંદન & ભસ્મ અંબર')">
           <div class="deity-icon">🔱</div>
           <div>
             <div class="deity-title">મહાદેવ / શિવ ભક્તિ</div>
-            <div class="deity-notes">શાંતિ, ધ્યાન, વૈરાગ્ય • શ્વેત ચંદન, ભસ્મ-અંબર & લોબાન</div>
+            <div class="deity-notes">શાંતિ, ધ્યાન અને માનસિક સ્થિરતા</div>
           </div>
         </div>
 
-        <div class="deity-card" onclick="selectDeity('શ્રી રાધા-કૃષ્ણ ભક્તિ', 'પ્રેમ & આકર્ષણ', 'કાશ્મીરી કેસર, કસ્તુરી & કદંબ')">
-          <div class="deity-icon">🦚</div>
-          <div>
-            <div class="deity-title">શ્રી રાધા-કૃષ્ણ ભક્તિ</div>
-            <div class="deity-notes">પ્રેમ, દિવ્ય મોહ, પ્રસન્નતા • કાશ્મીરી કેસર, કસ્તુરી & કદંબ</div>
-          </div>
-        </div>
-
-        <div class="deity-card" onclick="selectDeity('હનુમાનજી શક્તિ ઉપાસના', 'સકારાત્મક ઊર્જા', 'સિંદૂર-ગુલાબ, લવિંગ & અગરવુડ')">
+        <div class="deity-card" onclick="selectDeity('હનુમાનજી મહારાજ', 'સિંદૂર કસ્તુરી & કેસર')">
           <div class="deity-icon">🚩</div>
           <div>
-            <div class="deity-title">શ્રી હનુમાનજી / શક્તિ ઉપાસના</div>
-            <div class="deity-notes">સકારાત્મક ઊર્જા, નકારાત્મકતાનો નાશ • સિંદૂરી ગુલાબ & લવિંગ</div>
+            <div class="deity-title">હનુમાનજી ભક્તિ</div>
+            <div class="deity-notes">સકારાત્મક ઊર્જા, રક્ષણ અને સાહસ</div>
           </div>
         </div>
 
-        <div class="deity-card" onclick="selectDeity('લક્ષ્મી-નારાયણ સમૃદ્ધિ', 'વાસ્તુ & ધન શાંતિ', 'પવિત્ર કમળ, મલયાગિરી ચંદન & તુલસી')">
+        <div class="deity-card" onclick="selectDeity('શ્રી કૃષ્ણ / રાધાજી', 'પવિત્ર તુલસી & કદંબ સુગંધ')">
+          <div class="deity-icon">🪈</div>
+          <div>
+            <div class="deity-title">શ્રી કૃષ્ણ / રાધા કૃષ્ણ</div>
+            <div class="deity-notes">પ્રેમભાવ, પ્રસન્નતા અને મધુરતા</div>
+          </div>
+        </div>
+
+        <div class="deity-card" onclick="selectDeity('માતાજી / લક્ષ્મીજી', 'દિવ્ય ગુલાબ, મોગરો & કેસર')">
           <div class="deity-icon">🪷</div>
           <div>
-            <div class="deity-title">લક્ષ્મી-નારાયણ / વાસ્તુ સમૃદ્ધિ</div>
-            <div class="deity-notes">ઘરમાં શાંતિ, લક્ષ્મી કૃપા • દિવ્ય કમળ, શુદ્ધ ચંદન & તુલસી</div>
+            <div class="deity-title">માતાજી / લક્ષ્મી સ્વરૂપ</div>
+            <div class="deity-notes">વાસ્તુ સમૃદ્ધિ, મંગલ ભાવ અને પવિત્રતા</div>
+          </div>
+        </div>
+
+        <div class="deity-card" onclick="selectDeity('શ્રી ગણેશજી', 'મોદક મંચ, ચંદન & દૂર્વા')">
+          <div class="deity-icon">🐘</div>
+          <div>
+            <div class="deity-title">શ્રી ગણેશજી</div>
+            <div class="deity-notes">શુભ શરૂઆત અને વિઘ્નનિવારણ</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 2: SPIRITUAL GOAL SELECTION -->
+    <!-- STEP 2 -->
     <section class="screen-card" id="slide2">
-      <span class="step-badge">પગલું ૨ • પૂજા અને મનનો હેતુ</span>
+      <span class="step-badge">પગલું ૨ • વાસ્તુ & ભાવ ઊર્જા</span>
       <h2 class="heading">
-        આ અત્તરથી તમારો <br />
-        <span class="gold-highlight">મુખ્ય આધ્યાત્મિક હેતુ</span> શું છે?
+        તમારો મુખ્ય <span class="gold-highlight">વાસ્તુ ભાવ</span> પસંદ કરો
       </h2>
       <p class="sub-heading">
-        તમારા દૈનિક જીવનમાં આ દૈવી ખુશ્બૂ કયો ચમત્કારિક બદલાવ લાવે?
+        અત્તરની દૈવી સુગંધ સાથે તમે કઈ ઊર્જા અનુભવવા માંગો છો?
       </p>
 
       <div class="goal-stack">
-        <div class="goal-item" onclick="selectGoal('પૂજા, પાઠ અને ધ્યાનમાં અખંડ એકાગ્રતા')">
+        <div class="goal-item" onclick="selectGoal('માનસિક શાંતિ અને ધ્યાન')">
           <div class="goal-badge">૧</div>
           <div>
-            <div class="deity-title">ધ્યાન અને પૂજામાં એકાગ્રતા</div>
-            <div class="deity-notes">પૂજા સમયે મન ભટકે નહીં અને ઈશ્વર ચિંતનમાં ઊંડું લીન થાય.</div>
+            <div class="deity-title">માનસિક શાંતિ & પ્રસન્નતા</div>
+            <div class="deity-notes">ચિંતા મુક્ત મન અને આધ્યાત્મિક સુકૂન</div>
           </div>
         </div>
 
-        <div class="goal-item" onclick="selectGoal('ઘર અને મનમાંથી નકારાત્મક ઊર્જા અને તણાવ દૂર કરવો')">
+        <div class="goal-item" onclick="selectGoal('વાસ્તુ શુદ્ધિ અને સકારાત્મકતા')">
           <div class="goal-badge">૨</div>
           <div>
-            <div class="deity-title">નકારાત્મક ઊર્જા & વાસ્તુ શુદ્ધિ</div>
-            <div class="deity-notes">ઘરનું વાતાવરણ મંદિર જેવું પવિત્ર બને અને મનનો ભાર હળવો થાય.</div>
+            <div class="deity-title">ઘર/ઓફિસ વાસ્તુ સકારાત્મક ઊર્જા</div>
+            <div class="deity-notes">નકારાત્મક તરંગો દૂર કરી પવિત્ર વાતાવરણ</div>
           </div>
         </div>
 
-        <div class="goal-item" onclick="selectGoal('દિવસભર મન શાંત, પ્રસન્ન અને પવિત્ર રહે')">
+        <div class="goal-item" onclick="selectGoal('પૂજા-પાઠ અને ધ્યાન એકાગ્રતા')">
           <div class="goal-badge">૩</div>
           <div>
-            <div class="deity-title">દિવસભર શાંતિ અને પવિત્ર વાઇબ્સ</div>
-            <div class="deity-notes">કામ પર કે મુસાફરીમાં આખો દિવસ તમારી આસપાસ દૈવી આભા રહે.</div>
+            <div class="deity-title">નિત્ય પૂજા અને એકાગ્રતા</div>
+            <div class="deity-notes">ઈશ્વર સાથે ઊંડો ભાવ અને સમર્પણ</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 3: SACRED JYOTI / DIYA CHARGE SIMULATOR -->
+    <!-- STEP 3 -->
     <section class="screen-card" id="slide3">
-      <span class="step-badge">પગલું ૩ • દૈવી જ્યોતિ સિન્ક</span>
+      <span class="step-badge">પગલું ૩ • કોસ્મિક & વાસ્તુ સંકલ્પ</span>
       <h2 class="heading">
-        <span class="gold-highlight">પવિત્ર જ્યોતિ</span> સ્પર્શ કરો
+        <span class="gold-highlight">શ્રી યંત્ર</span> ઊર્જા સિમ્યુલેશન
       </h2>
       <p class="sub-heading">
-        તમારી આધ્યાત્મિક આભા સાથે સુગંધના પવિત્ર અર્કને સિન્ક કરવા નીચે દીપક પર આંગળી દબાવી રાખો:
+        શ્રી યંત્ર પર 3 સેકન્ડ સ્પર્શ કરી રાખો — તમારા સંકલ્પ સાથે સુમેળ સાધવા માટે:
       </p>
 
-      <div class="diya-altar" id="diyaAltar">
-        <div class="aura-ring"></div>
-        <div class="diya-core" id="diyaCore">
-          <div class="diya-flame"></div>
-          <div class="diya-clay-base"></div>
-          <span class="diya-touch-text" id="diyaTip">અહીં દબાવી રાખો</span>
+      <div class="yantra-altar" id="altarTrigger">
+        <div class="cosmic-ring"></div>
+        <div class="yantra-center" id="yantraCenter">
+          <div class="yantra-symbol">🔯</div>
+          <div class="yantra-touch-text" id="touchLabel">સ્પર્શ કરી રાખો</div>
         </div>
-      </div>
-
-      <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:6px;">
-        <span style="color:var(--text-muted);">દૈવી આભા સંગમ:</span>
-        <span style="color:var(--gold-temple); font-weight:800;" id="chargePct">૦%</span>
       </div>
 
       <div class="charge-track">
         <div class="charge-fill" id="chargeBar"></div>
       </div>
-
-      <div style="font-size:11.5px; color:var(--gold-deep); font-weight:700;" id="diyaStatus">
-        સ્પર્શ કરી રાખો (મંત્ર વાઇબ્રેશન)...
-      </div>
+      <p style="font-size: 11px; color: var(--gold-deep);" id="statusText">સંકલ્પ ઊર્જા સાથે જોડાઈ રહ્યું છે...</p>
     </section>
 
-    <!-- SLIDE 4: 50:30:20 SACRED BLEND REVEAL & DUAL ORDER -->
+    <!-- STEP 4 -->
     <section class="screen-card" id="slide4">
-      <span class="step-badge" style="background:rgba(34,197,94,0.15); border-color:#22c55e; color:#4ade80;">✔ સંકલ્પ પૂર્ણ • ૧૦૦% શુદ્ધ પૂજા ગ્રેડ</span>
-      <h2 class="heading" style="font-size: 19px; margin-bottom: 10px;">
-        તમારી ભક્તિ માટે <br />
-        <span class="gold-highlight">સિદ્ધ થયેલું ૫૦:૩૦:૨૦ દૈવી અત્તર</span>
+      <span class="step-badge">પગલું ૪ • ઓર્ડર & કસ્ટમાઇઝેશન</span>
+      <h2 class="heading">
+        તમારા નામ સાથેનું <span class="gold-highlight">વિશેષ અત્તર</span>
       </h2>
-
-      <!-- 50:30:20 Breakdown Card -->
-      <div class="formula-card">
-        <div class="formula-header">
-          <span>પવિત્ર અર્ક મિશ્રણ (Sacred Blend):</span>
-          <span style="color:var(--gold-temple);">૫૦ : ૩૦ : ૨૦</span>
-        </div>
-
-        <div class="ing-row">
-          <div class="ing-top">
-            <span class="ing-title" id="sacredIng1">૫૦% મલયાગિરી શ્વેત ચંદન & અમૃત અર્ક</span>
-            <span class="ing-percent">૫૦%</span>
-          </div>
-          <div class="bar-bg">
-            <div class="bar-fill fill-50"></div>
-          </div>
-          <div class="ing-sub" id="sacredDesc1">મનને તાત્કાલિક શાંત કરતો અને ધ્યાનને ઊંડું કરતો પવિત્ર આધાર.</div>
-        </div>
-
-        <div class="ing-row">
-          <div class="ing-top">
-            <span class="ing-title" id="sacredIng2">૩૦% કાશ્મીરી કેસર & કસ્તુરી મસ્ક</span>
-            <span class="ing-percent">૩૦%</span>
-          </div>
-          <div class="bar-bg">
-            <div class="bar-fill fill-30"></div>
-          </div>
-          <div class="ing-sub" id="sacredDesc2">ઈશ્વરીય પ્રેમ, સકારાત્મક આભા અને પ્રસન્નતા ફેલાવતો અર્ક.</div>
-        </div>
-
-        <div class="ing-row">
-          <div class="ing-top">
-            <span class="ing-title" id="sacredIng3">૨૦% પવિત્ર તુલસી & ગૂગળ-લોબાન ધૂપ</span>
-            <span class="ing-percent">૨૦%</span>
-          </div>
-          <div class="bar-bg">
-            <div class="bar-fill fill-20"></div>
-          </div>
-          <div class="ing-sub" id="sacredDesc3">વાસ્તુદોષ અને નકારાત્મક વિચારોનો નાશ કરનાર શુદ્ધ વાઇબ્સ.</div>
-        </div>
+      
+      <div class="concept-disclaimer">
+        <p>✨ <strong>મહત્વપૂર્ણ સ્પષ્ટતા:</strong> આ કોઈ જાદુ કે ચમત્કારનો દાવો નથી — પરંતુ મનને પ્રસન્નતા, શાંતિ અને સકારાત્મક ભાવના સાથે જોડવાનો એક સુંદર પ્રયાસ છે. 🙏</p>
       </div>
 
-      <!-- Sacred Offering Price Box -->
-      <div class="offering-box">
-        <div class="spiritual-bottle">
-          <span class="bottle-gold-text">AURA<br/>DIVINE</span>
-        </div>
-        <div>
-          <div class="pricing-div">
-            <span class="old-price">₹૮૯૯</span>
-            <span class="prasad-price">₹૫૯૯</span>
-            <span class="prasad-tag">સ્પેશિયલ પ્રસાદ ઑફર</span>
-          </div>
-          <div class="sacred-bullets">
-            ✔ ૧૦૦% આલ્કોહોલ ફ્રી • પૂજા, પાઠ અને મંદિર માટે પવિત્ર<br />
-            ✔ એક પણ ટીપું કેમિકલ વગરનું શુદ્ધ અત્તર તેલ
-          </div>
-        </div>
+      <div class="custom-inputs-box">
+        <label class="input-label" for="userNameInput">તમારું પૂરું નામ:</label>
+        <input type="text" id="userNameInput" class="custom-input" placeholder="દા.ત. રાજેશભાઈ પટેલ" />
+
+        <label class="input-label" for="userDeityInput">તમારા ઇષ્ટદેવનું નામ:</label>
+        <input type="text" id="userDeityInput" class="custom-input" placeholder="દા.ત. મહાદેવ / હનુમાનજી" />
+
+        <label class="input-label" for="userPhoneInput">તમારો મોબાઈલ નંબર:</label>
+        <input type="tel" id="userPhoneInput" class="custom-input" placeholder="૧૦ આંકડાનો મોબાઈલ નંબર" maxlength="10" />
       </div>
 
-      <!-- DUAL PAYMENT SELECTOR (NO FORM) -->
-      <div class="payment-selection-box">
-        <div class="payment-box-header">
-          <span style="font-size:12px; font-weight:800; color:var(--gold-temple); text-transform:uppercase;">
-            ★ પેમેન્ટ પદ્ધતિ પસંદ કરો
-          </span>
-          <span class="delivery-pill">
-            🚚 All India Free Delivery
-          </span>
-        </div>
-
-        <!-- Option 1: Razorpay Online -->
-        <label id="cardOnline" class="pay-card selected-online">
-          <div class="pay-card-left">
-            <input type="radio" name="payType" value="ONLINE" checked onchange="handlePaymentModeChange('ONLINE')" class="pay-radio">
+      <p style="font-size: 12px; font-weight:800; color:var(--gold-temple); margin-bottom:8px; text-align:left;">🌿 વિશેષ કસ્ટમાઇઝ્ડ અત્તર પેકેજ પસંદ કરો:</p>
+      <div class="bottle-options-grid">
+        <div class="bottle-tier-card" onclick="selectTier(1, 599, this)">
+          <div class="tier-left">
+            <input type="radio" name="bottleQty" class="tier-radio">
             <div>
-              <div class="pay-card-title">
-                ઓનલાઇન પેમેન્ટ (Prepaid)
-                <span class="pay-card-badge badge-prepaid">ઝડપી ડિસ્પેચ</span>
-              </div>
-              <div class="pay-card-sub">UPI, Google Pay, PhonePe, Paytm, કાર્ડ્સ (Razorpay)</div>
+              <div class="tier-title">• 1 બોટલ અત્તર</div>
+              <div class="tier-sub">વ્યક્તિગત ઉપયોગ માટે</div>
             </div>
           </div>
-          <span style="font-size:14px; font-weight:900; color:var(--gold-temple);">₹૫૯૯</span>
-        </label>
-
-        <!-- Option 2: Cash on Delivery via WhatsApp -->
-        <label id="cardCOD" class="pay-card">
-          <div class="pay-card-left">
-            <input type="radio" name="payType" value="COD" onchange="handlePaymentModeChange('COD')" class="pay-radio">
-            <div>
-              <div class="pay-card-title">
-                કેશ ઓન ડિલિવરી (COD)
-                <span class="pay-card-badge badge-cod">WhatsApp</span>
-              </div>
-              <div class="pay-card-sub">પાર્સલ ઘરે પહોંચે ત્યારે જ રોકડા રૂપિયા આપો</div>
-            </div>
-          </div>
-          <span style="font-size:14px; font-weight:900; color:#ddd;">₹૫૯૯</span>
-        </label>
-
-        <!-- Free Delivery Banner -->
-        <div class="delivery-strip">
-          <span>📦 <strong>સમગ્ર ભારતમાં ફ્રી હોમ ડિલિવરી</strong></span>
-          <span style="font-weight:900; color:#fff;">₹0 FREE</span>
+          <div class="tier-price">₹599</div>
         </div>
 
-        <!-- Single Master CTA Button -->
-        <button id="masterActionBtn" onclick="executeFinalOrder()" class="btn-master-action btn-gold-action">
-          <svg id="btnIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5z"/>
-          </svg>
-          <span id="btnLabel">₹૫૯૯ ઓનલાઇન ચૂકવો (Razorpay Instant)</span>
-        </button>
-
-        <!-- Success Message on Razorpay Complete -->
-        <div id="paymentSuccessBox" class="success-alert">
-          <div style="font-size:24px; margin-bottom:4px;">🙏</div>
-          <h3 style="font-size:16px; font-weight:900; color:#fff; margin-bottom:4px;">પેમેન્ટ સફળ!</h3>
-          <p style="font-size:12px; color:#a7f3d0;" id="successDetails"></p>
-          <p style="font-size:11px; color:#ffd700; margin-top:4px;">સરનામું મોકલવા WhatsApp ખૂલી રહ્યું છે...</p>
-        </div>
-      </div>
-
-      <p class="wa-subtext" id="footerSubtext">
-        🔒 ૧૦૦% સુરક્ષિત પેમેન્ટ ગેટવે • ઝીરો વધારાનો ચાર્જ
-      </p>
-    </section>
-  </main>
-
-  <script>
-    // ==========================================================
-    // 1. Razorpay Key ID & Config
-    // ==========================================================
-    const RAZORPAY_KEY = "rzp_live_TcnN4bgnhTNHvC";
-    const WHATSAPP_NUMBER = "919327938950";
-    const ORDER_AMOUNT_INR = 599;
-
-    let currentPaymentMode = "ONLINE";
-
-    // Temple Particles (Incense Smoke & Golden Sparks)
-    const canvas = document.getElementById("templeCanvas");
-    const ctx = canvas.getContext("2d");
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
-
-    window.addEventListener("resize", () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    });
-
-    const particles = [];
-    const particleCount = 42;
-
-    class TempleSpark {
-      constructor() {
-        this.reset();
-      }
-      reset() {
-        this.x = Math.random() * width;
-        this.y = height + Math.random() * 40;
-        this.size = Math.random() * 2.6 + 1;
-        this.speedY = Math.random() * 1.2 + 0.4;
-        this.speedX = (Math.random() - 0.5) * 0.7;
-        this.alpha = Math.random() * 0.6 + 0.2;
-        this.life = 0;
-        this.maxLife = Math.random() * 120 + 100;
-        this.color = Math.random() > 0.4 ? "#ffd700" : "#ff7700";
-      }
-      update() {
-        this.y -= this.speedY;
-        this.x += this.speedX + Math.sin(this.life * 0.05) * 0.4;
-        this.life++;
-        if (this.life >= this.maxLife || this.y < -10) {
-          this.reset();
-        }
-      }
-      draw() {
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.globalAlpha = this.alpha * (1 - this.life / this.maxLife);
-        ctx.shadowColor = this.color;
-        ctx.shadowBlur = 8;
-        ctx.fill();
-        ctx.restore();
-      }
-    }
-
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new TempleSpark());
-    }
-
-    function animateTemple() {
-      ctx.clearRect(0, 0, width, height);
-      particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
-      requestAnimationFrame(animateTemple);
-    }
-    animateTemple();
-
-    // User Devotional State
-    const spiritualSelections = {
-      deity: "મહાદેવ શિવ ભક્તિ",
-      vibe: "ધ્યાન & શાંતિ",
-      notes: "શ્વેત ચંદન & ભસ્મ અંબર",
-      goal: "પૂજા, પાઠ અને ધ્યાનમાં અખંડ એકાગ્રતા",
-      ing1: "",
-      ing2: "",
-      ing3: ""
-    };
-
-    // Screen Navigation
-    function goToSlide(slideNum) {
-      document.querySelectorAll(".screen-card").forEach(c => c.classList.remove("active"));
-      document.getElementById("slide" + slideNum).classList.add("active");
-
-      for (let i = 1; i <= 4; i++) {
-        const pill = document.getElementById("pill" + i);
-        if (i <= slideNum) {
-          pill.classList.add("active");
-        } else {
-          pill.classList.remove("active");
-        }
-      }
-
-      if (slideNum === 4) {
-        buildDivineFormula();
-      }
-    }
-
-    function selectDeity(deityName, vibe, notes) {
-      spiritualSelections.deity = deityName;
-      spiritualSelections.vibe = vibe;
-      spiritualSelections.notes = notes;
-
-      // Meta ViewContent Event
-      if (typeof fbq === 'function') {
-        fbq('track', 'ViewContent', {
-          content_name: deityName,
-          content_category: 'Spiritual Selection'
-        });
-      }
-
-      goToSlide(2);
-    }
-
-    function selectGoal(goalText) {
-      spiritualSelections.goal = goalText;
-      goToSlide(3);
-    }
-
-    // Diya Hold-to-Charge Simulator
-    const diyaCore = document.getElementById("diyaCore");
-    const chargeBar = document.getElementById("chargeBar");
-    const chargePct = document.getElementById("chargePct");
-    const diyaTip = document.getElementById("diyaTip");
-    const diyaStatus = document.getElementById("diyaStatus");
-
-    let isCharging = false;
-    let diyaCharge = 0;
-    let diyaTimer = null;
-
-    function startDiyaCharge(e) {
-      if (e) e.preventDefault();
-      if (isCharging) return;
-      isCharging = true;
-      diyaCore.classList.add("charging");
-      diyaTip.innerText = "આભા સિન્ક...";
-      diyaStatus.innerText = "પવિત્ર મંત્ર તરંગો સાથે સિન્ક થઈ રહ્યું છે...";
-
-      diyaTimer = setInterval(() => {
-        if (diyaCharge < 100) {
-          diyaCharge += 3;
-          chargeBar.style.width = diyaCharge + "%";
-          chargePct.innerText = diyaCharge + "%";
-
-          if (navigator.vibrate && diyaCharge % 15 === 0) {
-            navigator.vibrate(25);
-          }
-        } else {
-          clearInterval(diyaTimer);
-          if (navigator.vibrate) navigator.vibrate([60, 40, 80]);
-          diyaTip.innerText = "૧૦૦% સિદ્ધ";
-          diyaStatus.innerText = "સંકલ્પ પૂર્ણ! પવિત્ર દૈવી ફોર્મ્યુલા પ્રગટ થઈ!";
-
-          // Meta Customization Complete Event
-          if (typeof fbq === 'function') {
-            fbq('track', 'CustomizeProduct', {
-              content_name: spiritualSelections.deity
-            });
-          }
-
-          setTimeout(() => goToSlide(4), 450);
-        }
-      }, 40);
-    }
-
-    function endDiyaCharge() {
-      if (!isCharging) return;
-      if (diyaCharge < 100) {
-        clearInterval(diyaTimer);
-        isCharging = false;
-        diyaCharge = 0;
-        chargeBar.style.width = "0%";
-        chargePct.innerText = "૦%";
-        diyaCore.classList.remove("charging");
-        diyaTip.innerText = "અહીં દબાવી રાખો";
-        diyaStatus.innerText = "આંગળી હટાવશો નહીં, ફરી પ્રયાસ કરો.";
-      }
-    }
-
-    diyaCore.addEventListener("mousedown", startDiyaCharge);
-    diyaCore.addEventListener("mouseup", endDiyaCharge);
-    diyaCore.addEventListener("mouseleave", endDiyaCharge);
-    diyaCore.addEventListener("touchstart", startDiyaCharge, { passive: false });
-    diyaCore.addEventListener("touchend", endDiyaCharge);
-    diyaCore.addEventListener("touchcancel", endDiyaCharge);
-
-    // Build 50:30:20 Formulation Values
-    function buildDivineFormula() {
-      let ing1 = "૫૦% મલયાગિરી શ્વેત ચંદન & ભસ્મ અર્ક";
-      let desc1 = "મનને તાત્કાલિક શાંત કરતો અને ધ્યાનને ઊંડું કરતો પવિત્ર આધાર.";
-      let ing2 = "૩૦% શુદ્ધ કસ્તુરી મસ્ક & દિવ્ય કેસર";
-      let desc2 = "સાધના અને આભામાં અલૌકિક તેજ પ્રગટાવતો પવિત્ર અર્ક.";
-      let ing3 = "૨૦% પવિત્ર ગૂગળ, લોબાન & તુલસી અર્ક";
-      let desc3 = "વાસ્તુદોષ અને નકારાત્મક ઊર્જાનો નાશ કરનાર પવિત્ર ધૂપ સુરક્ષા.";
-
-      if (spiritualSelections.deity.includes("કૃષ્ણ")) {
-        ing1 = "૫૦% કાશ્મીરી કેસર & મલયાગિરી ચંદન";
-        desc1 = "શ્રી કૃષ્ણ ભક્તિની મનમોહક અને દિવ્ય આનંદ આપતી ખુશ્બૂ.";
-        ing2 = "૩૦% દિવ્ય કસ્તુરી મસ્ક & કદંબ પુષ્પ";
-        desc2 = "મન અને હૃદયમાં પ્રેમ અને દૈવી પ્રસન્નતાનો સંચાર.";
-        ing3 = "૨૦% પવિત્ર શ્યામ તુલસી અર્ક";
-        desc3 = "મંદિર જેવી પવિત્રતા અને મનમાં અતૂટ શાંતિ.";
-      } else if (spiritualSelections.deity.includes("હનુમાનજી")) {
-        ing1 = "૫૦% સિંદૂરી ગુલાબ & રક્ત ચંદન";
-        desc1 = "દિર્ઘ સંકલ્પ અને ભયમુક્ત ઊર્જા આપતો શાહી અર્ક.";
-        ing2 = "૩૦% પવિત્ર લવિંગ, કપૂર & અગરવુડ";
-        desc2 = "નકારાત્મક શક્તિઓ અને મનના ડરનો નાશ કરતી ઉગ્ર પવિત્રતા.";
-        ing3 = "૨૦% લોબાન & ગૂગળ ધૂપ અર્ક";
-        desc3 = "ઘર અને શરીરની આસપાસ સકારાત્મક ઊર્જાનું સુરક્ષા કવચ.";
-      } else if (spiritualSelections.deity.includes("લક્ષ્મી")) {
-        ing1 = "૫૦% શ્વેત કમળ & મલયાગિરી ચંદન";
-        desc1 = "ઘરમાં લક્ષ્મીજીની કૃપા અને વાસ્તુદોષ નિવારણ કરતો આધાર.";
-        ing2 = "૩૦% કાશ્મીરી કેસર & સુવર્ણ ચંપા";
-        desc2 = "ધન-ધાન્ય અને મનની સમૃદ્ધિ વધારતો મોહક સુગંધ સંગમ.";
-        ing3 = "૨૦% પવિત્ર તુલસી & ગંગાજળ અર્ક";
-        desc3 = "દૈનિક પૂજા અને ઘરમાં સુખ-શાંતિનો વાસ કરાવતો અર્ક.";
-      }
-
-      spiritualSelections.ing1 = ing1;
-      spiritualSelections.ing2 = ing2;
-      spiritualSelections.ing3 = ing3;
-
-      document.getElementById("sacredIng1").innerText = ing1;
-      document.getElementById("sacredDesc1").innerText = desc1;
-      document.getElementById("sacredIng2").innerText = ing2;
-      document.getElementById("sacredDesc2").innerText = desc2;
-      document.getElementById("sacredIng3").innerText = ing3;
-      document.getElementById("sacredDesc3").innerText = desc3;
-    }
-
-    // Toggle between ONLINE and COD
-    function handlePaymentModeChange(mode) {
-      currentPaymentMode = mode;
-      const btn = document.getElementById("masterActionBtn");
-      const label = document.getElementById("btnLabel");
-      const icon = document.getElementById("btnIcon");
-      const cardOnline = document.getElementById("cardOnline");
-      const cardCOD = document.getElementById("cardCOD");
-      const footerText = document.getElementById("footerSubtext");
-
-      // Meta InitiateCheckout Event on Mode Selection
-      if (typeof fbq === 'function') {
-        fbq('track', 'InitiateCheckout', {
-          value: ORDER_AMOUNT_INR,
-          currency: 'INR',
-          content_name: `AURA - ${spiritualSelections.deity} (${mode})`
-        });
-      }
-
-      if (mode === "ONLINE") {
-        cardOnline.className = "pay-card selected-online";
-        cardCOD.className = "pay-card";
-        btn.className = "btn-master-action btn-gold-action";
-        label.innerText = "₹૫૯૯ ઓનલાઇન ચૂકવો (Razorpay Instant)";
-        icon.innerHTML = `<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5z"/>`;
-        footerText.innerText = "🔒 ૧૦૦% સુરક્ષિત પેમેન્ટ ગેટવે • ઝીરો વધારાનો ચાર્જ";
-      } else {
-        cardOnline.className = "pay-card";
-        cardCOD.className = "pay-card selected-cod";
-        btn.className = "btn-master-action btn-wa-action";
-        label.innerText = "WhatsApp પર COD ઓર્ડર કન્ફર્મ કરો ➔";
-        icon.innerHTML = `<path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.586-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.698.073-1.133-.07-.272-.089-.623-.21-1.077-.406-1.924-.83-3.176-2.779-3.272-2.906-.096-.128-.777-1.034-.777-1.973 0-.94.492-1.402.668-1.593.175-.19.382-.239.51-.239.127 0 .255.002.366.007.119.006.279-.045.437.335.163.393.556 1.356.604 1.455.048.099.08.216.016.343-.064.128-.096.208-.192.32-.096.112-.202.25-.288.336-.096.096-.197.2-.085.392.112.192.499.824 1.072 1.335.738.657 1.36.861 1.552.957.192.096.304.08.416-.048.112-.128.48-.559.608-.751.128-.192.256-.16.432-.096.176.064 1.12.528 1.312.624.192.096.32.144.368.224.048.08.048.464-.096.869z"/>`;
-        footerText.innerText = "બટન દબાવતાં જ તમારા ઈષ્ટદેવના બ્લેન્ડ સાથે WhatsApp ચેટ ખૂલશે";
-      }
-    }
-
-    // Main Order Trigger
-    function executeFinalOrder() {
-      // Meta AddToCart Event on CTA click
-      if (typeof fbq === 'function') {
-        fbq('track', 'AddToCart', {
-          value: ORDER_AMOUNT_INR,
-          currency: 'INR',
-          content_name: `AURA Divine Perfume (${spiritualSelections.deity})`,
-          content_type: 'product'
-        });
-      }
-
-      if (currentPaymentMode === "ONLINE") {
-        triggerRazorpayPayment();
-      } else {
-        triggerWhatsAppCODOrder();
-      }
-    }
-
-    // Razorpay Flow with Instant WhatsApp Redirect & Meta Purchase Tracking
-    function triggerRazorpayPayment() {
-      const options = {
-        key: RAZORPAY_KEY,
-        amount: ORDER_AMOUNT_INR * 100, // In paise
-        currency: "INR",
-        name: "AURA DIVINE",
-        description: `દૈવી અત્તર પ્રસાદ (${spiritualSelections.deity})`,
-        theme: {
-          color: "#ffd700"
-        },
-        handler: function (response) {
-          // Meta Purchase Event on successful payment
-          if (typeof fbq === 'function') {
-            fbq('track', 'Purchase', {
-              value: ORDER_AMOUNT_INR,
-              currency: 'INR',
-              content_name: `AURA Divine Perfume (${spiritualSelections.deity})`,
-              content_type: 'product'
-            });
-          }
-
-          document.getElementById("masterActionBtn").style.display = "none";
-          const successBox = document.getElementById("paymentSuccessBox");
-          successBox.style.display = "block";
-          document.getElementById("successDetails").innerText = 
-            `Payment ID: ${response.razorpay_payment_id} | અમાઉન્ટ: ₹${ORDER_AMOUNT_INR} (Paid)`;
-
-          const paidMessage = 
-`જય શ્રી કૃષ્ણ / હર હર મહાદેવ 🙏
-
-મેં AURA દૈવી અત્તર માટે ₹૫૯૯ નું ઓનલાઇન પેમેન્ટ સફળતાપૂર્વક કરી દીધું છે! ✅
-
-💳 *પેમેન્ટ વિગતો:*
-• પેમેન્ટ ID: ${response.razorpay_payment_id}
-• રકમ: ₹${ORDER_AMOUNT_INR} (Paid)
-
-🕉️ *આધ્યાત્મિક સંકલ્પ વિગત:*
-• ઈષ્ટદેવ: ${spiritualSelections.deity}
-• હેતુ: ${spiritualSelections.goal}
-
-🪔 *સિદ્ધ થયેલું ૫૦:૩૦:૨૦ પવિત્ર અર્ક:*
-૧. ${spiritualSelections.ing1}
-૨. ${spiritualSelections.ing2}
-૩. ${spiritualSelections.ing3}
-
-📦 *મારું ડિલિવરી સરનામું:*
-• પૂરું નામ: 
-• મોબાઈલ નંબર: 
-• ઘરનું પૂરું સરનામું (ગામ/શહેર સહિત): 
-• પિનકોડ: 
-
-કૃપા કરીને મારો પ્રસાદ ઓર્ડર તૈયાર કરી રવાના કરશો!`;
-
-          setTimeout(() => {
-            const redirectUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(paidMessage)}`;
-            window.location.href = redirectUrl;
-          }, 1500);
-        }
-      };
-
-      const rzp = new Razorpay(options);
-      rzp.on('payment.failed', function (response) {
-        alert("પેમેન્ટ અપૂર્ણ રહ્યું: " + response.error.description);
-      });
-      rzp.open();
-    }
-
-    // WhatsApp COD Flow with Meta Tracking
-    function triggerWhatsAppCODOrder() {
-      // Meta Purchase Track for COD Leads
-      if (typeof fbq === 'function') {
-        fbq('track', 'Purchase', {
-          value: ORDER_AMOUNT_INR,
-          currency: 'INR',
-          content_name: `AURA Divine Perfume COD (${spiritualSelections.deity})`,
-          content_type: 'product'
-        });
-      }
-
-      const message = 
-`જય શ્રી કૃષ્ણ / હર હર મહાદેવ 🙏
-
-મારે *Cash on Delivery (COD)* દ્વારા આ પવિત્ર દૈવી અત્તર મંગાવવું છે.
-
-🕉️ *આધ્યાત્મિક સંકલ્પ વિગત:*
-• ઈષ્ટદેવ: ${spiritualSelections.deity}
-• હેતુ: ${spiritualSelections.goal}
-
-🪔 *સિદ્ધ થયેલું ૫૦:૩૦:૨૦ પવિત્ર અર્ક:*
-૧. ${spiritualSelections.ing1}
-૨. ${spiritualSelections.ing2}
-૩. ${spiritualSelections.ing3}
-
-💰 *પ્રસાદ ઑફર:* ₹${ORDER_AMOUNT_INR} (સમગ્ર ભારતમાં ફ્રી હોમ ડિલિવરી)
-
-📦 *મારું ડિલિવરી સરનામું:*
-• પૂરું નામ: 
-• મોબાઈલ નંબર: 
-• ઘરનું પૂરું સરનામું: 
-• પિનકોડ: 
-
-કૃપા કરીને મારો COD ઓર્ડર કન્ફર્મ કરશો!`;
-
-      const encodedUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-      window.location.href = encodedUrl;
-    }
-  </script>
-</body>
-</html>
+        <div class="bottle-tier-card selected" onclick="selectTier(2, 799, th
