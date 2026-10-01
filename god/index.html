@@ -39,7 +39,7 @@
       --bg-night: #07040d;
       --gold-temple: #ffd700;
       --gold-deep: #f39c12;
-      --gold-glow: rgba(255, 215, 0, 0.4);
+      --gold-glow: rgba(255, 215, 0, 0.45);
       --card-bg: rgba(18, 10, 30, 0.95);
       --card-border: rgba(255, 215, 0, 0.28);
       --text: #fdfbf7;
@@ -71,7 +71,7 @@
       inset: 0;
       width: 100vw;
       height: 100vh;
-      z-index: 1;
+      z-index: 0;
       pointer-events: none !important;
     }
 
@@ -80,21 +80,21 @@
       inset: 0;
       background: radial-gradient(circle at center, transparent 30%, rgba(7, 4, 13, 0.95) 95%);
       pointer-events: none !important;
-      z-index: 2;
+      z-index: 1;
     }
 
     .app-frame {
       position: relative;
-      z-index: 20;
+      z-index: 10;
       width: 100%;
       max-width: 450px;
-      padding: 24px 16px 36px;
+      padding: 20px 16px 36px;
       margin: auto;
     }
 
     .sacred-header {
       text-align: center;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .om-symbol {
@@ -102,18 +102,12 @@
       color: var(--gold-temple);
       display: inline-block;
       text-shadow: 0 0 16px var(--gold-glow);
-      animation: floatOm 2.5s ease-in-out infinite alternate;
-    }
-
-    @keyframes floatOm {
-      from { transform: translateY(0); filter: brightness(1); }
-      to { transform: translateY(-4px) scale(1.06); filter: brightness(1.25); }
     }
 
     .brand-title {
       font-family: 'Rozha One', 'Cinzel Decorative', serif;
-      font-size: 26px;
-      letter-spacing: 0.15em;
+      font-size: 25px;
+      letter-spacing: 0.14em;
       font-weight: 900;
       background: linear-gradient(180deg, #fff7d6 0%, #ffd700 50%, #d48806 100%);
       -webkit-background-clip: text;
@@ -122,14 +116,13 @@
     }
 
     .brand-subtitle {
-      font-size: 12px;
+      font-size: 11.5px;
       color: var(--gold-deep);
       letter-spacing: 0.1em;
       font-weight: 700;
       margin-top: 3px;
     }
 
-    /* Screen Card Styles */
     .screen-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -140,15 +133,15 @@
       text-align: center;
       display: none;
       box-shadow: 0 14px 40px rgba(0, 0, 0, 0.85);
-      animation: fadeIn 0.3s ease forwards;
     }
 
     .screen-card.active {
       display: block;
+      animation: fadeIn 0.3s ease forwards;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -184,7 +177,6 @@
       margin-bottom: 18px;
     }
 
-    /* Inputs */
     .form-group {
       text-align: left;
       margin-bottom: 15px;
@@ -205,27 +197,22 @@
       border-radius: 12px;
       padding: 13px 14px;
       color: #ffffff;
-      font-size: 14px;
+      font-size: 14.5px;
       outline: none;
-      transition: all 0.2s ease;
+      user-select: auto;
     }
 
     .form-input:focus {
       border-color: var(--gold-temple);
       box-shadow: 0 0 12px rgba(255, 215, 0, 0.35);
-      background: rgba(18, 9, 34, 0.95);
     }
 
-    /* Analysis Screen Styles */
-    .analysis-container {
-      padding: 20px 0;
-    }
-
+    /* Analysis Screen */
     .yantra-orbit {
       position: relative;
-      width: 160px;
-      height: 160px;
-      margin: 15px auto 25px;
+      width: 150px;
+      height: 150px;
+      margin: 20px auto 25px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -236,7 +223,7 @@
       inset: -6px;
       border-radius: 50%;
       border: 2px dashed rgba(255, 215, 0, 0.5);
-      animation: spinRing 10s linear infinite;
+      animation: spinRing 9s linear infinite;
     }
 
     @keyframes spinRing {
@@ -244,14 +231,8 @@
     }
 
     .yantra-icon {
-      font-size: 55px;
+      font-size: 52px;
       filter: drop-shadow(0 0 16px rgba(255, 215, 0, 0.6));
-      animation: pulseYantra 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes pulseYantra {
-      0% { transform: scale(0.95); }
-      100% { transform: scale(1.08); }
     }
 
     .progress-track {
@@ -267,35 +248,79 @@
       height: 100%;
       background: linear-gradient(90deg, #f39c12, #ffd700);
       box-shadow: 0 0 12px var(--gold-glow);
-      transition: width 0.1s linear;
+      transition: width 0.08s linear;
     }
 
     .analysis-status {
       font-size: 13px;
       color: #f1e9db;
       font-weight: 700;
-      min-height: 20px;
     }
 
-    /* Result Screen Specifics */
+    /* Result Details */
     .result-badge-card {
-      background: linear-gradient(135deg, rgba(255, 215, 0, 0.12), rgba(30, 16, 50, 0.8));
-      border: 1px solid var(--gold-temple);
-      border-radius: 14px;
-      padding: 14px;
-      margin-bottom: 16px;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.12), rgba(35, 17, 56, 0.85));
+      border: 1.5px solid var(--gold-temple);
+      border-radius: 16px;
+      padding: 16px 14px;
+      margin-bottom: 14px;
+      text-align: left;
     }
 
     .result-user-title {
-      font-size: 16px;
+      font-size: 16.5px;
       font-weight: 900;
       color: var(--gold-temple);
     }
 
     .result-deity-title {
-      font-size: 13px;
+      font-size: 13.5px;
       color: #ffffff;
       margin-top: 4px;
+      font-weight: 700;
+    }
+
+    .vastu-pill-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .vastu-tag {
+      background: rgba(255, 215, 0, 0.12);
+      border: 1px solid rgba(255, 215, 0, 0.35);
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 11px;
+      color: #ffd700;
+      font-weight: 700;
+    }
+
+    .formula-breakdown {
+      background: rgba(14, 7, 24, 0.7);
+      border: 1px solid rgba(255, 215, 0, 0.18);
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      text-align: left;
+    }
+
+    .formula-title {
+      font-size: 12px;
+      color: var(--gold-deep);
+      font-weight: 800;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .note-item {
+      font-size: 12.5px;
+      color: #f3edf8;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .concept-disclaimer {
@@ -303,7 +328,7 @@
       border: 1px solid rgba(255, 215, 0, 0.25);
       border-radius: 12px;
       padding: 12px 14px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       text-align: left;
     }
 
@@ -313,7 +338,7 @@
       color: #f5eedf;
     }
 
-    /* Packages */
+    /* Package Options */
     .bottle-options-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -332,7 +357,6 @@
       cursor: pointer;
       text-align: left;
       position: relative;
-      transition: all 0.2s ease;
     }
 
     .bottle-tier-card.selected {
@@ -382,7 +406,7 @@
       color: var(--gold-temple);
     }
 
-    /* Action Buttons */
+    /* Buttons */
     .btn-action {
       display: flex;
       align-items: center;
@@ -396,7 +420,7 @@
       border: none;
       cursor: pointer;
       margin-bottom: 10px;
-      transition: transform 0.15s ease;
+      user-select: none;
     }
 
     .btn-action:active {
@@ -422,14 +446,13 @@
   <div class="temple-vignette"></div>
 
   <main class="app-frame">
-    <!-- Header -->
     <header class="sacred-header">
       <div class="om-symbol">ॐ</div>
       <div class="brand-title">AURA DIVINE</div>
       <div class="brand-subtitle">વાસ્તુ & ઇષ્ટદેવ કસ્ટમાઇઝ્ડ અત્તર ✨</div>
     </header>
 
-    <!-- STEP 1: NAME + ISHTADEV INPUT -->
+    <!-- STEP 1: INPUT SCREEN -->
     <section class="screen-card active" id="slide1">
       <span class="step-badge">પગલું ૧ • આધ્યાત્મિક સંકલ્પ</span>
       <h2 class="heading">
@@ -441,12 +464,12 @@
 
       <div class="form-group">
         <label class="form-label" for="userName">૧. તમારું પૂરું નામ:</label>
-        <input type="text" id="userName" class="form-input" placeholder="દા.ત. રાજેશભાઈ પટેલ" autocomplete="off" />
+        <input type="text" id="userName" class="form-input" placeholder="દા.ત. J k patel" autocomplete="off" />
       </div>
 
       <div class="form-group">
         <label class="form-label" for="userDeity">૨. તમારા ઇષ્ટદેવનું નામ:</label>
-        <input type="text" id="userDeity" class="form-input" placeholder="દા.ત. મહાદેવ / હનુમાનજી / શ્રી કૃષ્ણ" autocomplete="off" />
+        <input type="text" id="userDeity" class="form-input" placeholder="દા.ત. Hanumanji" autocomplete="off" />
       </div>
 
       <div class="form-group">
@@ -454,12 +477,12 @@
         <input type="tel" id="userPhone" class="form-input" placeholder="૧૦ આંકડાનો મોબાઈલ નંબર" maxlength="10" />
       </div>
 
-      <button type="button" class="btn-action btn-gold" style="margin-top: 10px;" onclick="startAnalysis()">
-        દૈવી ઊર્જા વિશ્લેષણ શરૂ કરો ✨
+      <button type="button" id="startBtn" class="btn-action btn-gold" style="margin-top: 10px;">
+        દૈવી ઉર્જા વિશ્લેષણ શરૂ કરો ✨
       </button>
     </section>
 
-    <!-- STEP 2: LIVE ANALYSIS SCREEN -->
+    <!-- STEP 2: ANIMATED ANALYSIS SCREEN -->
     <section class="screen-card" id="slide2">
       <span class="step-badge">પગલું ૨ • દૈવી વિશ્લેષણ</span>
       <h2 class="heading">
@@ -467,30 +490,39 @@
       </h2>
       <p class="sub-heading">તમારા સંકલ્પ સાથે મેળ ખાતી સુગંધનું સંયોજન થઈ રહ્યું છે...</p>
 
-      <div class="analysis-container">
-        <div class="yantra-orbit">
-          <div class="orbit-ring"></div>
-          <div class="yantra-icon">🔯</div>
-        </div>
-
-        <div class="progress-track">
-          <div class="progress-bar" id="analysisBar"></div>
-        </div>
-
-        <p class="analysis-status" id="analysisStatus">તમારા નામની ઉર્જા સાથે સુમેળ સાધી રહ્યા છીએ...</p>
+      <div class="yantra-orbit">
+        <div class="orbit-ring"></div>
+        <div class="yantra-icon">🔯</div>
       </div>
+
+      <div class="progress-track">
+        <div class="progress-bar" id="analysisBar"></div>
+      </div>
+
+      <p class="analysis-status" id="analysisStatus">તમારા નામની ઉર્જા સાથે સુમેળ સાધી રહ્યા છીએ...</p>
     </section>
 
-    <!-- STEP 3: RESULT & PRICING SELECTION -->
+    <!-- STEP 3: DETERMINISTIC RESULT SCREEN -->
     <section class="screen-card" id="slide3">
       <span class="step-badge">પગલું ૩ • કસ્ટમાઇઝ્ડ રિઝલ્ટ</span>
       
       <div class="result-badge-card">
-        <div class="result-user-title" id="displayUserName">રાજેશભાઈ પટેલ માટે ખાસ તૈયાર કરેલ</div>
-        <div class="result-deity-title" id="displayUserDeity">🌿 ઇષ્ટદેવ: મહાદેવ ભાવ અત્તર</div>
+        <div class="result-user-title" id="displayUserName">કસ્ટમાઇઝ્ડ અત્તર</div>
+        <div class="result-deity-title" id="displayUserDeity">ઇષ્ટદેવ ભાવ અત્તર</div>
+        <div class="vastu-pill-box">
+          <span class="vastu-tag" id="displayTattva">તત્વ</span>
+          <span class="vastu-tag" id="displayDisha">દિશા</span>
+        </div>
       </div>
 
-      <!-- Philosophy / Claim-free Note -->
+      <div class="formula-breakdown">
+        <div class="formula-title">🌿 તમારા માટે સિદ્ધ થયેલું અત્તર સંયોજન:</div>
+        <div class="note-item" id="noteItem1">✨ ટોપ નોટ</div>
+        <div class="note-item" id="noteItem2">✨ હાર્ટ નોટ</div>
+        <div class="note-item" id="noteItem3">✨ બેઝ નોટ</div>
+        <p style="font-size: 11.5px; color: var(--gold-temple); margin-top: 8px;" id="vastuBhavText"></p>
+      </div>
+
       <div class="concept-disclaimer">
         <p>
           આ કોઈ જાદુ કે ચમત્કારનો દાવો નથી —<br>
@@ -503,9 +535,9 @@
       </p>
 
       <div class="bottle-options-grid">
-        <div class="bottle-tier-card" onclick="selectTier(1, 599, this)">
+        <div class="bottle-tier-card" id="tier1Card">
           <div class="tier-left">
-            <input type="radio" name="bottleQty" class="tier-radio">
+            <input type="radio" name="bottleQty" id="tier1Radio" class="tier-radio">
             <div>
               <div class="tier-title">• 1 બોટલ અત્તર</div>
               <div class="tier-sub">વ્યક્તિગત ઉપયોગ માટે</div>
@@ -514,10 +546,10 @@
           <div class="tier-price">₹599</div>
         </div>
 
-        <div class="bottle-tier-card selected" onclick="selectTier(2, 799, this)">
+        <div class="bottle-tier-card selected" id="tier2Card">
           <span class="tier-badge">સૌથી વધુ પસંદગી</span>
           <div class="tier-left">
-            <input type="radio" name="bottleQty" class="tier-radio" checked>
+            <input type="radio" name="bottleQty" id="tier2Radio" class="tier-radio" checked>
             <div>
               <div class="tier-title">• 2 બોટલ અત્તર</div>
               <div class="tier-sub">પરિવાર / ભેટ આપવા માટે</div>
@@ -526,10 +558,10 @@
           <div class="tier-price">₹799</div>
         </div>
 
-        <div class="bottle-tier-card" onclick="selectTier(3, 999, this)">
+        <div class="bottle-tier-card" id="tier3Card">
           <span class="tier-badge" style="background:#4ade80;">બેસ્ટ વેલ્યુ</span>
           <div class="tier-left">
-            <input type="radio" name="bottleQty" class="tier-radio">
+            <input type="radio" name="bottleQty" id="tier3Radio" class="tier-radio">
             <div>
               <div class="tier-title">• 3 બોટલ અત્તર</div>
               <div class="tier-sub">સંપૂર્ણ વાસ્તુ & પવિત્ર સેટ</div>
@@ -539,11 +571,11 @@
         </div>
       </div>
 
-      <button type="button" class="btn-action btn-gold" onclick="handlePrepaidPayment()">
+      <button type="button" id="onlinePayBtn" class="btn-action btn-gold">
         💳 ઓનલાઇન ઓર્ડર કરો (તાત્કાલિક બુકિંગ)
       </button>
 
-      <button type="button" class="btn-action btn-cod" onclick="handleCODOrder()">
+      <button type="button" id="codPayBtn" class="btn-action btn-cod">
         📦 કેશ ઓન ડિલિવરી (COD) ઓર્ડર કરો
       </button>
 
@@ -554,7 +586,7 @@
   </main>
 
   <script>
-    // --- Background Stars ---
+    // --- Stars Background Animation ---
     const canvas = document.getElementById('templeCanvas');
     const ctx = canvas.getContext('2d');
     let width, height, stars = [];
@@ -566,13 +598,13 @@
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 35; i++) {
       stars.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        radius: Math.random() * 1.6 + 0.5,
+        radius: Math.random() * 1.5 + 0.5,
         alpha: Math.random() * 0.7 + 0.3,
-        speed: Math.random() * 0.35 + 0.15
+        speed: Math.random() * 0.3 + 0.15
       });
     }
 
@@ -582,7 +614,7 @@
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255, 215, 0, ${s.alpha})`;
-        ctx.shadowBlur = 6;
+        ctx.shadowBlur = 4;
         ctx.shadowColor = '#ffd700';
         ctx.fill();
         s.y -= s.speed;
@@ -595,7 +627,58 @@
     }
     renderStars();
 
-    // --- State ---
+    // --- Deterministic Aura Engine (Same Input = Same Result, Different Input = Different Result) ---
+    const vastuTattvas = [
+      { name: "અગ્નિ તત્વ (ઓજસ & સાહસ)", disha: "વાસ્તુ દિશા: પૂર્વ-દક્ષિણ (અગ્નિ કોણ)" },
+      { name: "વાયુ તત્વ (પ્રસન્નતા & શાંતિ)", disha: "વાસ્તુ દિશા: ઉત્તર-પશ્ચિમ (વાયવ્ય કોણ)" },
+      { name: "જલ તત્વ (સહજતા & શીતળતા)", disha: "વાસ્તુ દિશા: ઉત્તર-પૂર્વ (ઈશાન કોણ)" },
+      { name: "પૃથ્વી તત્વ (સ્થિરતા & સમૃદ્ધિ)", disha: "વાસ્તુ દિશા: દક્ષિણ-પશ્ચિમ (નૈઋત્ય કોણ)" },
+      { name: "આકાશ તત્વ (ધ્યાન & દિવ્યતા)", disha: "વાસ્તુ દિશા: બ્રહ્મસ્થાન (કેન્દ્ર ઊર્જા)" }
+    ];
+
+    const attarFormulas = [
+      {
+        notes: ["સિંદૂરી કેસર & કસ્તુરી નોટ (૪૫%)", "પવિત્ર રક્ત ચંદન અર્ક (૩૫%)", "દિવ્ય લોબાન સુગંધ (૨૦%)"],
+        bhav: "વાસ્તુ ભાવ: સકારાત્મક ઊર્જા, આત્મવિશ્વાસ અને નકારાત્મકતા નિવારણ."
+      },
+      {
+        notes: ["શ્વેત મલયાગિરી ચંદન (૫૦%)", "દેવદારુ પુષ્પ અર્ક (૩૦%)", "શીતળ ભસ્મ અંબર (૨૦%)"],
+        bhav: "વાસ્તુ ભાવ: માનસિક શાંતિ, ઊંડો આંતરિક સુકૂન અને એકાગ્રતા."
+      },
+      {
+        notes: ["પવિત્ર તુલસી દલ અર્ક (૪૫%)", "વૃંદાવન કદંબ સુવાસ (૩૫%)", "મીઠો ગોપી ચંદન (૨૦%)"],
+        bhav: "વાસ્તુ ભાવ: હૃદય પ્રસન્નતા, પ્રેમભાવ અને પવિત્ર ઘર વાતાવરણ."
+      },
+      {
+        notes: ["શાહી દેશી ગુલાબ અત્તર (૫૦%)", "સુવર્ણ મોગરો & કેવડા (૩૦%)", "દિવ્ય કસ્તૂરી અંબર (૨૦%)"],
+        bhav: "વાસ્તુ ભાવ: વાસ્તુ સમૃદ્ધિ, મંગલ ભાવ અને સુખ-શાંતિ."
+      },
+      {
+        notes: ["લીલી દૂર્વા ઘાસ અર્ક (૪૦%)", "સુગંધ કોકિલા (૩૫%)", "શુદ્ધ જાવંત્રી & ચંદન (૨૫%)"],
+        bhav: "વાસ્તુ ભાવ: વિઘ્નનિવારણ, શુભ શરૂઆત અને ઉત્સાહ વૃદ્ધિ."
+      },
+      {
+        notes: ["સુવર્ણ ચંપા પુષ્પ (૪૫%)", "ભીમસેની કપૂર (૩૦%)", "આધ્યાત્મિક અંબર નોટ (૨૫%)"],
+        bhav: "વાસ્તુ ભાવ: ઓરા શુદ્ધિ, આધ્યાત્મિક જાગૃતિ અને પવિત્ર તરંગો."
+      }
+    ];
+
+    function calculateAuraProfile(name, deity) {
+      const text = (name.trim().toLowerCase() + "_" + deity.trim().toLowerCase());
+      let hash = 0;
+      for (let i = 0; i < text.length; i++) {
+        hash = (hash << 5) - hash + text.charCodeAt(i);
+        hash |= 0;
+      }
+      hash = Math.abs(hash);
+
+      const tattva = vastuTattvas[hash % vastuTattvas.length];
+      const formula = attarFormulas[(Math.floor(hash / 7)) % attarFormulas.length];
+
+      return { tattva, formula };
+    }
+
+    // --- State & Navigation ---
     let orderState = {
       name: '',
       deity: '',
@@ -606,97 +689,11 @@
 
     function showSlide(num) {
       document.querySelectorAll('.screen-card').forEach(s => s.classList.remove('active'));
-      document.getElementById('slide' + num).classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const target = document.getElementById('slide' + num);
+      if (target) {
+        target.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     }
 
-    // --- 1. Start Analysis ---
-    function startAnalysis() {
-      const name = document.getElementById('userName').value.trim();
-      const deity = document.getElementById('userDeity').value.trim();
-      const phone = document.getElementById('userPhone').value.trim();
-
-      if (!name) {
-        alert("કૃપા કરીને તમારું નામ લખો.");
-        return;
-      }
-      if (!deity) {
-        alert("કૃપા કરીને તમારા ઇષ્ટદેવનું નામ લખો.");
-        return;
-      }
-      if (!phone || phone.length < 10) {
-        alert("કૃપા કરીને ૧૦ આંકડાનો મોબાઈલ નંબર દાખલ કરો.");
-        return;
-      }
-
-      orderState.name = name;
-      orderState.deity = deity;
-      orderState.phone = phone;
-
-      // Track Lead / Step
-      if (typeof fbq === 'function') {
-        fbq('track', 'Search', { search_string: deity });
-      }
-
-      // Switch to Analysis Screen
-      showSlide(2);
-
-      const bar = document.getElementById('analysisBar');
-      const status = document.getElementById('analysisStatus');
-      let progress = 0;
-
-      const interval = setInterval(() => {
-        progress += 4;
-        bar.style.width = progress + '%';
-
-        if (progress === 32) {
-          status.innerText = "વાસ્તુ ઉર્જા અને દૈવી ભાવ સાથે જોડાઈ રહ્યું છે...";
-        } else if (progress === 68) {
-          status.innerText = "કુદરતી અત્તર તત્વોનું સંયોજન નક્કી થઈ રહ્યું છે...";
-        } else if (progress >= 100) {
-          clearInterval(interval);
-          status.innerText = "વિશ્લેષણ સફળ થયું! ✨";
-
-          setTimeout(() => {
-            // Set Result text
-            document.getElementById('displayUserName').innerText = `${orderState.name} માટે ખાસ તૈયાર કરેલ`;
-            document.getElementById('displayUserDeity').innerText = `🌿 ઇષ્ટદેવ: ${orderState.deity} ભાવ અત્તર`;
-            showSlide(3);
-          }, 500);
-        }
-      }, 90);
-    }
-
-    // --- 2. Select Tier ---
-    function selectTier(bottles, price, elem) {
-      orderState.selectedBottles = bottles;
-      orderState.selectedPrice = price;
-
-      document.querySelectorAll('.bottle-tier-card').forEach(card => {
-        card.classList.remove('selected');
-        const radio = card.querySelector('.tier-radio');
-        if (radio) radio.checked = false;
-      });
-
-      elem.classList.add('selected');
-      const selectedRadio = elem.querySelector('.tier-radio');
-      if (selectedRadio) selectedRadio.checked = true;
-    }
-
-    // --- 3. Checkout Handlers ---
-    function handlePrepaidPayment() {
-      if (typeof fbq === 'function') {
-        fbq('track', 'InitiateCheckout', {
-          content_name: `${orderState.selectedBottles} Bottle Customized Attar`,
-          value: orderState.selectedPrice,
-          currency: 'INR'
-        });
-      }
-
-      const options = {
-        key: "rzp_test_YOUR_KEY_HERE", // Tamari live Razorpay key muko
-        amount: orderState.selectedPrice * 100,
-        currency: "INR",
-        name: "AURA DIVINE",
-        description: `${orderState.name} - ${orderState.selectedBottles} Bottle (${orderState.deity})`,
-        image: "https://via.placeholder.com/150/ffd700/000000?tex
+    // --- Button Click B
