@@ -6,17 +6,18 @@
   <title>દૈવી સુગંધ વિશ્લેષણ | Vastu & Cosmic Attar Customizer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Noto+Sans+Gujarati:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Noto+Sans+Gujarati:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #05070c;
-      --card-bg: rgba(14, 18, 28, 0.88);
+      --bg-space: #03050a;
+      --card-bg: rgba(9, 13, 24, 0.82);
       --gold: #d4af37;
       --gold-bright: #ffd700;
-      --gold-glow: rgba(255, 215, 0, 0.35);
-      --saffron: #ff8c00;
-      --text-muted: #9aa8be;
-      --border-gold: rgba(212, 175, 55, 0.32);
+      --gold-light: #fff2a3;
+      --gold-glow: rgba(255, 215, 0, 0.4);
+      --saffron: #ff7700;
+      --text-muted: #94a3b8;
+      --border-gold: rgba(212, 175, 55, 0.35);
       --wa-green: #25d366;
     }
 
@@ -25,39 +26,101 @@
       margin: 0;
       padding: 0;
       font-family: 'Noto Sans Gujarati', sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
-      background: radial-gradient(circle at 50% 15%, #182035 0%, #080a12 60%, #030407 100%);
+      background-color: var(--bg-space);
       color: #ffffff;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 14px;
+      padding: 16px 12px;
       overflow-x: hidden;
+      position: relative;
     }
 
+    /* Live Cosmic Stars & Particle Canvas */
+    #cosmic-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Rotating Vastu Mandala Watermark in Background */
+    .vastu-bg-watermark {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      max-width: 95vw;
+      max-height: 95vw;
+      z-index: 1;
+      opacity: 0.12;
+      pointer-events: none;
+      animation: rotateVastuMandala 90s linear infinite;
+    }
+
+    @keyframes rotateVastuMandala {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* Main Container (Vedic Royal Glass Card) */
     .container {
       width: 100%;
       max-width: 490px;
       background: var(--card-bg);
       border: 1px solid var(--border-gold);
-      border-radius: 24px;
-      padding: 24px 20px;
-      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.85), 0 0 35px var(--gold-glow);
-      backdrop-filter: blur(14px);
+      border-radius: 26px;
+      padding: 26px 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 175, 55, 0.25), inset 0 0 30px rgba(255, 215, 0, 0.05);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       position: relative;
+      z-index: 2;
     }
 
+    /* Ornate Gold Border Line on Top */
     .container::before {
       content: '';
       position: absolute;
-      top: -2px;
-      left: 15%;
-      right: 15%;
+      top: -1px;
+      left: 12%;
+      right: 12%;
       height: 2px;
-      background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
+      background: linear-gradient(90deg, transparent, var(--gold-bright), var(--saffron), var(--gold-bright), transparent);
+      box-shadow: 0 0 15px var(--gold-bright);
+    }
+
+    /* Vastu Compass Header Ribbon */
+    .vastu-ribbon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      color: var(--gold);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .vastu-ribbon span.dir {
+      background: rgba(255, 215, 0, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 10px;
+      color: var(--gold-light);
     }
 
     .header {
@@ -65,27 +128,35 @@
       margin-bottom: 22px;
     }
 
+    /* Sacred Yantra Emblem */
     .sacred-yantra-icon {
-      width: 48px;
-      height: 48px;
+      width: 54px;
+      height: 54px;
       margin: 0 auto 10px;
       display: block;
-      filter: drop-shadow(0 0 12px var(--gold-bright));
+      filter: drop-shadow(0 0 15px var(--gold-bright));
+      animation: pulseYantra 3s infinite ease-in-out;
+    }
+
+    @keyframes pulseYantra {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 12px var(--gold-bright)); }
+      50% { transform: scale(1.08); filter: drop-shadow(0 0 22px #ff8c00); }
     }
 
     h1 {
-      font-size: 22px;
+      font-size: 23px;
       color: var(--gold-bright);
       font-weight: 800;
       letter-spacing: 0.5px;
       line-height: 1.35;
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
     }
 
     p.subtitle {
       font-size: 13px;
       color: var(--text-muted);
-      margin-top: 5px;
-      line-height: 1.4;
+      margin-top: 6px;
+      line-height: 1.45;
     }
 
     .form-group {
@@ -98,62 +169,90 @@
       color: #e2e8f0;
       margin-bottom: 6px;
       font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    label .icon {
+      color: var(--gold-bright);
     }
 
     input, select {
       width: 100%;
-      padding: 13px 15px;
-      background: rgba(6, 9, 15, 0.92);
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      border-radius: 12px;
-      color: #fff;
+      padding: 14px 16px;
+      background: rgba(4, 7, 14, 0.95);
+      border: 1.5px solid rgba(212, 175, 55, 0.35);
+      border-radius: 14px;
+      color: #ffffff;
       font-size: 14.5px;
       outline: none;
       transition: all 0.3s ease;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.7);
     }
 
     input:focus, select:focus {
       border-color: var(--gold-bright);
-      box-shadow: 0 0 14px var(--gold-glow);
-      background: rgba(10, 15, 26, 0.98);
+      box-shadow: 0 0 16px var(--gold-glow), inset 0 2px 6px rgba(0, 0, 0, 0.5);
+      background: rgba(8, 12, 22, 0.98);
     }
 
+    /* Visceral Shimmering CTA Button */
     .cta-btn {
       width: 100%;
       padding: 16px;
-      background: linear-gradient(135deg, #ffd700, #b8860b);
+      background: linear-gradient(135deg, #ffd700, #ff9900, #b8860b);
       border: none;
       border-radius: 14px;
-      color: #05070a;
+      color: #04060a;
       font-size: 17px;
       font-weight: 800;
       cursor: pointer;
-      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45);
+      box-shadow: 0 6px 25px rgba(255, 170, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.6);
       transition: all 0.3s ease;
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 10px;
+      position: relative;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .cta-btn::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+      transform: rotate(30deg);
+      animation: buttonShimmer 3.5s infinite;
+    }
+
+    @keyframes buttonShimmer {
+      0% { left: -60%; }
+      30%, 100% { left: 140%; }
     }
 
     .cta-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
-      background: linear-gradient(135deg, #fff066, #d4af37);
+      box-shadow: 0 8px 30px rgba(255, 215, 0, 0.7);
     }
 
-    /* Visceral Cosmic & Vastu Mandala Loader */
+    /* STEP 2: Visceral Cosmic & Vastu Mandala Loader */
     #loader-screen {
       display: none;
       text-align: center;
-      padding: 24px 10px;
+      padding: 26px 10px;
     }
 
     .mandala-stage {
       position: relative;
-      width: 200px;
-      height: 200px;
-      margin: 0 auto 24px;
+      width: 220px;
+      height: 220px;
+      margin: 0 auto 26px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -162,24 +261,24 @@
     .cosmic-svg {
       width: 100%;
       height: 100%;
-      animation: rotateSlow 20s linear infinite;
+      animation: rotateSlow 24s linear infinite;
     }
 
     .inner-yantra-svg {
       position: absolute;
-      width: 110px;
-      height: 110px;
-      animation: rotateReverse 12s linear infinite;
+      width: 125px;
+      height: 125px;
+      animation: rotateReverse 14s linear infinite;
     }
 
     .center-diya-glow {
       position: absolute;
-      width: 22px;
-      height: 22px;
-      background: radial-gradient(circle, #ffffff 0%, var(--gold-bright) 50%, transparent 100%);
+      width: 24px;
+      height: 24px;
+      background: radial-gradient(circle, #ffffff 0%, var(--gold-bright) 45%, var(--saffron) 70%, transparent 100%);
       border-radius: 50%;
-      box-shadow: 0 0 25px var(--gold-bright), 0 0 40px var(--saffron);
-      animation: pulseGlow 1.5s infinite ease-in-out;
+      box-shadow: 0 0 30px var(--gold-bright), 0 0 50px var(--saffron);
+      animation: pulseGlow 1.4s infinite ease-in-out;
     }
 
     @keyframes rotateSlow {
@@ -193,78 +292,86 @@
     }
 
     @keyframes pulseGlow {
-      0%, 100% { transform: scale(1); opacity: 0.85; }
-      50% { transform: scale(1.3); opacity: 1; }
+      0%, 100% { transform: scale(1); opacity: 0.85; filter: blur(0px); }
+      50% { transform: scale(1.4); opacity: 1; filter: blur(1px); }
     }
 
     .loader-title {
-      font-size: 19px;
+      font-size: 20px;
       color: var(--gold-bright);
-      margin-bottom: 6px;
-      font-weight: 700;
+      margin-bottom: 8px;
+      font-weight: 800;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
     }
 
     .loader-step {
-      font-size: 13.5px;
+      font-size: 14px;
       color: #cbd5e1;
-      min-height: 26px;
-      margin-bottom: 18px;
+      min-height: 28px;
+      margin-bottom: 20px;
+      font-weight: 500;
     }
 
     .progress-bar {
       width: 100%;
-      height: 7px;
+      height: 8px;
       background: rgba(255, 255, 255, 0.08);
-      border-radius: 10px;
+      border-radius: 12px;
       overflow: hidden;
       margin-bottom: 12px;
-      border: 1px solid rgba(212, 175, 55, 0.25);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 1px;
     }
 
     .progress-fill {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, #aa7c11, #ffd700, #ff8c00);
+      border-radius: 10px;
+      background: linear-gradient(90deg, #aa7c11, #ffd700, #ff7700);
+      box-shadow: 0 0 12px var(--gold-bright);
       transition: width 0.3s ease;
     }
 
-    /* Result Screen */
+    /* STEP 3: Result Screen */
     #result-screen {
       display: none;
     }
 
     .disclaimer-badge {
-      background: rgba(212, 175, 55, 0.1);
-      border-left: 3px solid var(--gold);
+      background: rgba(212, 175, 55, 0.08);
+      border-left: 3.5px solid var(--gold-bright);
       padding: 12px 14px;
-      border-radius: 10px;
+      border-radius: 12px;
       font-size: 12.5px;
       color: #e2e8f0;
       line-height: 1.5;
       margin-bottom: 20px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-left-width: 4px;
     }
 
-    /* Price Packages (599 / 799 / 999) */
+    /* Packages Grid (₹599 / ₹799 / ₹999) */
     .package-title {
       font-size: 15px;
       color: var(--gold-bright);
       margin-bottom: 12px;
       font-weight: 700;
       text-align: center;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
     }
 
     .pricing-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px;
+      gap: 9px;
       margin-bottom: 20px;
     }
 
     .price-card {
-      background: rgba(8, 12, 20, 0.9);
+      background: rgba(6, 10, 18, 0.95);
       border: 1.5px solid rgba(212, 175, 55, 0.3);
-      border-radius: 12px;
-      padding: 12px 6px;
+      border-radius: 14px;
+      padding: 14px 6px 12px;
       text-align: center;
       cursor: pointer;
       position: relative;
@@ -273,56 +380,59 @@
 
     .price-card.active {
       border-color: var(--gold-bright);
-      background: rgba(212, 175, 55, 0.16);
-      box-shadow: 0 0 16px rgba(255, 215, 0, 0.35);
-      transform: translateY(-2px);
+      background: linear-gradient(180deg, rgba(255, 215, 0, 0.18) 0%, rgba(10, 15, 28, 0.98) 100%);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.35);
+      transform: translateY(-3px);
     }
 
     .pop-tag {
       position: absolute;
-      top: -9px;
+      top: -10px;
       left: 50%;
       transform: translateX(-50%);
-      background: linear-gradient(90deg, #ff8c00, #ffd700);
-      color: #000;
+      background: linear-gradient(90deg, #ff7700, #ffd700);
+      color: #04060a;
       font-size: 9.5px;
       font-weight: 800;
-      padding: 2px 7px;
-      border-radius: 10px;
+      padding: 2.5px 8px;
+      border-radius: 12px;
       white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
     }
 
     .price-card .qty {
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 700;
-      color: #fff;
-      margin-top: 4px;
+      color: #ffffff;
+      margin-top: 3px;
     }
 
     .price-card .amount {
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 800;
       color: var(--gold-bright);
       margin: 4px 0 2px;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
     }
 
     .price-card .delivery-badge {
       font-size: 10px;
-      color: #a0aec0;
+      color: #94a3b8;
     }
 
+    /* Attar Cards */
     .attar-section-label {
       font-size: 13.5px;
-      color: #cbd5e1;
-      margin-bottom: 10px;
+      color: #e2e8f0;
+      margin-bottom: 12px;
       font-weight: 600;
     }
 
     .attar-card {
-      background: rgba(11, 15, 25, 0.92);
+      background: rgba(8, 12, 22, 0.94);
       border: 1.5px solid rgba(212, 175, 55, 0.25);
-      border-radius: 14px;
-      padding: 14px;
+      border-radius: 16px;
+      padding: 15px;
       margin-bottom: 12px;
       position: relative;
       cursor: pointer;
@@ -334,12 +444,12 @@
 
     .attar-card.selected {
       border-color: var(--gold-bright);
-      background: rgba(18, 26, 43, 0.95);
-      box-shadow: 0 0 12px rgba(212, 175, 55, 0.2);
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.12) 0%, rgba(10, 16, 30, 0.98) 100%);
+      box-shadow: 0 0 16px rgba(212, 175, 55, 0.25);
     }
 
     .attar-check {
-      margin-top: 3px;
+      margin-top: 4px;
       width: 20px;
       height: 20px;
       accent-color: var(--gold-bright);
@@ -358,31 +468,32 @@
     }
 
     .attar-name {
-      font-size: 15px;
+      font-size: 15.5px;
       font-weight: 700;
       color: var(--gold-bright);
     }
 
     .attar-tag {
       font-size: 10.5px;
-      background: rgba(212, 175, 55, 0.18);
-      color: var(--gold-bright);
-      padding: 2px 7px;
-      border-radius: 8px;
-      border: 1px solid rgba(212, 175, 55, 0.35);
+      background: rgba(255, 215, 0, 0.16);
+      color: var(--gold-light);
+      padding: 3px 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
       white-space: nowrap;
     }
 
     .attar-notes {
-      font-size: 12px;
+      font-size: 12.5px;
       color: #cbd5e1;
-      margin-bottom: 5px;
-      line-height: 1.4;
+      margin-bottom: 6px;
+      line-height: 1.45;
     }
 
     .attar-vastu {
-      font-size: 11.5px;
-      color: #f6ad55;
+      font-size: 12px;
+      color: #ffaa44;
+      font-weight: 500;
     }
 
     /* WhatsApp Button with COD */
@@ -391,12 +502,12 @@
       padding: 16px 14px;
       background: linear-gradient(135deg, #25d366, #128c7e);
       border: none;
-      border-radius: 14px;
+      border-radius: 16px;
       color: #ffffff;
-      font-size: 16px;
-      font-weight: 700;
+      font-size: 16.5px;
+      font-weight: 800;
       cursor: pointer;
-      box-shadow: 0 6px 22px rgba(37, 211, 102, 0.4);
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.45);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -405,64 +516,106 @@
       margin-top: 18px;
       position: relative;
       transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .whatsapp-btn::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+      transform: rotate(30deg);
+      animation: buttonShimmer 3.2s infinite;
     }
 
     .whatsapp-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(37, 211, 102, 0.6);
-      background: linear-gradient(135deg, #2fe671, #169b8c);
+      box-shadow: 0 10px 32px rgba(37, 211, 102, 0.65);
     }
 
     .cod-badge {
-      background: #fff;
-      color: #0c6934;
+      background: #ffffff;
+      color: #086130;
       font-size: 11px;
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 6px;
+      font-weight: 900;
+      padding: 3.5px 8px;
+      border-radius: 7px;
       margin-left: 6px;
       text-transform: uppercase;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     }
 
     .summary-text {
       text-align: center;
       font-size: 13px;
-      color: #a0aec0;
-      margin-top: 10px;
+      color: #94a3b8;
+      margin-top: 12px;
     }
   </style>
 </head>
 <body>
 
+  <!-- Live Cosmic Starfield & Nebula Canvas -->
+  <canvas id="cosmic-canvas"></canvas>
+
+  <!-- Rotating Sacred Vastu Purusha Mandala SVG Background -->
+  <svg class="vastu-bg-watermark" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Outer 32 Vastu Pada Boundary -->
+    <rect x="20" y="20" width="360" height="360" stroke="#ffd700" stroke-width="1.5" stroke-dasharray="8 6"/>
+    <circle cx="200" cy="200" r="170" stroke="#d4af37" stroke-width="1.2"/>
+    <circle cx="200" cy="200" r="140" stroke="#ffd700" stroke-width="0.8" stroke-dasharray="4 4"/>
+    
+    <!-- 8 Cardinal Vastu Energy Lines -->
+    <line x1="200" y1="20" x2="200" y2="380" stroke="#ffd700" stroke-width="1"/>
+    <line x1="20" y1="200" x2="380" y2="200" stroke="#ffd700" stroke-width="1"/>
+    <line x1="72" y1="72" x2="328" y2="328" stroke="#d4af37" stroke-width="1"/>
+    <line x1="72" y1="328" x2="328" y2="72" stroke="#d4af37" stroke-width="1"/>
+
+    <!-- Sacred Vedic Geometry -->
+    <polygon points="200,45 345,305 55,305" stroke="#ffd700" stroke-width="1.2"/>
+    <polygon points="200,355 345,95 55,95" stroke="#d4af37" stroke-width="1.2"/>
+    <circle cx="200" cy="200" r="45" stroke="#ffd700" stroke-width="1.5"/>
+    <circle cx="200" cy="200" r="6" fill="#ffd700"/>
+  </svg>
+
   <div class="container">
     
     <!-- STEP 1: FORM SCREEN -->
     <div id="form-screen">
+      <!-- Vastu Directional Header -->
+      <div class="vastu-ribbon">
+        <span class="dir">ઈશાન (NE)</span>
+        <span>• ॐ વાસ્તુ યંત્ર •</span>
+        <span class="dir">કુબેર (N)</span>
+      </div>
+
       <div class="header">
-        <svg class="sacred-yantra-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="sacred-yantra-icon" viewBox="0 0 100 100" fill="none">
           <circle cx="50" cy="50" r="46" stroke="#ffd700" stroke-width="2"/>
           <circle cx="50" cy="50" r="38" stroke="#d4af37" stroke-dasharray="3 3"/>
-          <polygon points="50,15 80,75 20,75" stroke="#ffd700" stroke-width="2"/>
-          <polygon points="50,85 80,25 20,25" stroke="#d4af37" stroke-width="2"/>
+          <polygon points="50,14 82,76 18,76" stroke="#ffd700" stroke-width="2"/>
+          <polygon points="50,86 82,24 18,24" stroke="#d4af37" stroke-width="2"/>
           <circle cx="50" cy="50" r="5" fill="#ffd700"/>
         </svg>
         <h1>દૈવી સુગંધ & વાસ્તુ મેપિંગ</h1>
-        <p class="subtitle">તમારા ઇષ્ટદેવની ઉર્જા અને વાસ્તુ પંચમહાભૂત અનુસાર તમારા ૩ અત્તર</p>
+        <p class="subtitle">તમારા ઇષ્ટદેવની ઉર્જા અને વાસ્તુ પંચમહાભૂત અનુસાર તમારા ૩ વિશેષ અત્તર</p>
       </div>
 
       <div class="form-group">
-        <label>૧. તમારું શુભ નામ</label>
+        <label><span class="icon">✦</span> ૧. તમારું શુભ નામ</label>
         <input type="text" id="userName" placeholder="દા.ત. કિશનભાઈ પટેલ" required />
       </div>
 
       <div class="form-group">
-        <label>૨. તમારા ઇષ્ટદેવ / કુલદેવીનું નામ</label>
-        <input type="text" id="devName" placeholder="દા.ત. શ્રી હનુમાનજી / શિવજી / મોગલ માતા" required />
+        <label><span class="icon">✦</span> ૨. તમારા ઇષ્ટદેવ / કુલદેવીનું નામ</label>
+        <input type="text" id="devName" placeholder="દા.ત. શ્રી હનુમાનજી / મહાદેવ / મોગલ માતા" required />
       </div>
 
       <div class="form-group">
-        <label>૩. હાલ જીવનમાં સૌથી વધુ કઈ ઉર્જાની જરૂર છે?</label>
+        <label><span class="icon">✦</span> ૩. હાલ જીવનમાં સૌથી વધુ કઈ ઉર્જાની જરૂર છે?</label>
         <select id="userNeed">
           <option value="aura">રૂઆબ, પ્રભાવ અને વ્યાપારમાં માન-સન્માન</option>
           <option value="peace">માનસિક શાંતિ, ઘર-ક્લેશ મુક્તિ અને ઊંઘ</option>
@@ -472,7 +625,7 @@
       </div>
 
       <div class="form-group">
-        <label>૪. તમારો જન્મ વાર (Birth Day)</label>
+        <label><span class="icon">✦</span> ૪. તમારો જન્મ વાર (Birth Day)</label>
         <select id="birthDay">
           <option value="som">સોમવાર (ચંદ્ર / શિવ તત્ત્વ)</option>
           <option value="mangal">મંગળવાર (અગ્નિ / હનુમાન તત્ત્વ)</option>
@@ -493,21 +646,24 @@
     <!-- STEP 2: VISCERAL COSMIC & VASTU MANDALA LOADER -->
     <div id="loader-screen">
       <div class="mandala-stage">
-        <svg class="cosmic-svg" viewBox="0 0 200 200" fill="none">
-          <circle cx="100" cy="100" r="95" stroke="#d4af37" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.6"/>
-          <circle cx="100" cy="100" r="80" stroke="#ffd700" stroke-width="1" opacity="0.4"/>
-          <line x1="100" y1="5" x2="100" y2="195" stroke="#ffd700" stroke-width="0.75" opacity="0.3"/>
-          <line x1="5" y1="100" x2="195" y2="100" stroke="#ffd700" stroke-width="0.75" opacity="0.3"/>
-          <line x1="33" y1="33" x2="167" y2="167" stroke="#d4af37" stroke-width="0.75" opacity="0.3"/>
-          <line x1="33" y1="167" x2="167" y2="33" stroke="#d4af37" stroke-width="0.75" opacity="0.3"/>
+        <!-- Cosmic Ring with Cardinal Angles -->
+        <svg class="cosmic-svg" viewBox="0 0 220 220" fill="none">
+          <circle cx="110" cy="110" r="105" stroke="#d4af37" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.7"/>
+          <circle cx="110" cy="110" r="88" stroke="#ffd700" stroke-width="1.2" opacity="0.5"/>
+          <line x1="110" y1="5" x2="110" y2="215" stroke="#ffd700" stroke-width="0.8" opacity="0.35"/>
+          <line x1="5" y1="110" x2="215" y2="110" stroke="#ffd700" stroke-width="0.8" opacity="0.35"/>
+          <line x1="36" y1="36" x2="184" y2="184" stroke="#d4af37" stroke-width="0.8" opacity="0.35"/>
+          <line x1="36" y1="184" x2="184" y2="36" stroke="#d4af37" stroke-width="0.8" opacity="0.35"/>
         </svg>
 
-        <svg class="inner-yantra-svg" viewBox="0 0 100 100" fill="none">
-          <polygon points="50,10 88,78 12,78" stroke="#ffd700" stroke-width="1.8" fill="rgba(255,215,0,0.06)"/>
-          <polygon points="50,90 88,22 12,22" stroke="#d4af37" stroke-width="1.8" fill="rgba(212,175,55,0.06)"/>
-          <circle cx="50" cy="50" r="28" stroke="#ffd700" stroke-width="1" stroke-dasharray="2 3"/>
+        <!-- Inner Interlocking Triangle Yantra -->
+        <svg class="inner-yantra-svg" viewBox="0 0 120 120" fill="none">
+          <polygon points="60,12 106,94 14,94" stroke="#ffd700" stroke-width="2" fill="rgba(255,215,0,0.08)"/>
+          <polygon points="60,108 106,26 14,26" stroke="#d4af37" stroke-width="2" fill="rgba(212,175,55,0.08)"/>
+          <circle cx="60" cy="60" r="32" stroke="#ffd700" stroke-width="1" stroke-dasharray="3 3"/>
         </svg>
 
+        <!-- Center Glowing Cosmic Diya / Bindu -->
         <div class="center-diya-glow"></div>
       </div>
 
@@ -520,6 +676,10 @@
 
     <!-- STEP 3: RESULTS SCREEN -->
     <div id="result-screen">
+      <div class="vastu-ribbon">
+        <span class="dir">પ્રાચીન વાસ્તુ સુગંધ-શાસ્ત્ર</span>
+      </div>
+
       <div class="header">
         <svg class="sacred-yantra-icon" viewBox="0 0 100 100" fill="none">
           <circle cx="50" cy="50" r="46" stroke="#ffd700" stroke-width="2"/>
@@ -532,10 +692,10 @@
       </div>
 
       <div class="disclaimer-badge">
-        <strong>⚠️ સત્ય અને શ્રદ્ધા નો નિયમ:</strong> આ કોઈ ચમત્કાર કે જાદુઈ ટોટકો નથી. આ માત્ર તમારી શ્રદ્ધા, ઇષ્ટદેવ પ્રત્યેનો સાચો ભાવ અને પ્રાચીન વાસ્તુ સુગંધ-શાસ્ત્રના આધારે તૈયાર કરેલું વિશેષ કસ્ટમાઇઝેશન છે.
+        <strong>⚠️️ સત્ય અને શ્રદ્ધા નો નિયમ:</strong> આ કોઈ ચમત્કાર કે જાદુઈ ટોટકો નથી. આ માત્ર તમારી શ્રદ્ધા, ઇષ્ટદેવ પ્રત્યેનો સાચો ભાવ અને પ્રાચીન વાસ્તુ સુગંધ-શાસ્ત્રના આધારે તૈયાર કરેલું વિશેષ કસ્ટમાઇઝેશન છે.
       </div>
 
-      <!-- Price Packages (599 / 799 / 999) -->
+      <!-- Pricing Packages (599 / 799 / 999) -->
       <div class="package-title">કયું પેકેજ લેવા માંગો છો તે પસંદ કરો:</div>
       <div class="pricing-grid">
         <div class="price-card" id="pkg-1" onclick="selectPackage(1, 599)">
@@ -558,9 +718,9 @@
         </div>
       </div>
 
-      <!-- Attar List (Selectable) -->
+      <!-- Attar List (Selectable with Limit) -->
       <div class="attar-section-label" id="selectionNotice">
-        તમારા પેક મુજબ નીચેના અત્તર પસંદ કરો (હાલ ૩ પસંદ છે):
+        તમારા પેક મુજબ પસંદ કરેલ અત્તર (હાલ ૩ પસંદ છે):
       </div>
 
       <div id="attarContainer">
@@ -604,7 +764,7 @@
         </div>
       </div>
 
-      <!-- WhatsApp Order CTA with COD -->
+      <!-- WhatsApp Order CTA with COD (Number: 9427242563) -->
       <a href="#" id="waOrderBtn" class="whatsapp-btn" target="_blank">
         <span>💬 WhatsApp પર ઓર્ડર કરો</span>
         <span class="cod-badge">COD ઉપલબ્ધ</span>
@@ -617,6 +777,110 @@
   </div>
 
   <script>
+    /* =========================================================
+       1. LIVE COSMIC STARFIELD & NEBULA PARTICLES (CANVAS)
+       ========================================================= */
+    const canvas = document.getElementById('cosmic-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class CosmicParticle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedY = -(Math.random() * 0.4 + 0.15); // gentle floating upwards
+        this.speedX = (Math.random() - 0.5) * 0.2;
+        this.opacity = Math.random() * 0.7 + 0.2;
+        this.pulse = Math.random() * 0.03 + 0.01;
+        this.pulseDir = Math.random() > 0.5 ? 1 : -1;
+        // Warm gold and sacred amber tones
+        const colors = ['#ffd700', '#d4af37', '#ff9900', '#fff2a3', '#ffffff'];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX;
+
+        // Twinkle effect
+        this.opacity += this.pulse * this.pulseDir;
+        if (this.opacity > 0.85) this.pulseDir = -1;
+        if (this.opacity < 0.2) this.pulseDir = 1;
+
+        if (this.y < -10 || this.x < -10 || this.x > width + 10) {
+          this.reset();
+          this.y = height + 10;
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = this.opacity;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = this.color;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+        ctx.shadowBlur = 0;
+      }
+    }
+
+    // Initialize 65 Cosmic Particles
+    for (let i = 0; i < 65; i++) {
+      particles.push(new CosmicParticle());
+    }
+
+    function animateCosmos() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Deep space ambient glow in center
+      const gradient = ctx.createRadialGradient(width / 2, height / 3, 50, width / 2, height / 2, Math.max(width, height) / 1.2);
+      gradient.addColorStop(0, 'rgba(24, 34, 60, 0.45)');
+      gradient.addColorStop(0.5, 'rgba(10, 15, 28, 0.7)');
+      gradient.addColorStop(1, 'rgba(3, 5, 10, 0.98)');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
+
+      // Connect near particles with delicate sacred constellation lines
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dist = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
+          if (dist < 90) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = '#ffd700';
+            ctx.globalAlpha = (1 - dist / 90) * 0.12;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+          }
+        }
+      }
+
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+
+      requestAnimationFrame(animateCosmos);
+    }
+    animateCosmos();
+
+    /* =========================================================
+       2. APP WORKFLOW & VASTU CUSTOMIZATION LOGIC
+       ========================================================= */
     const attarData = [
       "દિવ્ય રુદ્રાક્ષ & મૈસૂર ચંદન",
       "શ્રી મહાલક્ષ્મી પદ્મ-કસ્તૂરી",
@@ -638,6 +902,7 @@
         return;
       }
 
+      // Hide Form, Show Loader
       document.getElementById('form-screen').style.display = 'none';
       document.getElementById('loader-screen').style.display = 'block';
 
