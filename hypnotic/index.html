@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>AURAFRAG | व्यक्तित्व की खुशबू • 15 ML सिग्नेचर अत्तर</title>
   
-  <!-- Premium Fonts: Noto Sans Devanagari for Ultra-Sharp Hindi & Cinzel for Luxury Accents -->
+  <!-- Fonts: Noto Sans Devanagari for Ultra-Sharp Hindi & Cinzel for Royal Luxury Accents -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -23,8 +23,6 @@
       WHATSAPP_NUMBER: "919876543210",
       
       // 3. Original Assets (असली Logo और असली Bottle फोटो)
-      // नोट: यदि आप /assets/ फ़ोल्डर उपयोग कर रहे हैं, तो 'assets/aurafrag-logo.png' 
-      // और 'assets/aurafrag-bottle.jpg' सेट कर सकते हैं।
       LOGO_IMAGE_URL: "75235.png",
       BOTTLE_IMAGE_URL: "46642.jpg",
       
@@ -55,13 +53,12 @@
       fbq('init', CONFIG.META_PIXEL_ID);
       fbq('track', 'PageView');
     } else {
-      console.log("[AURAFRAG TRACKING] Pixel initialized (PageView event ready)");
+      console.log("[AURAFRAG TRACKING] Pixel initialized in testing mode (PageView logged)");
     }
 
     /**
      * Unified Meta Tracking Helper (CAPI Ready)
      * WhatsApp बटन क्लिक केवल InitiateCheckout व WhatsAppCODIntent है, Purchase नहीं।
-     * वास्तविक Purchase डिलीवरी के बाद बैकएंड/CAPI से भेजा जाएगा।
      */
     function trackMetaEvent(eventName, eventType = 'custom', params = {}) {
       const eventId = 'af_' + Date.now() + '_' + Math.floor(Math.random() * 1000000);
@@ -81,23 +78,20 @@
 
   <style>
     /* ==========================================
-       SECTION: DARK NEON LUXURY CSS SYSTEM
+       SECTION: DARK LUXURY CSS SYSTEM
        ========================================== */
     :root {
       --bg-midnight: #07070a;
       --bg-surface: #0f0f15;
       --bg-elevated: #161522;
       
-      /* Neon Luxury Accents */
+      /* Neon & Gold Accents */
       --neon-ruby: #ff0055;
-      --neon-magenta: #e11d48;
       --neon-glow-ruby: rgba(255, 0, 85, 0.4);
-      --violet-subtle: #8b5cf6;
       --gold-royal: #d4af37;
       --gold-light: #f7e7b4;
-      --gold-glow: rgba(212, 175, 55, 0.3);
+      --gold-glow: rgba(212, 175, 55, 0.35);
       --whatsapp-green: #25D366;
-      --whatsapp-hover: #1eb956;
       
       /* Crisp High-Contrast Typography */
       --text-white: #ffffff;
@@ -185,7 +179,7 @@
     .funnel-step {
       display: none;
       padding: 22px 18px;
-      animation: smoothFade 0.3s ease-out forwards;
+      animation: smoothFade 0.28s ease-out forwards;
     }
 
     .funnel-step.active {
@@ -281,7 +275,6 @@
       color: var(--gold-light);
     }
 
-    /* Buttons */
     .mysterious-cta-btn {
       width: 100%;
       background: linear-gradient(135deg, #ff0055 0%, #d4145a 50%, #8b0032 100%);
@@ -314,7 +307,7 @@
       font-weight: 500;
     }
 
-    /* Trust Feature Grid */
+    /* Trust Pillars */
     .trust-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -349,7 +342,7 @@
     }
 
     /* ==========================================
-       QUIZ STYLING
+       QUIZ (REDUCED TO EXACTLY 3 QUESTIONS)
        ========================================== */
     .quiz-progress-track {
       width: 100%;
@@ -362,7 +355,7 @@
 
     .quiz-progress-bar {
       height: 100%;
-      width: 25%;
+      width: 33.33%;
       background: linear-gradient(90deg, #ff0055, #d4af37);
       transition: width 0.25s ease;
     }
@@ -381,12 +374,6 @@
       font-weight: 800;
       color: #ffffff;
       line-height: 1.4;
-      margin-bottom: 6px;
-    }
-
-    .quiz-q-sub {
-      font-size: 14px;
-      color: var(--text-muted);
       margin-bottom: 20px;
     }
 
@@ -425,7 +412,7 @@
     }
 
     .quiz-opt-text {
-      font-size: 16px;
+      font-size: 15.5px;
       font-weight: 700;
       color: #ffffff;
     }
@@ -464,7 +451,7 @@
       border-top: 3px solid #ff0055;
       border-right: 3px solid #d4af37;
       border-radius: 50%;
-      animation: spinLoader 0.9s linear infinite;
+      animation: spinLoader 0.85s linear infinite;
     }
 
     @keyframes spinLoader {
@@ -473,14 +460,14 @@
     }
 
     /* ==========================================
-       RESULT & AURA SUMMARY
+       RESULT SCREEN & COPY
        ========================================== */
     .result-aura-card {
       background: linear-gradient(180deg, #13101c 0%, #0d0c13 100%);
       border: 1px solid var(--border-crisp);
       border-radius: var(--radius-lg);
       padding: 22px 18px;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
       text-align: center;
     }
 
@@ -509,135 +496,176 @@
       text-transform: uppercase;
       padding: 4px 14px;
       border-radius: 20px;
-      margin-bottom: 10px;
-    }
-
-    .result-main-name {
-      font-size: 22px;
-      font-weight: 800;
-      color: #ffffff;
-      line-height: 1.35;
-      margin-bottom: 6px;
-    }
-
-    .result-aura-traits {
-      font-size: 14px;
-      color: var(--gold-light);
-      font-weight: 700;
-      letter-spacing: 0.05em;
       margin-bottom: 12px;
     }
 
-    .result-intro-para {
-      font-size: 13.5px;
+    .result-main-headline {
+      font-size: 21px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+
+    .result-dynamic-subtext {
+      font-size: 14px;
       color: var(--text-sub);
       line-height: 1.6;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.45);
       padding: 12px 14px;
       border-radius: var(--radius-sm);
       text-align: left;
     }
 
-    /* ==========================================
-       PERSONALIZED PHYSICAL CARD PREVIEW
-       ========================================== */
-    .physical-card-preview {
-      background: linear-gradient(135deg, #1b0a2a 0%, #110e20 45%, #2a0815 100%);
-      border: 2px solid #ff0055;
-      border-radius: var(--radius-lg);
-      padding: 20px 18px;
-      margin-bottom: 18px;
-      box-shadow: 0 0 35px rgba(255, 0, 85, 0.35);
-      position: relative;
-      text-align: left;
+    /* ==================================================
+       EXACT PERSONALIZED CARD (CLASSIC BLACK-GOLD LUXURY)
+       ================================================== */
+    .physical-card-container {
+      background: #09090d;
+      border: 1px solid rgba(212, 175, 55, 0.7);
+      border-radius: var(--radius-md);
+      padding: 7px;
+      margin-bottom: 14px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 0 25px rgba(212, 175, 55, 0.15);
     }
 
-    .card-preview-header {
+    .card-inner-frame {
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 10px;
+      padding: 16px 14px;
+      background: radial-gradient(circle at 50% 30%, #16151e 0%, #0c0b11 90%);
+      position: relative;
+    }
+
+    .card-top-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
-      padding-bottom: 10px;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
 
-    .card-brand-logo {
+    .card-brand-group {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .card-round-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--gold-royal);
+    }
+
+    .card-brand-name-text {
       font-family: 'Cinzel', serif;
-      font-weight: 900;
-      font-size: 16px;
-      letter-spacing: 0.2em;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 0.15em;
       color: var(--gold-light);
+      line-height: 1.2;
     }
 
-    .card-customer-name {
-      font-size: 22px;
+    .card-brand-sub-tag {
+      font-size: 9px;
+      color: #a2a2b0;
+      letter-spacing: 0.05em;
+    }
+
+    .card-right-pill {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gold-light);
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      padding: 3px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .card-customer-name-large {
+      text-align: center;
+      font-size: 24px;
       font-weight: 800;
       color: #ffffff;
-      margin-bottom: 2px;
-      letter-spacing: 0.04em;
-    }
-
-    .card-for-you-tag {
-      font-size: 12px;
-      color: var(--gold-light);
-      margin-bottom: 12px;
-      font-weight: 600;
-    }
-
-    .card-identity-box {
-      background: rgba(0, 0, 0, 0.45);
-      border-left: 3px solid var(--gold-royal);
-      padding: 10px 14px;
-      border-radius: 4px;
-      margin-bottom: 14px;
-    }
-
-    .card-identity-lbl {
-      font-size: 10px;
-      color: var(--text-dim);
-      text-transform: uppercase;
       letter-spacing: 0.08em;
-      margin-bottom: 2px;
+      text-transform: uppercase;
+      margin: 10px 0 16px;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
     }
 
-    .card-identity-val {
-      font-size: 14px;
-      font-weight: 700;
-      color: #ffffff;
+    .card-two-col-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      border-top: 1px solid rgba(212, 175, 55, 0.25);
+      padding-top: 12px;
+      margin-bottom: 12px;
     }
 
-    .card-how-to-use {
-      font-size: 12px;
-      color: #e2e8f0;
-      line-height: 1.55;
-      margin-bottom: 10px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding-top: 10px;
-    }
-
-    .card-safety-clause {
-      font-size: 10px;
-      color: var(--text-dim);
-      font-style: italic;
-      line-height: 1.4;
-    }
-
-    .card-experience-copy {
-      margin-bottom: 24px;
+    .card-col-left {
       text-align: left;
+      border-right: 1px solid rgba(212, 175, 55, 0.18);
+      padding-right: 8px;
     }
 
-    .card-exp-title {
-      font-size: 14px;
+    .card-col-right {
+      text-align: left;
+      padding-left: 2px;
+    }
+
+    .card-col-label {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--gold-royal);
+      margin-bottom: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    .card-dynamic-traits {
+      font-size: 12.5px;
       font-weight: 700;
       color: #ffffff;
-      margin-bottom: 2px;
+      line-height: 1.45;
     }
 
-    .card-exp-sub {
+    .card-instructions-text {
+      font-size: 10.5px;
+      color: #d8d8e6;
+      line-height: 1.45;
+    }
+
+    .card-bottom-testing-line {
+      text-align: center;
+      font-size: 9.5px;
+      color: #8b8b99;
+      font-style: italic;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 8px;
+      line-height: 1.35;
+    }
+
+    /* Prominent Physical Card Notice */
+    .physical-card-alert-box {
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .card-alert-main-title {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--gold-light);
+      margin-bottom: 3px;
+    }
+
+    .card-alert-sub-title {
       font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 8px;
+      color: var(--text-sub);
     }
 
     /* ==========================================
@@ -704,13 +732,13 @@
     }
 
     /* ==========================================
-       ORDER OPTIONS SELECTION (FIX 1, 2, 3)
+       ORDER OPTIONS SELECTION
        ========================================== */
     .order-selection-heading {
       font-size: 20px;
       font-weight: 800;
       color: #ffffff;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       text-align: left;
     }
 
@@ -746,7 +774,7 @@
       border-color: rgba(255, 255, 255, 0.3);
     }
 
-    /* Active Selected State */
+    /* Active Selected State (No Redirect on Card Click) */
     .order-option-card.selected {
       border-color: var(--whatsapp-green);
       background: #121919;
@@ -858,7 +886,7 @@
       letter-spacing: 0.05em;
     }
 
-    /* Selected Order Summary Box */
+    /* Order Summary Box */
     .order-summary-box {
       background: rgba(0, 0, 0, 0.45);
       border: 1px dashed rgba(255, 255, 255, 0.2);
@@ -881,7 +909,7 @@
       color: var(--gold-light);
     }
 
-    /* Selection Warning Banner */
+    /* Validation Warning */
     .selection-warning-note {
       background: rgba(255, 0, 85, 0.15);
       border: 1px solid #ff0055;
@@ -895,7 +923,6 @@
       display: none;
     }
 
-    /* Pre-CTA Text */
     .pre-cta-explanation {
       text-align: center;
       font-size: 13px;
@@ -904,7 +931,7 @@
       margin-bottom: 10px;
     }
 
-    /* FINAL SINGLE WHATSAPP BUTTON (FIX 2) */
+    /* SINGLE FINAL WHATSAPP BUTTON */
     .final-whatsapp-btn {
       width: 100%;
       background: linear-gradient(135deg, var(--whatsapp-green) 0%, #17a94d 100%);
@@ -1018,11 +1045,11 @@
     </div>
 
     <!-- ==========================================
-         STEP 1 - 4: QUIZ QUESTIONS
+         STEP 1 - 3: NATURAL PSYCHOLOGICAL QUIZ
          ========================================== -->
     <div id="view-quiz" class="funnel-step">
       <div class="quiz-meta-info">
-        <span id="quiz-step-label">सवाल 1 / 4</span>
+        <span id="quiz-step-label">सवाल 1 / 3</span>
         <span class="cinzel" style="color: #ff3377;">AURAFRAG PROFILE</span>
       </div>
       <div class="quiz-progress-track">
@@ -1035,7 +1062,7 @@
     </div>
 
     <!-- ==========================================
-         STEP 5: CUSTOMER NAME COLLECTION
+         STEP 4: NAME COLLECTION STEP
          ========================================== -->
     <div id="view-name" class="funnel-step">
       <div class="quiz-meta-info">
@@ -1046,9 +1073,9 @@
         <div class="quiz-progress-bar" style="width: 100%;"></div>
       </div>
 
-      <h2 class="quiz-q-title">अब इस खुशबू को आपकी पहचान देते हैं।</h2>
-      <p class="quiz-q-sub">
-        यह नाम आपके अत्तर पार्सल के साथ आने वाले निजी AURAFRAG कार्ड पर मुद्रित किया जाएगा।
+      <h2 class="quiz-q-title">अब आपकी खुशबू को आपकी पहचान देते हैं।</h2>
+      <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 18px;">
+        यह नाम आपके अत्तर पार्सल में शामिल किए जाने वाले विशेष 'निजी सुगंध कार्ड' पर मुद्रित होगा।
       </p>
 
       <input 
@@ -1061,65 +1088,87 @@
       />
 
       <button class="mysterious-cta-btn" onclick="submitCustomerName()">
-        <span>मेरी ऑरा प्रोफ़ाइल और विकल्प देखें</span>
+        <span>मेरी पहचान देखें</span>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>
     </div>
 
     <!-- ==========================================
-         STEP 6: ANALYZING LOADER
+         STEP 5: ANALYZING LOADER
          ========================================== -->
     <div id="view-loader" class="funnel-step">
       <div class="loader-box">
         <div class="neon-spinner"></div>
-        <h3 class="cinzel" style="font-size: 19px; color: var(--gold-light); margin-bottom: 6px;">ALIGNING AURA SPECTRUM</h3>
-        <p style="font-size: 14px; color: var(--text-muted);" id="loader-msg">आपके व्यक्तित्व की दिशा का मिलान हो रहा है...</p>
+        <h3 class="cinzel" style="font-size: 19px; color: var(--gold-light); margin-bottom: 6px;">ANALYZING PERSONALITY SPECTRUM</h3>
+        <p style="font-size: 14px; color: var(--text-muted);" id="loader-msg">आपके स्वभाव और प्राथमिकताओं का मिलान हो रहा है...</p>
       </div>
     </div>
 
     <!-- ==========================================
-         STEP 7: RESULT SCREEN & ORDER FUNNEL
+         STEP 6: RESULT & ORDER FUNNEL
          ========================================== -->
     <div id="view-result" class="funnel-step">
       
-      <!-- 1. Customer Aura Result -->
+      <!-- 1. Customer Aura Result Copy -->
       <div id="aura-card-box" class="result-aura-card">
         <div id="aura-badge-tag" class="aura-badge">गोल्डन ऑरा</div>
-        <h2 id="result-user-title" class="result-main-name">AMAN के लिए चुना गया GOLDEN AURA प्रोफ़ाइल</h2>
-        <div id="result-traits-tag" class="result-aura-traits">शाही • प्रभावशाली • सलीकेदार</div>
-        <p class="result-intro-para">
-          आपकी पसंद और व्यक्तित्व की दिशा के अनुसार चुने गए दो AURAFRAG विकल्प नीचे प्रस्तुत हैं। ये विकल्प आपकी मौजूदगी के दो अलग-अलग मिज़ाज को पूरा करते हैं।
+        <h2 id="result-headline-title" class="result-main-headline">
+          AMAN, आपकी पहचान GOLDEN AURA से सबसे ज्यादा मेल खाती है।
+        </h2>
+        <p id="result-dynamic-summary" class="result-dynamic-subtext">
+          आपके जवाब बताते हैं कि आपकी मौजूदगी में एक स्वाभाविक गरिमा और वजन है जो बिना दिखावे के भी दूसरों के जेहन में रह जाती है।
         </p>
       </div>
 
-      <!-- 2. Personalized Card Preview (Single Identity Card) -->
-      <div id="physical-card-mockup" class="physical-card-preview">
-        <div class="card-preview-header">
-          <span class="card-brand-logo">AURAFRAG</span>
-          <span style="font-size: 10px; font-weight: 700; color: #ff3377; border: 1px solid #ff3377; padding: 2px 8px; border-radius: 4px;">खास आपके लिए</span>
-        </div>
+      <!-- 2. EXACT PERSONALIZED CARD PREVIEW (CLASSIC BLACK-GOLD LUXURY) -->
+      <div class="physical-card-container">
+        <div class="card-inner-frame">
+          
+          <!-- Top Row: Logo, Brand & Pill -->
+          <div class="card-top-row">
+            <div class="card-brand-group">
+              <img id="card-logo-thumb" class="card-round-logo" src="" alt="AURAFRAG" onerror="handleLogoImageError(this)">
+              <div>
+                <div class="card-brand-name-text">AURAFRAG</div>
+                <div class="card-brand-sub-tag">PREMIUM ATTAR • खास आपके लिए</div>
+              </div>
+            </div>
+            <div class="card-right-pill">निजी सुगंध कार्ड</div>
+          </div>
 
-        <div id="card-holder-name" class="card-customer-name">AMAN</div>
-        <div class="card-for-you-tag">खास आपके लिए</div>
+          <!-- Center: Large Bold Customer Name -->
+          <div id="card-customer-name-display" class="card-customer-name-large">
+            AMAN
+          </div>
 
-        <div class="card-identity-box">
-          <div class="card-identity-lbl">पहचान</div>
-          <div id="card-personality-traits" class="card-identity-val">शाही • प्रभावशाली • सलीकेदार</div>
-        </div>
+          <!-- Two-Column Layout (Left: पहचान | Right: लगाने का तरीका) -->
+          <div class="card-two-col-layout">
+            <div class="card-col-left">
+              <div class="card-col-label">पहचान</div>
+              <div id="card-dynamic-traits-display" class="card-dynamic-traits">
+                शाही • प्रभावशाली • सलीकेदार
+              </div>
+            </div>
+            <div class="card-col-right">
+              <div class="card-col-label">लगाने का तरीका</div>
+              <div class="card-instructions-text">
+                दोनों कलाइयों पर 1–2 बिंदु लगाएँ। उँगलियों पर बची हल्की खुशबू कपड़ों के अलग-अलग हिस्सों पर हल्के स्पर्श से लगाएँ।
+              </div>
+            </div>
+          </div>
 
-        <div class="card-how-to-use">
-          <strong>लगाने का तरीका:</strong><br>
-          दोनों कलाइयों पर 1–2 बिंदु लगाएँ। उँगलियों पर बची हल्की खुशबू कपड़ों के अलग-अलग हिस्सों पर हल्के स्पर्श से लगाएँ।
-        </div>
+          <!-- Bottom Testing Line -->
+          <div class="card-bottom-testing-line">
+            कपड़े पर लगाने से पहले किसी कम दिखाई देने वाले हिस्से पर छोटा परीक्षण करें।
+          </div>
 
-        <div class="card-safety-clause">
-          *कपड़े पर लगाने से पहले किसी कम दिखाई देने वाले हिस्से पर छोटा परीक्षण करें।
         </div>
       </div>
 
-      <div class="card-experience-copy">
-        <div class="card-exp-title">आपके पैक के साथ आपके नाम वाला निजी AURAFRAG कार्ड मिलेगा।</div>
-        <div class="card-exp-sub">आपकी पहचान, आपकी शैली — आपके नाम के साथ।</div>
+      <!-- Clear Physical Card Fulfillment Notice -->
+      <div class="physical-card-alert-box">
+        <div class="card-alert-main-title">📦 यही निजी AURAFRAG कार्ड आपके ऑर्डर के साथ भेजा जाएगा</div>
+        <div class="card-alert-sub-title">आपके नाम और आपकी पहचान के साथ (प्रत्येक पार्सल में 1 कलेक्टिबल कार्ड)</div>
       </div>
 
       <!-- 3. ORIGINAL BOTTLE IMAGE SHOWCASE -->
@@ -1140,7 +1189,7 @@
         </div>
       </div>
 
-      <!-- 4. ORDER OPTIONS SELECTION (FIX 1, 3) -->
+      <!-- 4. ORDER OPTIONS SELECTION -->
       <h3 class="order-selection-heading">अब अपना विकल्प चुनें</h3>
       <p class="order-selection-sub">तीनों में से कोई एक विकल्प चुनें (क्लिक करने पर केवल चयन होगा):</p>
 
@@ -1162,8 +1211,8 @@
             </div>
             <div class="opt-specs-chip">1 Bottle • 15 ML</div>
             <ul class="opt-desc-bullets">
-              <li>थोड़ा नरम और संतुलित</li>
-              <li>नज़दीकी मौजूदगी के लिए</li>
+              <li>थोड़ा नरम और संतुलित मिज़ाज</li>
+              <li>नज़दीकी मौजूदगी और निजी बैठकों के लिए</li>
               <li>सलीकेदार और refined प्रभाव</li>
             </ul>
           </div>
@@ -1181,8 +1230,8 @@
             </div>
             <div class="opt-specs-chip">1 Bottle • 15 ML</div>
             <ul class="opt-desc-bullets">
-              <li>थोड़ा गहरा और वजनदार</li>
-              <li>ज़्यादा उभरा हुआ character</li>
+              <li>थोड़ा गहरा और वजनदार मिज़ाज</li>
+              <li>ज़्यादा उभरा हुआ और ध्यान खींचने वाला असर</li>
               <li>शाम व ख़ास मौकों के लिए</li>
             </ul>
           </div>
@@ -1202,7 +1251,7 @@
             <div class="opt-specs-chip">2 Bottles • 15 ML + 15 ML</div>
             <ul class="opt-desc-bullets">
               <li>विकल्प 01 + विकल्प 02 (दोनों 15 ML बोतलें)</li>
-              <li>दिन व शाम दोनों के लिए संपूर्ण अनुभव</li>
+              <li>दिन व शाम दोनों के लिए संपूर्ण सुगंध अनुभव</li>
               <li>साथ में 1 निजी AURAFRAG कार्ड शामिल</li>
             </ul>
           </div>
@@ -1210,18 +1259,18 @@
 
       </div>
 
-      <!-- 6. Selected Order Summary -->
+      <!-- Selected Order Summary Box -->
       <div id="order-summary-box" class="order-summary-box">
         <div id="summary-chosen-text" class="summary-text-line">आपने चुना: —</div>
         <div id="summary-price-text" class="summary-price-line">कुल: ₹—</div>
       </div>
 
-      <!-- 7. Small Explanatory Text -->
+      <!-- Small Explanatory Text -->
       <div class="pre-cta-explanation">
         अपना विकल्प चुनें। भुगतान डिलीवरी के समय करें।
       </div>
 
-      <!-- 8. ONE FINAL WHATSAPP CTA (FIX 2) -->
+      <!-- SINGLE FINAL WHATSAPP CTA -->
       <button id="final-whatsapp-button" class="final-whatsapp-btn" onclick="handleFinalWhatsAppCheckout()">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.149.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.768-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.101.005.242-.039.375.283.144.35.491 1.198.534 1.285.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.353.101.173.45 1.743 1.996 2.404.225.195.358.181.492.025.134-.156.577-.672.731-.903.153-.231.306-.193.518-.115.212.078 1.344.633 1.575.748.231.115.385.173.442.27.058.096.058.558-.086.963z"/>
@@ -1230,7 +1279,7 @@
       </button>
       <div class="whatsapp-sub-info">Cash on Delivery • Free Home Delivery</div>
 
-      <!-- Trust Footer -->
+      <!-- Footer Trust -->
       <div class="footer-clause">
         AURAFRAG शुद्ध कंसंट्रेटेड अत्तर (15 ML) है। ऑरा प्रोफाइल आपकी व्यक्तिगत पसंद और शैली पर आधारित एक विशेष रचनात्मक सुझाव है।<br>
         © <span id="year-tag">2026</span> AURAFRAG. सर्वाधिकार सुरक्षित।
@@ -1244,50 +1293,36 @@
        SECTION: JAVASCRIPT LOGIC
        ========================================== -->
   <script>
-    /* 1. QUIZ QUESTIONS DATA */
+    /* 1. QUIZ DATA: REDUCED TO EXACTLY 3 FOCUSED QUESTIONS */
     const QUIZ_DATA = [
       {
         id: 1,
-        question: "लोग आपकी मौजूदगी को किस एहसास से याद रखें?",
-        subtitle: "आपकी उपस्थिति का वह पहला असर जो दूसरों के जेहन में रह जाए",
+        question: "नई जगह पर लोग आपको किस तरह याद रखें, यह आप क्या चाहेंगे?",
         options: [
-          { text: "नरम प्रेमपूर्ण गर्माहट", auraKey: "ruby" },
-          { text: "शाही प्रभाव", auraKey: "golden" },
-          { text: "सहज आकर्षण", auraKey: "ruby" },
-          { text: "गहरा रहस्य", auraKey: "black" }
+          { text: "शांत लेकिन असरदार", auraKey: "silver" },
+          { text: "सहज और अपनापन भरा", auraKey: "ruby" },
+          { text: "रहस्यमय और अलग", auraKey: "black" },
+          { text: "शाही और आत्मविश्वासी", auraKey: "golden" }
         ]
       },
       {
         id: 2,
-        question: "आपकी खुशबू में कौन-सी छाप होनी चाहिए?",
-        subtitle: "आपकी आंतरिक भावना का वह रंग जो हवा में घुल जाए",
+        question: "जब आप बिल्कुल अपने जैसे होते हैं, तब आपकी पहचान किसके सबसे करीब होती है?",
         options: [
-          { text: "प्रेम की नरमी", auraKey: "silver" },
-          { text: "प्रभाव की गहराई", auraKey: "golden" },
-          { text: "आकर्षण की गर्माहट", auraKey: "ruby" },
-          { text: "रहस्य की परत", auraKey: "black" }
+          { text: "कम बोलना, लेकिन साफ असर छोड़ना", auraKey: "silver" },
+          { text: "लोगों से जल्दी घुल-मिल जाना", auraKey: "ruby" },
+          { text: "अपनी दुनिया में रहना और अलग दिखना", auraKey: "black" },
+          { text: "जहाँ रहूँ वहाँ confidence दिखना", auraKey: "golden" }
         ]
       },
       {
         id: 3,
-        question: "आपके जाने के बाद आपकी कौन-सी पहचान याद रहनी चाहिए?",
-        subtitle: "पीछे छूट जाने वाला वह असर जो बिना कहे बात करता है",
+        question: "आपकी खुशबू आपके बारे में बिना बोले क्या कहे?",
         options: [
-          { text: "शांत लेकिन प्रभावशाली", auraKey: "silver" },
-          { text: "रहस्यमय और अलग", auraKey: "black" },
-          { text: "गर्मजोशी से भरी", auraKey: "ruby" },
-          { text: "शाही और सलीकेदार", auraKey: "golden" }
-        ]
-      },
-      {
-        id: 4,
-        question: "आपकी शैली किसके सबसे करीब है?",
-        subtitle: "आपका व्यक्तिगत पहनावा और जीवन जीने का अंदाज़",
-        options: [
-          { text: "शाही", auraKey: "golden" },
-          { text: "आधुनिक", auraKey: "silver" },
-          { text: "रहस्यमय", auraKey: "black" },
-          { text: "बोल्ड", auraKey: "ruby" }
+          { text: "“यह व्यक्ति सलीकेदार है”", auraKey: "golden" },
+          { text: "“इसमें कुछ अलग है”", auraKey: "black" },
+          { text: "“इसकी मौजूदगी याद रहती है”", auraKey: "ruby" },
+          { text: "“यह शांत है, लेकिन कमजोर नहीं”", auraKey: "silver" }
         ]
       }
     ];
@@ -1300,11 +1335,9 @@
         nameEnglish: "GOLDEN AURA",
         traits: "शाही • प्रभावशाली • सलीकेदार",
         cardClass: "golden-aura",
-        cardBg: "linear-gradient(135deg, #1f1a08 0%, #121008 50%, #2a2007 100%)",
-        cardBorder: "#d4af37",
-        cardGlow: "rgba(212, 175, 55, 0.35)",
         badgeBg: "rgba(212, 175, 55, 0.25)",
-        badgeColor: "#d4af37"
+        badgeColor: "#d4af37",
+        subtext: "आपके जवाब बताते हैं कि आपकी मौजूदगी में एक स्वाभाविक गरिमा और वजन है जो बिना दिखावे के भी दूसरों के जेहन में रह जाती है।"
       },
       black: {
         key: "black",
@@ -1312,23 +1345,19 @@
         nameEnglish: "BLACK AURA",
         traits: "रहस्यमयी • गहरी • यादगार",
         cardClass: "black-aura",
-        cardBg: "linear-gradient(135deg, #150921 0%, #0c0812 50%, #1d102b 100%)",
-        cardBorder: "#8b5cf6",
-        cardGlow: "rgba(139, 92, 246, 0.35)",
         badgeBg: "rgba(139, 92, 246, 0.25)",
-        badgeColor: "#a78bfa"
+        badgeColor: "#a78bfa",
+        subtext: "आपके जवाब बताते हैं कि आपकी शख्सियत में एक गहरी ख़ामोशी और खिंचाव है जो आसानी से समझ नहीं आता, पर असर गहरा छोड़ता है।"
       },
       ruby: {
         key: "ruby",
         nameHindi: "रूबी ऑरा",
         nameEnglish: "RUBY AURA",
-        traits: "गर्मजोशी भरी • आकर्षक • बोल्ड",
+        traits: "गर्मजोशी भरी • आकर्षक • आत्मीय",
         cardClass: "ruby-aura",
-        cardBg: "linear-gradient(135deg, #240511 0%, #13060a 50%, #2e0817 100%)",
-        cardBorder: "#ff0055",
-        cardGlow: "rgba(255, 0, 85, 0.4)",
         badgeBg: "rgba(255, 0, 85, 0.25)",
-        badgeColor: "#ff0055"
+        badgeColor: "#ff0055",
+        subtext: "आपके जवाब बताते हैं कि आपकी ऊर्जा जिंदादिल और दिलकश है, जो लोगों को सहज रूप से अपनी ओर खींचती है।"
       },
       silver: {
         key: "silver",
@@ -1336,28 +1365,27 @@
         nameEnglish: "SILVER AURA",
         traits: "आधुनिक • साफ • संतुलित",
         cardClass: "silver-aura",
-        cardBg: "linear-gradient(135deg, #091720 0%, #080f14 50%, #0d222e 100%)",
-        cardBorder: "#06b6d4",
-        cardGlow: "rgba(6, 182, 212, 0.35)",
         badgeBg: "rgba(6, 182, 212, 0.25)",
-        badgeColor: "#38bdf8"
+        badgeColor: "#38bdf8",
+        subtext: "आपके जवाब बताते हैं कि आपकी सादगी में ही आपका सबसे बड़ा क्लास है, जो शांत रहकर भी बहुत साफ और सुलझा हुआ असर छोड़ती है।"
       }
     };
 
     /* 3. APPLICATION STATE */
     let currentQuizIndex = 0;
     let scores = { golden: 0, black: 0, ruby: 0, silver: 0 };
-    let customerName = "अमन";
+    let customerName = "AMAN";
     let activeAura = AURA_PROFILES.golden;
     let selectedOrderOption = null; // 'opt1', 'opt2', 'both'
 
     // Initialize Images
     document.getElementById('header-logo').src = CONFIG.LOGO_IMAGE_URL;
     document.getElementById('hero-emblem').src = CONFIG.LOGO_IMAGE_URL;
+    document.getElementById('card-logo-thumb').src = CONFIG.LOGO_IMAGE_URL;
     document.getElementById('bottle-display-img').src = CONFIG.BOTTLE_IMAGE_URL;
     document.getElementById('year-tag').textContent = new Date().getFullYear();
 
-    /* Asset Fallback Handlers (FIX 7) */
+    /* Asset Fallback Handlers */
     function handleBottleImageError() {
       const container = document.getElementById('bottle-frame-container');
       if (container) {
@@ -1394,7 +1422,7 @@
       renderQuizQuestion();
     }
 
-    /* 6. RENDER QUESTION */
+    /* 6. RENDER 3-QUESTION QUIZ */
     function renderQuizQuestion() {
       const q = QUIZ_DATA[currentQuizIndex];
       const total = QUIZ_DATA.length;
@@ -1419,7 +1447,6 @@
 
       document.getElementById('quiz-content-area').innerHTML = `
         <h2 class="quiz-q-title">${q.question}</h2>
-        <p class="quiz-q-sub">${q.subtitle}</p>
         <div class="quiz-options-list">${optionsHtml}</div>
       `;
     }
@@ -1447,18 +1474,18 @@
     function submitCustomerName() {
       const input = document.getElementById('customer-name-field');
       const val = input ? input.value.trim() : "";
-      customerName = val !== "" ? val : "अमन";
+      customerName = val !== "" ? val : "AMAN";
 
       switchFunnelStep('view-loader');
 
       setTimeout(() => {
         const msg = document.getElementById('loader-msg');
         if (msg) msg.textContent = "सिग्नेचर विकल्पों का समन्वय तैयार हो गया है...";
-      }, 700);
+      }, 650);
 
       setTimeout(() => {
         finalizeAuraResult();
-      }, 1400);
+      }, 1250);
     }
 
     /* 9. FINALIZE AURA RESULT */
@@ -1486,7 +1513,7 @@
       });
     }
 
-    /* 10. RENDER RESULT DOM */
+    /* 10. RENDER RESULT & PERSONALIZED CARD */
     function renderResultDOM() {
       const cardBox = document.getElementById('aura-card-box');
       cardBox.className = `result-aura-card ${activeAura.cardClass}`;
@@ -1496,33 +1523,28 @@
       badge.style.background = activeAura.badgeBg;
       badge.style.color = activeAura.badgeColor;
 
-      document.getElementById('result-user-title').textContent = `${customerName} के लिए चुना गया ${activeAura.nameEnglish} प्रोफ़ाइल`;
-      document.getElementById('result-traits-tag').textContent = activeAura.traits;
+      // Result Headline & Copy
+      document.getElementById('result-headline-title').textContent = 
+        `${customerName}, आपकी पहचान ${activeAura.nameEnglish} से सबसे ज्यादा मेल खाती है।`;
+      document.getElementById('result-dynamic-summary').textContent = activeAura.subtext;
 
-      // Personalized Card Mockup Styling & Text (FIX 4, 9)
-      const physCard = document.getElementById('physical-card-mockup');
-      physCard.style.background = activeAura.cardBg;
-      physCard.style.borderColor = activeAura.cardBorder;
-      physCard.style.boxShadow = `0 0 35px ${activeAura.cardGlow}`;
-
-      document.getElementById('card-holder-name').textContent = customerName;
-      document.getElementById('card-personality-traits').textContent = activeAura.traits;
+      // LIVE UPDATE EXACT PERSONALIZED CARD
+      document.getElementById('card-customer-name-display').textContent = customerName;
+      document.getElementById('card-dynamic-traits-display').textContent = activeAura.traits;
     }
 
     /* ==================================================
-       11. ORDER OPTION SELECTION (FIX 1, 3, 11)
-       Clicking an option card ONLY selects it.
-       NO WhatsApp redirect on card click!
+       11. ORDER OPTION SELECTION (CLICK ONLY SELECTS)
        ================================================== */
     function selectOrderOption(optionKey) {
       selectedOrderOption = optionKey;
 
-      // Highlight selected card visually
+      // Update Card Visuals
       document.getElementById('opt-card-1').classList.toggle('selected', optionKey === 'opt1');
       document.getElementById('opt-card-2').classList.toggle('selected', optionKey === 'opt2');
       document.getElementById('opt-card-both').classList.toggle('selected', optionKey === 'both');
 
-      // Hide validation error if visible
+      // Hide validation error if displayed
       const warningNote = document.getElementById('selection-error-note');
       if (warningNote) warningNote.style.display = 'none';
 
@@ -1536,20 +1558,20 @@
       let chosenPrice = 0;
 
       if (optionKey === 'opt1') {
-        chosenLabel = "सिग्नेचर विकल्प 01 (1 Bottle — 15 ML)";
+        chosenLabel = "सिग्नेचर विकल्प 01 (1 Bottle • 15 ML)";
         chosenPrice = CONFIG.SINGLE_PRICE;
       } else if (optionKey === 'opt2') {
-        chosenLabel = "सिग्नेचर विकल्प 02 (1 Bottle — 15 ML)";
+        chosenLabel = "सिग्नेचर विकल्प 02 (1 Bottle • 15 ML)";
         chosenPrice = CONFIG.SINGLE_PRICE;
       } else if (optionKey === 'both') {
-        chosenLabel = "दोनों सिग्नेचर विकल्प (2 Bottles — 15 ML + 15 ML)";
+        chosenLabel = "दोनों सिग्नेचर विकल्प (2 Bottles • 15 ML + 15 ML)";
         chosenPrice = CONFIG.DOUBLE_PRICE;
       }
 
       summaryChosen.textContent = `आपने चुना: ${chosenLabel}`;
       summaryPrice.textContent = `कुल: ₹${chosenPrice}`;
 
-      // Custom Pixel Event on Selection (Not WhatsApp intent)
+      // Custom Pixel Event on Selection (Does NOT fire WhatsApp Intent)
       trackMetaEvent('ProductOptionSelected', 'custom', {
         selected_option: chosenLabel,
         price: chosenPrice,
@@ -1558,11 +1580,10 @@
     }
 
     /* ==================================================
-       12. FINAL WHATSAPP COD CHECKOUT (FIX 2, 5, 6, 11)
-       WhatsApp opens ONLY from this button!
+       12. FINAL WHATSAPP COD CHECKOUT (EXACT CARD PRINT DETAILS)
        ================================================== */
     function handleFinalWhatsAppCheckout() {
-      // Validation: User must select an option first
+      // Must select an option first
       if (!selectedOrderOption) {
         const warningNote = document.getElementById('selection-error-note');
         if (warningNote) {
@@ -1592,7 +1613,7 @@
         totalPrice = CONFIG.DOUBLE_PRICE;
       }
 
-      // Meta Pixel Events: InitiateCheckout (Standard) & WhatsAppCODIntent (Custom)
+      // Meta Pixel Events
       const checkoutEventId = trackMetaEvent('InitiateCheckout', 'standard', {
         content_name: `${customerName} - ${activeAura.nameEnglish} (${optionName})`,
         content_category: 'Attar',
@@ -1609,7 +1630,7 @@
         event_id: checkoutEventId
       });
 
-      // Construct Exact WhatsApp Prefilled Message (FIX 5, 6)
+      // Construct Exact WhatsApp Prefilled Message with Seller-Friendly Card Print Details
       const message = 
 `नमस्ते ${CONFIG.BRAND_NAME},
 
