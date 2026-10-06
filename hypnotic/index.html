@@ -3,180 +3,185 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>औराफ्रैग | अपनी सिग्नेचर खुशबू खोजें</title>
-
-  <!-- =========================================================
-       META PIXEL
-  ========================================================== -->
-  <script>
-    const META_PIXEL_ID = "1718140289270179";
-    !function(f,b,e,v,n,t,s){
-      if(f.fbq)return;
-      n=f.fbq=function(){
-        n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments)
-      };
-      if(!f._fbq)f._fbq=n;
-      n.push=n; n.loaded=!0; n.version='2.0'; n.queue=[];
-      t=b.createElement(e); t.async=!0; t.src=v;
-      s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s);
-    }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-
-    fbq('init', META_PIXEL_ID);
-    fbq('track', 'PageView');
-  </script>
-  <noscript>
-    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1718140289270179&ev=PageView&noscript=1">
-  </noscript>
-
-  <!-- =========================================================
-       VERCEL ANALYTICS
-  ========================================================== -->
-  <script>
-    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-  </script>
-  <script defer src="/_vercel/insights/script.js"></script>
-
-  <!-- =========================================================
-       FONTS (देवनागरी + ROYAL CINZEL)
-  ========================================================== -->
+  <title>AURAFRAG | अपनी ऑरा पहचानिए • सिग्नेचर अत्तर</title>
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Noto+Sans+Devanagari:wght@400;500;600;700;800;900&family=Rozha+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Rozha+One&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
 
-  <!-- =========================================================
-       TAILWIND & RAZORPAY
-  ========================================================== -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
+  <!-- ==========================================
+       SECTION: CONFIGURATION & CONSTANTS
+       ========================================== -->
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            deepBg: '#07040a',
-            panelBg: '#120a17',
-            goldPrimary: '#e4ae4c',
-            goldLight: '#ffe6a3',
-            goldDark: '#9c6f21',
-            crimson: '#ef1748',
-            waGreen: '#25D366'
-          },
-          fontFamily: {
-            cinzel: ['Cinzel', 'serif'],
-            hindi: ['Noto Sans Devanagari', 'sans-serif'],
-            rozha: ['Rozha One', 'serif']
-          }
+    const CONFIG = {
+      // 1. Meta Pixel ID (यहाँ अपना 15-16 अंकों का Pixel ID डालें)
+      META_PIXEL_ID: "YOUR_META_PIXEL_ID_HERE",
+      
+      // 2. WhatsApp Number (Country code सहित, बिना + चिह्न, उदा: 919876543210)
+      WHATSAPP_NUMBER: "919876543210",
+      
+      // 3. Product Details
+      BRAND_NAME: "AURAFRAG",
+      PRODUCT_NAME: "पर्सनलाइज़्ड सिग्नेचर अत्तर",
+      PRODUCT_SIZE: "15 ML",
+      PRODUCT_PRICE: 599,
+      PRODUCT_CURRENCY: "INR",
+      DELIVERY_TEXT: "पूरे भारत में मुफ़्त होम डिलीवरी",
+      
+      // 4. Razorpay Public Key (वैकल्पिक - यदि ऑनलाइन पेमेंट चालू करना हो)
+      // नोट: केवल public key फ्रंटएंड पर रखें। Secret key कभी भी यहाँ न डालें।
+      RAZORPAY_KEY_ID: "rzp_test_YOUR_KEY_HERE"
+    };
+  </script>
+
+  <!-- ==========================================
+       SECTION: META PIXEL TRACKING CODE
+       ========================================== -->
+  <script>
+    /* Meta Pixel Base Code */
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+
+    // Pixel Initialization
+    if (CONFIG.META_PIXEL_ID && CONFIG.META_PIXEL_ID !== "YOUR_META_PIXEL_ID_HERE") {
+      fbq('init', CONFIG.META_PIXEL_ID);
+      fbq('track', 'PageView');
+    } else {
+      console.log("[AURAFRAG TRACKING] Pixel Mode: Placeholder Active. (PageView fired in console)");
+    }
+
+    /**
+     * Helper to track custom & standard Meta events safely.
+     * CAPI Readiness: हर इवेंट के साथ unique event_id भेजा जाता है 
+     * ताकि भविष्य में Server-Side CAPI से डुप्लीकेशन न हो।
+     */
+    function trackMetaEvent(eventName, eventType = 'custom', params = {}) {
+      const eventId = 'af_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+      const payload = { ...params, event_id: eventId };
+      
+      if (typeof fbq === 'function' && CONFIG.META_PIXEL_ID !== "YOUR_META_PIXEL_ID_HERE") {
+        if (eventType === 'standard') {
+          fbq('track', eventName, payload);
+        } else {
+          fbq('trackCustom', eventName, payload);
         }
       }
+      console.log(`[AURAFRAG PIXEL TRACK]: ${eventName} (${eventType})`, payload);
+      return eventId;
     }
   </script>
 
-  <!-- =========================================================
-       CUSTOM LUXURY CSS
-  ========================================================== -->
   <style>
+    /* ==========================================
+       SECTION: DESIGN SYSTEM & CSS STYLING
+       ========================================== */
+    :root {
+      --bg-dark: #0a0a0d;
+      --bg-card: #131318;
+      --bg-card-elevated: #1a1a22;
+      --gold-primary: #d4af37;
+      --gold-light: #f7e7b4;
+      --gold-dark: #91711c;
+      --text-main: #f5f5f7;
+      --text-muted: #a2a2b0;
+      --text-dim: #6d6d7a;
+      --border-gold: rgba(212, 175, 55, 0.28);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --accent-ruby: #a31d24;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
       -webkit-tap-highlight-color: transparent;
     }
 
     body {
-      margin: 0;
-      background-color: #07040a;
-      background-image: 
-        radial-gradient(circle at 50% 0%, rgba(239, 23, 72, 0.22) 0%, transparent 60%),
-        radial-gradient(circle at 85% 90%, rgba(228, 174, 76, 0.16) 0%, transparent 55%),
-        radial-gradient(circle at 15% 70%, rgba(138, 28, 58, 0.14) 0%, transparent 50%);
-      color: #f8f8f8;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Tiro Devanagari Hindi', 'Plus Jakarta Sans', -apple-system, sans-serif;
+      line-height: 1.55;
       overflow-x: hidden;
-      font-family: 'Noto Sans Devanagari', sans-serif;
-    }
-
-    /* Ambient Background Texture */
-    .bg-mesh {
-      background-size: 32px 32px;
-      background-image: 
-        linear-gradient(to right, rgba(228, 174, 76, 0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(239, 23, 72, 0.03) 1px, transparent 1px);
-    }
-
-    .main-panel {
-      background: linear-gradient(165deg, rgba(24, 13, 31, 0.96), rgba(9, 6, 14, 0.99));
-      border: 1px solid rgba(228, 174, 76, 0.35);
-      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9), 0 0 45px rgba(228, 174, 76, 0.12);
-      backdrop-filter: blur(12px);
-    }
-
-    /* Choice Cards */
-    .choice-card {
-      position: relative;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
-      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
-      cursor: pointer;
-      overflow: hidden;
-    }
-
-    .choice-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(228, 174, 76, 0.6);
-      box-shadow: 0 10px 30px rgba(228, 174, 76, 0.15);
-    }
-
-    .choice-card.selected {
-      border-color: #e4ae4c;
-      background: linear-gradient(180deg, rgba(228, 174, 76, 0.18) 0%, rgba(239, 23, 72, 0.09) 100%);
-      box-shadow: 0 0 25px rgba(228, 174, 76, 0.22), inset 0 0 15px rgba(228, 174, 76, 0.1);
-      transform: translateY(-2px);
-    }
-
-    .choice-card.selected::after {
-      content: '✓';
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      width: 18px;
-      height: 18px;
-      background: linear-gradient(135deg, #ffe6a3, #e4ae4c);
-      color: #120a17;
-      font-size: 11px;
-      font-weight: 900;
-      border-radius: 50%;
       display: flex;
-      align-items: center;
       justify-content: center;
+      min-height: 100vh;
     }
 
-    /* Gold CTA Button */
-    .gold-button {
-      background: linear-gradient(135deg, #fff0bf 0%, #e4ae4c 50%, #c48b28 100%);
-      color: #1a0f02;
-      box-shadow: 0 10px 30px rgba(228, 174, 76, 0.28);
-      transition: all 0.2s ease;
+    /* Container: Strictly Mobile First with Max 600px Width on Desktop */
+    .app-container {
+      width: 100%;
+      max-width: 580px;
+      min-height: 100vh;
+      background: radial-gradient(circle at 50% 0%, #171720 0%, #0a0a0d 65%);
+      position: relative;
+      padding-bottom: 40px;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.85);
     }
 
-    .gold-button:hover:not(:disabled) {
-      box-shadow: 0 12px 36px rgba(228, 174, 76, 0.42);
-      transform: translateY(-1px);
+    /* Typography */
+    .cinzel {
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.08em;
     }
 
-    .gold-button:active:not(:disabled) {
-      transform: scale(0.985);
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      font-size: 20px;
+      background: linear-gradient(135deg, #f7e7b4 0%, #d4af37 50%, #aa7c1e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
     }
 
-    .wa-button {
-      background: linear-gradient(135deg, #2ae771, #1aa34e);
-      box-shadow: 0 10px 30px rgba(37, 211, 102, 0.25);
+    .badge-label {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--border-gold);
+      padding: 4px 12px;
+      border-radius: 50px;
+      margin-bottom: 12px;
     }
 
-    .progress-line {
-      transition: width 0.45s ease-in-out;
+    /* Header */
+    .site-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(10, 10, 13, 0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
     }
 
-    .fade-in {
-      animation: fadeIn 0.35s ease-out forwards;
+    /* Funnel Step Views */
+    .view-step {
+      display: none;
+      padding: 24px 20px;
+      animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .view-step.active {
+      display: block;
     }
 
     @keyframes fadeIn {
@@ -184,781 +189,1425 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Luxury Scent Aura Animation */
-    .aura-ring {
-      animation: pulseAura 2s ease-in-out infinite;
+    /* HERO SCREEN */
+    .hero-content {
+      text-align: center;
+      padding: 20px 0 10px;
     }
 
-    @keyframes pulseAura {
-      0%, 100% {
-        box-shadow: 0 0 20px rgba(228, 174, 76, 0.2), inset 0 0 15px rgba(228, 174, 76, 0.1);
-        transform: scale(1);
-      }
-      50% {
-        box-shadow: 0 0 50px rgba(228, 174, 76, 0.45), inset 0 0 25px rgba(228, 174, 76, 0.25);
-        transform: scale(1.04);
-      }
+    .hero-headline {
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 14px;
+      color: #ffffff;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    .hero-subheadline {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+      line-height: 1.6;
+      padding: 0 8px;
+    }
+
+    .trust-pill-bar {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .pill-item {
+      font-size: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 6px 12px;
+      border-radius: 30px;
+      color: #dfdfe6;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .pill-item span.gold {
+      color: var(--gold-light);
+      font-weight: 700;
+    }
+
+    /* Buttons */
+    .cta-btn-primary {
+      width: 100%;
+      background: linear-gradient(135deg, #e3c467 0%, #d4af37 50%, #99741a 100%);
+      color: #0b0b0d;
+      font-size: 18px;
+      font-weight: 700;
+      padding: 16px 22px;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 6px 24px rgba(212, 175, 55, 0.28);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      font-family: inherit;
+    }
+
+    .cta-btn-primary:active {
+      transform: scale(0.98);
+      box-shadow: 0 2px 12px rgba(212, 175, 55, 0.2);
+    }
+
+    .whatsapp-btn {
+      background: linear-gradient(135deg, #25D366 0%, #1ea952 100%);
+      color: #ffffff;
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.28);
+    }
+
+    .sub-cta-note {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-top: 10px;
+    }
+
+    /* Trust Grid (Opening) */
+    .trust-card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 32px;
+    }
+
+    .trust-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      text-align: center;
+    }
+
+    .trust-box-icon {
+      font-size: 20px;
+      margin-bottom: 6px;
+      color: var(--gold-primary);
+    }
+
+    .trust-box-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .trust-box-desc {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    /* QUIZ FLOW */
+    .quiz-progress-bar-wrap {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .quiz-progress-fill {
+      height: 100%;
+      width: 20%;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
+      transition: width 0.3s ease;
+    }
+
+    .quiz-step-indicator {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--gold-primary);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .quiz-question-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+
+    .quiz-question-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+    }
+
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: all 0.2s ease;
+      text-align: left;
+    }
+
+    .option-card:active {
+      transform: scale(0.98);
+      border-color: var(--gold-primary);
+      background: var(--bg-card-elevated);
+    }
+
+    .option-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.25);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .option-card:hover .option-dot,
+    .option-card.selected .option-dot {
+      border-color: var(--gold-primary);
+      background: var(--gold-primary);
+    }
+
+    .option-text-wrap {
+      flex: 1;
+    }
+
+    .option-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #f0f0f5;
+    }
+
+    .option-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* NAME INPUT STEP */
+    .name-input-group {
+      margin: 24px 0 20px;
+    }
+
+    .name-input-field {
+      width: 100%;
+      background: var(--bg-card-elevated);
+      border: 2px solid var(--border-gold);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      color: #ffffff;
+      font-size: 18px;
+      outline: none;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    .name-input-field:focus {
+      border-color: var(--gold-light);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
+    }
+
+    .name-input-field::placeholder {
+      color: var(--text-dim);
+    }
+
+    /* LOADING SCREEN */
+    .loader-container {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .luxury-spinner {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 24px;
+      border: 2px solid rgba(212, 175, 55, 0.15);
+      border-top: 2px solid var(--gold-primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* ==========================================
+       RESULT SCREEN & PRESENTATION
+       ========================================== */
+    .result-aura-card {
+      background: linear-gradient(180deg, #181822 0%, #101015 100%);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: 24px 20px;
+      text-align: center;
+      position: relative;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+    }
+
+    .aura-glow-effect {
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      filter: blur(50px);
+      opacity: 0.35;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .result-header-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .result-aura-badge {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .result-main-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+
+    .result-formula-pill {
+      font-family: 'Cinzel', monospace;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      color: var(--gold-light);
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px dashed var(--border-gold);
+      padding: 5px 14px;
+      border-radius: 30px;
+      display: inline-block;
+      margin-bottom: 14px;
+    }
+
+    .result-desc {
+      font-size: 14px;
+      color: #cfcfe0;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      text-align: left;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 14px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Notes Progress Bars */
+    .notes-section {
+      text-align: left;
+      margin-top: 14px;
+    }
+
+    .notes-section-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold-primary);
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .note-bar-item {
+      margin-bottom: 10px;
+    }
+
+    .note-bar-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #e5e5eb;
+      margin-bottom: 4px;
+    }
+
+    .note-bar-bg {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .note-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
+      border-radius: 10px;
+    }
+
+    /* ==========================================
+       PHYSICAL PACKAGING PREVIEW (MOCKUP)
+       ========================================== */
+    .mockup-container {
+      background: radial-gradient(circle at 50% 30%, #1f1f2a 0%, #0d0d12 80%);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: 24px 16px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .mockup-heading {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .mockup-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    /* CSS Rendered Luxury Perfume Bottle */
+    .mockup-visual {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 16px;
+      margin: 15px auto 25px;
+      perspective: 800px;
+    }
+
+    .bottle-box-art {
+      width: 150px;
+      background: linear-gradient(145deg, #191921 0%, #0d0d12 100%);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 8px;
+      padding: 16px 12px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+      text-align: center;
+      position: relative;
+    }
+
+    .bottle-box-art::before {
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      right: 6px;
+      bottom: 6px;
+      border: 1px solid rgba(212, 175, 55, 0.18);
+      pointer-events: none;
+    }
+
+    .bottle-glass {
+      width: 120px;
+      height: 190px;
+      background: linear-gradient(160deg, #2b2b35 0%, #111116 70%, #000000 100%);
+      border-radius: 12px 12px 20px 20px;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 8px;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 15px 30px rgba(0,0,0,0.8);
+    }
+
+    .bottle-cap {
+      position: absolute;
+      top: -24px;
+      width: 50px;
+      height: 24px;
+      background: linear-gradient(135deg, #f7e7b4 0%, #d4af37 50%, #825f16 100%);
+      border-radius: 4px 4px 0 0;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
+    }
+
+    .bottle-label-sticker {
+      width: 88%;
+      background: #0d0d10;
+      border: 1px solid var(--gold-primary);
+      padding: 10px 4px;
+      text-align: center;
+      border-radius: 4px;
+    }
+
+    .sticker-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      color: var(--gold-light);
+      letter-spacing: 0.15em;
+    }
+
+    .sticker-aura {
+      font-size: 9px;
+      color: #c9c9d4;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 3px 0;
+    }
+
+    .sticker-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+      padding: 3px 0;
+      border-top: 1px solid rgba(212, 175, 55, 0.3);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+      margin: 4px 0;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sticker-code {
+      font-family: monospace;
+      font-size: 8px;
+      color: var(--gold-primary);
+    }
+
+    .sticker-volume {
+      font-size: 8px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    /* 3 Benefit Cards under Mockup */
+    .preview-usp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .preview-usp-box {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 10px 6px;
+      text-align: center;
+    }
+
+    .preview-usp-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold-light);
+      margin-bottom: 2px;
+    }
+
+    .preview-usp-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+      line-height: 1.25;
+    }
+
+    /* ==========================================
+       ROYAL DIGITAL CERTIFICATE
+       ========================================== */
+    .certificate-wrap {
+      background: #111116;
+      border: 2px solid var(--gold-primary);
+      border-radius: var(--radius-md);
+      padding: 24px 18px;
+      text-align: center;
+      position: relative;
+      margin-bottom: 28px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .certificate-inner-border {
+      border: 1px dashed rgba(212, 175, 55, 0.5);
+      padding: 18px 12px;
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .cert-emblem {
+      width: 50px;
+      height: 50px;
+      margin: 0 auto 10px;
+    }
+
+    .cert-title {
+      font-family: 'Rozha One', 'Cinzel', serif;
+      font-size: 20px;
+      color: var(--gold-light);
+      margin-bottom: 6px;
+    }
+
+    .cert-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .cert-table {
+      width: 100%;
+      margin: 14px 0;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding: 10px 0;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    .cert-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+    }
+
+    .cert-label {
+      color: var(--text-dim);
+    }
+
+    .cert-val {
+      font-weight: 600;
+      color: #ffffff;
+      text-align: right;
+    }
+
+    .cert-signature-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 16px;
+      padding: 0 8px;
+      font-size: 11px;
+      color: var(--gold-primary);
+    }
+
+    /* ==========================================
+       OFFER & COD SECTION
+       ========================================== */
+    .offer-card {
+      background: linear-gradient(180deg, #191924 0%, #121217 100%);
+      border: 2px solid var(--gold-primary);
+      border-radius: var(--radius-lg);
+      padding: 24px 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+      text-align: center;
+    }
+
+    .offer-badge {
+      display: inline-block;
+      font-size: 11px;
+      background: rgba(212, 175, 55, 0.15);
+      color: var(--gold-light);
+      padding: 5px 14px;
+      border-radius: 30px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      border: 1px solid var(--border-gold);
+    }
+
+    .offer-product-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .offer-price-row {
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .offer-mrp {
+      font-size: 16px;
+      color: var(--text-dim);
+      text-decoration: line-through;
+    }
+
+    .offer-current-price {
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--gold-light);
+      font-family: 'Cinzel', sans-serif;
+    }
+
+    .offer-tagline {
+      font-size: 13px;
+      color: #c0c0d0;
+      margin-bottom: 20px;
+    }
+
+    .urgency-note {
+      font-size: 12px;
+      color: #f0c36d;
+      background: rgba(212, 175, 55, 0.08);
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    /* COD Explanatory Steps */
+    .cod-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 20px 0;
+      text-align: left;
+    }
+
+    .cod-step-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+    }
+
+    .cod-step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--gold-primary);
+      color: #000000;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .cod-step-text {
+      font-size: 13px;
+      color: #dedee8;
+    }
+
+    /* Footer Trust */
+    .footer-policy-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-dim);
+      padding: 20px;
+      line-height: 1.6;
     }
   </style>
 </head>
+<body>
 
-<body class="bg-mesh min-h-screen flex justify-center items-center px-3 py-6">
+  <div class="app-container">
+    
+    <!-- STICKY HEADER -->
+    <header class="site-header">
+      <div class="brand-title">AURAFRAG</div>
+    </header>
 
-<div class="main-panel w-full max-w-[620px] rounded-3xl p-5 sm:p-8 relative overflow-hidden">
+    <!-- ==========================================
+         STEP 0: HERO OPENING SCREEN
+         ========================================== -->
+    <div id="view-hero" class="view-step active">
+      <div class="hero-content">
+        <div class="badge-label">AURAFRAG PERSONALIZED ATTAR</div>
+        <h1 class="hero-headline">आपकी खुशबू भी आपकी तरह अलग होनी चाहिए</h1>
+        <p class="hero-subheadline">
+          कुछ सवालों के जवाब दीजिए और अपनी ऑरा प्रोफ़ाइल के अनुसार विशेष रूप से तैयार किया गया सिग्नेचर अत्तर खोजिए।
+        </p>
 
-  <!-- =========================================================
-       HEADER
-  ========================================================== -->
-  <header class="flex items-center justify-between pb-4 mb-5 border-b border-goldPrimary/25">
-    <div>
-      <div class="font-cinzel text-goldLight font-black tracking-widest text-base sm:text-lg flex items-center gap-1.5">
-        <span>AURAFRAG</span>
-        <span class="text-[10px] text-goldPrimary bg-goldPrimary/15 px-2 py-0.5 rounded-full border border-goldPrimary/30 font-hindi font-medium">इत्रशाला</span>
+        <div class="trust-pill-bar">
+          <div class="pill-item">15 ML शुद्ध अत्तर</div>
+          <div class="pill-item">अल्कोहल-मुक्त</div>
+          <div class="pill-item"><span class="gold">₹599</span> केवल</div>
+          <div class="pill-item">मुफ़्त होम डिलीवरी</div>
+        </div>
+
+        <button class="cta-btn-primary" onclick="startAuraQuiz()">
+          <span>मेरी ऑरा पहचानें</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <div class="sub-cta-note">लगभग 30 सेकंड का पर्सनलाइज्ड क्विज़</div>
       </div>
-      <div class="text-[10px] text-gray-400 tracking-wider mt-0.5 font-hindi">
-        सिग्नेचर रॉयल अत्तर स्टूडियो
+
+      <!-- Trust Pillars Grid -->
+      <div class="trust-card-grid">
+        <div class="trust-box">
+          <div class="trust-box-icon">🌿</div>
+          <div class="trust-box-title">100% अल्कोहल-मुक्त</div>
+          <div class="trust-box-desc">शुद्ध प्राकृतिक अर्क</div>
+        </div>
+        <div class="trust-box">
+          <div class="trust-box-icon">🏷️</div>
+          <div class="trust-box-title">बोतल पर आपका नाम</div>
+          <div class="trust-box-desc">व्यक्तिगत सिग्नेचर लेबल</div>
+        </div>
+        <div class="trust-box">
+          <div class="trust-box-icon">📜</div>
+          <div class="trust-box-title">शाही प्रमाणपत्र</div>
+          <div class="trust-box-desc">यूनिक फॉर्मूला कोड सहित</div>
+        </div>
+        <div class="trust-box">
+          <div class="trust-box-icon">📦</div>
+          <div class="trust-box-title">Cash On Delivery</div>
+          <div class="trust-box-desc">पार्सल मिलने पर भुगतान</div>
+        </div>
       </div>
     </div>
 
-    <div class="text-right">
-      <span class="inline-flex items-center gap-1 bg-emerald-950/70 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold px-2.5 py-1 rounded-full">
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-        १००% शुद्ध • ०% अल्कोहल
-      </span>
-    </div>
-  </header>
+    <!-- ==========================================
+         STEP 1 - 4: INTERACTIVE QUIZ QUESTIONS
+         ========================================== -->
+    <div id="view-quiz" class="view-step">
+      <div class="quiz-step-indicator">
+        <span id="quiz-step-num-text">सवाल 1 / 4</span>
+        <span class="cinzel">AURAFRAG QUIZ</span>
+      </div>
+      <div class="quiz-progress-bar-wrap">
+        <div id="quiz-progress-fill" class="quiz-progress-fill"></div>
+      </div>
 
-  <!-- =========================================================
-       PROGRESS BAR
-  ========================================================== -->
-  <div class="mb-6">
-    <div class="flex justify-between items-center text-xs text-gray-400 mb-2">
-      <span class="font-bold text-goldLight/90 tracking-wide text-[11px]">आपकी पसंद का विश्लेषण</span>
-      <span id="progressText" class="font-bold text-goldPrimary bg-goldPrimary/10 px-2 py-0.5 rounded text-[11px] border border-goldPrimary/20">
-        चरण १ / ३
-      </span>
+      <div id="quiz-question-container">
+        <!-- Dynamically injected by renderQuizQuestion() -->
+      </div>
     </div>
 
-    <div class="h-2 rounded-full bg-white/5 overflow-hidden p-0.5 border border-white/10">
-      <div id="progressBar" class="progress-line h-full rounded-full bg-gradient-to-r from-crimson via-goldPrimary to-goldLight" style="width: 33%"></div>
+    <!-- ==========================================
+         STEP 5: CUSTOMER NAME ENTRY STEP
+         ========================================== -->
+    <div id="view-name" class="view-step">
+      <div class="quiz-step-indicator">
+        <span>अंतिम चरण</span>
+        <span class="cinzel">FINAL STEP</span>
+      </div>
+      <div class="quiz-progress-bar-wrap">
+        <div class="quiz-progress-fill" style="width: 100%;"></div>
+      </div>
+
+      <h2 class="quiz-question-title">अब आपकी खुशबू को आपकी पहचान देते हैं</h2>
+      <p class="quiz-question-sub">
+        यह नाम आपकी अत्तर की बोतल, पैकेजिंग और आधिकारिक ऑरा प्रमाणपत्र पर मुद्रित किया जाएगा।
+      </p>
+
+      <div class="name-input-group">
+        <input 
+          type="text" 
+          id="customer-name-input" 
+          class="name-input-field" 
+          placeholder="अपना नाम लिखिए (उदा. अमन, राहुल, प्रिया)"
+          maxlength="25"
+          autocomplete="name"
+        />
+      </div>
+
+      <button class="cta-btn-primary" onclick="submitCustomerName()">
+        <span>मेरी ऑरा प्रोफ़ाइल देखें</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
     </div>
+
+    <!-- ==========================================
+         STEP 6: TRANSITION / ANALYZING LOADER
+         ========================================== -->
+    <div id="view-loader" class="view-step">
+      <div class="loader-container">
+        <div class="luxury-spinner"></div>
+        <h3 class="cinzel" style="font-size: 20px; color: var(--gold-light); margin-bottom: 8px;">AURAFRAG BLENDING</h3>
+        <p style="font-size: 14px; color: var(--text-muted);" id="loader-status-text">आपकी प्राथमिकताओं का विश्लेषण हो रहा है...</p>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STEP 7: RESULT + OFFER + COD SCREEN
+         ========================================== -->
+    <div id="view-result" class="view-step">
+      
+      <!-- Aura Result Card -->
+      <div class="result-aura-card">
+        <div id="aura-glow" class="aura-glow-effect"></div>
+        
+        <div class="result-header-content">
+          <div id="result-badge" class="result-aura-badge">गोल्डन ऑरा</div>
+          <h2 id="result-title" class="result-main-title">अमन के लिए चुना गया गोल्डन ऑरा सिग्नेचर ब्लेंड</h2>
+          <div id="result-code" class="result-formula-pill">FORMULA: AF-GD-4827</div>
+          <p id="result-description" class="result-desc"></p>
+
+          <!-- Notes breakdown -->
+          <div class="notes-section">
+            <div class="notes-section-title">
+              <span>सुगंध संरचना (Signature Notes)</span>
+              <span style="font-size: 10px; color: var(--text-dim); text-transform: none;">ब्लेंडिंग अनुपात</span>
+            </div>
+            <div id="notes-bars-container">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Physical Mockup & Bottle Preview -->
+      <div class="mockup-container">
+        <div class="badge-label">सिग्नेचर पर्सनलाइजेशन</div>
+        <h3 class="mockup-heading">आपकी बोतल पर आपका नाम</h3>
+        <p class="mockup-sub">ऑर्डर के बाद आपकी बोतल और बॉक्स पर आपका व्यक्तिगत नाम और फॉर्मूला कोड मुद्रित होगा।</p>
+
+        <div class="mockup-visual">
+          <!-- Box Mockup -->
+          <div class="bottle-box-art">
+            <div class="sticker-brand">AURAFRAG</div>
+            <div style="font-size: 8px; color: var(--gold-primary); margin: 6px 0;">LUXURY ATTAR</div>
+            <div id="box-preview-name" class="sticker-name">अमन</div>
+            <div id="box-preview-aura" class="sticker-aura">GOLDEN AURA</div>
+            <div id="box-preview-code" class="sticker-code">AF-GD-4827</div>
+          </div>
+
+          <!-- Glass Bottle Mockup -->
+          <div class="bottle-glass">
+            <div class="bottle-cap"></div>
+            <div class="bottle-label-sticker">
+              <div class="sticker-brand">AURAFRAG</div>
+              <div id="bottle-preview-aura" class="sticker-aura">GOLDEN AURA</div>
+              <div id="bottle-preview-name" class="sticker-name">अमन</div>
+              <div id="bottle-preview-code" class="sticker-code">AF-GD-4827</div>
+              <div class="sticker-volume">15 ML • CPO</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-usp-grid">
+          <div class="preview-usp-box">
+            <div class="preview-usp-title">नाम का लेबल</div>
+            <div class="preview-usp-sub">आपके नाम से तैयार पैकिंग</div>
+          </div>
+          <div class="preview-usp-box">
+            <div class="preview-usp-title">ऑरा पहचान</div>
+            <div class="preview-usp-sub">व्यक्तिगत खुशबू प्रोफाइल</div>
+          </div>
+          <div class="preview-usp-box">
+            <div class="preview-usp-title">Formula Code</div>
+            <div class="preview-usp-sub">दोबारा उसी ब्लेंड के लिए</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Royal Digital Certificate -->
+      <div class="certificate-wrap">
+        <div class="certificate-inner-border">
+          <svg class="cert-emblem" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="45" stroke="#d4af37" stroke-width="2"/>
+            <circle cx="50" cy="50" r="38" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 2"/>
+            <path d="M50 20 L58 38 L78 40 L63 54 L68 74 L50 63 L32 74 L37 54 L22 40 L42 38 Z" fill="#d4af37" opacity="0.85"/>
+          </svg>
+          <h3 class="cert-title">AURAFRAG शाही सुगंध प्रमाणपत्र</h3>
+          <p class="cert-sub">
+            यह सिग्नेचर सुगंध ग्राहक की चुनी हुई खुशबू, व्यक्तिगत शैली और ऑरा प्रोफ़ाइल के आधार पर विशेष रूप से संयोजित की गई है।
+          </p>
+
+          <div class="cert-table">
+            <div class="cert-row">
+              <span class="cert-label">ग्राहक का नाम:</span>
+              <span id="cert-holder-name" class="cert-val">अमन</span>
+            </div>
+            <div class="cert-row">
+              <span class="cert-label">ऑरा प्रोफ़ाइल:</span>
+              <span id="cert-aura-type" class="cert-val">गोल्डन ऑरा</span>
+            </div>
+            <div class="cert-row">
+              <span class="cert-label">सिग्नेचर ब्लेंड:</span>
+              <span id="cert-blend-name" class="cert-val">शाही चंदन व ऊद</span>
+            </div>
+            <div class="cert-row">
+              <span class="cert-label">फ़ॉर्मूला कोड:</span>
+              <span id="cert-formula-code" class="cert-val cinzel">AF-GD-4827</span>
+            </div>
+            <div class="cert-row">
+              <span class="cert-label">प्रमाणीकरण तिथि:</span>
+              <span id="cert-date" class="cert-val">आज</span>
+            </div>
+          </div>
+
+          <div class="cert-signature-line">
+            <span>AURAFRAG VERIFIED</span>
+            <span style="font-family: 'Cinzel', serif;">AUTHENTIC CRAFT</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- OFFER SECTION & WHATSAPP COD CTA -->
+      <div class="offer-card">
+        <div class="offer-badge">सीमित दैनिक उत्पादन</div>
+        <h3 class="offer-product-name">AURAFRAG पर्सनलाइज़्ड सिग्नेचर अत्तर (15 ML)</h3>
+        
+        <div class="offer-price-row">
+          <span class="offer-mrp">₹1,299</span>
+          <span class="offer-current-price">₹599</span>
+        </div>
+
+        <p class="offer-tagline">
+          15 ML कंसंट्रेटेड अत्तर • 100% अल्कोहल-मुक्त • मुफ़्त होम डिलीवरी
+        </p>
+
+        <div class="urgency-note">
+          पर्सनलाइज्ड ऑर्डर्स सीमित संख्या में तैयार किए जाते हैं।
+        </div>
+
+        <!-- COD WhatsApp CTA Button -->
+        <button id="whatsapp-cod-btn" class="cta-btn-primary whatsapp-btn" onclick="handleWhatsAppOrder()">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.149.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.768-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.101.005.242-.039.375.283.144.35.491 1.198.534 1.285.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.353.101.173.45 1.743 1.996 2.404.225.195.358.181.492.025.134-.156.577-.672.731-.903.153-.231.306-.193.518-.115.212.078 1.344.633 1.575.748.231.115.385.173.442.27.058.096.058.558-.086.963z"/>
+          </svg>
+          <span>₹599 में अपना सिग्नेचर अत्तर ऑर्डर करें</span>
+        </button>
+        <div class="sub-cta-note" style="color: #4ade80; font-weight: 600; margin-top: 8px;">
+          WhatsApp पर Cash On Delivery ऑर्डर भेजें
+        </div>
+
+        <!-- 3 Simple COD Steps -->
+        <div class="cod-steps">
+          <div class="cod-step-item">
+            <div class="cod-step-num">1</div>
+            <div class="cod-step-text">बटन दबाएँ और WhatsApp पर चैट शुरू करें</div>
+          </div>
+          <div class="cod-step-item">
+            <div class="cod-step-num">2</div>
+            <div class="cod-step-text">अपना डिलीवरी पता भेजें (कोई अग्रिम भुगतान नहीं)</div>
+          </div>
+          <div class="cod-step-item">
+            <div class="cod-step-num">3</div>
+            <div class="cod-step-text">पार्सल घर पहुँचने पर ₹599 नकद भुगतान करें</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Trust & Transparency Footer -->
+      <div class="footer-policy-note">
+        AURAFRAG सिग्नेचर अत्तर 100% शुद्ध एवं अल्कोहल-मुक्त होता है। ऑरा प्रोफाइल आपकी व्यक्तिगत पसंद और शैली पर आधारित एक विशेष सुगंध सुझाव है।<br>
+        © <span id="current-year">2026</span> AURAFRAG. सर्वाधिकार सुरक्षित।
+      </div>
+
+    </div>
+
   </div>
 
-  <!-- =========================================================
-       STEP 1: PRESENCE / व्यक्तित्व
-  ========================================================== -->
-  <section id="stepPresence" class="space-y-5 fade-in">
-    <div>
-      <div class="text-[11px] text-crimson font-bold tracking-wider mb-1">
-        ✦ चरण ०१ — आपका मिज़ाज और प्रभाव
-      </div>
-      <h1 class="text-xl sm:text-2xl font-black text-white leading-snug">
-        आपकी मौजूदगी कैसी महसूस होनी चाहिए?
-      </h1>
-      <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">
-        उस व्यक्तित्व को चुनें, जो आपकी खुशबू के ज़रिए लोगों के दिलों पर छाप छोड़े।
-      </p>
-    </div>
-
-    <div class="grid grid-cols-2 gap-3 sm:gap-4">
-      <!-- Royal -->
-      <div class="choice-card presence-card rounded-2xl p-4 text-center" onclick="app.selectPresence('ROYAL', this)">
-        <div class="text-3xl mb-2">👑</div>
-        <div class="font-bold text-sm text-white">शाही और प्रभावशाली</div>
-        <div class="text-[11px] text-goldLight/70 mt-1">राजसी ठाઠ • महफ़िल की शान</div>
-      </div>
-
-      <!-- Mysterious -->
-      <div class="choice-card presence-card rounded-2xl p-4 text-center" onclick="app.selectPresence('MYSTERIOUS', this)">
-        <div class="text-3xl mb-2">🌑</div>
-        <div class="font-bold text-sm text-white">रहस्यमयी और गहरा</div>
-        <div class="text-[11px] text-gray-400 mt-1">गंभीर • सम्मोहक अंदाज़</div>
-      </div>
-
-      <!-- Warm -->
-      <div class="choice-card presence-card rounded-2xl p-4 text-center" onclick="app.selectPresence('WARM', this)">
-        <div class="text-3xl mb-2">🔥</div>
-        <div class="font-bold text-sm text-white">उष्ण और दिलकश</div>
-        <div class="text-[11px] text-gray-400 mt-1">मखमली • दिल छूने वाला</div>
-      </div>
-
-      <!-- Fresh -->
-      <div class="choice-card presence-card rounded-2xl p-4 text-center" onclick="app.selectPresence('FRESH', this)">
-        <div class="text-3xl mb-2">🌿</div>
-        <div class="font-bold text-sm text-white">ताज़ा और ऊर्जावान</div>
-        <div class="text-[11px] text-gray-400 mt-1">स्वच्छ • आधुनिक अहसास</div>
-      </div>
-    </div>
-
-    <button id="btnPresence" disabled onclick="app.goToOccasion()" class="gold-button opacity-40 cursor-not-allowed w-full rounded-2xl py-4 font-black text-sm tracking-wide mt-2">
-      अगले चरण पर चलें ➜
-    </button>
-  </section>
-
-  <!-- =========================================================
-       STEP 2: OCCASION / अवसर
-  ========================================================== -->
-  <section id="stepOccasion" class="hidden space-y-5">
-    <div>
-      <div class="text-[11px] text-crimson font-bold tracking-wider mb-1">
-        ✦ चरण ०२ — सही मौक़ા
-      </div>
-      <h2 class="text-xl sm:text-2xl font-black text-white leading-snug">
-        आप इस अत्तर को सबसे ज़्यादा कब इस्तेमाल करेंगे?
-      </h2>
-      <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">
-        अवसर के अनुसार अत्तर की गहराई और फैलाव (Projection) का चयन किया जाएगा।
-      </p>
-    </div>
-
-    <div class="grid grid-cols-2 gap-3 sm:gap-4">
-      <!-- Daily -->
-      <div class="choice-card occasion-card rounded-2xl p-4 text-center" onclick="app.selectOccasion('DAILY', this)">
-        <div class="text-3xl mb-2">☀️</div>
-        <div class="font-bold text-sm text-white">दैनिक उपयोग</div>
-        <div class="text-[11px] text-gray-400 mt-1">दफ़्तर और रोज़मर्रा की पहचान</div>
-      </div>
-
-      <!-- Date / Special -->
-      <div class="choice-card occasion-card rounded-2xl p-4 text-center" onclick="app.selectOccasion('DATE', this)">
-        <div class="text-3xl mb-2">🌹</div>
-        <div class="font-bold text-sm text-white">खास मुलाक़ात</div>
-        <div class="text-[11px] text-gray-400 mt-1">नज़दीकी और यादगार लम्हे</div>
-      </div>
-
-      <!-- Functions -->
-      <div class="choice-card occasion-card rounded-2xl p-4 text-center" onclick="app.selectOccasion('FUNCTION', this)">
-        <div class="text-3xl mb-2">🥂</div>
-        <div class="font-bold text-sm text-white">शादी और समारोह</div>
-        <div class="text-[11px] text-gray-400 mt-1">दूर तक महकती दमदार मौजूदगी</div>
-      </div>
-
-      <!-- Evening / Spiritual -->
-      <div class="choice-card occasion-card rounded-2xl p-4 text-center" onclick="app.selectOccasion('EVENING', this)">
-        <div class="text-3xl mb-2">🌙</div>
-        <div class="font-bold text-sm text-white">शाम और सुकून</div>
-        <div class="text-[11px] text-gray-400 mt-1">रूहानी शांति और गंभीर महक</div>
-      </div>
-    </div>
-
-    <button id="btnOccasion" disabled onclick="app.goToNotes()" class="gold-button opacity-40 cursor-not-allowed w-full rounded-2xl py-4 font-black text-sm tracking-wide mt-2">
-      खुशबू के नोट्स चुनें ➜
-    </button>
-  </section>
-
-  <!-- =========================================================
-       STEP 3: SCENT NOTES / पसंदीदा खुशबू
-  ========================================================== -->
-  <section id="stepNotes" class="hidden space-y-5">
-    <div>
-      <div class="text-[11px] text-crimson font-bold tracking-wider mb-1">
-        ✦ चरण ०३ — आपकी पसंदीदा नोट्स
-      </div>
-      <h2 class="text-xl sm:text-2xl font-black text-white leading-snug">
-        आपको किस तरह की खुशबू सबसे अधिक भाती है?
-      </h2>
-      <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">
-        इसके आधार पर हमारी इत्रशाला आपके लिए एक आदर्श फॉर्मूला तैयार करेगी।
-      </p>
-    </div>
-
-    <div class="grid grid-cols-2 gap-3 sm:gap-4">
-      <!-- Sweet -->
-      <div class="choice-card note-card rounded-2xl p-4 text-center" onclick="app.selectNote('SWEET', this)">
-        <div class="text-3xl mb-2">🍫</div>
-        <div class="font-bold text-sm text-white">मिठास और चॉकलेट</div>
-        <div class="text-[11px] text-gray-400 mt-1">डार्क चॉकलेट और मखमली गरमाहट</div>
-      </div>
-
-      <!-- Floral -->
-      <div class="choice-card note-card rounded-2xl p-4 text-center" onclick="app.selectNote('FLORAL', this)">
-        <div class="text-3xl mb-2">🌺</div>
-        <div class="font-bold text-sm text-white">शाही गुलाब व फूल</div>
-        <div class="text-[11px] text-gray-400 mt-1">दमिश्क गुलाब का नायाब संगम</div>
-      </div>
-
-      <!-- Woody -->
-      <div class="choice-card note-card rounded-2xl p-4 text-center" onclick="app.selectNote('WOODY', this)">
-        <div class="text-3xl mb-2">🪵</div>
-        <div class="font-bold text-sm text-white">शाही चंदन व काष्ठ</div>
-        <div class="text-[11px] text-gray-400 mt-1">सैंडલવુડ અને ઊંડા લક્ઝરી વૂડ્સ</div>
-      </div>
-
-      <!-- Musky -->
-      <div class="choice-card note-card rounded-2xl p-4 text-center" onclick="app.selectNote('MUSKY', this)">
-        <div class="text-3xl mb-2">⚡</div>
-        <div class="font-bold text-sm text-white">सफेद कस्तूरी (Musk)</div>
-        <div class="text-[11px] text-gray-400 mt-1">पवित्र, क्लीन और देर तक टिकने वाली</div>
-      </div>
-    </div>
-
-    <button id="btnNotes" disabled onclick="app.generateBlend()" class="gold-button opacity-40 cursor-not-allowed w-full rounded-2xl py-4 font-black text-sm tracking-wide mt-2">
-      मेरा सिग्नेचर अत्तर तैयार करें ✦
-    </button>
-  </section>
-
-  <!-- =========================================================
-       BLENDING SCREEN (ANIMATED)
-  ========================================================== -->
-  <section id="blendScreen" class="hidden py-14 text-center space-y-6">
-    <div class="aura-ring mx-auto w-24 h-24 rounded-full border-2 border-goldPrimary/60 flex items-center justify-center text-4xl bg-black/60 relative">
-      <span class="animate-spin text-goldLight">✦</span>
-    </div>
-
-    <div>
-      <div class="text-goldLight font-bold text-sm tracking-widest uppercase">
-        आपका सिग्नेचर फॉर्मूला तैयार हो रहा है...
-      </div>
-      <div id="blendStatus" class="text-xs text-gray-300 mt-2 font-medium">
-        आपकी पसंद के अनुसार प्राकृतिक अत्तर नोट्स मिलाए जा रहे हैं...
-      </div>
-    </div>
-  </section>
-
-  <!-- =========================================================
-       RESULT SCREEN
-  ========================================================== -->
-  <section id="resultScreen" class="hidden space-y-5">
-    
-    <!-- Result Showcase Box -->
-    <div class="border border-goldPrimary/40 rounded-3xl p-5 sm:p-7 bg-gradient-to-b from-black/60 via-panelBg to-black/80 text-center relative overflow-hidden shadow-2xl">
-      
-      <div class="inline-block px-3 py-1 rounded-full bg-goldPrimary/15 border border-goldPrimary/40 text-goldLight text-[10px] font-bold tracking-widest uppercase">
-        ✦ आपकी विशिष्ट सिग्नेचर पहचान ✦
-      </div>
-
-      <div class="text-4xl my-3 text-goldLight">🏺</div>
-
-      <h2 id="resultTitle" class="text-2xl sm:text-3xl font-black text-white font-rozha tracking-wide text-goldLight">
-        दमिश्क वेलवेट अत्तर
-      </h2>
-
-      <p id="resultDescription" class="text-xs text-gray-300 mt-2 leading-relaxed max-w-md mx-auto"></p>
-
-      <!-- Profile Tags -->
-      <div id="profileTags" class="flex justify-center flex-wrap gap-2 mt-4"></div>
-
-      <!-- Scent Pyramid / Blend List -->
-      <div class="mt-6 border-t border-white/10 pt-4 text-left">
-        <div class="flex justify-between items-center mb-3">
-          <span class="text-[11px] text-goldLight font-bold tracking-wider">अत्तर संरचना (SCENT PYRAMID)</span>
-          <span class="text-[10px] text-gray-400">अनुपात</span>
-        </div>
-
-        <div id="blendList" class="space-y-2.5"></div>
-      </div>
-
-      <div class="mt-4 text-[10px] text-gray-400 border-t border-white/10 pt-3 leading-relaxed">
-        यह मिश्रण आपकी चुनी हुई प्राथमिकताओं के आधार पर तैयार किया गया है। AuraFrag १००% प्राकृतिक और सात्विक अत्तर प्रदान करता है।
-      </div>
-    </div>
-
-    <!-- =========================================================
-         OFFER & PAYMENT
-    ========================================================== -->
-    <div class="border-2 border-goldPrimary/40 rounded-3xl p-5 bg-panelBg space-y-4 shadow-xl">
-      
-      <!-- Price & Quantity Banner -->
-      <div class="flex justify-between items-center pb-3 border-b border-white/10">
-        <div>
-          <div class="text-xs font-black text-goldLight tracking-wider">
-            AURAFRAG सिग्नेचर बॉटल
-          </div>
-          <div class="text-[11px] text-emerald-400 font-bold mt-0.5">
-            ✓ 15 ML प्रीमियम ग्लास शीशी • मुफ़्त डिलीवरी
-          </div>
-        </div>
-
-        <div class="text-right">
-          <div class="text-xs text-gray-500 line-through">₹899</div>
-          <div class="text-2xl font-black text-goldLight">₹599</div>
-        </div>
-      </div>
-
-      <!-- Payment Mode Selection -->
-      <div class="space-y-2.5">
-        <div class="text-[11px] text-gray-300 font-bold">
-          भुगतान का माध्यम चुनें:
-        </div>
-
-        <!-- Online Payment -->
-        <label id="onlineCard" class="flex justify-between items-center gap-3 p-3.5 rounded-2xl border-2 border-goldPrimary bg-goldPrimary/10 cursor-pointer">
-          <div class="flex items-center gap-3">
-            <input type="radio" name="payment" value="ONLINE" checked onchange="app.setPayment('ONLINE')" class="accent-goldPrimary w-4 h-4">
-            <div>
-              <div class="text-sm font-black text-white">ऑनलाइन भुगतान (Online Payment)</div>
-              <div class="text-[10px] text-gray-300 mt-0.5">UPI, Google Pay, PhonePe, Paytm, Cards</div>
-            </div>
-          </div>
-          <span class="text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-500/40 font-bold px-2 py-0.5 rounded">
-            फास्ट डिलीवरी
-          </span>
-        </label>
-
-        <!-- COD -->
-        <label id="codCard" class="flex justify-between items-center gap-3 p-3.5 rounded-2xl border border-white/10 bg-black/40 cursor-pointer">
-          <div class="flex items-center gap-3">
-            <input type="radio" name="payment" value="COD" onchange="app.setPayment('COD')" class="accent-waGreen w-4 h-4">
-            <div>
-              <div class="text-sm font-black text-white">कैश ऑन डिलीवरी (COD)</div>
-              <div class="text-[10px] text-gray-400 mt-0.5">सामान मिलने पर नकद भुगतान करें</div>
-            </div>
-          </div>
-          <span class="text-[10px] text-gray-400 font-bold border border-white/10 px-2 py-0.5 rounded">
-            COD
-          </span>
-        </label>
-      </div>
-
-      <!-- CTA Button -->
-      <button id="orderButton" onclick="app.executeOrder()" class="gold-button w-full py-4 rounded-2xl font-black text-sm tracking-wide">
-        <span id="orderButtonText">₹599 सुरक्षित ऑनलाइन भुगतान करें ➜</span>
-      </button>
-
-      <!-- Trust Badges -->
-      <div class="flex justify-around items-center text-center text-[10px] text-gray-400 pt-1">
-        <div>🔒 सुरक्षित पेमेंट</div>
-        <div>📦 फ्री होम डिलीवरी</div>
-        <div>🌿 100% अल्कोहल-मुक्त</div>
-        <div>⏳ २४+ घंटे महक</div>
-      </div>
-
-      <div id="paymentSuccessBox" class="hidden bg-emerald-950/80 border border-emerald-500/50 rounded-2xl p-4 text-center"></div>
-
-    </div>
-
-  </section>
-
-</div>
-
-<!-- ===========================================================
-     JAVASCRIPT LOGIC
-============================================================ -->
-<script>
-const RAZORPAY_KEY = "rzp_live_TcnN4bgnhTNHvC";
-const WHATSAPP_NUMBER = "919327938950";
-const ORDER_AMOUNT_INR = 599;
-
-/* NOTES IN DEVANAGARI */
-const NOTES = {
-  chocolate: {
-    name: "डार्क चॉकलेट नोयर (Dark Chocolate)",
-    type: "बेस नोट • मीठी और गर्म महक",
-    weight: 50
-  },
-  rose: {
-    name: "शाही दमिश्क गुलाब (Damascus Rose)",
-    type: "हार्ट नोट • मनमोहक महक",
-    weight: 30
-  },
-  cherish: {
-    name: "मखमली चेरिश (Velvet Cherish)",
-    type: "शीर्ष नोट • कोमल एहसास",
-    weight: 20
-  },
-  sandal: {
-    name: "शाही मैसूर चंदन (Imperial Sandal)",
-    type: "बेस नोट • राजसी और पवित्र काष्ठ",
-    weight: 50
-  },
-  copper: {
-    name: "स्मोक्ड ऊद और काष्ठ (Smoked Wood)",
-    type: "हार्ट नोट • गहरा प्रभाव",
-    weight: 30
-  },
-  musk: {
-    name: "पवित्र सफेद कस्तूरी (White Musk)",
-    type: "बेस नोट • शुद्ध और टिकाऊ फिनिश",
-    weight: 20
-  },
-  fresh: {
-    name: "इडेन ताज़गी अर्क (Fresh Mist)",
-    type: "शीर्ष नोट • स्फूर्तिदायक शुरुआत",
-    weight: 30
-  }
-};
-
-class AuraFragApp {
-  constructor() {
-    this.presence = null;
-    this.occasion = null;
-    this.note = null;
-    this.payment = "ONLINE";
-    this.result = null;
-    this.hasViewContentFired = false;
-    this.code = "AF-" + Math.floor(1000 + Math.random() * 9000);
-  }
-
-  markSelected(selector, element) {
-    document.querySelectorAll(selector).forEach(card => card.classList.remove("selected"));
-    element.classList.add("selected");
-  }
-
-  activateButton(id) {
-    const button = document.getElementById(id);
-    button.disabled = false;
-    button.classList.remove("opacity-40", "cursor-not-allowed");
-  }
-
-  showStep(hideId, showId) {
-    document.getElementById(hideId).classList.add("hidden");
-    const newSection = document.getElementById(showId);
-    newSection.classList.remove("hidden");
-    newSection.classList.add("fade-in");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
-  setProgress(step) {
-    const percentage = { 1: 33, 2: 66, 3: 100 };
-    document.getElementById("progressBar").style.width = percentage[step] + "%";
-    const hindiSteps = { 1: "चरण १ / ३", 2: "चरण २ / ३", 3: "चरण ३ / ३" };
-    document.getElementById("progressText").innerText = hindiSteps[step];
-  }
-
-  /* STEP 1 */
-  selectPresence(value, element) {
-    this.presence = value;
-    this.markSelected(".presence-card", element);
-    this.activateButton("btnPresence");
-  }
-
-  goToOccasion() {
-    if (!this.presence) return;
-    if (typeof fbq === "function") {
-      fbq("trackCustom", "AttarQuizStep", { step: 1, presence: this.presence });
-    }
-    this.showStep("stepPresence", "stepOccasion");
-    this.setProgress(2);
-  }
-
-  /* STEP 2 */
-  selectOccasion(value, element) {
-    this.occasion = value;
-    this.markSelected(".occasion-card", element);
-    this.activateButton("btnOccasion");
-  }
-
-  goToNotes() {
-    if (!this.occasion) return;
-    if (typeof fbq === "function") {
-      fbq("trackCustom", "AttarQuizStep", { step: 2, occasion: this.occasion });
-    }
-    this.showStep("stepOccasion", "stepNotes");
-    this.setProgress(3);
-  }
-
-  /* STEP 3 */
-  selectNote(value, element) {
-    this.note = value;
-    this.markSelected(".note-card", element);
-    this.activateButton("btnNotes");
-  }
-
-  /* BLEND GENERATION */
-  generateBlend() {
-    if (!this.note) return;
-
-    if (typeof fbq === "function") {
-      fbq("trackCustom", "AttarQuizCompleted", {
-        presence: this.presence,
-        occasion: this.occasion,
-        note: this.note
-      });
-    }
-
-    document.getElementById("stepNotes").classList.add("hidden");
-    document.getElementById("blendScreen").classList.remove("hidden");
-
-    setTimeout(() => {
-      document.getElementById("blendStatus").innerText = "शीर्ष, हृदय और आधार (Base) नोट्स का अनुपात संतुलित किया जा रहा है...";
-    }, 700);
-
-    setTimeout(() => {
-      document.getElementById("blendStatus").innerText = "आपका व्यक्तिगत अत्तर प्रोफाइल तैयार है!";
-    }, 1400);
-
-    setTimeout(() => {
-      this.calculateResult();
-      this.renderResult();
-    }, 2000);
-  }
-
-  /* RESULT LOGIC */
-  calculateResult() {
-    let blend = [];
-    let title = "";
-    let description = "";
-
-    if (this.note === "SWEET") {
-      blend = [NOTES.chocolate, NOTES.rose, NOTES.musk];
-      title = "नोयर चॉकलेट सिग्नेचर (Noir Chocolate)";
-      description = "एक बेहद दिलकश और गहरा अत्तर, जिसमें डार्क चॉकलेट की मिठास, दमिश्क गुलाब की नज़ाकत और शुद्ध कस्तूरी का मखमली ठहराव मिलता है।";
-    } else if (this.note === "FLORAL") {
-      blend = [NOTES.rose, NOTES.chocolate, NOTES.cherish];
-      title = "दमिश्क वेलवेट रोज़ (Damascus Velvet)";
-      description = "शाही गुलाब के दीवानों के लिए एक नफ़ीस खुशबू, जिसमें फूलों की ताज़गी के साथ हल्की मिठास का नायाब मेल है।";
-    } else if (this.note === "WOODY") {
-      blend = [NOTES.sandal, NOTES.copper, NOTES.musk];
-      title = "इम्पीरियल मैसूर वुड (Imperial Sandal)";
-      description = "शुद्ध चंदन और कीमती ऊद की काष्ठ-प्रधान गहराई। एक गंभीर, राजसी और परिपक्व व्यक्तित्व का प्रतीक।";
-    } else {
-      blend = [NOTES.musk, NOTES.sandal, NOTES.fresh];
-      title = "व्हाइट मस्क रिज़र्व (White Musk Reserve)";
-      description = "सफेद कस्तूरी और चंदन का संतुलित व सौम्य संगम। एक ऐसी खुशबू जो बहुत हल्की होने के बावजूद हर किसी का ध्यान खींचती है।";
-    }
-
-    const presenceMap = {
-      MYSTERIOUS: "आपने रहस्यमयी व्यक्तित्व चुना है, इसलिए इस मिश्रण में गहरे बेस नोट्स को प्राथमिकता दी गई है।",
-      ROYAL: "आपने शाही व्यक्तित्व चुना है, इसलिए इसमें राजसी और परिष्कृत नोट्स का अनुपात बढ़ाया गया है।",
-      WARM: "आपने उष्ण और दिलकश मिज़ाज चुना है, इसलिए खुशबू में कोमलता और नज़ाकत का विशेष ध्यान रखा गया है।",
-      FRESH: "आपने ताज़ा व ऊर्जावान मिज़ाज चुना है, इसलिए इसमें स्फूर्तिदायक और स्वच्छ नोट्स जोड़े गए हैं।"
-    };
-
-    description += " " + presenceMap[this.presence];
-
-    this.result = { title, description, blend };
-  }
-
-  /* RENDER RESULT */
-  renderResult() {
-    document.getElementById("blendScreen").classList.add("hidden");
-    const resultScreen = document.getElementById("resultScreen");
-    resultScreen.classList.remove("hidden");
-    resultScreen.classList.add("fade-in");
-
-    document.getElementById("resultTitle").innerText = this.result.title;
-    document.getElementById("resultDescription").innerText = this.result.description;
-
-    /* Tags in Devanagari */
-    const tags = document.getElementById("profileTags");
-    tags.innerHTML = "";
-
-    const tagHindi = {
-      MYSTERIOUS: "रहस्यमयी",
-      ROYAL: "शाही",
-      WARM: "उष्ण",
-      FRESH: "ताज़ा",
-      DAILY: "दैनिक उपयोग",
-      DATE: "खास मुलाक़ात",
-      FUNCTION: "समारोह",
-      EVENING: "शाम व सुकून",
-      SWEET: "चॉकलेट / स्वीट",
-      FLORAL: "गुलाब / फ्लोरल",
-      WOODY: "चंदन / वूडी",
-      MUSKY: "कस्तूरी / मस्क"
-    };
-
-    [this.presence, this.occasion, this.note].forEach(item => {
-      const span = document.createElement("span");
-      span.className = "text-[11px] px-3 py-1 rounded-full border border-goldPrimary/40 bg-goldPrimary/10 text-goldLight font-bold";
-      span.innerText = tagHindi[item] || item;
-      tags.appendChild(span);
-    });
-
-    /* Blend List */
-    const list = document.getElementById("blendList");
-    list.innerHTML = "";
-
-    const percentages = [50, 30, 20];
-    this.result.blend.forEach((item, index) => {
-      const row = document.createElement("div");
-      row.className = "flex items-center justify-between gap-3 p-3 rounded-2xl bg-black/50 border border-white/10";
-      row.innerHTML = `
-        <div>
-          <div class="text-xs font-bold text-white">${item.name}</div>
-          <div class="text-[10px] text-gray-400 mt-0.5">${item.type}</div>
-        </div>
-        <div class="text-xs font-mono text-goldLight font-black bg-goldPrimary/15 px-2.5 py-1 rounded-lg border border-goldPrimary/20">
-          ${percentages[index]}%
-        </div>
-      `;
-      list.appendChild(row);
-    });
-
-    /* Meta Pixel ViewContent */
-    if (!this.hasViewContentFired && typeof fbq === "function") {
-      fbq("track", "ViewContent", {
-        content_name: this.result.title,
-        content_category: "Signature Attar",
-        content_ids: [this.code],
-        content_type: "product",
-        value: ORDER_AMOUNT_INR,
-        currency: "INR"
-      });
-      this.hasViewContentFired = true;
-    }
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
-  /* PAYMENT SWITCH */
-  setPayment(mode) {
-    this.payment = mode;
-    const online = document.getElementById("onlineCard");
-    const cod = document.getElementById("codCard");
-    const button = document.getElementById("orderButton");
-    const text = document.getElementById("orderButtonText");
-
-    if (mode === "ONLINE") {
-      online.className = "flex justify-between items-center gap-3 p-3.5 rounded-2xl border-2 border-goldPrimary bg-goldPrimary/10 cursor-pointer";
-      cod.className = "flex justify-between items-center gap-3 p-3.5 rounded-2xl border border-white/10 bg-black/40 cursor-pointer";
-      button.className = "gold-button w-full py-4 rounded-2xl font-black text-sm tracking-wide";
-      text.innerText = "₹599 सुरक्षित ऑनलाइन भुगतान करें ➜";
-    } else {
-      cod.className = "flex justify-between items-center gap-3 p-3.5 rounded-2xl border-2 border-waGreen bg-emerald-950/40 cursor-pointer";
-      online.className = "flex justify-between items-center gap-3 p-3.5 rounded-2xl border border-white/10 bg-black/40 cursor-pointer";
-      button.className = "wa-button w-full py-4 rounded-2xl font-black text-sm tracking-wide text-white";
-      text.innerText = "व्हाट्सएप पर COD ऑर्डर कन्फर्म करें ➜";
-    }
-  }
-
-  /* ORDER EXECUTION */
-  executeOrder() {
-    if (typeof fbq === "function") {
-      fbq("track", "InitiateCheckout", {
-        content_name: this.result.title,
-        content_category: "Signature Attar",
-        content_ids: [this.code],
-        content_type: "product",
-        value: ORDER_AMOUNT_INR,
-        currency: "INR",
-        num_items: 1,
-        payment_method: this.payment
-      });
-    }
-
-    if (this.payment === "ONLINE") {
-      this.startRazorpay();
-    } else {
-      this.startCOD();
-    }
-  }
-
-  /* RAZORPAY INTEGRATION */
-  startRazorpay() {
-    const options = {
-      key: RAZORPAY_KEY,
-      amount: ORDER_AMOUNT_INR * 100,
-      currency: "INR",
-      name: "AURAFRAG",
-      description: this.result.title + " | 15 ML अत्तर",
-      theme: { color: "#e4ae4c" },
-      handler: (response) => {
-        if (typeof fbq === "function") {
-          fbq("trackCustom", "RazorpayClientSuccess", {
-            value: ORDER_AMOUNT_INR,
-            currency: "INR",
-            payment_id: response.razorpay_payment_id
-          });
-        }
-
-        const message = 
-`नमस्ते AURAFRAG टीम 🙏
-
-मैंने अपनी सिग्नेचर अत्तर बॉटल के लिए ₹${ORDER_AMOUNT_INR} का ऑनलाइन भुगतान कर दिया है।
-
-✅ पेमेंट आईडी (Payment ID):
-${response.razorpay_payment_id}
-
-✦ अत्तर प्रोफाइल:
-${this.result.title}
-
-✦ प्रोफाइल कोड:
-${this.code}
-
-💰 राशि:
-₹${ORDER_AMOUNT_INR}
-
-📦 मेरा डिलीवरी पता (Address):
-
-नाम:
-मोबाइल नंबर:
-मकान / फ्लैट नंबर व गली:
-शहर / कस्बा:
-राज्य:
-पिनकोड:
-
-कृपया मेरा ऑर्डर कन्फर्म करें। धन्यवाद!`;
-
-        const redirect = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
-
-        document.getElementById("orderButton").classList.add("hidden");
-        const successBox = document.getElementById("paymentSuccessBox");
-        successBox.classList.remove("hidden");
-        successBox.innerHTML = `
-          <div class="text-3xl mb-1">🎉</div>
-          <div class="font-black text-white text-base">भुगतान सफल रहा!</div>
-          <div class="text-xs text-gray-300 mt-1">अब केवल अपना डिलीवरी पता व्हाट्सएप पर साझा करें।</div>
-          <a href="${redirect}" class="wa-button block mt-3 py-3 rounded-xl font-black text-xs text-white">
-            व्हाट्सएप पर पता भेजें ➜
-          </a>
-        `;
-
-        setTimeout(() => {
-          window.location.href = redirect;
-        }, 1500);
+  <!-- ==========================================
+       SECTION: JAVASCRIPT APP LOGIC
+       ========================================== -->
+  <script>
+    /* 1. QUIZ DATA (Deterministic & Conversion-Focused) */
+    const QUIZ_QUESTIONS = [
+      {
+        id: 1,
+        question: "लोग आपको सबसे पहले किस रूप में याद रखें, यह आप क्या चाहेंगे?",
+        subtitle: "आपकी व्यक्तिगत उपस्थिति (Presence) की प्राथमिक पहचान",
+        options: [
+          { text: "शांत लेकिन प्रभावशाली", sub: "सुलझा हुआ और वजनदार व्यक्तित्व", scores: { golden: 3, silver: 2 } },
+          { text: "रहस्यमय और गहरा", sub: "जो आसानी से समझ न आए पर आकर्षित करे", scores: { black: 4 } },
+          { text: "गर्मजोशी भरा और दिलकश", sub: "मिलनसार, आकर्षक और जीवंत अंदाज़", scores: { ruby: 4 } },
+          { text: "शाही और सबसे अलग", sub: "राजसी गरिमा और विशिष्ट पहचान", scores: { golden: 4 } }
+        ]
+      },
+      {
+        id: 2,
+        // Tie-breaker Question (Direct Fragrance Profile Preference)
+        question: "आपकी पसंद की खुशबू कैसी होती है?",
+        subtitle: "यह आपके फॉर्मूले का मुख्य सुगंध आधार (Base Note) तय करेगा",
+        options: [
+          { text: "लकड़ी जैसी और शाही", sub: "चंदन, कंबोडियन ऊद और कस्तूरी की गहराई", scores: { golden: 5 } },
+          { text: "मीठी, गाढ़ी और डार्क", sub: "डार्क चॉकलेट, कस्तूरी और डीप वुड्स", scores: { black: 5 } },
+          { text: "गुलाब जैसी गर्म और रूमानी", sub: "दमिश्क गुलाब, अंबर और सॉफ्ट कस्तूरी", scores: { ruby: 5 } },
+          { text: "साफ़, ताज़ी और सौम्य मस्की", sub: "व्हाइट मस्क, फ्रेश नोट्स और हल्का चंदन", scores: { silver: 5 } }
+        ]
+      },
+      {
+        id: 3,
+        question: "आप अत्तर सबसे ज़्यादा कब लगाते हैं?",
+        subtitle: "आपकी उपयोगिता के अनुसार महक का टिकाऊपन तय होता है",
+        options: [
+          { text: "शादी, जलसे और बड़े ख़ास मौके", sub: "जहाँ दूर तक छाप छोड़नी हो", scores: { golden: 3 } },
+          { text: "शाम की ख़ास मुलाक़ात या डिनर", sub: "गहरी और इंटिमेट खुशबू के पल", scores: { black: 3 } },
+          { text: "डेट्स और रूमानी शाम", sub: "एक यादगार और मोहक अहसास", scores: { ruby: 3 } },
+          { text: "दफ़्तर और रोज़मर्रा की ज़िंदगी", sub: "हर रोज़ तरोताज़ा और शालीन रहने के लिए", scores: { silver: 3 } }
+        ]
+      },
+      {
+        id: 4,
+        question: "आपकी स्टाइल (Style) किसके सबसे क़रीब है?",
+        subtitle: "आपका व्यक्तिगत पहनावा और अंदाज़",
+        options: [
+          { text: "रॉयल और क्लासिक", sub: "शाही और भव्य पहनावा", scores: { golden: 3 } },
+          { text: "डार्क, मिस्टीरियस और गहरा", sub: "मिनिमल डार्क और शार्प लुक्स", scores: { black: 3 } },
+          { text: "बोल्ड और एक्सप्रेसिव", sub: "कॉन्फिडेंट और ध्यान आकर्षित करने वाला", scores: { ruby: 3 } },
+          { text: "क्लीन, सिंपल और एलिगेंट", sub: "सफेद, न्यूट्रल और शालीन सादगी", scores: { silver: 3 } }
+        ]
+      }
+    ];
+
+    /* 2. AURA PROFILES DATA */
+    const AURA_PROFILES = {
+      golden: {
+        codePrefix: "GD",
+        nameHindi: "गोल्डन ऑरा",
+        nameEnglish: "GOLDEN AURA",
+        badgeColor: "#d4af37",
+        glowColor: "rgba(212, 175, 55, 0.45)",
+        headlineTitle: "शाही चंदन व ऊद सिग्नेचर ब्लेंड",
+        description: "आपकी पसंद शाही, आत्मविश्वासी और प्रभावशाली खुशबुओं की ओर जाती है। आपके लिए ऐसा ब्लेंड चुना गया है जो राजसी गरिमा और विशिष्ट आकर्षण का अहसास कराए।",
+        notes: [
+          { name: "मैसूर सैंडलवुड (चंदन)", percent: 45 },
+          { name: "रॉयल कंबोडियन ऊद (Woody Depth)", percent: 35 },
+          { name: "कश्मीरी कस्तूरी (Musk Foundation)", percent: 20 }
+        ]
+      },
+      black: {
+        codePrefix: "BL",
+        nameHindi: "ब्लैक ऑरा",
+        nameEnglish: "BLACK AURA",
+        badgeColor: "#8b5cf6",
+        glowColor: "rgba(139, 92, 246, 0.45)",
+        headlineTitle: "डार्क चॉकलेट व कस्तूरी सिग्नेचर ब्लेंड",
+        description: "आपकी पसंद गहरी, शांत और रहस्यमयी खुशबुओं की ओर जाती है। आपके लिए ऐसा ब्लेंड चुना गया है जिसमें डार्क नोट्स, चॉकलेट की मिठास और वुडी गहराई का ख़ास संतुलन हो।",
+        notes: [
+          { name: "डार्क कोकोआ एक्सट्रैक्ट", percent: 50 },
+          { name: "सैंडल व डीप वुडी नोट्स", percent: 30 },
+          { name: "वेलवेट व्हाइट मस्क", percent: 20 }
+        ]
+      },
+      ruby: {
+        codePrefix: "RB",
+        nameHindi: "रूबी ऑरा",
+        nameEnglish: "RUBY AURA",
+        badgeColor: "#ef4444",
+        glowColor: "rgba(239, 68, 68, 0.45)",
+        headlineTitle: "दमिश्क गुलाब व अंबर सिग्नेचर ब्लेंड",
+        description: "आपकी पसंद बोल्ड, गर्मजोशी से भरी और रूमानी खुशबुओं की ओर जाती है। यह ब्लेंड आपकी ऊर्जा, लालित्य और गर्मजोशी को एक लंबे समय तक टिकने वाली खुशबू में बदल देता है।",
+        notes: [
+          { name: "दमिश्क गुलाब (Damascus Rose)", percent: 50 },
+          { name: "वॉर्म अंबर (Warm Amber)", percent: 30 },
+          { name: "सॉफ्ट कस्तूरी (Soft Musk)", percent: 20 }
+        ]
+      },
+      silver: {
+        codePrefix: "SL",
+        nameHindi: "सिल्वर ऑरा",
+        nameEnglish: "SILVER AURA",
+        badgeColor: "#94a3b8",
+        glowColor: "rgba(148, 163, 184, 0.45)",
+        headlineTitle: "व्हाइट मस्क व फ्रेश सैंडल ब्लेंड",
+        description: "आपकी पसंद शांत, आधुनिक, साफ़ और सुरुचिपूर्ण खुशबुओं की ओर जाती है। आपके लिए एक ऐसा ब्लेंड तैयार किया गया है जो शुद्ध ताज़गी और शालीन सादगी का अहसास कराए।",
+        notes: [
+          { name: "व्हाइट मस्क (White Musk)", percent: 45 },
+          { name: "नेचुरल फ्रेश नोट्स (Crisp Air)", percent: 35 },
+          { name: "सौम्य चंदन (Gentle Sandal)", percent: 20 }
+        ]
       }
     };
 
-    const razorpay = new Razorpay(options);
-    razorpay.on("payment.failed", () => {
-      alert("भुगतान पूरा नहीं हो सका। कृपया पुनः प्रयास करें।");
-    });
-    razorpay.open();
-  }
+    /* 3. APPLICATION STATE */
+    let currentQuizStep = 0;
+    let scores = { golden: 0, black: 0, ruby: 0, silver: 0 };
+    let tieBreakerPreference = 'golden';
+    let customerName = "अमन";
+    let finalProfile = null;
+    let uniqueFormulaCode = "";
 
-  /* COD INTEGRATION */
-  startCOD() {
-    if (typeof fbq === "function") {
-      fbq("track", "Lead", {
-        content_name: this.result.title,
-        content_category: "WhatsApp COD",
-        content_ids: [this.code],
-        value: ORDER_AMOUNT_INR,
-        currency: "INR"
+    // Set Copyright Year Dynamically
+    document.getElementById("current-year").textContent = new Date().getFullYear();
+
+    /* 4. NAVIGATION & STEP SWITCHING */
+    function showStep(stepId) {
+      document.querySelectorAll('.view-step').forEach(el => el.classList.remove('active'));
+      const target = document.getElementById(stepId);
+      if (target) {
+        target.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    /* 5. START QUIZ */
+    function startAuraQuiz() {
+      currentQuizStep = 0;
+      scores = { golden: 0, black: 0, ruby: 0, silver: 0 };
+      
+      // Meta Pixel Event: AuraQuizStart
+      trackMetaEvent('AuraQuizStart', 'custom', { funnel_step: 'hero_to_quiz' });
+
+      showStep('view-quiz');
+      renderQuizQuestion();
+    }
+
+    /* 6. RENDER QUIZ QUESTION */
+    function renderQuizQuestion() {
+      const q = QUIZ_QUESTIONS[currentQuizStep];
+      const totalSteps = QUIZ_QUESTIONS.length;
+      
+      // Progress UI
+      document.getElementById('quiz-step-num-text').textContent = `सवाल ${currentQuizStep + 1} / ${totalSteps}`;
+      const progressPercent = ((currentQuizStep + 1) / totalSteps) * 100;
+      document.getElementById('quiz-progress-fill').style.width = `${progressPercent}%`;
+
+      // Track Quiz Step Progress
+      trackMetaEvent('AuraQuizStep', 'custom', { step_number: currentQuizStep + 1, question: q.question });
+
+      let optionsHtml = '';
+      q.options.forEach((opt, idx) => {
+        optionsHtml += `
+          <div class="option-card" onclick="selectQuizOption(${idx})">
+            <div class="option-dot"></div>
+            <div class="option-text-wrap">
+              <div class="option-title">${opt.text}</div>
+              <div class="option-desc">${opt.sub}</div>
+            </div>
+          </div>
+        `;
+      });
+
+      const container = document.getElementById('quiz-question-container');
+      container.innerHTML = `
+        <h2 class="quiz-question-title">${q.question}</h2>
+        <p class="quiz-question-sub">${q.subtitle}</p>
+        <div class="options-grid">
+          ${optionsHtml}
+        </div>
+      `;
+    }
+
+    /* 7. SELECT OPTION & ADVANCE */
+    function selectQuizOption(index) {
+      const currentQuestion = QUIZ_QUESTIONS[currentQuizStep];
+      const selectedOption = currentQuestion.options[index];
+
+      // Add scores
+      for (const [key, val] of Object.entries(selectedOption.scores)) {
+        if (scores[key] !== undefined) {
+          scores[key] += val;
+        }
+      }
+
+      // If Question 2, remember fragrance preference as tie-breaker
+      if (currentQuestion.id === 2) {
+        if (index === 0) tieBreakerPreference = 'golden';
+        else if (index === 1) tieBreakerPreference = 'black';
+        else if (index === 2) tieBreakerPreference = 'ruby';
+        else if (index === 3) tieBreakerPreference = 'silver';
+      }
+
+      currentQuizStep++;
+
+      if (currentQuizStep < QUIZ_QUESTIONS.length) {
+        renderQuizQuestion();
+      } else {
+        // Move to Customer Name Step
+        showStep('view-name');
+        setTimeout(() => {
+          const input = document.getElementById('customer-name-input');
+          if (input) input.focus();
+        }, 300);
+      }
+    }
+
+    /* 8. SUBMIT NAME & GENERATE RESULT */
+    function submitCustomerName() {
+      const input = document.getElementById('customer-name-input');
+      const enteredName = input ? input.value.trim() : "";
+      
+      customerName = enteredName ? enteredName : "अमन"; // Fallback graceful default
+
+      showStep('view-loader');
+
+      // Loader status copy progression
+      const statusText = document.getElementById('loader-status-text');
+      setTimeout(() => {
+        if (statusText) statusText.textContent = "ऑरा अनुसार सुगंध नोट्स का समन्वय तैयार हो रहा है...";
+      }, 700);
+
+      setTimeout(() => {
+        computeAuraResult();
+      }, 1600);
+    }
+
+    /* 9. COMPUTE AURA DETERMINISTICALLY */
+    function computeAuraResult() {
+      // Find highest score
+      let highestKey = 'golden';
+      let highestScore = -1;
+      let isTie = false;
+
+      for (const [key, val] of Object.entries(scores)) {
+        if (val > highestScore) {
+          highestScore = val;
+          highestKey = key;
+          isTie = false;
+        } else if (val === highestScore) {
+          isTie = true;
+        }
+      }
+
+      // If tie, fallback to fragrance question preference
+      const finalAuraKey = isTie ? tieBreakerPreference : highestKey;
+      finalProfile = AURA_PROFILES[finalAuraKey] || AURA_PROFILES.golden;
+
+      // Generate Unique Formula Code (e.g. AF-GD-4827)
+      const randomFourDigits = Math.floor(1000 + Math.random() * 9000);
+      uniqueFormulaCode = `AF-${finalProfile.codePrefix}-${randomFourDigits}`;
+
+      renderResultScreen();
+      showStep('view-result');
+
+      // ==========================================
+      // META PIXEL EVENT: ViewContent
+      // ==========================================
+      trackMetaEvent('ViewContent', 'standard', {
+        content_name: `${finalProfile.nameEnglish} - ${finalProfile.headlineTitle}`,
+        content_category: 'Personalized Attar',
+        aura_type: finalProfile.nameEnglish,
+        content_ids: [uniqueFormulaCode],
+        value: CONFIG.PRODUCT_PRICE,
+        currency: CONFIG.PRODUCT_CURRENCY
       });
     }
 
-    const blendText = this.result.blend.map(item => "• " + item.name).join("\n");
+    /* 10. RENDER RESULT SCREEN CONTENT */
+    function renderResultScreen() {
+      // Glow and badge color
+      const glow = document.getElementById('aura-glow');
+      if (glow) glow.style.background = finalProfile.glowColor;
 
-    const message = 
-`नमस्ते AURAFRAG टीम 🙏
+      const badge = document.getElementById('result-badge');
+      if (badge) {
+        badge.textContent = finalProfile.nameHindi;
+        badge.style.background = finalProfile.glowColor;
+        badge.style.color = '#ffffff';
+      }
 
-मुझे अपना सिग्नेचर अत्तर कैश ऑन डिलीवरी (COD) पर ऑर्डर करना है।
+      // Title & Code
+      document.getElementById('result-title').textContent = `${customerName} के लिए चुना गया ${finalProfile.nameHindi} सिग्नेचर ब्लेंड`;
+      document.getElementById('result-code').textContent = `FORMULA: ${uniqueFormulaCode}`;
+      document.getElementById('result-description').textContent = finalProfile.description;
 
-✦ अत्तर प्रोफाइल:
-${this.result.title}
+      // Note Bars
+      const barsContainer = document.getElementById('notes-bars-container');
+      barsContainer.innerHTML = '';
+      finalProfile.notes.forEach(note => {
+        const item = document.createElement('div');
+        item.className = 'note-bar-item';
+        item.innerHTML = `
+          <div class="note-bar-header">
+            <span>${note.name}</span>
+            <span style="font-weight: 700; color: var(--gold-light);">${note.percent}%</span>
+          </div>
+          <div class="note-bar-bg">
+            <div class="note-bar-fill" style="width: ${note.percent}%;"></div>
+          </div>
+        `;
+        barsContainer.appendChild(item);
+      });
 
-✦ प्रोफाइल कोड:
-${this.code}
+      // Update Bottle & Box Mockup Previews
+      document.getElementById('box-preview-name').textContent = customerName;
+      document.getElementById('box-preview-aura').textContent = finalProfile.nameEnglish;
+      document.getElementById('box-preview-code').textContent = uniqueFormulaCode;
 
-अत्तर की बनावट:
-${blendText}
+      document.getElementById('bottle-preview-name').textContent = customerName;
+      document.getElementById('bottle-preview-aura').textContent = finalProfile.nameEnglish;
+      document.getElementById('bottle-preview-code').textContent = uniqueFormulaCode;
 
-💰 कुल कीमत:
-₹${ORDER_AMOUNT_INR}
+      // Update Royal Certificate
+      document.getElementById('cert-holder-name').textContent = customerName;
+      document.getElementById('cert-aura-type').textContent = finalProfile.nameHindi;
+      document.getElementById('cert-blend-name').textContent = finalProfile.headlineTitle;
+      document.getElementById('cert-formula-code').textContent = uniqueFormulaCode;
+      
+      const today = new Date();
+      const formattedDate = `${today.getDate()} / ${today.getMonth() + 1} / ${today.getFullYear()}`;
+      document.getElementById('cert-date').textContent = formattedDate;
+    }
 
-🚚 डिलीवरी:
-मुफ़्त (FREE)
+    /* 11. HANDLE WHATSAPP COD ORDER */
+    function handleWhatsAppOrder() {
+      // TRACKING ARCHITECTURE:
+      // WhatsApp click indicates checkout intent, NOT a finished purchase.
+      // 1. Standard: InitiateCheckout
+      // 2. Custom: WhatsAppCODIntent
+      // Note: Actual 'Purchase' event must be fired via Meta Conversions API (CAPI) 
+      // from your backend system after courier confirmation/delivery.
+      
+      const checkoutEventId = trackMetaEvent('InitiateCheckout', 'standard', {
+        content_name: `${customerName} - ${finalProfile.nameEnglish}`,
+        content_ids: [uniqueFormulaCode],
+        value: CONFIG.PRODUCT_PRICE,
+        currency: CONFIG.PRODUCT_CURRENCY,
+        num_items: 1
+      });
 
-📦 मेरा डिलीवरी पता (Address):
+      trackMetaEvent('WhatsAppCODIntent', 'custom', {
+        customer_name: customerName,
+        aura_type: finalProfile.nameEnglish,
+        formula_code: uniqueFormulaCode,
+        price: CONFIG.PRODUCT_PRICE,
+        event_id: checkoutEventId
+      });
 
-नाम:
-मोबाइल नंबर:
-मकान / फ्लैट नंबर व गली:
-शहर / कस्बा:
-राज्य:
-पिनकोड:
+      // Construct Clean WhatsApp Order Message
+      const message = 
+`नमस्ते ${CONFIG.BRAND_NAME},
+मुझे अपना Personalized Signature Attar COD पर ऑर्डर करना है।
+
+नाम: ${customerName}
+ऑरा: ${finalProfile.nameHindi} (${finalProfile.nameEnglish})
+सिग्नेचर ब्लेंड: ${finalProfile.headlineTitle}
+प्रोफ़ाइल कोड: ${uniqueFormulaCode}
+कीमत: ₹${CONFIG.PRODUCT_PRICE} (${CONFIG.PRODUCT_SIZE})
+
+मेरा पूरा पता:
+नाम: ${customerName}
+मोबाइल नंबर: 
+घर / गली / सोसायटी: 
+शहर: 
+राज्य: 
+पिनकोड: 
 
 कृपया मेरा COD ऑर्डर कन्फर्म करें।`;
 
-    const url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
-    window.location.href = url;
-  }
-}
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodedMessage}`;
 
-const app = new AuraFragApp();
-</script>
+      // Open WhatsApp
+      window.open(whatsappUrl, '_blank');
+    }
+  </script>
 
 </body>
 </html>
