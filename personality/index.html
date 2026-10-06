@@ -5,28 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>AURAFRAG | व्यक्तित्व की खुशबू • 15 ML सिग्नेचर अत्तर</title>
   
-  <!-- Fonts: Noto Sans Devanagari for Ultra-Sharp Hindi & Cinzel for Royal Luxury Accents -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- ==========================================
-       SECTION: CONFIGURATION & CONSTANTS
-       ========================================== -->
   <script>
     const CONFIG = {
-      // 1. Brand & Tracking
       BRAND_NAME: "AURAFRAG",
-      META_PIXEL_ID: "YOUR_META_PIXEL_ID_HERE",
+      META_PIXEL_ID: "1718140289270179",
       
-      // 2. WhatsApp Number (Country code सहित, बिना '+' चिह्न, उदा: 919876543210)
-      WHATSAPP_NUMBER: "919876543210",
+      WHATSAPP_NUMBER: "919327938950",
       
-      // 3. Original Assets (असली Logo और असली Bottle फोटो)
       LOGO_IMAGE_URL: "75235.png",
-      BOTTLE_IMAGE_URL: "aurafrag-hero.png",
+      BOTTLE_IMAGE_URL: "/personality/aurafrag-hero.png",
       
-      // 4. Product Details & Pricing
       PRODUCT_SIZE: "15 ML",
       SINGLE_PRICE: 599,
       DOUBLE_PRICE: 799,
@@ -35,11 +27,7 @@
     };
   </script>
 
-  <!-- ==========================================
-       SECTION: META PIXEL TRACKING CODE
-       ========================================== -->
   <script>
-    /* Meta Pixel Base Code */
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -53,12 +41,9 @@
       fbq('init', CONFIG.META_PIXEL_ID);
       fbq('track', 'PageView');
     } else {
-      console.log("[AURAFRAG TRACKING] Pixel initialized in testing mode (PageView logged)");
+      console.log("[AURAFRAG TRACKING] Pixel initialized in testing mode");
     }
 
-    /**
-     * Unified Meta Tracking Helper (CAPI Ready)
-     */
     function trackMetaEvent(eventName, eventType = 'custom', params = {}) {
       const eventId = 'af_' + Date.now() + '_' + Math.floor(Math.random() * 1000000);
       const payload = { ...params, event_id: eventId };
@@ -70,35 +55,31 @@
           fbq('trackCustom', eventName, payload);
         }
       }
-      console.log(`[AURAFRAG PIXEL]: ${eventName} (${eventType})`, payload);
+
+      console.log(`[AURAFRAG PIXEL]: ${eventName}`, payload);
       return eventId;
     }
   </script>
 
   <style>
-    /* ==========================================
-       SECTION: DARK LUXURY CSS SYSTEM
-       ========================================== */
     :root {
       --bg-midnight: #07070a;
       --bg-surface: #0f0f15;
       --bg-elevated: #161522;
-      
-      /* Neon & Gold Accents */
+
       --neon-ruby: #ff0055;
-      --neon-glow-ruby: rgba(255, 0, 85, 0.4);
+      --neon-glow-ruby: rgba(255,0,85,.4);
       --gold-royal: #d4af37;
       --gold-light: #f7e7b4;
-      --gold-glow: rgba(212, 175, 55, 0.35);
+      --gold-glow: rgba(212,175,55,.35);
       --whatsapp-green: #25D366;
-      
-      /* Crisp High-Contrast Typography */
+
       --text-white: #ffffff;
       --text-sub: #f1f5f9;
       --text-muted: #cbd5e1;
       --text-dim: #94a3b8;
-      
-      --border-crisp: rgba(255, 255, 255, 0.15);
+
+      --border-crisp: rgba(255,255,255,.15);
       --radius-sm: 8px;
       --radius-md: 14px;
       --radius-lg: 20px;
@@ -125,7 +106,6 @@
       text-rendering: optimizeLegibility;
     }
 
-    /* Mobile First Container */
     .app-shell {
       width: 100%;
       max-width: 540px;
@@ -133,18 +113,17 @@
       background: radial-gradient(circle at 50% 0%, #171124 0%, #08080c 65%);
       position: relative;
       padding-bottom: 45px;
-      box-shadow: 0 0 60px rgba(0, 0, 0, 0.95);
+      box-shadow: 0 0 60px rgba(0,0,0,.95);
     }
 
     .cinzel {
       font-family: 'Cinzel', serif;
-      letter-spacing: 0.08em;
+      letter-spacing: .08em;
     }
 
-    /* Sticky Header */
     .sticky-header {
       padding: 12px 18px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(255,255,255,.1);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -167,18 +146,17 @@
     .header-brand-title {
       font-family: 'Cinzel', serif;
       font-weight: 900;
-      letter-spacing: 0.22em;
+      letter-spacing: .22em;
       font-size: 19px;
-      background: linear-gradient(135deg, #ffffff 0%, #f7e7b4 40%, #d4af37 100%);
+      background: linear-gradient(135deg,#fff 0%,#f7e7b4 40%,#d4af37 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    /* Screen Views */
     .funnel-step {
       display: none;
       padding: 22px 18px;
-      animation: smoothFade 0.28s ease-out forwards;
+      animation: smoothFade .28s ease-out forwards;
     }
 
     .funnel-step.active {
@@ -190,9 +168,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ==========================================
-       HERO OPENING
-       ========================================== */
     .hero-box {
       text-align: center;
       padding: 10px 0 6px;
@@ -202,7 +177,6 @@
       width: 86px;
       height: 86px;
       margin: 0 auto 16px;
-      position: relative;
     }
 
     .hero-emblem-img {
@@ -211,19 +185,18 @@
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid var(--gold-royal);
-      box-shadow: 0 0 25px rgba(212, 175, 55, 0.35);
+      box-shadow: 0 0 25px rgba(212,175,55,.35);
     }
 
     .hero-badge-pill {
       display: inline-block;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+      letter-spacing: .16em;
       color: #ff3377;
-      background: rgba(255, 0, 85, 0.1);
-      border: 1px solid rgba(255, 0, 85, 0.35);
-      box-shadow: 0 0 14px rgba(255, 0, 85, 0.2);
+      background: rgba(255,0,85,.1);
+      border: 1px solid rgba(255,0,85,.35);
+      box-shadow: 0 0 14px rgba(255,0,85,.2);
       padding: 4px 14px;
       border-radius: 50px;
       margin-bottom: 16px;
@@ -234,13 +207,12 @@
       font-weight: 800;
       line-height: 1.38;
       margin-bottom: 14px;
-      color: #ffffff;
-      letter-spacing: -0.01em;
+      color: #fff;
     }
 
     .hero-heading span.neon-highlight {
       color: #ff2a6d;
-      text-shadow: 0 0 16px rgba(255, 42, 109, 0.55);
+      text-shadow: 0 0 16px rgba(255,42,109,.55);
     }
 
     .hero-subheading {
@@ -270,32 +242,26 @@
     }
 
     .trust-chip.highlight-gold {
-      border-color: rgba(212, 175, 55, 0.45);
+      border-color: rgba(212,175,55,.45);
       color: var(--gold-light);
     }
 
     .mysterious-cta-btn {
       width: 100%;
-      background: linear-gradient(135deg, #ff0055 0%, #d4145a 50%, #8b0032 100%);
-      color: #ffffff;
+      background: linear-gradient(135deg,#ff0055 0%,#d4145a 50%,#8b0032 100%);
+      color: #fff;
       font-size: 18px;
       font-weight: 700;
       padding: 17px 20px;
       border-radius: var(--radius-md);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255,255,255,.3);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
       box-shadow: 0 4px 26px var(--neon-glow-ruby);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
       font-family: inherit;
-    }
-
-    .mysterious-cta-btn:active {
-      transform: scale(0.985);
-      box-shadow: 0 2px 12px rgba(255, 0, 85, 0.3);
     }
 
     .btn-footnote {
@@ -303,10 +269,8 @@
       font-size: 13px;
       color: var(--text-dim);
       margin-top: 10px;
-      font-weight: 500;
     }
 
-    /* Trust Pillars */
     .trust-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -319,19 +283,16 @@
       border: 1px solid var(--border-crisp);
       border-radius: var(--radius-sm);
       padding: 12px 10px;
-      text-align: left;
     }
 
     .trust-cell-icon {
       font-size: 18px;
       margin-bottom: 4px;
-      color: var(--gold-royal);
     }
 
     .trust-cell-title {
       font-size: 13px;
       font-weight: 700;
-      color: #ffffff;
     }
 
     .trust-cell-desc {
@@ -340,13 +301,10 @@
       margin-top: 2px;
     }
 
-    /* ==========================================
-       QUIZ (EXACTLY 3 QUESTIONS)
-       ========================================== */
     .quiz-progress-track {
       width: 100%;
       height: 4px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255,255,255,.1);
       border-radius: 4px;
       margin-bottom: 20px;
       overflow: hidden;
@@ -355,8 +313,8 @@
     .quiz-progress-bar {
       height: 100%;
       width: 33.33%;
-      background: linear-gradient(90deg, #ff0055, #d4af37);
-      transition: width 0.25s ease;
+      background: linear-gradient(90deg,#ff0055,#d4af37);
+      transition: width .25s ease;
     }
 
     .quiz-meta-info {
@@ -371,7 +329,6 @@
     .quiz-q-title {
       font-size: 21px;
       font-weight: 800;
-      color: #ffffff;
       line-height: 1.4;
       margin-bottom: 20px;
     }
@@ -391,52 +348,33 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      transition: all 0.15s ease;
-      text-align: left;
-    }
-
-    .quiz-option-card:active {
-      transform: scale(0.985);
-      border-color: #ff0055;
-      background: var(--bg-elevated);
-      box-shadow: 0 0 16px rgba(255, 0, 85, 0.3);
     }
 
     .quiz-opt-bullet {
       width: 18px;
       height: 18px;
       border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.3);
+      border: 2px solid rgba(255,255,255,.3);
       flex-shrink: 0;
     }
 
     .quiz-opt-text {
       font-size: 15.5px;
       font-weight: 700;
-      color: #ffffff;
     }
 
-    /* Name Step */
     .name-input-box {
       width: 100%;
       background: #111118;
-      border: 2px solid rgba(212, 175, 55, 0.45);
+      border: 2px solid rgba(212,175,55,.45);
       border-radius: var(--radius-md);
       padding: 16px 18px;
-      color: #ffffff;
+      color: #fff;
       font-size: 18px;
-      font-weight: 600;
-      outline: none;
       font-family: inherit;
       margin: 18px 0 22px;
     }
 
-    .name-input-box:focus {
-      border-color: #ff0055;
-      box-shadow: 0 0 20px rgba(255, 0, 85, 0.35);
-    }
-
-    /* Loader */
     .loader-box {
       text-align: center;
       padding: 60px 10px;
@@ -446,23 +384,19 @@
       width: 60px;
       height: 60px;
       margin: 0 auto 22px;
-      border: 3px solid rgba(255, 0, 85, 0.2);
+      border: 3px solid rgba(255,0,85,.2);
       border-top: 3px solid #ff0055;
       border-right: 3px solid #d4af37;
       border-radius: 50%;
-      animation: spinLoader 0.85s linear infinite;
+      animation: spinLoader .85s linear infinite;
     }
 
     @keyframes spinLoader {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      to { transform: rotate(360deg); }
     }
 
-    /* ==========================================
-       RESULT SCREEN & COPY
-       ========================================== */
     .result-aura-card {
-      background: linear-gradient(180deg, #13101c 0%, #0d0c13 100%);
+      background: linear-gradient(180deg,#13101c 0%,#0d0c13 100%);
       border: 1px solid var(--border-crisp);
       border-radius: var(--radius-lg);
       padding: 22px 18px;
@@ -471,28 +405,26 @@
     }
 
     .result-aura-card.golden-aura {
-      border-color: rgba(212, 175, 55, 0.5);
-      box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+      border-color: rgba(212,175,55,.5);
     }
+
     .result-aura-card.black-aura {
-      border-color: rgba(139, 92, 246, 0.5);
-      box-shadow: 0 0 25px rgba(139, 92, 246, 0.2);
+      border-color: rgba(139,92,246,.5);
     }
+
     .result-aura-card.ruby-aura {
-      border-color: rgba(255, 0, 85, 0.5);
-      box-shadow: 0 0 25px rgba(255, 0, 85, 0.2);
+      border-color: rgba(255,0,85,.5);
     }
+
     .result-aura-card.silver-aura {
-      border-color: rgba(6, 182, 212, 0.5);
-      box-shadow: 0 0 25px rgba(6, 182, 212, 0.2);
+      border-color: rgba(6,182,212,.5);
     }
 
     .aura-badge {
       display: inline-block;
       font-size: 11px;
       font-weight: 800;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+      letter-spacing: .15em;
       padding: 4px 14px;
       border-radius: 20px;
       margin-bottom: 12px;
@@ -501,8 +433,6 @@
     .result-main-headline {
       font-size: 21px;
       font-weight: 800;
-      color: #ffffff;
-      line-height: 1.4;
       margin-bottom: 12px;
     }
 
@@ -510,19 +440,15 @@
       font-size: 14px;
       color: var(--text-sub);
       line-height: 1.6;
-      background: rgba(0, 0, 0, 0.45);
+      background: rgba(0,0,0,.45);
       padding: 12px 14px;
       border-radius: var(--radius-sm);
       text-align: left;
     }
 
-    /* ==================================================
-       EXACT PERSONALIZED CARD (CLASSIC BLACK-GOLD LUXURY)
-       Aspect Ratio: ~100 mm × 74 mm
-       ================================================== */
     .physical-card-alert-box {
-      background: rgba(212, 175, 55, 0.08);
-      border: 1px solid rgba(212, 175, 55, 0.35);
+      background: rgba(212,175,55,.08);
+      border: 1px solid rgba(212,175,55,.35);
       border-radius: var(--radius-sm);
       padding: 12px 14px;
       margin-bottom: 14px;
@@ -533,7 +459,6 @@
       font-size: 14.5px;
       font-weight: 800;
       color: var(--gold-light);
-      margin-bottom: 3px;
     }
 
     .card-alert-sub-title {
@@ -545,35 +470,29 @@
       width: 100%;
       aspect-ratio: 100 / 74;
       min-height: 290px;
-      background: radial-gradient(circle at 50% 20%, #16120e 0%, #0a0807 80%, #050404 100%);
-      border: 1px solid rgba(212, 175, 55, 0.75); /* thin gold outer border */
+      background: radial-gradient(circle at 50% 20%,#16120e 0%,#0a0807 80%,#050404 100%);
+      border: 1px solid rgba(212,175,55,.75);
       border-radius: 12px;
       padding: 7px;
-      box-sizing: border-box;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85);
+      box-shadow: 0 10px 30px rgba(0,0,0,.85);
       margin-bottom: 24px;
-      display: flex;
-      flex-direction: column;
     }
 
     .card-inner-border {
       width: 100%;
       height: 100%;
-      border: 1px solid rgba(212, 175, 55, 0.35); /* inner thin gold border */
+      border: 1px solid rgba(212,175,55,.35);
       border-radius: 8px;
       padding: 14px 14px 10px;
-      box-sizing: border-box;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background: transparent;
     }
 
     .card-header-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 100%;
     }
 
     .card-brand-group {
@@ -588,39 +507,28 @@
       border-radius: 50%;
       object-fit: cover;
       border: 1px solid var(--gold-royal);
-      flex-shrink: 0;
-    }
-
-    .card-brand-text-block {
-      text-align: left;
-      line-height: 1.15;
     }
 
     .card-brand-title {
-      font-family: 'Cinzel', serif;
+      font-family: 'Cinzel',serif;
       font-size: 13px;
       font-weight: 800;
-      letter-spacing: 0.16em;
+      letter-spacing: .16em;
       color: var(--gold-light);
     }
 
     .card-brand-subtag {
       font-size: 9px;
       color: #a8a29e;
-      letter-spacing: 0.04em;
-      margin-top: 2px;
     }
 
     .card-pill-tag {
       font-size: 9.5px;
       font-weight: 700;
       color: var(--gold-light);
-      background: rgba(212, 175, 55, 0.08);
-      border: 1px solid rgba(212, 175, 55, 0.5);
+      border: 1px solid rgba(212,175,55,.5);
       padding: 3px 9px;
       border-radius: 20px;
-      white-space: nowrap;
-      letter-spacing: 0.02em;
     }
 
     .card-center-block {
@@ -629,20 +537,17 @@
     }
 
     .card-customer-name {
-      font-family: 'Cinzel', -apple-system, sans-serif;
+      font-family: 'Cinzel',sans-serif;
       font-size: 24px;
       font-weight: 800;
-      letter-spacing: 0.08em;
-      color: #ffffff;
+      letter-spacing: .08em;
       text-transform: uppercase;
-      line-height: 1.2;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     }
 
     .card-gold-divider {
       width: 80%;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.65), transparent);
+      background: linear-gradient(90deg,transparent,rgba(212,175,55,.65),transparent);
       margin: 8px auto 0;
     }
 
@@ -650,57 +555,40 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
-      align-items: start;
-      margin-top: 4px;
       text-align: left;
     }
 
     .card-col-left {
-      border-right: 1px solid rgba(212, 175, 55, 0.2);
+      border-right: 1px solid rgba(212,175,55,.2);
       padding-right: 8px;
-    }
-
-    .card-col-right {
-      padding-left: 2px;
     }
 
     .card-section-label {
       font-size: 10px;
       font-weight: 800;
       color: var(--gold-royal);
-      letter-spacing: 0.05em;
       margin-bottom: 3px;
-      text-transform: uppercase;
     }
 
     .card-identity-value {
       font-size: 12px;
       font-weight: 700;
-      color: #ffffff;
-      line-height: 1.45;
     }
 
     .card-usage-text {
       font-size: 9.5px;
       color: #e2e8f0;
       line-height: 1.4;
-      font-weight: 400;
     }
 
     .card-bottom-safety-line {
       font-size: 8.5px;
       color: #8c857b;
-      font-style: italic;
       text-align: center;
-      border-top: 1px solid rgba(212, 175, 55, 0.15);
+      border-top: 1px solid rgba(212,175,55,.15);
       padding-top: 6px;
-      margin-top: 6px;
-      line-height: 1.35;
     }
 
-    /* ==========================================
-       ACTUAL BOTTLE PHOTO SECTION
-       ========================================== */
     .bottle-showcase-card {
       background: #0f0f16;
       border: 1px solid var(--border-crisp);
@@ -712,11 +600,11 @@
 
     .bottle-frame {
       width: 100%;
-      height: 270px;
+      height: auto;
+      min-height: 270px;
       border-radius: var(--radius-md);
       overflow: hidden;
       margin-bottom: 12px;
-      position: relative;
       background: #09090e;
       display: flex;
       align-items: center;
@@ -724,59 +612,47 @@
     }
 
     .bottle-frame img {
-      max-width: 100%;
-      max-height: 100%;
-      width: auto;
+      width: 100%;
       height: auto;
+      max-height: 420px;
       object-fit: contain;
       display: block;
-      margin: 0 auto;
     }
 
     .bottle-fallback-box {
       width: 100%;
-      height: 100%;
+      height: 270px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 20px;
       background: #14131d;
-      border: 2px dashed rgba(212, 175, 55, 0.4);
+      border: 2px dashed rgba(212,175,55,.4);
       border-radius: var(--radius-md);
-      text-align: center;
     }
 
     .bottle-caption-text {
       font-size: 14px;
       font-weight: 700;
-      color: #ffffff;
-      line-height: 1.5;
     }
 
     .bottle-sub-clause {
       font-size: 12px;
       color: var(--gold-light);
       margin-top: 4px;
-      font-weight: 500;
     }
 
-    /* ==========================================
-       ORDER OPTIONS SELECTION
-       ========================================== */
     .order-selection-heading {
       font-size: 20px;
       font-weight: 800;
-      color: #ffffff;
       margin-bottom: 4px;
-      text-align: left;
     }
 
     .order-selection-sub {
       font-size: 13px;
       color: var(--text-muted);
       margin-bottom: 14px;
-      text-align: left;
     }
 
     .order-options-stack {
@@ -788,63 +664,44 @@
 
     .order-option-card {
       background: #11111a;
-      border: 2px solid rgba(255, 255, 255, 0.12);
+      border: 2px solid rgba(255,255,255,.12);
       border-radius: var(--radius-md);
       padding: 16px 14px;
       cursor: pointer;
       position: relative;
-      text-align: left;
-      transition: all 0.2s ease;
       display: flex;
       gap: 12px;
-      align-items: flex-start;
     }
 
-    .order-option-card:hover {
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    /* Active Selected State (No Redirect on Card Click) */
     .order-option-card.selected {
       border-color: var(--whatsapp-green);
       background: #121919;
-      box-shadow: 0 0 20px rgba(37, 211, 102, 0.25);
     }
 
     .order-option-card.selected.dual-tier {
       border-color: var(--gold-royal);
-      background: #1a1622;
-      box-shadow: 0 0 22px rgba(212, 175, 55, 0.3);
     }
 
     .opt-radio-circle {
       width: 22px;
       height: 22px;
       border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.35);
+      border: 2px solid rgba(255,255,255,.35);
       flex-shrink: 0;
-      margin-top: 2px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s ease;
     }
 
     .order-option-card.selected .opt-radio-circle {
-      border-color: var(--whatsapp-green);
       background: var(--whatsapp-green);
-    }
-
-    .order-option-card.selected.dual-tier .opt-radio-circle {
-      border-color: var(--gold-royal);
-      background: var(--gold-royal);
     }
 
     .opt-radio-check {
       display: none;
       width: 12px;
       height: 12px;
-      fill: #000000;
+      fill: #000;
     }
 
     .order-option-card.selected .opt-radio-check {
@@ -859,67 +716,46 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 4px;
     }
 
     .opt-title {
       font-size: 16px;
       font-weight: 800;
-      color: #ffffff;
     }
 
     .opt-price {
-      font-family: 'Cinzel', sans-serif;
+      font-family: 'Cinzel',sans-serif;
       font-size: 20px;
       font-weight: 800;
       color: var(--gold-light);
     }
 
     .opt-specs-chip {
-      display: inline-block;
       font-size: 11px;
       color: var(--text-dim);
-      font-weight: 600;
-      margin-bottom: 6px;
     }
 
     .opt-desc-bullets {
       list-style: none;
       font-size: 11.5px;
       color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .opt-desc-bullets li {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      margin-bottom: 2px;
-    }
-
-    .opt-desc-bullets li::before {
-      content: "•";
-      color: var(--gold-royal);
-      font-weight: bold;
     }
 
     .best-val-tag {
       position: absolute;
       top: -10px;
       right: 14px;
-      background: linear-gradient(90deg, #d4af37, #f59e0b);
+      background: linear-gradient(90deg,#d4af37,#f59e0b);
       color: #000;
       font-size: 10px;
       font-weight: 800;
       padding: 2px 10px;
       border-radius: 20px;
-      letter-spacing: 0.05em;
     }
 
-    /* Order Summary Box */
     .order-summary-box {
-      background: rgba(0, 0, 0, 0.45);
-      border: 1px dashed rgba(255, 255, 255, 0.2);
+      background: rgba(0,0,0,.45);
+      border: 1px dashed rgba(255,255,255,.2);
       border-radius: var(--radius-sm);
       padding: 12px 14px;
       margin-bottom: 16px;
@@ -929,8 +765,6 @@
     .summary-text-line {
       font-size: 14px;
       font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 2px;
     }
 
     .summary-price-line {
@@ -939,9 +773,8 @@
       color: var(--gold-light);
     }
 
-    /* Validation Warning */
     .selection-warning-note {
-      background: rgba(255, 0, 85, 0.15);
+      background: rgba(255,0,85,.15);
       border: 1px solid #ff0055;
       color: #ffb3c9;
       font-size: 13px;
@@ -957,33 +790,25 @@
       text-align: center;
       font-size: 13px;
       font-weight: 600;
-      color: var(--text-sub);
       margin-bottom: 10px;
     }
 
-    /* SINGLE FINAL WHATSAPP BUTTON */
     .final-whatsapp-btn {
       width: 100%;
-      background: linear-gradient(135deg, var(--whatsapp-green) 0%, #17a94d 100%);
-      color: #ffffff;
+      background: linear-gradient(135deg,var(--whatsapp-green),#17a94d);
+      color: #fff;
       font-size: 18px;
       font-weight: 800;
       padding: 18px 20px;
       border-radius: var(--radius-md);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255,255,255,.3);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 12px;
-      box-shadow: 0 6px 28px rgba(37, 211, 102, 0.4);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 0 6px 28px rgba(37,211,102,.4);
       font-family: inherit;
-    }
-
-    .final-whatsapp-btn:active {
-      transform: scale(0.985);
-      box-shadow: 0 2px 14px rgba(37, 211, 102, 0.3);
     }
 
     .whatsapp-sub-info {
@@ -991,10 +816,8 @@
       font-size: 12px;
       color: var(--text-dim);
       margin-top: 8px;
-      font-weight: 500;
     }
 
-    /* Footer Trust */
     .footer-clause {
       text-align: center;
       font-size: 11px;
@@ -1004,675 +827,1034 @@
     }
   </style>
 </head>
+
 <body>
 
-  <div class="app-shell">
-    
-    <!-- STICKY HEADER -->
-    <header class="sticky-header">
-      <img id="header-logo" class="header-logo-img" src="" alt="AURAFRAG Emblem" onerror="handleLogoImageError(this)">
-      <div id="header-brand-text" class="header-brand-title">AURAFRAG</div>
-    </header>
+<div class="app-shell">
 
-    <!-- ==========================================
-         STEP 0: MAIN HERO OPENING
-         ========================================== -->
-    <div id="view-hero" class="funnel-step active">
-      <div class="hero-box">
-        <div class="hero-emblem-wrap">
-          <img id="hero-emblem" class="hero-emblem-img" src="" alt="AURAFRAG Official Logo" onerror="handleLogoImageError(this)">
-        </div>
+  <header class="sticky-header">
+    <img id="header-logo" class="header-logo-img" src="" alt="AURAFRAG">
+    <div class="header-brand-title">AURAFRAG</div>
+  </header>
 
-        <div class="hero-badge-pill">PERSONALIZED ATTAR EXPERIENCE</div>
-        
-        <h1 class="hero-heading">
-          आपको अलग दिखना है?<br>
-          <span class="neon-highlight">तो पहले अपने व्यक्तित्व की खुशबू पहचानिए।</span>
-        </h1>
-        
-        <p class="hero-subheading">
-          कुछ सवालों के जवाब दीजिए और जानिए आपकी मौजूदगी के लिए किस तरह की खुशबू सबसे बेहतर बैठती है।
-        </p>
+  <div id="view-hero" class="funnel-step active">
+    <div class="hero-box">
 
-        <div class="trust-strip-row">
-          <div class="trust-chip">15 ML</div>
-          <div class="trust-chip">Alcohol Free Attar</div>
-          <div class="trust-chip">COD उपलब्ध</div>
-          <div class="trust-chip highlight-gold">₹599 से शुरू</div>
-        </div>
-
-        <!-- Mysterious Hero CTA -->
-        <button class="mysterious-cta-btn" onclick="startAuraQuiz()">
-          <span>मेरी खुशबू का राज़ खोलें</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
-        <div class="btn-footnote">लगभग 30 सेकंड का व्यक्तित्व क्विज़ • कोई अग्रिम भुगतान नहीं</div>
+      <div class="hero-emblem-wrap">
+        <img id="hero-emblem" class="hero-emblem-img" src="" alt="AURAFRAG">
       </div>
 
-      <!-- Trust Pillars -->
-      <div class="trust-grid">
-        <div class="trust-cell">
-          <div class="trust-cell-icon">🔮</div>
-          <div class="trust-cell-title">2 रहस्यमयी विकल्प</div>
-          <div class="trust-cell-desc">आपकी मौजूदगी के दो अलग पहलू</div>
-        </div>
-        <div class="trust-cell">
-          <div class="trust-cell-icon">🏷️</div>
-          <div class="trust-cell-title">निजी AURAFRAG कार्ड</div>
-          <div class="trust-cell-desc">आपके नाम से प्रिंटेड कलेक्टिबल</div>
-        </div>
-        <div class="trust-cell">
-          <div class="trust-cell-icon">🌿</div>
-          <div class="trust-cell-title">100% अल्कोहल-मुक्त</div>
-          <div class="trust-cell-desc">शुद्ध प्राकृतिक अर्क</div>
-        </div>
-        <div class="trust-cell">
-          <div class="trust-cell-icon">📦</div>
-          <div class="trust-cell-title">Cash On Delivery</div>
-          <div class="trust-cell-desc">पार्सल हाथ में आने पर भुगतान</div>
-        </div>
-      </div>
-    </div>
+      <div class="hero-badge-pill">PERSONALIZED ATTAR EXPERIENCE</div>
 
-    <!-- ==========================================
-         STEP 1 - 3: NATURAL PSYCHOLOGICAL QUIZ
-         ========================================== -->
-    <div id="view-quiz" class="funnel-step">
-      <div class="quiz-meta-info">
-        <span id="quiz-step-label">सवाल 1 / 3</span>
-        <span class="cinzel" style="color: #ff3377;">AURAFRAG PROFILE</span>
-      </div>
-      <div class="quiz-progress-track">
-        <div id="quiz-progress-bar" class="quiz-progress-bar"></div>
-      </div>
+      <h1 class="hero-heading">
+        आपको अलग दिखना है?<br>
+        <span class="neon-highlight">
+          तो पहले अपने व्यक्तित्व की खुशबू पहचानिए।
+        </span>
+      </h1>
 
-      <div id="quiz-content-area">
-        <!-- Dynamically rendered -->
-      </div>
-    </div>
-
-    <!-- ==========================================
-         STEP 4: NAME COLLECTION STEP
-         ========================================== -->
-    <div id="view-name" class="funnel-step">
-      <div class="quiz-meta-info">
-        <span>अंतिम चरण</span>
-        <span class="cinzel" style="color: var(--gold-light);">PERSONALIZATION</span>
-      </div>
-      <div class="quiz-progress-track">
-        <div class="quiz-progress-bar" style="width: 100%;"></div>
-      </div>
-
-      <h2 class="quiz-q-title">अब आपकी खुशबू को आपकी पहचान देते हैं।</h2>
-      <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 18px;">
-        यह नाम आपके अत्तर पार्सल में शामिल किए जाने वाले विशेष 'निजी सुगंध कार्ड' पर मुद्रित होगा।
+      <p class="hero-subheading">
+        कुछ सवालों के जवाब दीजिए और जानिए आपकी मौजूदगी के लिए किस तरह की खुशबू सबसे बेहतर बैठती है।
       </p>
 
-      <input 
-        type="text" 
-        id="customer-name-field" 
-        class="name-input-box" 
-        placeholder="अपना नाम लिखिए"
-        maxlength="25"
-        autocomplete="name"
-      />
+      <div class="trust-strip-row">
+        <div class="trust-chip">15 ML</div>
+        <div class="trust-chip">Alcohol Free Attar</div>
+        <div class="trust-chip">COD उपलब्ध</div>
+        <div class="trust-chip highlight-gold">₹599 से शुरू</div>
+      </div>
 
-      <button class="mysterious-cta-btn" onclick="submitCustomerName()">
-        <span>मेरी पहचान देखें</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <button class="mysterious-cta-btn" onclick="startAuraQuiz()">
+        मेरी खुशबू का राज़ खोलें ➜
       </button>
+
+      <div class="btn-footnote">
+        लगभग 30 सेकंड का व्यक्तित्व क्विज़ • कोई अग्रिम भुगतान नहीं
+      </div>
+
     </div>
 
-    <!-- ==========================================
-         STEP 5: ANALYZING LOADER
-         ========================================== -->
-    <div id="view-loader" class="funnel-step">
-      <div class="loader-box">
-        <div class="neon-spinner"></div>
-        <h3 class="cinzel" style="font-size: 19px; color: var(--gold-light); margin-bottom: 6px;">ANALYZING PERSONALITY SPECTRUM</h3>
-        <p style="font-size: 14px; color: var(--text-muted);" id="loader-msg">आपके स्वभाव और प्राथमिकताओं का मिलान हो रहा है...</p>
+    <div class="trust-grid">
+
+      <div class="trust-cell">
+        <div class="trust-cell-icon">🔮</div>
+        <div class="trust-cell-title">2 रहस्यमयी विकल्प</div>
+        <div class="trust-cell-desc">आपकी मौजूदगी के दो अलग पहलू</div>
       </div>
+
+      <div class="trust-cell">
+        <div class="trust-cell-icon">🏷️</div>
+        <div class="trust-cell-title">निजी AURAFRAG कार्ड</div>
+        <div class="trust-cell-desc">आपके नाम से प्रिंटेड कलेक्टिबल</div>
+      </div>
+
+      <div class="trust-cell">
+        <div class="trust-cell-icon">🌿</div>
+        <div class="trust-cell-title">Alcohol Free</div>
+        <div class="trust-cell-desc">15 ML अत्तर</div>
+      </div>
+
+      <div class="trust-cell">
+        <div class="trust-cell-icon">📦</div>
+        <div class="trust-cell-title">Cash On Delivery</div>
+        <div class="trust-cell-desc">डिलीवरी पर भुगतान</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="view-quiz" class="funnel-step">
+
+    <div class="quiz-meta-info">
+      <span id="quiz-step-label">सवाल 1 / 3</span>
+      <span>AURAFRAG PROFILE</span>
     </div>
 
-    <!-- ==========================================
-         STEP 6: RESULT & ORDER FUNNEL
-         ========================================== -->
-    <div id="view-result" class="funnel-step">
-      
-      <!-- 1. Customer Aura Result Copy -->
-      <div id="aura-card-box" class="result-aura-card">
-        <div id="aura-badge-tag" class="aura-badge">गोल्डन ऑरा</div>
-        <h2 id="result-headline-title" class="result-main-headline">
-          AMAN, आपकी पहचान GOLDEN AURA से सबसे ज्यादा मेल खाती है।
-        </h2>
-        <p id="result-dynamic-summary" class="result-dynamic-subtext">
-          आपके जवाब बताते हैं कि आपकी मौजूदगी में एक स्वाभाविक गरिमा और वजन है जो बिना दिखावे के भी दूसरों के जेहन में रह जाती है।
-        </p>
-      </div>
+    <div class="quiz-progress-track">
+      <div id="quiz-progress-bar" class="quiz-progress-bar"></div>
+    </div>
 
-      <!-- Clear Physical Card Fulfillment Notice -->
-      <div class="physical-card-alert-box">
-        <div class="card-alert-main-title">यही निजी AURAFRAG कार्ड आपके ऑर्डर के साथ भेजा जाएगा।</div>
-        <div class="card-alert-sub-title">आपके नाम और आपकी पहचान के साथ।</div>
-      </div>
+    <div id="quiz-content-area"></div>
 
-      <!-- 2. EXACT PERSONALIZED CARD PREVIEW (CLASSIC BLACK-GOLD LUXURY) -->
-      <div class="aurafrag-luxury-card" id="aurafrag-luxury-card">
-        <div class="card-inner-border">
-          
-          <!-- Top Left: Logo, Name, Subtitle | Top Right: Gold Pill -->
-          <div class="card-header-row">
-            <div class="card-brand-group">
-              <img id="card-logo-thumb" class="card-brand-logo-round" src="" alt="AURAFRAG" onerror="handleLogoImageError(this)">
-              <div class="card-brand-text-block">
-                <div class="card-brand-title">AURAFRAG</div>
-                <div class="card-brand-subtag">PREMIUM ATTAR • खास आपके लिए</div>
-              </div>
-            </div>
-            <div class="card-pill-tag">
-              निजी सुगंध कार्ड
-            </div>
-          </div>
+  </div>
 
-          <!-- Center: Large Bold White Customer Name + Thin Gold Divider Line -->
-          <div class="card-center-block">
-            <div id="card-customer-name-display" class="card-customer-name">
-              PARTH
-            </div>
-            <div class="card-gold-divider"></div>
-          </div>
+  <div id="view-name" class="funnel-step">
 
-          <!-- Bottom: 2-Column Layout -->
-          <div class="card-two-column-grid">
-            
-            <!-- Left Column: पहचान -->
-            <div class="card-col-left">
-              <div class="card-section-label">पहचान</div>
-              <div id="card-dynamic-traits-display" class="card-identity-value">
-                आधुनिक • साफ • संतुलित
-              </div>
-            </div>
+    <div class="quiz-meta-info">
+      <span>अंतिम चरण</span>
+      <span>PERSONALIZATION</span>
+    </div>
 
-            <!-- Right Column: लगाने का तरीका -->
-            <div class="card-col-right">
-              <div class="card-section-label">लगाने का तरीका</div>
-              <div class="card-usage-text">
-                दोनों कलाइयों पर 1–2 बिंदु लगाएँ। उँगलियों पर बची हल्की खुशबू कपड़ों के अलग-अलग हिस्सों पर हल्के स्पर्श से लगाएँ।
-              </div>
-            </div>
+    <h2 class="quiz-q-title">
+      अब आपकी खुशबू को आपकी पहचान देते हैं।
+    </h2>
 
-          </div>
+    <p style="font-size:14px;color:var(--text-muted);">
+      यह नाम आपके अत्तर पार्सल के साथ मिलने वाले निजी AURAFRAG कार्ड पर मुद्रित होगा।
+    </p>
 
-          <!-- Bottom Small Line -->
-          <div class="card-bottom-safety-line">
-            कपड़े पर लगाने से पहले किसी कम दिखाई देने वाले हिस्से पर छोटा परीक्षण करें।
-          </div>
+    <input
+      id="customer-name-field"
+      class="name-input-box"
+      placeholder="अपना नाम लिखिए"
+      maxlength="25"
+    >
 
-        </div>
-      </div>
+    <button class="mysterious-cta-btn" onclick="submitCustomerName()">
+      मेरी पहचान देखें ➜
+    </button>
 
-      <!-- 3. ORIGINAL BOTTLE IMAGE SHOWCASE -->
-      <div class="bottle-showcase-card">
-        <div id="bottle-frame-container" class="bottle-frame">
-          <img 
-            id="bottle-display-img" 
-            src="" 
-            alt="AURAFRAG 15 ML Attar Bottle" 
-            onerror="handleBottleImageError()"
-          />
-        </div>
-        <div class="bottle-caption-text">
-          “आपके ऑर्डर में यही AURAFRAG अत्तर बोतल भेजी जाएगी।”
-        </div>
-        <div class="bottle-sub-clause">
-          15 ML • Alcohol Free • Free Home Delivery
-        </div>
-      </div>
+  </div>
 
-      <!-- 4. ORDER OPTIONS SELECTION -->
-      <h3 class="order-selection-heading">अब अपना विकल्प चुनें</h3>
-      <p class="order-selection-sub">तीनों में से कोई एक विकल्प चुनें (क्लिक करने पर केवल चयन होगा):</p>
+  <div id="view-loader" class="funnel-step">
 
-      <div id="selection-error-note" class="selection-warning-note">
-        पहले अपना विकल्प चुनें।
-      </div>
+    <div class="loader-box">
+      <div class="neon-spinner"></div>
 
-      <div class="order-options-stack">
-        
-        <!-- OPTION 1: Signature Option 01 -->
-        <div id="opt-card-1" class="order-option-card" onclick="selectOrderOption('opt1')">
-          <div class="opt-radio-circle">
-            <svg class="opt-radio-check" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-          </div>
-          <div class="opt-body">
-            <div class="opt-top-row">
-              <span class="opt-title">सिग्नेचर विकल्प 01</span>
-              <span class="opt-price">₹599</span>
-            </div>
-            <div class="opt-specs-chip">1 Bottle • 15 ML</div>
-            <ul class="opt-desc-bullets">
-              <li>थोड़ा नरम और संतुलित मिज़ाज</li>
-              <li>नज़दीकी मौजूदगी और निजी बैठकों के लिए</li>
-              <li>सलीकेदार और refined प्रभाव</li>
-            </ul>
-          </div>
-        </div>
+      <h3 style="color:var(--gold-light);">
+        आपकी प्रोफ़ाइल तैयार हो रही है...
+      </h3>
 
-        <!-- OPTION 2: Signature Option 02 -->
-        <div id="opt-card-2" class="order-option-card" onclick="selectOrderOption('opt2')">
-          <div class="opt-radio-circle">
-            <svg class="opt-radio-check" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-          </div>
-          <div class="opt-body">
-            <div class="opt-top-row">
-              <span class="opt-title">सिग्नेचर विकल्प 02</span>
-              <span class="opt-price">₹599</span>
-            </div>
-            <div class="opt-specs-chip">1 Bottle • 15 ML</div>
-            <ul class="opt-desc-bullets">
-              <li>थोड़ा गहरा और वजनदार मिज़ाज</li>
-              <li>ज़्यादा उभरा हुआ और ध्यान खींचने वाला असर</li>
-              <li>शाम व ख़ास मौकों के लिए</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- OPTION 3: Both Signature Options -->
-        <div id="opt-card-both" class="order-option-card dual-tier" onclick="selectOrderOption('both')">
-          <div class="best-val-tag">दोनों अनुभव (बेस्ट वैल्यू)</div>
-          <div class="opt-radio-circle">
-            <svg class="opt-radio-check" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-          </div>
-          <div class="opt-body">
-            <div class="opt-top-row">
-              <span class="opt-title">दोनों सिग्नेचर विकल्प</span>
-              <span class="opt-price" style="color: var(--gold-light);">₹799</span>
-            </div>
-            <div class="opt-specs-chip">2 Bottles • 15 ML + 15 ML</div>
-            <ul class="opt-desc-bullets">
-              <li>विकल्प 01 + विकल्प 02 (दोनों 15 ML बोतलें)</li>
-              <li>दिन व शाम दोनों के लिए संपूर्ण सुगंध अनुभव</li>
-              <li>साथ में 1 निजी AURAFRAG कार्ड शामिल</li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Selected Order Summary Box -->
-      <div id="order-summary-box" class="order-summary-box">
-        <div id="summary-chosen-text" class="summary-text-line">आपने चुना: —</div>
-        <div id="summary-price-text" class="summary-price-line">कुल: ₹—</div>
-      </div>
-
-      <!-- Small Explanatory Text -->
-      <div class="pre-cta-explanation">
-        अपना विकल्प चुनें। भुगतान डिलीवरी के समय करें।
-      </div>
-
-      <!-- SINGLE FINAL WHATSAPP CTA -->
-      <button id="final-whatsapp-button" class="final-whatsapp-btn" onclick="handleFinalWhatsAppCheckout()">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.149.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.768-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.101.005.242-.039.375.283.144.35.491 1.198.534 1.285.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.353.101.173.45 1.743 1.996 2.404.225.195.358.181.492.025.134-.156.577-.672.731-.903.153-.231.306-.193.518-.115.212.078 1.344.633 1.575.748.231.115.385.173.442.27.058.096.058.558-.086.963z"/>
-        </svg>
-        <span>WhatsApp पर COD ऑर्डर कन्फर्म करें</span>
-      </button>
-      <div class="whatsapp-sub-info">Cash on Delivery • Free Home Delivery</div>
-
-      <!-- Footer Trust -->
-      <div class="footer-clause">
-        AURAFRAG शुद्ध कंसंट्रेटेड अत्तर (15 ML) है। ऑरा प्रोफाइल आपकी व्यक्तिगत पसंद और शैली पर आधारित एक विशेष रचनात्मक सुझाव है।<br>
-        © <span id="year-tag">2026</span> AURAFRAG. सर्वाधिकार सुरक्षित।
-      </div>
+      <p id="loader-msg" style="color:var(--text-muted);">
+        आपके जवाबों का मिलान किया जा रहा है...
+      </p>
 
     </div>
 
   </div>
 
-  <!-- ==========================================
-       SECTION: JAVASCRIPT LOGIC
-       ========================================== -->
-  <script>
-    /* 1. QUIZ DATA: 3 FOCUSED QUESTIONS */
-    const QUIZ_DATA = [
-      {
-        id: 1,
-        question: "नई जगह पर लोग आपको किस तरह याद रखें, यह आप क्या चाहेंगे?",
-        options: [
-          { text: "शांत लेकिन असरदार", auraKey: "silver" },
-          { text: "सहज और अपनापन भरा", auraKey: "ruby" },
-          { text: "रहस्यमय और अलग", auraKey: "black" },
-          { text: "शाही और आत्मविश्वासी", auraKey: "golden" }
-        ]
-      },
-      {
-        id: 2,
-        question: "जब आप बिल्कुल अपने जैसे होते हैं, तब आपकी पहचान किसके सबसे करीब होती है?",
-        options: [
-          { text: "कम बोलना, लेकिन साफ असर छोड़ना", auraKey: "silver" },
-          { text: "लोगों से जल्दी घुल-मिल जाना", auraKey: "ruby" },
-          { text: "अपनी दुनिया में रहना और अलग दिखना", auraKey: "black" },
-          { text: "जहाँ रहूँ वहाँ confidence दिखना", auraKey: "golden" }
-        ]
-      },
-      {
-        id: 3,
-        question: "आपकी खुशबू आपके बारे में बिना बोले क्या कहे?",
-        options: [
-          { text: "“यह व्यक्ति सलीकेदार है”", auraKey: "golden" },
-          { text: "“इसमें कुछ अलग है”", auraKey: "black" },
-          { text: "“इसकी मौजूदगी याद रहती है”", auraKey: "ruby" },
-          { text: "“यह शांत है, लेकिन कमजोर नहीं”", auraKey: "silver" }
-        ]
-      }
-    ];
+  <div id="view-result" class="funnel-step">
 
-    /* 2. AURA PROFILES DATA */
-    const AURA_PROFILES = {
-      golden: {
-        key: "golden",
-        nameHindi: "गोल्डन ऑरा",
-        nameEnglish: "GOLDEN AURA",
-        traits: "शाही • प्रभावशाली • सलीकेदार",
-        cardClass: "golden-aura",
-        badgeBg: "rgba(212, 175, 55, 0.25)",
-        badgeColor: "#d4af37",
-        subtext: "आपके जवाब बताते हैं कि आपकी मौजूदगी में एक स्वाभाविक गरिमा और वजन है जो बिना दिखावे के भी दूसरों के जेहन में रह जाती है।"
-      },
-      black: {
-        key: "black",
-        nameHindi: "ब्लैक ऑरा",
-        nameEnglish: "BLACK AURA",
-        traits: "रहस्यमयी • गहरी • यादगार",
-        cardClass: "black-aura",
-        badgeBg: "rgba(139, 92, 246, 0.25)",
-        badgeColor: "#a78bfa",
-        subtext: "आपके जवाब बताते हैं कि आपकी शख्सियत में एक गहरी ख़ामोशी और खिंचाव है जो आसानी से समझ नहीं आता, पर असर गहरा छोड़ता है।"
-      },
-      ruby: {
-        key: "ruby",
-        nameHindi: "रूबी ऑरा",
-        nameEnglish: "RUBY AURA",
-        traits: "गर्मजोशी भरी • आकर्षक • आत्मीय",
-        cardClass: "ruby-aura",
-        badgeBg: "rgba(255, 0, 85, 0.25)",
-        badgeColor: "#ff0055",
-        subtext: "आपके जवाब बताते हैं कि आपकी ऊर्जा जिंदादिल और दिलकश है, जो लोगों को सहज रूप से अपनी ओर खींचती है।"
-      },
-      silver: {
-        key: "silver",
-        nameHindi: "सिल्वर ऑरा",
-        nameEnglish: "SILVER AURA",
-        traits: "आधुनिक • साफ • संतुलित",
-        cardClass: "silver-aura",
-        badgeBg: "rgba(6, 182, 212, 0.25)",
-        badgeColor: "#38bdf8",
-        subtext: "आपके जवाब बताते हैं कि आपकी सादगी में ही आपका सबसे बड़ा क्लास है, जो शांत रहकर भी बहुत साफ और सुलझा हुआ असर छोड़ती है।"
-      }
-    };
+    <div id="aura-card-box" class="result-aura-card">
 
-    /* 3. APPLICATION STATE */
-    let currentQuizIndex = 0;
-    let scores = { golden: 0, black: 0, ruby: 0, silver: 0 };
-    let customerName = "PARTH";
-    let activeAura = AURA_PROFILES.silver;
-    let selectedOrderOption = null; // 'opt1', 'opt2', 'both'
+      <div id="aura-badge-tag" class="aura-badge">
+        गोल्डन ऑरा
+      </div>
 
-    // Initialize Images
-    document.getElementById('header-logo').src = CONFIG.LOGO_IMAGE_URL;
-    document.getElementById('hero-emblem').src = CONFIG.LOGO_IMAGE_URL;
-    document.getElementById('card-logo-thumb').src = CONFIG.LOGO_IMAGE_URL;
-    document.getElementById('bottle-display-img').src = CONFIG.BOTTLE_IMAGE_URL;
-    document.getElementById('year-tag').textContent = new Date().getFullYear();
+      <h2 id="result-headline-title" class="result-main-headline">
+        आपकी पहचान तैयार है।
+      </h2>
 
-    /* Asset Fallback Handlers */
-    function handleBottleImageError() {
-      const container = document.getElementById('bottle-frame-container');
-      if (container) {
-        container.innerHTML = `
-          <div class="bottle-fallback-box">
-            <div style="font-size: 32px; margin-bottom: 8px;">🧴</div>
-            <div style="font-weight: 700; color: #ffffff; font-size: 15px;">AURAFRAG bottle image यहाँ दिखाई जाएगी</div>
-            <div style="font-size: 11px; color: var(--text-dim); margin-top: 4px;">कृपया फ़ाइल चेक करें: ${CONFIG.BOTTLE_IMAGE_URL}</div>
+      <p id="result-dynamic-summary" class="result-dynamic-subtext"></p>
+
+    </div>
+
+    <div class="physical-card-alert-box">
+
+      <div class="card-alert-main-title">
+        यही निजी AURAFRAG कार्ड आपके ऑर्डर के साथ भेजा जाएगा।
+      </div>
+
+      <div class="card-alert-sub-title">
+        आपके नाम और आपकी पहचान के साथ।
+      </div>
+
+    </div>
+
+    <div class="aurafrag-luxury-card">
+
+      <div class="card-inner-border">
+
+        <div class="card-header-row">
+
+          <div class="card-brand-group">
+
+            <img
+              id="card-logo-thumb"
+              class="card-brand-logo-round"
+              src=""
+              alt="AURAFRAG"
+            >
+
+            <div>
+              <div class="card-brand-title">
+                AURAFRAG
+              </div>
+
+              <div class="card-brand-subtag">
+                PREMIUM ATTAR • खास आपके लिए
+              </div>
+            </div>
+
           </div>
-        `;
-      }
-    }
 
-    function handleLogoImageError(el) {
-      if (el) el.style.display = 'none';
-    }
-
-    /* 4. NAVIGATION VIEW CONTROLLER */
-    function switchFunnelStep(stepId) {
-      document.querySelectorAll('.funnel-step').forEach(s => s.classList.remove('active'));
-      const target = document.getElementById(stepId);
-      if (target) {
-        target.classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    }
-
-    /* 5. START QUIZ */
-    function startAuraQuiz() {
-      currentQuizIndex = 0;
-      scores = { golden: 0, black: 0, ruby: 0, silver: 0 };
-      trackMetaEvent('AuraQuizStart', 'custom', { source: 'hero_cta' });
-      switchFunnelStep('view-quiz');
-      renderQuizQuestion();
-    }
-
-    /* 6. RENDER 3-QUESTION QUIZ */
-    function renderQuizQuestion() {
-      const q = QUIZ_DATA[currentQuizIndex];
-      const total = QUIZ_DATA.length;
-      
-      document.getElementById('quiz-step-label').textContent = `सवाल ${currentQuizIndex + 1} / ${total}`;
-      document.getElementById('quiz-progress-bar').style.width = `${((currentQuizIndex + 1) / total) * 100}%`;
-
-      trackMetaEvent('AuraQuizStep', 'custom', { 
-        step: currentQuizIndex + 1, 
-        question_id: q.id 
-      });
-
-      let optionsHtml = '';
-      q.options.forEach((opt) => {
-        optionsHtml += `
-          <div class="quiz-option-card" onclick="handleOptionSelect('${opt.auraKey}')">
-            <div class="quiz-opt-bullet"></div>
-            <div class="quiz-opt-text">${opt.text}</div>
+          <div class="card-pill-tag">
+            निजी सुगंध कार्ड
           </div>
-        `;
-      });
 
-      document.getElementById('quiz-content-area').innerHTML = `
-        <h2 class="quiz-q-title">${q.question}</h2>
-        <div class="quiz-options-list">${optionsHtml}</div>
-      `;
+        </div>
+
+        <div class="card-center-block">
+
+          <div id="card-customer-name-display" class="card-customer-name">
+            PARTH
+          </div>
+
+          <div class="card-gold-divider"></div>
+
+        </div>
+
+        <div class="card-two-column-grid">
+
+          <div class="card-col-left">
+
+            <div class="card-section-label">
+              पहचान
+            </div>
+
+            <div id="card-dynamic-traits-display" class="card-identity-value">
+              आधुनिक • साफ • संतुलित
+            </div>
+
+          </div>
+
+          <div>
+
+            <div class="card-section-label">
+              लगाने का तरीका
+            </div>
+
+            <div class="card-usage-text">
+              दोनों कलाइयों पर 1–2 बिंदु लगाएँ।
+              उँगलियों पर बची हल्की खुशबू कपड़ों के अलग-अलग हिस्सों पर हल्के स्पर्श से लगाएँ।
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="card-bottom-safety-line">
+          कपड़े पर लगाने से पहले किसी कम दिखाई देने वाले हिस्से पर छोटा परीक्षण करें।
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="bottle-showcase-card">
+
+      <div id="bottle-frame-container" class="bottle-frame">
+
+        <img
+          id="bottle-display-img"
+          src="/personality/aurafrag-hero.png"
+          alt="AURAFRAG Premium Attar"
+          onerror="handleBottleImageError()"
+        >
+
+      </div>
+
+      <div class="bottle-caption-text">
+        आपके ऑर्डर में यही AURAFRAG अत्तर बोतल भेजी जाएगी।
+      </div>
+
+      <div class="bottle-sub-clause">
+        15 ML • Alcohol Free • Free Home Delivery
+      </div>
+
+    </div>
+
+    <h3 class="order-selection-heading">
+      अब अपना विकल्प चुनें
+    </h3>
+
+    <p class="order-selection-sub">
+      नीचे से अपना पसंदीदा विकल्प चुनें।
+    </p>
+
+    <div id="selection-error-note" class="selection-warning-note">
+      पहले अपना विकल्प चुनें।
+    </div>
+
+    <div class="order-options-stack">
+
+      <div
+        id="opt-card-1"
+        class="order-option-card"
+        onclick="selectOrderOption('opt1')"
+      >
+
+        <div class="opt-radio-circle">
+          <svg class="opt-radio-check" viewBox="0 0 24 24">
+            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+          </svg>
+        </div>
+
+        <div class="opt-body">
+
+          <div class="opt-top-row">
+            <span class="opt-title">
+              सिग्नेचर विकल्प 01
+            </span>
+
+            <span class="opt-price">
+              ₹599
+            </span>
+          </div>
+
+          <div class="opt-specs-chip">
+            1 Bottle • 15 ML
+          </div>
+
+          <ul class="opt-desc-bullets">
+            <li>नरम और संतुलित व्यक्तित्व</li>
+            <li>सलीकेदार मौजूदगी</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+      <div
+        id="opt-card-2"
+        class="order-option-card"
+        onclick="selectOrderOption('opt2')"
+      >
+
+        <div class="opt-radio-circle">
+          <svg class="opt-radio-check" viewBox="0 0 24 24">
+            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+          </svg>
+        </div>
+
+        <div class="opt-body">
+
+          <div class="opt-top-row">
+            <span class="opt-title">
+              सिग्नेचर विकल्प 02
+            </span>
+
+            <span class="opt-price">
+              ₹599
+            </span>
+          </div>
+
+          <div class="opt-specs-chip">
+            1 Bottle • 15 ML
+          </div>
+
+          <ul class="opt-desc-bullets">
+            <li>थोड़ा गहरा व्यक्तित्व</li>
+            <li>खास मौकों के लिए</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+      <div
+        id="opt-card-both"
+        class="order-option-card dual-tier"
+        onclick="selectOrderOption('both')"
+      >
+
+        <div class="best-val-tag">
+          बेस्ट वैल्यू
+        </div>
+
+        <div class="opt-radio-circle">
+          <svg class="opt-radio-check" viewBox="0 0 24 24">
+            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+          </svg>
+        </div>
+
+        <div class="opt-body">
+
+          <div class="opt-top-row">
+            <span class="opt-title">
+              दोनों सिग्नेचर विकल्प
+            </span>
+
+            <span class="opt-price">
+              ₹799
+            </span>
+          </div>
+
+          <div class="opt-specs-chip">
+            2 Bottles • 15 ML + 15 ML
+          </div>
+
+          <ul class="opt-desc-bullets">
+            <li>दो अलग AURAFRAG विकल्प</li>
+            <li>1 निजी कार्ड शामिल</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="order-summary-box" class="order-summary-box">
+
+      <div id="summary-chosen-text" class="summary-text-line">
+        आपने चुना: —
+      </div>
+
+      <div id="summary-price-text" class="summary-price-line">
+        कुल: ₹—
+      </div>
+
+    </div>
+
+    <div class="pre-cta-explanation">
+      अपना विकल्प चुनें। भुगतान डिलीवरी के समय करें।
+    </div>
+
+    <button
+      class="final-whatsapp-btn"
+      onclick="handleFinalWhatsAppCheckout()"
+    >
+      WhatsApp पर COD ऑर्डर कन्फर्म करें
+    </button>
+
+    <div class="whatsapp-sub-info">
+      Cash on Delivery • Free Home Delivery
+    </div>
+
+    <div class="footer-clause">
+      AURAFRAG 15 ML अत्तर है। ऑरा प्रोफाइल आपकी पसंद और शैली पर आधारित एक रचनात्मक व्यक्तित्व अनुभव है।
+      <br>
+      © <span id="year-tag"></span> AURAFRAG
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+const QUIZ_DATA = [
+  {
+    question: "नई जगह पर लोग आपको किस तरह याद रखें, यह आप क्या चाहेंगे?",
+    options: [
+      { text:"शांत लेकिन असरदार", auraKey:"silver" },
+      { text:"सहज और अपनापन भरा", auraKey:"ruby" },
+      { text:"रहस्यमय और अलग", auraKey:"black" },
+      { text:"शाही और आत्मविश्वासी", auraKey:"golden" }
+    ]
+  },
+
+  {
+    question: "जब आप बिल्कुल अपने जैसे होते हैं, तब आपकी पहचान किसके सबसे करीब होती है?",
+    options: [
+      { text:"कम बोलना, लेकिन साफ असर छोड़ना", auraKey:"silver" },
+      { text:"लोगों से जल्दी घुल-मिल जाना", auraKey:"ruby" },
+      { text:"अपनी दुनिया में रहना और अलग दिखना", auraKey:"black" },
+      { text:"जहाँ रहूँ वहाँ confidence दिखना", auraKey:"golden" }
+    ]
+  },
+
+  {
+    question: "आपकी खुशबू आपके बारे में बिना बोले क्या कहे?",
+    options: [
+      { text:"यह व्यक्ति सलीकेदार है", auraKey:"golden" },
+      { text:"इसमें कुछ अलग है", auraKey:"black" },
+      { text:"इसकी मौजूदगी याद रहती है", auraKey:"ruby" },
+      { text:"यह शांत है, लेकिन कमजोर नहीं", auraKey:"silver" }
+    ]
+  }
+];
+
+const AURA_PROFILES = {
+
+  golden:{
+    nameHindi:"गोल्डन ऑरा",
+    nameEnglish:"GOLDEN AURA",
+    traits:"शाही • प्रभावशाली • सलीकेदार",
+    cardClass:"golden-aura",
+    badgeBg:"rgba(212,175,55,.25)",
+    badgeColor:"#d4af37",
+    subtext:"आपकी मौजूदगी में स्वाभाविक गरिमा और आत्मविश्वास दिखाई देता है।"
+  },
+
+  black:{
+    nameHindi:"ब्लैक ऑरा",
+    nameEnglish:"BLACK AURA",
+    traits:"रहस्यमयी • गहरी • यादगार",
+    cardClass:"black-aura",
+    badgeBg:"rgba(139,92,246,.25)",
+    badgeColor:"#a78bfa",
+    subtext:"आपकी पहचान शांत, अलग और आसानी से पूरी तरह समझ न आने वाली है।"
+  },
+
+  ruby:{
+    nameHindi:"रूबी ऑरा",
+    nameEnglish:"RUBY AURA",
+    traits:"गर्मजोशी भरी • आकर्षक • आत्मीय",
+    cardClass:"ruby-aura",
+    badgeBg:"rgba(255,0,85,.25)",
+    badgeColor:"#ff0055",
+    subtext:"आपके व्यक्तित्व में अपनापन, गर्मजोशी और सहज आकर्षण दिखाई देता है।"
+  },
+
+  silver:{
+    nameHindi:"सिल्वर ऑरा",
+    nameEnglish:"SILVER AURA",
+    traits:"आधुनिक • साफ • संतुलित",
+    cardClass:"silver-aura",
+    badgeBg:"rgba(6,182,212,.25)",
+    badgeColor:"#38bdf8",
+    subtext:"आपकी पहचान साफ, आधुनिक और बिना दिखावे के संतुलित महसूस होती है।"
+  }
+
+};
+
+let currentQuizIndex = 0;
+
+let scores = {
+  golden:0,
+  black:0,
+  ruby:0,
+  silver:0
+};
+
+let customerName = "";
+
+let activeAura = AURA_PROFILES.silver;
+
+let selectedOrderOption = null;
+
+document.getElementById('header-logo').src =
+  CONFIG.LOGO_IMAGE_URL;
+
+document.getElementById('hero-emblem').src =
+  CONFIG.LOGO_IMAGE_URL;
+
+document.getElementById('card-logo-thumb').src =
+  CONFIG.LOGO_IMAGE_URL;
+
+document.getElementById('bottle-display-img').src =
+  CONFIG.BOTTLE_IMAGE_URL;
+
+document.getElementById('year-tag').textContent =
+  new Date().getFullYear();
+
+function handleBottleImageError(){
+
+  const container =
+    document.getElementById(
+      'bottle-frame-container'
+    );
+
+  container.innerHTML = `
+    <div class="bottle-fallback-box">
+
+      <div style="font-size:30px">
+        🧴
+      </div>
+
+      <strong>
+        Product image load नहीं हुई
+      </strong>
+
+      <div style="font-size:11px;color:#94a3b8;margin-top:5px;">
+        ${CONFIG.BOTTLE_IMAGE_URL}
+      </div>
+
+    </div>
+  `;
+}
+
+function switchFunnelStep(id){
+
+  document
+    .querySelectorAll('.funnel-step')
+    .forEach(el =>
+      el.classList.remove('active')
+    );
+
+  document
+    .getElementById(id)
+    .classList
+    .add('active');
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+}
+
+function startAuraQuiz(){
+
+  currentQuizIndex = 0;
+
+  scores = {
+    golden:0,
+    black:0,
+    ruby:0,
+    silver:0
+  };
+
+  trackMetaEvent(
+    'AuraQuizStart',
+    'custom'
+  );
+
+  switchFunnelStep(
+    'view-quiz'
+  );
+
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion(){
+
+  const q =
+    QUIZ_DATA[currentQuizIndex];
+
+  document
+    .getElementById(
+      'quiz-step-label'
+    )
+    .textContent =
+    `सवाल ${currentQuizIndex+1} / 3`;
+
+  document
+    .getElementById(
+      'quiz-progress-bar'
+    )
+    .style.width =
+    `${((currentQuizIndex+1)/3)*100}%`;
+
+  trackMetaEvent(
+    'AuraQuizStep',
+    'custom',
+    {
+      step:
+        currentQuizIndex+1
     }
+  );
 
-    /* 7. HANDLE QUESTION SELECTION */
-    function handleOptionSelect(auraKey) {
-      if (scores[auraKey] !== undefined) {
-        scores[auraKey] += 1;
+  let html = `
+    <h2 class="quiz-q-title">
+      ${q.question}
+    </h2>
+
+    <div class="quiz-options-list">
+  `;
+
+  q.options.forEach(opt=>{
+
+    html += `
+      <div
+        class="quiz-option-card"
+        onclick="handleOptionSelect('${opt.auraKey}')"
+      >
+
+        <div class="quiz-opt-bullet"></div>
+
+        <div class="quiz-opt-text">
+          ${opt.text}
+        </div>
+
+      </div>
+    `;
+
+  });
+
+  html += `</div>`;
+
+  document
+    .getElementById(
+      'quiz-content-area'
+    )
+    .innerHTML = html;
+}
+
+function handleOptionSelect(key){
+
+  scores[key]++;
+
+  currentQuizIndex++;
+
+  if(
+    currentQuizIndex <
+    QUIZ_DATA.length
+  ){
+
+    renderQuizQuestion();
+
+  }else{
+
+    switchFunnelStep(
+      'view-name'
+    );
+
+  }
+}
+
+function submitCustomerName(){
+
+  const value =
+    document
+      .getElementById(
+        'customer-name-field'
+      )
+      .value
+      .trim();
+
+  customerName =
+    value || "AURAFRAG CUSTOMER";
+
+  switchFunnelStep(
+    'view-loader'
+  );
+
+  setTimeout(
+    finalizeAuraResult,
+    1100
+  );
+}
+
+function finalizeAuraResult(){
+
+  let winner = 'silver';
+
+  let best = -1;
+
+  Object
+    .entries(scores)
+    .forEach(([key,val])=>{
+
+      if(val > best){
+
+        best = val;
+
+        winner = key;
+
       }
 
-      currentQuizIndex++;
+    });
 
-      if (currentQuizIndex < QUIZ_DATA.length) {
-        renderQuizQuestion();
-      } else {
-        switchFunnelStep('view-name');
-        setTimeout(() => {
-          const inp = document.getElementById('customer-name-field');
-          if (inp) inp.focus();
-        }, 250);
-      }
+  activeAura =
+    AURA_PROFILES[winner];
+
+  renderResultDOM();
+
+  switchFunnelStep(
+    'view-result'
+  );
+
+  trackMetaEvent(
+    'ViewContent',
+    'standard',
+    {
+      content_name:
+        activeAura.nameEnglish,
+
+      content_category:
+        'Personalized Attar',
+
+      value:
+        CONFIG.SINGLE_PRICE,
+
+      currency:'INR'
     }
+  );
+}
 
-    /* 8. SUBMIT CUSTOMER NAME */
-    function submitCustomerName() {
-      const input = document.getElementById('customer-name-field');
-      const val = input ? input.value.trim() : "";
-      customerName = val !== "" ? val : "PARTH";
+function renderResultDOM(){
 
-      switchFunnelStep('view-loader');
+  const cardBox =
+    document.getElementById(
+      'aura-card-box'
+    );
 
-      setTimeout(() => {
-        const msg = document.getElementById('loader-msg');
-        if (msg) msg.textContent = "सिग्नेचर विकल्पों का समन्वय तैयार हो गया है...";
-      }, 650);
+  cardBox.className =
+    `result-aura-card ${activeAura.cardClass}`;
 
-      setTimeout(() => {
-        finalizeAuraResult();
-      }, 1250);
+  const badge =
+    document.getElementById(
+      'aura-badge-tag'
+    );
+
+  badge.textContent =
+    activeAura.nameHindi;
+
+  badge.style.background =
+    activeAura.badgeBg;
+
+  badge.style.color =
+    activeAura.badgeColor;
+
+  document
+    .getElementById(
+      'result-headline-title'
+    )
+    .textContent =
+    `${customerName}, आपकी पहचान ${activeAura.nameEnglish} से सबसे ज्यादा मेल खाती है।`;
+
+  document
+    .getElementById(
+      'result-dynamic-summary'
+    )
+    .textContent =
+    activeAura.subtext;
+
+  document
+    .getElementById(
+      'card-customer-name-display'
+    )
+    .textContent =
+    customerName;
+
+  document
+    .getElementById(
+      'card-dynamic-traits-display'
+    )
+    .textContent =
+    activeAura.traits;
+}
+
+function selectOrderOption(option){
+
+  selectedOrderOption =
+    option;
+
+  document
+    .getElementById(
+      'opt-card-1'
+    )
+    .classList
+    .toggle(
+      'selected',
+      option==='opt1'
+    );
+
+  document
+    .getElementById(
+      'opt-card-2'
+    )
+    .classList
+    .toggle(
+      'selected',
+      option==='opt2'
+    );
+
+  document
+    .getElementById(
+      'opt-card-both'
+    )
+    .classList
+    .toggle(
+      'selected',
+      option==='both'
+    );
+
+  document
+    .getElementById(
+      'selection-error-note'
+    )
+    .style.display =
+    'none';
+
+  const summary =
+    document.getElementById(
+      'order-summary-box'
+    );
+
+  summary.style.display =
+    'block';
+
+  let label = "";
+
+  let price = 0;
+
+  if(option==='opt1'){
+
+    label =
+      "सिग्नेचर विकल्प 01";
+
+    price =
+      CONFIG.SINGLE_PRICE;
+
+  }
+
+  if(option==='opt2'){
+
+    label =
+      "सिग्नेचर विकल्प 02";
+
+    price =
+      CONFIG.SINGLE_PRICE;
+
+  }
+
+  if(option==='both'){
+
+    label =
+      "दोनों सिग्नेचर विकल्प";
+
+    price =
+      CONFIG.DOUBLE_PRICE;
+
+  }
+
+  document
+    .getElementById(
+      'summary-chosen-text'
+    )
+    .textContent =
+    `आपने चुना: ${label}`;
+
+  document
+    .getElementById(
+      'summary-price-text'
+    )
+    .textContent =
+    `कुल: ₹${price}`;
+
+  trackMetaEvent(
+    'ProductOptionSelected',
+    'custom',
+    {
+      selected_option:
+        label,
+
+      price:price,
+
+      currency:'INR'
     }
+  );
+}
 
-    /* 9. FINALIZE AURA RESULT */
-    function finalizeAuraResult() {
-      let highestKey = 'silver';
-      let highestScore = -1;
-      for (const [key, val] of Object.entries(scores)) {
-        if (val > highestScore) {
-          highestScore = val;
-          highestKey = key;
-        }
-      }
+function handleFinalWhatsAppCheckout(){
 
-      activeAura = AURA_PROFILES[highestKey] || AURA_PROFILES.silver;
-      renderResultDOM();
-      switchFunnelStep('view-result');
+  if(
+    !selectedOrderOption
+  ){
 
-      // Meta Pixel Event: ViewContent (Result Shown)
-      trackMetaEvent('ViewContent', 'standard', {
-        content_name: `${activeAura.nameEnglish} - 15 ML Attar`,
-        content_category: 'Personalized Attar',
-        aura_type: activeAura.nameEnglish,
-        value: CONFIG.SINGLE_PRICE,
-        currency: CONFIG.PRODUCT_CURRENCY
-      });
+    document
+      .getElementById(
+        'selection-error-note'
+      )
+      .style.display =
+      'block';
+
+    return;
+  }
+
+  let optionName = "";
+
+  let quantityText = "";
+
+  let price = 0;
+
+  if(
+    selectedOrderOption ===
+    'opt1'
+  ){
+
+    optionName =
+      "सिग्नेचर विकल्प 01";
+
+    quantityText =
+      "1 Bottle — 15 ML";
+
+    price =
+      CONFIG.SINGLE_PRICE;
+
+  }
+
+  if(
+    selectedOrderOption ===
+    'opt2'
+  ){
+
+    optionName =
+      "सिग्नेचर विकल्प 02";
+
+    quantityText =
+      "1 Bottle — 15 ML";
+
+    price =
+      CONFIG.SINGLE_PRICE;
+
+  }
+
+  if(
+    selectedOrderOption ===
+    'both'
+  ){
+
+    optionName =
+      "दोनों सिग्नेचर विकल्प";
+
+    quantityText =
+      "2 Bottles — 15 ML + 15 ML";
+
+    price =
+      CONFIG.DOUBLE_PRICE;
+
+  }
+
+  trackMetaEvent(
+    'InitiateCheckout',
+    'standard',
+    {
+      value:price,
+      currency:'INR',
+      num_items:
+        selectedOrderOption==='both'
+          ? 2
+          : 1
     }
+  );
 
-    /* 10. RENDER RESULT & EXACT LUXURY CARD */
-    function renderResultDOM() {
-      const cardBox = document.getElementById('aura-card-box');
-      cardBox.className = `result-aura-card ${activeAura.cardClass}`;
+  trackMetaEvent(
+    'WhatsAppCODIntent',
+    'custom',
+    {
+      selected_option:
+        optionName,
 
-      const badge = document.getElementById('aura-badge-tag');
-      badge.textContent = activeAura.nameHindi;
-      badge.style.background = activeAura.badgeBg;
-      badge.style.color = activeAura.badgeColor;
-
-      // Result Headline & Copy
-      document.getElementById('result-headline-title').textContent = 
-        `${customerName}, आपकी पहचान ${activeAura.nameEnglish} से सबसे ज्यादा मेल खाती है।`;
-      document.getElementById('result-dynamic-summary').textContent = activeAura.subtext;
-
-      // LIVE UPDATE EXACT CLASSIC LUXURY CARD (Customer Name & Dynamic Identity)
-      document.getElementById('card-customer-name-display').textContent = customerName;
-      document.getElementById('card-dynamic-traits-display').textContent = activeAura.traits;
+      price:price
     }
+  );
 
-    /* ==================================================
-       11. ORDER OPTION SELECTION (CLICK ONLY SELECTS)
-       ================================================== */
-    function selectOrderOption(optionKey) {
-      selectedOrderOption = optionKey;
-
-      // Update Card Visuals
-      document.getElementById('opt-card-1').classList.toggle('selected', optionKey === 'opt1');
-      document.getElementById('opt-card-2').classList.toggle('selected', optionKey === 'opt2');
-      document.getElementById('opt-card-both').classList.toggle('selected', optionKey === 'both');
-
-      // Hide validation error if displayed
-      const warningNote = document.getElementById('selection-error-note');
-      if (warningNote) warningNote.style.display = 'none';
-
-      // Update Order Summary Box
-      const summaryBox = document.getElementById('order-summary-box');
-      const summaryChosen = document.getElementById('summary-chosen-text');
-      const summaryPrice = document.getElementById('summary-price-text');
-      summaryBox.style.display = 'block';
-
-      let chosenLabel = "";
-      let chosenPrice = 0;
-
-      if (optionKey === 'opt1') {
-        chosenLabel = "सिग्नेचर विकल्प 01 (1 Bottle • 15 ML)";
-        chosenPrice = CONFIG.SINGLE_PRICE;
-      } else if (optionKey === 'opt2') {
-        chosenLabel = "सिग्नेचर विकल्प 02 (1 Bottle • 15 ML)";
-        chosenPrice = CONFIG.SINGLE_PRICE;
-      } else if (optionKey === 'both') {
-        chosenLabel = "दोनों सिग्नेचर विकल्प (2 Bottles • 15 ML + 15 ML)";
-        chosenPrice = CONFIG.DOUBLE_PRICE;
-      }
-
-      summaryChosen.textContent = `आपने चुना: ${chosenLabel}`;
-      summaryPrice.textContent = `कुल: ₹${chosenPrice}`;
-
-      // Custom Pixel Event on Selection (Does NOT fire WhatsApp Intent)
-      trackMetaEvent('ProductOptionSelected', 'custom', {
-        selected_option: chosenLabel,
-        price: chosenPrice,
-        currency: CONFIG.PRODUCT_CURRENCY
-      });
-    }
-
-    /* ==================================================
-       12. FINAL WHATSAPP COD CHECKOUT
-       ================================================== */
-    function handleFinalWhatsAppCheckout() {
-      // Must select an option first
-      if (!selectedOrderOption) {
-        const warningNote = document.getElementById('selection-error-note');
-        if (warningNote) {
-          warningNote.style.display = 'block';
-          warningNote.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-          alert("पहले अपना विकल्प चुनें।");
-        }
-        return;
-      }
-
-      let optionName = "";
-      let quantityText = "";
-      let totalPrice = 0;
-
-      if (selectedOrderOption === 'opt1') {
-        optionName = "सिग्नेचर विकल्प 01";
-        quantityText = `1 Bottle — ${CONFIG.PRODUCT_SIZE}`;
-        totalPrice = CONFIG.SINGLE_PRICE;
-      } else if (selectedOrderOption === 'opt2') {
-        optionName = "सिग्नेचर विकल्प 02";
-        quantityText = `1 Bottle — ${CONFIG.PRODUCT_SIZE}`;
-        totalPrice = CONFIG.SINGLE_PRICE;
-      } else if (selectedOrderOption === 'both') {
-        optionName = "दोनों सिग्नेचर विकल्प";
-        quantityText = `2 Bottles — ${CONFIG.PRODUCT_SIZE} + ${CONFIG.PRODUCT_SIZE}`;
-        totalPrice = CONFIG.DOUBLE_PRICE;
-      }
-
-      // Meta Pixel Events
-      const checkoutEventId = trackMetaEvent('InitiateCheckout', 'standard', {
-        content_name: `${customerName} - ${activeAura.nameEnglish} (${optionName})`,
-        content_category: 'Attar',
-        value: totalPrice,
-        currency: CONFIG.PRODUCT_CURRENCY,
-        num_items: selectedOrderOption === 'both' ? 2 : 1
-      });
-
-      trackMetaEvent('WhatsAppCODIntent', 'custom', {
-        customer_name: customerName,
-        aura_profile: activeAura.nameEnglish,
-        selected_option: optionName,
-        price: totalPrice,
-        event_id: checkoutEventId
-      });
-
-      // Construct Exact WhatsApp Prefilled Message with Seller-Friendly Card Print Details
-      const message = 
-`नमस्ते ${CONFIG.BRAND_NAME},
+  const message =
+`नमस्ते AURAFRAG,
 
 मुझे Cash On Delivery पर ऑर्डर करना है।
 
@@ -1689,16 +1871,16 @@ ${optionName}
 ${quantityText}
 
 कुल कीमत:
-₹${totalPrice}
+₹${price}
 
 डिलीवरी पता:
 
 पूरा नाम: ${customerName}
-मोबाइल नंबर: 
-घर / गली / सोसायटी: 
-शहर: 
-राज्य: 
-पिनकोड: 
+मोबाइल नंबर:
+घर / गली / सोसायटी:
+शहर:
+राज्य:
+पिनकोड:
 
 --------------------
 CARD PRINT DETAILS
@@ -1715,10 +1897,16 @@ ${activeAura.traits}
 
 कृपया मेरा COD ऑर्डर कन्फर्म करें।`;
 
-      const encodedUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-      window.open(encodedUrl, '_blank');
-    }
-  </script>
+  const url =
+    `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+  window.open(
+    url,
+    '_blank'
+  );
+}
+
+</script>
 
 </body>
 </html>
