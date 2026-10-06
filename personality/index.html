@@ -8,1720 +8,836 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <script>
 const CONFIG = {
+  BRAND_NAME: "AURAFRAG",
 
-    BRAND_NAME: "AURAFRAG",
+  /* बाद में अपना Pixel ID डालना */
+  META_PIXEL_ID: "YOUR_META_PIXEL_ID_HERE",
 
-    /* यहाँ अपना Meta Pixel ID डालना */
-    META_PIXEL_ID: "YOUR_META_PIXEL_ID_HERE",
+  /* आपका WhatsApp नंबर */
+  WHATSAPP_NUMBER: "919327938950",
 
-    /* आपका WhatsApp नंबर */
-    WHATSAPP_NUMBER: "919327938950",
+  /* Final product image */
+  BOTTLE_IMAGE_URL: "/personality/aurafrag-hero.png",
 
-    /* personality folder में मौजूद files */
-    LOGO_IMAGE_URL: "75235.png",
-
-    /* आपकी नई final lady + attar image */
-    BOTTLE_IMAGE_URL: "/personality/aurafrag-hero.png",
-
-    PRODUCT_SIZE: "15 ML",
-
-    SINGLE_PRICE: 599,
-
-    DOUBLE_PRICE: 799,
-
-    PRODUCT_CURRENCY: "INR"
-
+  PRODUCT_SIZE: "15 ML",
+  SINGLE_PRICE: 599,
+  DOUBLE_PRICE: 799,
+  PRODUCT_CURRENCY: "INR"
 };
 </script>
 
-
-<!-- META PIXEL -->
 <script>
-
-!function(f,b,e,v,n,t,s)
-{
-    if(f.fbq)return;
-
-    n=f.fbq=function()
-    {
-        n.callMethod ?
-        n.callMethod.apply(n,arguments) :
-        n.queue.push(arguments)
-    };
-
-    if(!f._fbq)f._fbq=n;
-
-    n.push=n;
-    n.loaded=!0;
-    n.version='2.0';
-    n.queue=[];
-
-    t=b.createElement(e);
-    t.async=!0;
-    t.src=v;
-
-    s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s);
-
-}
-(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
+!function(f,b,e,v,n,t,s){
+  if(f.fbq)return;
+  n=f.fbq=function(){
+    n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments)
+  };
+  if(!f._fbq)f._fbq=n;
+  n.push=n;
+  n.loaded=!0;
+  n.version='2.0';
+  n.queue=[];
+  t=b.createElement(e);
+  t.async=!0;
+  t.src=v;
+  s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s);
+}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 
 if(
-    CONFIG.META_PIXEL_ID &&
+  CONFIG.META_PIXEL_ID &&
+  CONFIG.META_PIXEL_ID !== "YOUR_META_PIXEL_ID_HERE"
+){
+  fbq('init', CONFIG.META_PIXEL_ID);
+  fbq('track', 'PageView');
+}
+
+function trackMetaEvent(eventName,eventType="custom",params={}){
+  const eventId =
+    "af_" + Date.now() + "_" + Math.floor(Math.random()*100000);
+
+  const payload = {
+    ...params,
+    event_id:eventId
+  };
+
+  if(
+    typeof fbq === "function" &&
     CONFIG.META_PIXEL_ID !== "YOUR_META_PIXEL_ID_HERE"
-){
-
-    fbq(
-        'init',
-        CONFIG.META_PIXEL_ID
-    );
-
-    fbq(
-        'track',
-        'PageView'
-    );
-
-}
-
-
-function trackMetaEvent(
-    eventName,
-    eventType="custom",
-    params={}
-){
-
-    const eventId =
-    "af_" +
-    Date.now() +
-    "_" +
-    Math.floor(
-        Math.random()*100000
-    );
-
-    const payload = {
-        ...params,
-        event_id:eventId
-    };
-
-
-    if(
-        typeof fbq === "function" &&
-        CONFIG.META_PIXEL_ID !==
-        "YOUR_META_PIXEL_ID_HERE"
-    ){
-
-        if(
-            eventType ===
-            "standard"
-        ){
-
-            fbq(
-                "track",
-                eventName,
-                payload
-            );
-
-        }
-        else{
-
-            fbq(
-                "trackCustom",
-                eventName,
-                payload
-            );
-
-        }
-
+  ){
+    if(eventType === "standard"){
+      fbq("track",eventName,payload);
+    } else {
+      fbq("trackCustom",eventName,payload);
     }
+  }
 
-    console.log(
-        "AURAFRAG:",
-        eventName,
-        payload
-    );
-
-    return eventId;
-
+  console.log("AURAFRAG:",eventName,payload);
+  return eventId;
 }
-
 </script>
-
 
 <style>
 
 :root{
-
-    --bg:#07070a;
-
-    --surface:#101017;
-
-    --surface2:#171421;
-
-    --ruby:#ff0055;
-
-    --gold:#d4af37;
-
-    --gold-light:#f7e7b4;
-
-    --white:#ffffff;
-
-    --muted:#cbd5e1;
-
-    --dim:#94a3b8;
-
-    --whatsapp:#25D366;
-
-    --border:
-    rgba(255,255,255,.14);
-
+  --bg:#07070a;
+  --surface:#101017;
+  --surface2:#171421;
+  --ruby:#ff0055;
+  --gold:#d4af37;
+  --gold-light:#f7e7b4;
+  --white:#ffffff;
+  --muted:#cbd5e1;
+  --dim:#94a3b8;
+  --whatsapp:#25D366;
+  --border:rgba(255,255,255,.14);
 }
-
 
 *{
-
-    box-sizing:border-box;
-
-    margin:0;
-
-    padding:0;
-
-    -webkit-tap-highlight-color:
-    transparent;
-
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  -webkit-tap-highlight-color:transparent;
 }
-
 
 body{
-
-    min-height:100vh;
-
-    background:#050507;
-
-    color:white;
-
-    font-family:
-    "Noto Sans Devanagari",
-    sans-serif;
-
-    display:flex;
-
-    justify-content:center;
-
-    overflow-x:hidden;
-
+  min-height:100vh;
+  background:#050507;
+  color:white;
+  font-family:"Noto Sans Devanagari",sans-serif;
+  display:flex;
+  justify-content:center;
+  overflow-x:hidden;
 }
-
 
 .app{
-
-    width:100%;
-
-    max-width:540px;
-
-    min-height:100vh;
-
-    background:
-
-    radial-gradient(
-        circle at 50% 0%,
-        #1a1125 0%,
-        #08080c 60%
-    );
-
-    padding-bottom:45px;
-
+  width:100%;
+  max-width:540px;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 50% 0%,#1a1125 0%,#08080c 60%);
+  padding-bottom:45px;
 }
-
 
 /* HEADER */
 
 .header{
-
-    position:sticky;
-
-    top:0;
-
-    z-index:50;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:10px;
-
-    padding:11px 18px;
-
-    background:
-    rgba(7,7,10,.95);
-
-    border-bottom:
-    1px solid var(--border);
-
-    backdrop-filter:
-    blur(8px);
-
+  position:sticky;
+  top:0;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:13px 18px;
+  background:rgba(7,7,10,.96);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(8px);
 }
-
-
-.logo-small{
-
-    width:40px;
-
-    height:40px;
-
-    aspect-ratio:1/1;
-
-    object-fit:contain;
-
-    object-position:center;
-
-    border-radius:50%;
-
-    background:#120c07;
-
-    padding:2px;
-
-    border:
-    1px solid var(--gold);
-
-}
-
 
 .brand{
-
-    font-family:
-    "Cinzel",
-    serif;
-
-    font-size:19px;
-
-    font-weight:800;
-
-    letter-spacing:.2em;
-
-    color:
-    var(--gold-light);
-
+  font-family:"Cinzel",serif;
+  font-size:22px;
+  font-weight:900;
+  letter-spacing:.26em;
+  background:linear-gradient(135deg,#fff,#f7e7b4,#d4af37);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
-
 
 /* FUNNEL */
 
 .step{
-
-    display:none;
-
-    padding:
-    23px 18px;
-
+  display:none;
+  padding:23px 18px;
 }
-
 
 .step.active{
-
-    display:block;
-
-    animation:
-    fade .25s ease;
-
+  display:block;
+  animation:fade .25s ease;
 }
-
 
 @keyframes fade{
-
-    from{
-        opacity:0;
-        transform:
-        translateY(7px);
-    }
-
-    to{
-        opacity:1;
-        transform:none;
-    }
-
+  from{
+    opacity:0;
+    transform:translateY(7px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
 }
-
 
 /* HERO */
 
 .hero{
-
-    text-align:center;
-
+  text-align:center;
 }
 
-
-.hero-logo-wrap{
-
-    width:92px;
-
-    height:92px;
-
-    margin:
-    4px auto 16px;
-
+.hero-brand-box{
+  width:96px;
+  height:96px;
+  margin:5px auto 17px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle,#2a170b,#0e0905);
+  border:2px solid var(--gold);
+  box-shadow:0 0 28px rgba(212,175,55,.28);
 }
 
-
-.hero-logo{
-
-    width:100%;
-
-    height:100%;
-
-    aspect-ratio:1/1;
-
-    object-fit:contain;
-
-    object-position:center;
-
-    border-radius:50%;
-
-    background:#120c07;
-
-    padding:4px;
-
-    border:
-    2px solid var(--gold);
-
-    box-shadow:
-    0 0 25px
-    rgba(212,175,55,.25);
-
+.hero-monogram{
+  font-family:"Cinzel",serif;
+  font-size:31px;
+  font-weight:900;
+  color:var(--gold-light);
+  letter-spacing:.05em;
 }
-
 
 .badge{
-
-    display:inline-block;
-
-    padding:
-    5px 14px;
-
-    border-radius:
-    30px;
-
-    color:#ff4d89;
-
-    background:
-    rgba(255,0,85,.1);
-
-    border:
-    1px solid
-    rgba(255,0,85,.35);
-
-    font-size:11px;
-
-    font-weight:700;
-
-    letter-spacing:.1em;
-
-    margin-bottom:17px;
-
+  display:inline-block;
+  padding:5px 14px;
+  border-radius:30px;
+  color:#ff4d89;
+  background:rgba(255,0,85,.1);
+  border:1px solid rgba(255,0,85,.35);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.1em;
+  margin-bottom:17px;
 }
-
 
 .hero h1{
-
-    font-size:27px;
-
-    line-height:1.4;
-
-    margin-bottom:13px;
-
+  font-size:27px;
+  line-height:1.4;
+  margin-bottom:13px;
 }
-
 
 .hero h1 span{
-
-    color:#ff2a6d;
-
+  color:#ff2a6d;
 }
-
 
 .hero-text{
-
-    color:
-    var(--muted);
-
-    font-size:15px;
-
-    line-height:1.7;
-
-    margin-bottom:20px;
-
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.7;
+  margin-bottom:20px;
 }
-
 
 .chips{
-
-    display:flex;
-
-    justify-content:center;
-
-    flex-wrap:wrap;
-
-    gap:7px;
-
-    margin-bottom:23px;
-
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-bottom:23px;
 }
-
 
 .chip{
-
-    background:
-    #111119;
-
-    border:
-    1px solid var(--border);
-
-    border-radius:
-    30px;
-
-    padding:
-    5px 11px;
-
-    font-size:12px;
-
+  background:#111119;
+  border:1px solid var(--border);
+  border-radius:30px;
+  padding:5px 11px;
+  font-size:12px;
 }
-
 
 .chip.gold{
-
-    color:
-    var(--gold-light);
-
-    border-color:
-    rgba(212,175,55,.4);
-
+  color:var(--gold-light);
+  border-color:rgba(212,175,55,.4);
 }
-
 
 .main-btn{
-
-    width:100%;
-
-    border:0;
-
-    cursor:pointer;
-
-    padding:
-    17px 16px;
-
-    border-radius:
-    15px;
-
-    font-family:inherit;
-
-    font-size:18px;
-
-    font-weight:800;
-
-    color:white;
-
-    background:
-
-    linear-gradient(
-        135deg,
-        #ff0055,
-        #b40b47
-    );
-
-    box-shadow:
-    0 5px 25px
-    rgba(255,0,85,.3);
-
+  width:100%;
+  border:0;
+  cursor:pointer;
+  padding:17px 16px;
+  border-radius:15px;
+  font-family:inherit;
+  font-size:18px;
+  font-weight:800;
+  color:white;
+  background:
+    linear-gradient(135deg,#ff0055,#b40b47);
+  box-shadow:0 5px 25px rgba(255,0,85,.3);
 }
-
 
 .small-note{
-
-    color:
-    var(--dim);
-
-    font-size:12px;
-
-    text-align:center;
-
-    margin-top:9px;
-
+  color:var(--dim);
+  font-size:12px;
+  text-align:center;
+  margin-top:9px;
 }
-
 
 /* TRUST */
 
 .trust-grid{
-
-    display:grid;
-
-    grid-template-columns:
-    1fr 1fr;
-
-    gap:10px;
-
-    margin-top:28px;
-
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:28px;
 }
-
 
 .trust{
-
-    padding:12px;
-
-    background:
-    var(--surface);
-
-    border:
-    1px solid var(--border);
-
-    border-radius:
-    10px;
-
+  padding:12px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
 }
-
 
 .trust-icon{
-
-    font-size:18px;
-
-    margin-bottom:4px;
-
+  font-size:18px;
+  margin-bottom:4px;
 }
-
 
 .trust-title{
-
-    font-size:13px;
-
-    font-weight:700;
-
+  font-size:13px;
+  font-weight:700;
 }
-
 
 .trust-desc{
-
-    font-size:11px;
-
-    color:
-    var(--dim);
-
+  font-size:11px;
+  color:var(--dim);
 }
-
 
 /* QUIZ */
 
 .quiz-top{
-
-    display:flex;
-
-    justify-content:
-    space-between;
-
-    align-items:center;
-
-    color:
-    var(--gold-light);
-
-    font-size:12px;
-
-    font-weight:700;
-
-    margin-bottom:8px;
-
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  color:var(--gold-light);
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:8px;
 }
-
 
 .progress{
-
-    height:4px;
-
-    background:
-    rgba(255,255,255,.1);
-
-    border-radius:
-    10px;
-
-    overflow:hidden;
-
-    margin-bottom:22px;
-
+  height:4px;
+  background:rgba(255,255,255,.1);
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:22px;
 }
-
 
 .progress-bar{
-
-    height:100%;
-
-    width:33%;
-
-    background:
-
-    linear-gradient(
-        90deg,
-        var(--ruby),
-        var(--gold)
-    );
-
-    transition:
-    width .2s;
-
+  height:100%;
+  width:33%;
+  background:linear-gradient(90deg,var(--ruby),var(--gold));
+  transition:width .2s;
 }
-
 
 .quiz-title{
-
-    font-size:22px;
-
-    line-height:1.45;
-
-    margin-bottom:20px;
-
+  font-size:22px;
+  line-height:1.45;
+  margin-bottom:20px;
 }
-
 
 .quiz-options{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:12px;
-
+  display:flex;
+  flex-direction:column;
+  gap:12px;
 }
-
 
 .quiz-option{
-
-    cursor:pointer;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:13px;
-
-    padding:
-    16px;
-
-    background:
-    var(--surface);
-
-    border:
-    1px solid var(--border);
-
-    border-radius:
-    14px;
-
-    font-size:15px;
-
-    font-weight:700;
-
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:16px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  font-size:15px;
+  font-weight:700;
 }
-
 
 .quiz-option:active{
-
-    transform:
-    scale(.985);
-
-    border-color:
-    var(--ruby);
-
+  transform:scale(.985);
+  border-color:var(--ruby);
 }
-
 
 .dot{
-
-    width:18px;
-
-    height:18px;
-
-    border-radius:50%;
-
-    border:
-    2px solid
-    rgba(255,255,255,.35);
-
-    flex-shrink:0;
-
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,.35);
+  flex-shrink:0;
 }
-
 
 /* NAME */
 
 .name-input{
-
-    width:100%;
-
-    margin:
-    18px 0;
-
-    padding:
-    16px;
-
-    background:
-    #111118;
-
-    color:white;
-
-    border:
-    2px solid
-    rgba(212,175,55,.5);
-
-    border-radius:
-    14px;
-
-    font-family:inherit;
-
-    font-size:18px;
-
-    outline:none;
-
+  width:100%;
+  margin:18px 0;
+  padding:16px;
+  background:#111118;
+  color:white;
+  border:2px solid rgba(212,175,55,.5);
+  border-radius:14px;
+  font-family:inherit;
+  font-size:18px;
+  outline:none;
 }
-
 
 .name-input:focus{
-
-    border-color:
-    var(--ruby);
-
+  border-color:var(--ruby);
 }
-
 
 /* LOADER */
 
 .loader-box{
-
-    text-align:center;
-
-    padding:
-    65px 10px;
-
+  text-align:center;
+  padding:65px 10px;
 }
-
 
 .spinner{
-
-    width:60px;
-
-    height:60px;
-
-    margin:
-    0 auto 22px;
-
-    border-radius:50%;
-
-    border:
-    3px solid
-    rgba(255,0,85,.2);
-
-    border-top-color:
-    var(--ruby);
-
-    border-right-color:
-    var(--gold);
-
-    animation:
-    spin .8s linear infinite;
-
+  width:60px;
+  height:60px;
+  margin:0 auto 22px;
+  border-radius:50%;
+  border:3px solid rgba(255,0,85,.2);
+  border-top-color:var(--ruby);
+  border-right-color:var(--gold);
+  animation:spin .8s linear infinite;
 }
-
 
 @keyframes spin{
-
-    to{
-        transform:
-        rotate(360deg);
-    }
-
+  to{
+    transform:rotate(360deg);
+  }
 }
-
 
 /* RESULT */
 
 .result-box{
-
-    padding:
-    20px 17px;
-
-    border-radius:
-    19px;
-
-    background:
-
-    linear-gradient(
-        180deg,
-        #15111d,
-        #0e0d13
-    );
-
-    border:
-    1px solid var(--border);
-
-    text-align:center;
-
-    margin-bottom:20px;
-
+  padding:20px 17px;
+  border-radius:19px;
+  background:
+    linear-gradient(180deg,#15111d,#0e0d13);
+  border:1px solid var(--border);
+  text-align:center;
+  margin-bottom:20px;
 }
-
 
 .aura-badge{
-
-    display:inline-block;
-
-    padding:
-    4px 13px;
-
-    border-radius:
-    20px;
-
-    margin-bottom:12px;
-
-    font-size:11px;
-
-    font-weight:800;
-
+  display:inline-block;
+  padding:4px 13px;
+  border-radius:20px;
+  margin-bottom:12px;
+  font-size:11px;
+  font-weight:800;
 }
-
 
 .result-title{
-
-    font-size:21px;
-
-    line-height:1.4;
-
-    margin-bottom:12px;
-
+  font-size:21px;
+  line-height:1.4;
+  margin-bottom:12px;
 }
-
 
 .result-copy{
-
-    background:
-    rgba(0,0,0,.35);
-
-    padding:
-    12px;
-
-    border-radius:
-    9px;
-
-    text-align:left;
-
-    color:
-    var(--muted);
-
-    font-size:14px;
-
+  background:rgba(0,0,0,.35);
+  padding:12px;
+  border-radius:9px;
+  text-align:left;
+  color:var(--muted);
+  font-size:14px;
 }
 
-
-/* PHYSICAL CARD NOTICE */
+/* CARD NOTICE */
 
 .card-notice{
-
-    text-align:center;
-
-    padding:
-    12px;
-
-    margin-bottom:14px;
-
-    border-radius:
-    9px;
-
-    color:
-    var(--gold-light);
-
-    background:
-    rgba(212,175,55,.08);
-
-    border:
-    1px solid
-    rgba(212,175,55,.35);
-
+  text-align:center;
+  padding:12px;
+  margin-bottom:14px;
+  border-radius:9px;
+  color:var(--gold-light);
+  background:rgba(212,175,55,.08);
+  border:1px solid rgba(212,175,55,.35);
 }
-
 
 .card-notice strong{
-
-    display:block;
-
-    font-size:14px;
-
+  display:block;
+  font-size:14px;
 }
-
 
 .card-notice span{
-
-    color:white;
-
-    font-size:12px;
-
+  color:white;
+  font-size:12px;
 }
-
 
 /* PERSONALIZED CARD */
 
 .personal-card{
-
-    aspect-ratio:
-    100/74;
-
-    min-height:290px;
-
-    padding:7px;
-
-    margin-bottom:25px;
-
-    border-radius:13px;
-
-    border:
-    1px solid
-    rgba(212,175,55,.75);
-
-    background:
-
-    radial-gradient(
-        circle at 50% 15%,
-        #18120d,
-        #080706 80%
-    );
-
-    box-shadow:
-    0 10px 30px
-    rgba(0,0,0,.8);
-
+  aspect-ratio:100/74;
+  min-height:290px;
+  padding:7px;
+  margin-bottom:25px;
+  border-radius:13px;
+  border:1px solid rgba(212,175,55,.75);
+  background:
+    radial-gradient(circle at 50% 15%,#18120d,#080706 80%);
+  box-shadow:0 10px 30px rgba(0,0,0,.8);
 }
-
 
 .personal-card-inner{
-
-    height:100%;
-
-    border:
-    1px solid
-    rgba(212,175,55,.35);
-
-    border-radius:9px;
-
-    padding:
-    14px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:
-    space-between;
-
+  height:100%;
+  border:1px solid rgba(212,175,55,.35);
+  border-radius:9px;
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
 }
-
 
 .card-top{
-
-    display:flex;
-
-    justify-content:
-    space-between;
-
-    align-items:center;
-
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
-
 
 .card-brand{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
+  display:flex;
+  align-items:center;
+  gap:8px;
 }
 
-
-.card-logo{
-
-    width:34px;
-
-    height:34px;
-
-    aspect-ratio:1/1;
-
-    border-radius:50%;
-
-    object-fit:contain;
-
-    object-position:center;
-
-    background:#120c07;
-
-    padding:1px;
-
-    border:
-    1px solid var(--gold);
-
-    flex-shrink:0;
-
+.card-monogram{
+  width:34px;
+  height:34px;
+  flex-shrink:0;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#160d07;
+  border:1px solid var(--gold);
+  color:var(--gold-light);
+  font-family:"Cinzel",serif;
+  font-size:13px;
+  font-weight:900;
 }
-
 
 .card-brand-name{
-
-    font-family:
-    "Cinzel",
-    serif;
-
-    color:
-    var(--gold-light);
-
-    letter-spacing:.13em;
-
-    font-weight:800;
-
-    font-size:13px;
-
+  font-family:"Cinzel",serif;
+  color:var(--gold-light);
+  letter-spacing:.13em;
+  font-weight:800;
+  font-size:13px;
 }
-
 
 .card-brand-sub{
-
-    font-size:8.5px;
-
-    color:#aaa29a;
-
+  font-size:8.5px;
+  color:#aaa29a;
 }
-
 
 .private-pill{
-
-    color:
-    var(--gold-light);
-
-    border:
-    1px solid
-    rgba(212,175,55,.5);
-
-    border-radius:
-    20px;
-
-    padding:
-    3px 8px;
-
-    font-size:9px;
-
+  color:var(--gold-light);
+  border:1px solid rgba(212,175,55,.5);
+  border-radius:20px;
+  padding:3px 8px;
+  font-size:9px;
 }
-
 
 .customer-card-name{
-
-    text-align:center;
-
-    font-family:
-    "Cinzel",
-    serif;
-
-    font-weight:800;
-
-    font-size:24px;
-
-    letter-spacing:.08em;
-
-    text-transform:
-    uppercase;
-
-    margin-top:7px;
-
+  text-align:center;
+  font-family:"Cinzel",serif;
+  font-weight:800;
+  font-size:24px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-top:7px;
 }
-
 
 .gold-line{
-
-    width:80%;
-
-    height:1px;
-
-    margin:
-    7px auto;
-
-    background:
-
-    linear-gradient(
-        90deg,
-        transparent,
-        var(--gold),
-        transparent
-    );
-
+  width:80%;
+  height:1px;
+  margin:7px auto;
+  background:
+    linear-gradient(90deg,transparent,var(--gold),transparent);
 }
-
 
 .card-content{
-
-    display:grid;
-
-    grid-template-columns:
-    1fr 1.35fr;
-
-    gap:12px;
-
-    text-align:left;
-
+  display:grid;
+  grid-template-columns:1fr 1.35fr;
+  gap:12px;
+  text-align:left;
 }
-
 
 .card-left{
-
-    border-right:
-    1px solid
-    rgba(212,175,55,.2);
-
-    padding-right:8px;
-
+  border-right:1px solid rgba(212,175,55,.2);
+  padding-right:8px;
 }
-
 
 .card-label{
-
-    font-size:10px;
-
-    color:
-    var(--gold);
-
-    font-weight:800;
-
-    margin-bottom:3px;
-
+  font-size:10px;
+  color:var(--gold);
+  font-weight:800;
+  margin-bottom:3px;
 }
-
 
 .card-traits{
-
-    font-size:12px;
-
-    font-weight:700;
-
-    line-height:1.45;
-
+  font-size:12px;
+  font-weight:700;
+  line-height:1.45;
 }
-
 
 .card-how{
-
-    font-size:9.5px;
-
-    color:#e5e7eb;
-
-    line-height:1.45;
-
+  font-size:9.5px;
+  color:#e5e7eb;
+  line-height:1.45;
 }
-
 
 .card-safety{
-
-    text-align:center;
-
-    color:#8d8478;
-
-    font-size:8px;
-
-    border-top:
-    1px solid
-    rgba(212,175,55,.15);
-
-    padding-top:5px;
-
+  text-align:center;
+  color:#8d8478;
+  font-size:8px;
+  border-top:1px solid rgba(212,175,55,.15);
+  padding-top:5px;
 }
-
 
 /* PRODUCT IMAGE */
 
 .product-box{
-
-    padding:15px;
-
-    margin-bottom:25px;
-
-    border:
-    1px solid var(--border);
-
-    border-radius:
-    19px;
-
-    background:
-    #0f0f16;
-
-    text-align:center;
-
+  padding:15px;
+  margin-bottom:25px;
+  border:1px solid var(--border);
+  border-radius:19px;
+  background:#0f0f16;
+  text-align:center;
 }
-
 
 .product-image-wrap{
-
-    width:100%;
-
-    border-radius:
-    14px;
-
-    overflow:hidden;
-
-    background:#09090e;
-
-    margin-bottom:12px;
-
+  width:100%;
+  border-radius:14px;
+  overflow:hidden;
+  background:#09090e;
+  margin-bottom:12px;
 }
-
 
 .product-image{
-
-    width:100%;
-
-    height:auto;
-
-    display:block;
-
-    object-fit:contain;
-
-    object-position:center;
-
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit:contain;
+  object-position:center;
 }
-
 
 .product-caption{
-
-    font-size:14px;
-
-    font-weight:700;
-
+  font-size:14px;
+  font-weight:700;
 }
-
 
 .product-sub{
-
-    color:
-    var(--gold-light);
-
-    font-size:12px;
-
-    margin-top:4px;
-
+  color:var(--gold-light);
+  font-size:12px;
+  margin-top:4px;
 }
-
 
 .image-error{
-
-    height:260px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    flex-direction:column;
-
-    color:
-    var(--muted);
-
+  height:260px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  color:var(--muted);
 }
-
 
 /* ORDER */
 
 .order-heading{
-
-    font-size:21px;
-
-    margin-bottom:4px;
-
+  font-size:21px;
+  margin-bottom:4px;
 }
-
 
 .order-sub{
-
-    font-size:13px;
-
-    color:
-    var(--muted);
-
-    margin-bottom:16px;
-
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:16px;
 }
-
 
 .order-list{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:12px;
-
+  display:flex;
+  flex-direction:column;
+  gap:12px;
 }
-
 
 .order-option{
-
-    cursor:pointer;
-
-    padding:
-    16px;
-
-    display:flex;
-
-    gap:12px;
-
-    border-radius:
-    14px;
-
-    border:
-    2px solid
-    rgba(255,255,255,.12);
-
-    background:
-    #11111a;
-
-    position:relative;
-
+  cursor:pointer;
+  padding:16px;
+  display:flex;
+  gap:12px;
+  border-radius:14px;
+  border:2px solid rgba(255,255,255,.12);
+  background:#11111a;
+  position:relative;
 }
-
 
 .order-option.selected{
-
-    border-color:
-    var(--whatsapp);
-
-    box-shadow:
-    0 0 20px
-    rgba(37,211,102,.2);
-
+  border-color:var(--whatsapp);
+  box-shadow:0 0 20px rgba(37,211,102,.2);
 }
-
 
 .order-option.selected.dual{
-
-    border-color:
-    var(--gold);
-
+  border-color:var(--gold);
 }
-
 
 .radio{
-
-    width:22px;
-
-    height:22px;
-
-    border-radius:50%;
-
-    border:
-    2px solid
-    rgba(255,255,255,.35);
-
-    flex-shrink:0;
-
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,.35);
+  flex-shrink:0;
 }
 
-
-.order-option.selected
-.radio{
-
-    background:
-    var(--whatsapp);
-
-    border-color:
-    var(--whatsapp);
-
+.order-option.selected .radio{
+  background:var(--whatsapp);
+  border-color:var(--whatsapp);
 }
-
 
 .order-info{
-
-    flex:1;
-
+  flex:1;
 }
-
 
 .order-top{
-
-    display:flex;
-
-    justify-content:
-    space-between;
-
-    gap:10px;
-
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
 }
-
 
 .order-name{
-
-    font-weight:800;
-
-    font-size:16px;
-
+  font-weight:800;
+  font-size:16px;
 }
-
 
 .order-price{
-
-    color:
-    var(--gold-light);
-
-    font-family:
-    "Cinzel",
-    serif;
-
-    font-weight:800;
-
-    font-size:20px;
-
+  color:var(--gold-light);
+  font-family:"Cinzel",serif;
+  font-weight:800;
+  font-size:20px;
 }
-
 
 .order-size{
-
-    color:
-    var(--dim);
-
-    font-size:11px;
-
+  color:var(--dim);
+  font-size:11px;
 }
-
 
 .order-desc{
-
-    color:
-    var(--muted);
-
-    font-size:11.5px;
-
-    margin-top:5px;
-
+  color:var(--muted);
+  font-size:11.5px;
+  margin-top:5px;
 }
-
 
 .best{
-
-    position:absolute;
-
-    top:-10px;
-
-    right:12px;
-
-    border-radius:
-    20px;
-
-    background:
-    linear-gradient(
-        90deg,
-        var(--gold),
-        #f59e0b
-    );
-
-    color:#000;
-
-    padding:
-    2px 9px;
-
-    font-size:10px;
-
-    font-weight:800;
-
+  position:absolute;
+  top:-10px;
+  right:12px;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--gold),#f59e0b);
+  color:#000;
+  padding:2px 9px;
+  font-size:10px;
+  font-weight:800;
 }
-
 
 .warning{
-
-    display:none;
-
-    text-align:center;
-
-    padding:
-    10px;
-
-    margin:
-    13px 0;
-
-    border-radius:
-    9px;
-
-    color:#ffc2d4;
-
-    background:
-    rgba(255,0,85,.12);
-
-    border:
-    1px solid
-    var(--ruby);
-
-    font-size:13px;
-
-    font-weight:700;
-
+  display:none;
+  text-align:center;
+  padding:10px;
+  margin:13px 0;
+  border-radius:9px;
+  color:#ffc2d4;
+  background:rgba(255,0,85,.12);
+  border:1px solid var(--ruby);
+  font-size:13px;
+  font-weight:700;
 }
-
 
 .summary{
-
-    display:none;
-
-    margin:
-    15px 0;
-
-    padding:
-    12px;
-
-    border-radius:
-    9px;
-
-    background:
-    rgba(0,0,0,.35);
-
-    border:
-    1px dashed
-    rgba(255,255,255,.2);
-
+  display:none;
+  margin:15px 0;
+  padding:12px;
+  border-radius:9px;
+  background:rgba(0,0,0,.35);
+  border:1px dashed rgba(255,255,255,.2);
 }
-
 
 .summary-price{
-
-    color:
-    var(--gold-light);
-
-    font-weight:800;
-
+  color:var(--gold-light);
+  font-weight:800;
 }
-
 
 .cod-note{
-
-    text-align:center;
-
-    font-size:13px;
-
-    margin:
-    15px 0 9px;
-
+  text-align:center;
+  font-size:13px;
+  margin:15px 0 9px;
 }
-
 
 .whatsapp-btn{
-
-    width:100%;
-
-    border:0;
-
-    border-radius:
-    14px;
-
-    cursor:pointer;
-
-    padding:
-    18px 14px;
-
-    font-family:inherit;
-
-    color:white;
-
-    font-size:18px;
-
-    font-weight:800;
-
-    background:
-
-    linear-gradient(
-        135deg,
-        #25D366,
-        #159447
-    );
-
-    box-shadow:
-    0 5px 25px
-    rgba(37,211,102,.3);
-
+  width:100%;
+  border:0;
+  border-radius:14px;
+  cursor:pointer;
+  padding:18px 14px;
+  font-family:inherit;
+  color:white;
+  font-size:18px;
+  font-weight:800;
+  background:
+    linear-gradient(135deg,#25D366,#159447);
+  box-shadow:0 5px 25px rgba(37,211,102,.3);
 }
-
 
 .whatsapp-small{
-
-    text-align:center;
-
-    color:
-    var(--dim);
-
-    font-size:12px;
-
-    margin-top:7px;
-
+  text-align:center;
+  color:var(--dim);
+  font-size:12px;
+  margin-top:7px;
 }
-
 
 .footer{
-
-    text-align:center;
-
-    font-size:10.5px;
-
-    color:
-    var(--dim);
-
-    margin-top:23px;
-
-    line-height:1.6;
-
+  text-align:center;
+  font-size:10.5px;
+  color:var(--dim);
+  margin-top:23px;
+  line-height:1.6;
 }
-
-
-/* SMALL SCREEN */
 
 @media(max-width:390px){
 
-    .card-brand-name{
-        font-size:11px;
-    }
+  .brand{
+    font-size:19px;
+  }
 
-    .private-pill{
-        font-size:8px;
-    }
+  .card-brand-name{
+    font-size:11px;
+  }
 
-    .card-brand-sub{
-        font-size:7px;
-    }
+  .private-pill{
+    font-size:8px;
+  }
 
-    .customer-card-name{
-        font-size:21px;
-    }
+  .card-brand-sub{
+    font-size:7px;
+  }
+
+  .customer-card-name{
+    font-size:21px;
+  }
 
 }
 
 </style>
 </head>
 
-
 <body>
 
 <div class="app">
 
-
 <header class="header">
-
-<img
-id="headerLogo"
-class="logo-small"
-alt="AURAFRAG">
 
 <div class="brand">
 AURAFRAG
@@ -1729,30 +845,23 @@ AURAFRAG
 
 </header>
 
-
-
 <!-- HERO -->
 
-<section
-id="hero"
-class="step active">
+<section id="hero" class="step active">
 
 <div class="hero">
 
-<div class="hero-logo-wrap">
+<div class="hero-brand-box">
 
-<img
-id="heroLogo"
-class="hero-logo"
-alt="AURAFRAG">
-
+<div class="hero-monogram">
+AF
 </div>
 
+</div>
 
 <div class="badge">
 PERSONALIZED ATTAR EXPERIENCE
 </div>
-
 
 <h1>
 
@@ -1766,13 +875,11 @@ PERSONALIZED ATTAR EXPERIENCE
 
 </h1>
 
-
 <p class="hero-text">
 
 कुछ सवालों के जवाब दीजिए और जानिए आपकी मौजूदगी के लिए किस तरह की खुशबू सबसे बेहतर बैठती है।
 
 </p>
-
 
 <div class="chips">
 
@@ -1794,7 +901,6 @@ COD उपलब्ध
 
 </div>
 
-
 <button
 class="main-btn"
 onclick="startQuiz()">
@@ -1803,7 +909,6 @@ onclick="startQuiz()">
 
 </button>
 
-
 <div class="small-note">
 
 लगभग 30 सेकंड का व्यक्तित्व क्विज़ • कोई अग्रिम भुगतान नहीं
@@ -1811,8 +916,6 @@ onclick="startQuiz()">
 </div>
 
 </div>
-
-
 
 <div class="trust-grid">
 
@@ -1832,7 +935,6 @@ onclick="startQuiz()">
 
 </div>
 
-
 <div class="trust">
 
 <div class="trust-icon">
@@ -1849,7 +951,6 @@ onclick="startQuiz()">
 
 </div>
 
-
 <div class="trust">
 
 <div class="trust-icon">
@@ -1865,7 +966,6 @@ Alcohol Free
 </div>
 
 </div>
-
 
 <div class="trust">
 
@@ -1887,13 +987,9 @@ Cash On Delivery
 
 </section>
 
-
-
 <!-- QUIZ -->
 
-<section
-id="quiz"
-class="step">
+<section id="quiz" class="step">
 
 <div class="quiz-top">
 
@@ -1907,7 +1003,6 @@ AURAFRAG PROFILE
 
 </div>
 
-
 <div class="progress">
 
 <div
@@ -1917,20 +1012,14 @@ class="progress-bar">
 
 </div>
 
-
 <div id="quizArea">
 </div>
 
 </section>
 
-
-
 <!-- NAME -->
 
-<section
-id="nameStep"
-class="step">
-
+<section id="nameStep" class="step">
 
 <div class="quiz-top">
 
@@ -1944,13 +1033,11 @@ PERSONALIZATION
 
 </div>
 
-
 <h2 class="quiz-title">
 
 अब आपकी खुशबू को आपकी पहचान देते हैं।
 
 </h2>
-
 
 <p
 style="
@@ -1963,14 +1050,12 @@ line-height:1.7;
 
 </p>
 
-
 <input
 id="nameInput"
 class="name-input"
 type="text"
 placeholder="अपना नाम लिखिए"
 maxlength="25">
-
 
 <button
 class="main-btn"
@@ -1982,18 +1067,13 @@ onclick="submitName()">
 
 </section>
 
-
-
 <!-- LOADER -->
 
-<section
-id="loaderStep"
-class="step">
+<section id="loaderStep" class="step">
 
 <div class="loader-box">
 
-<div class="spinner">
-</div>
+<div class="spinner"></div>
 
 <h3
 style="
@@ -2004,7 +1084,6 @@ margin-bottom:6px;
 आपकी प्रोफ़ाइल तैयार हो रही है...
 
 </h3>
-
 
 <p
 style="
@@ -2020,14 +1099,9 @@ font-size:14px;
 
 </section>
 
-
-
 <!-- RESULT -->
 
-<section
-id="resultStep"
-class="step">
-
+<section id="resultStep" class="step">
 
 <div
 id="resultBox"
@@ -2038,12 +1112,10 @@ id="auraBadge"
 class="aura-badge">
 </div>
 
-
 <h2
 id="resultTitle"
 class="result-title">
 </h2>
-
 
 <div
 id="resultCopy"
@@ -2051,8 +1123,6 @@ class="result-copy">
 </div>
 
 </div>
-
-
 
 <!-- CARD NOTICE -->
 
@@ -2068,25 +1138,19 @@ class="result-copy">
 
 </div>
 
-
-
 <!-- PERSONAL CARD -->
 
 <div class="personal-card">
 
 <div class="personal-card-inner">
 
-
 <div class="card-top">
-
 
 <div class="card-brand">
 
-<img
-id="cardLogo"
-class="card-logo"
-alt="AURAFRAG">
-
+<div class="card-monogram">
+AF
+</div>
 
 <div>
 
@@ -2102,14 +1166,11 @@ PREMIUM ATTAR • खास आपके लिए
 
 </div>
 
-
 <div class="private-pill">
 निजी सुगंध कार्ड
 </div>
 
 </div>
-
-
 
 <div>
 
@@ -2121,15 +1182,11 @@ YOUR NAME
 
 </div>
 
-<div class="gold-line">
-</div>
+<div class="gold-line"></div>
 
 </div>
-
-
 
 <div class="card-content">
-
 
 <div class="card-left">
 
@@ -2143,8 +1200,6 @@ class="card-traits">
 </div>
 
 </div>
-
-
 
 <div>
 
@@ -2160,10 +1215,7 @@ class="card-traits">
 
 </div>
 
-
 </div>
-
-
 
 <div class="card-safety">
 
@@ -2171,14 +1223,11 @@ class="card-traits">
 
 </div>
 
-
 </div>
 
 </div>
 
-
-
-<!-- REAL PRODUCT IMAGE -->
+<!-- PRODUCT IMAGE -->
 
 <div class="product-box">
 
@@ -2194,13 +1243,11 @@ alt="AURAFRAG Premium Attar">
 
 </div>
 
-
 <div class="product-caption">
 
 आपके ऑर्डर में यही AURAFRAG अत्तर बोतल भेजी जाएगी।
 
 </div>
-
 
 <div class="product-sub">
 
@@ -2210,9 +1257,7 @@ alt="AURAFRAG Premium Attar">
 
 </div>
 
-
-
-<!-- OPTIONS -->
+<!-- ORDER -->
 
 <h3 class="order-heading">
 
@@ -2220,14 +1265,11 @@ alt="AURAFRAG Premium Attar">
 
 </h3>
 
-
 <div class="order-sub">
 
-नीचे से कोई एक विकल्प चुनें। विकल्प चुनने से WhatsApp नहीं खुलेगा।
+नीचे से कोई एक विकल्प चुनें।
 
 </div>
-
-
 
 <div
 id="selectionWarning"
@@ -2237,25 +1279,18 @@ class="warning">
 
 </div>
 
-
-
 <div class="order-list">
 
-
-<!-- OPTION 1 -->
+<!-- 1 -->
 
 <div
 id="option1"
 class="order-option"
 onclick="selectOrder('opt1')">
 
-
-<div class="radio">
-</div>
-
+<div class="radio"></div>
 
 <div class="order-info">
-
 
 <div class="order-top">
 
@@ -2269,11 +1304,9 @@ onclick="selectOrder('opt1')">
 
 </div>
 
-
 <div class="order-size">
 1 Bottle • 15 ML
 </div>
-
 
 <div class="order-desc">
 
@@ -2281,27 +1314,20 @@ onclick="selectOrder('opt1')">
 
 </div>
 
-
 </div>
 
 </div>
 
-
-
-<!-- OPTION 2 -->
+<!-- 2 -->
 
 <div
 id="option2"
 class="order-option"
 onclick="selectOrder('opt2')">
 
-
-<div class="radio">
-</div>
-
+<div class="radio"></div>
 
 <div class="order-info">
-
 
 <div class="order-top">
 
@@ -2315,11 +1341,9 @@ onclick="selectOrder('opt2')">
 
 </div>
 
-
 <div class="order-size">
 1 Bottle • 15 ML
 </div>
-
 
 <div class="order-desc">
 
@@ -2327,12 +1351,9 @@ onclick="selectOrder('opt2')">
 
 </div>
 
-
 </div>
 
 </div>
-
-
 
 <!-- BOTH -->
 
@@ -2341,18 +1362,13 @@ id="optionBoth"
 class="order-option dual"
 onclick="selectOrder('both')">
 
-
 <div class="best">
 बेस्ट वैल्यू
 </div>
 
-
-<div class="radio">
-</div>
-
+<div class="radio"></div>
 
 <div class="order-info">
-
 
 <div class="order-top">
 
@@ -2366,11 +1382,9 @@ onclick="selectOrder('both')">
 
 </div>
 
-
 <div class="order-size">
 2 Bottles • 15 ML + 15 ML
 </div>
-
 
 <div class="order-desc">
 
@@ -2378,24 +1392,17 @@ onclick="selectOrder('both')">
 
 </div>
 
-
 </div>
 
 </div>
 
-
 </div>
-
-
-
-<!-- SUMMARY -->
 
 <div
 id="summary"
 class="summary">
 
-<div id="summaryOption">
-</div>
+<div id="summaryOption"></div>
 
 <div
 id="summaryPrice"
@@ -2404,24 +1411,19 @@ class="summary-price">
 
 </div>
 
-
-
 <div class="cod-note">
 
 अपना विकल्प चुनें। भुगतान डिलीवरी के समय करें।
 
 </div>
 
-
-
 <button
 class="whatsapp-btn"
 onclick="checkoutWhatsApp()">
 
-☏ WhatsApp पर COD ऑर्डर कन्फर्म करें
+WhatsApp पर COD ऑर्डर कन्फर्म करें
 
 </button>
-
 
 <div class="whatsapp-small">
 
@@ -2429,11 +1431,9 @@ Cash on Delivery • Free Home Delivery
 
 </div>
 
-
-
 <div class="footer">
 
-ऑरा प्रोफ़ाइल आपकी पसंद और व्यक्तित्व पर आधारित एक रचनात्मक अनुभव है।
+ऑरा प्रोफ़ाइल आपकी पसंद और व्यक्तित्व पर आधारित एक रचनात्मक अनुभव है.
 
 <br>
 
@@ -2441,301 +1441,110 @@ Cash on Delivery • Free Home Delivery
 
 </div>
 
-
 </section>
 
 </div>
 
-
-
 <script>
 
-
-/* ==========================
-   QUIZ DATA
-========================== */
-
+/* QUIZ */
 
 const QUIZ = [
 
 {
+  question:
+  "नई जगह पर लोग आपको किस तरह याद रखें, यह आप क्या चाहेंगे?",
 
-question:
-"नई जगह पर लोग आपको किस तरह याद रखें, यह आप क्या चाहेंगे?",
-
-options:[
-
-{
-text:
-"शांत लेकिन असरदार",
-aura:"silver"
+  options:[
+    {text:"शांत लेकिन असरदार",aura:"silver"},
+    {text:"सहज और अपनापन भरा",aura:"ruby"},
+    {text:"रहस्यमय और अलग",aura:"black"},
+    {text:"शाही और आत्मविश्वासी",aura:"golden"}
+  ]
 },
 
 {
-text:
-"सहज और अपनापन भरा",
-aura:"ruby"
+  question:
+  "जब आप बिल्कुल अपने जैसे होते हैं, तब आपकी पहचान किसके सबसे करीब होती है?",
+
+  options:[
+    {text:"कम बोलना, लेकिन साफ असर छोड़ना",aura:"silver"},
+    {text:"लोगों से जल्दी घुल-मिल जाना",aura:"ruby"},
+    {text:"अपनी दुनिया में रहना और अलग दिखना",aura:"black"},
+    {text:"जहाँ रहूँ वहाँ confidence दिखना",aura:"golden"}
+  ]
 },
 
 {
-text:
-"रहस्यमय और अलग",
-aura:"black"
-},
+  question:
+  "आपकी खुशबू आपके बारे में बिना बोले क्या कहे?",
 
-{
-text:
-"शाही और आत्मविश्वासी",
-aura:"golden"
-}
-
-]
-
-},
-
-
-{
-
-question:
-"जब आप बिल्कुल अपने जैसे होते हैं, तब आपकी पहचान किसके सबसे करीब होती है?",
-
-options:[
-
-{
-text:
-"कम बोलना, लेकिन साफ असर छोड़ना",
-aura:"silver"
-},
-
-{
-text:
-"लोगों से जल्दी घुल-मिल जाना",
-aura:"ruby"
-},
-
-{
-text:
-"अपनी दुनिया में रहना और अलग दिखना",
-aura:"black"
-},
-
-{
-text:
-"जहाँ रहूँ वहाँ confidence दिखना",
-aura:"golden"
-}
-
-]
-
-},
-
-
-{
-
-question:
-"आपकी खुशबू आपके बारे में बिना बोले क्या कहे?",
-
-options:[
-
-{
-text:
-"यह व्यक्ति सलीकेदार है",
-aura:"golden"
-},
-
-{
-text:
-"इसमें कुछ अलग है",
-aura:"black"
-},
-
-{
-text:
-"इसकी मौजूदगी याद रहती है",
-aura:"ruby"
-},
-
-{
-text:
-"यह शांत है, लेकिन कमजोर नहीं",
-aura:"silver"
-}
-
-]
-
+  options:[
+    {text:"यह व्यक्ति सलीकेदार है",aura:"golden"},
+    {text:"इसमें कुछ अलग है",aura:"black"},
+    {text:"इसकी मौजूदगी याद रहती है",aura:"ruby"},
+    {text:"यह शांत है, लेकिन कमजोर नहीं",aura:"silver"}
+  ]
 }
 
 ];
 
-
-
-/* ==========================
-   AURA DATA
-========================== */
-
+/* AURAS */
 
 const AURAS = {
 
-
 golden:{
-
-nameHindi:
-"गोल्डन ऑरा",
-
-nameEnglish:
-"GOLDEN AURA",
-
-traits:
-"शाही • प्रभावशाली • सलीकेदार",
-
-color:
-"#d4af37",
-
-bg:
-"rgba(212,175,55,.18)",
-
-copy:
-"आपकी मौजूदगी में स्वाभाविक गरिमा और आत्मविश्वास दिखाई देता है। आपको बहुत ज्यादा दिखावे की जरूरत नहीं होती—आपका अंदाज़ खुद आपकी पहचान बनाता है।"
-
+  nameHindi:"गोल्डन ऑरा",
+  nameEnglish:"GOLDEN AURA",
+  traits:"शाही • प्रभावशाली • सलीकेदार",
+  color:"#d4af37",
+  bg:"rgba(212,175,55,.18)",
+  copy:"आपकी मौजूदगी में स्वाभाविक गरिमा और आत्मविश्वास दिखाई देता है। आपका अंदाज़ खुद आपकी पहचान बनाता है।"
 },
-
-
 
 black:{
-
-nameHindi:
-"ब्लैक ऑरा",
-
-nameEnglish:
-"BLACK AURA",
-
-traits:
-"रहस्यमयी • गहरी • यादगार",
-
-color:
-"#a78bfa",
-
-bg:
-"rgba(139,92,246,.18)",
-
-copy:
-"आपकी पहचान शांत लेकिन अलग है। हर कोई आपको तुरंत पूरी तरह समझ नहीं पाता, और शायद यही आपकी मौजूदगी को यादगार बनाता है।"
-
+  nameHindi:"ब्लैक ऑरा",
+  nameEnglish:"BLACK AURA",
+  traits:"रहस्यमयी • गहरी • यादगार",
+  color:"#a78bfa",
+  bg:"rgba(139,92,246,.18)",
+  copy:"आपकी पहचान शांत लेकिन अलग है। हर कोई आपको तुरंत पूरी तरह समझ नहीं पाता, और यही आपको यादगार बनाता है।"
 },
-
-
 
 ruby:{
-
-nameHindi:
-"रूबी ऑरा",
-
-nameEnglish:
-"RUBY AURA",
-
-traits:
-"गर्मजोशी भरी • आकर्षक • आत्मीय",
-
-color:
-"#ff336f",
-
-bg:
-"rgba(255,0,85,.18)",
-
-copy:
-"आपके व्यक्तित्व में सहज गर्मजोशी है। लोग आपके आसपास बहुत औपचारिक महसूस करने के बजाय जल्दी सहज महसूस कर सकते हैं।"
-
+  nameHindi:"रूबी ऑरा",
+  nameEnglish:"RUBY AURA",
+  traits:"गर्मजोशी भरी • आकर्षक • आत्मीय",
+  color:"#ff336f",
+  bg:"rgba(255,0,85,.18)",
+  copy:"आपके व्यक्तित्व में सहज गर्मजोशी है। लोग आपके आसपास जल्दी सहज महसूस कर सकते हैं।"
 },
 
-
-
 silver:{
-
-nameHindi:
-"सिल्वर ऑरा",
-
-nameEnglish:
-"SILVER AURA",
-
-traits:
-"आधुनिक • साफ • संतुलित",
-
-color:
-"#38bdf8",
-
-bg:
-"rgba(6,182,212,.18)",
-
-copy:
-"आपकी पहचान साफ, आधुनिक और संतुलित है। आपका प्रभाव शोर से नहीं बल्कि सादगी और स्पष्टता से आता है।"
-
+  nameHindi:"सिल्वर ऑरा",
+  nameEnglish:"SILVER AURA",
+  traits:"आधुनिक • साफ • संतुलित",
+  color:"#38bdf8",
+  bg:"rgba(6,182,212,.18)",
+  copy:"आपकी पहचान साफ, आधुनिक और संतुलित है। आपका प्रभाव सादगी और स्पष्टता से आता है।"
 }
 
 };
 
-
-
-/* ==========================
-   STATE
-========================== */
-
-
 let quizIndex = 0;
 
-
 let score = {
-
-golden:0,
-
-black:0,
-
-ruby:0,
-
-silver:0
-
+  golden:0,
+  black:0,
+  ruby:0,
+  silver:0
 };
-
 
 let customerName = "";
 
+let activeAura = AURAS.silver;
 
-let activeAura =
-AURAS.silver;
-
-
-let selectedOrder =
-null;
-
-
-
-/* ==========================
-   INIT
-========================== */
-
-
-document
-.getElementById("headerLogo")
-.src =
-CONFIG.LOGO_IMAGE_URL;
-
-
-document
-.getElementById("heroLogo")
-.src =
-CONFIG.LOGO_IMAGE_URL;
-
-
-document
-.getElementById("cardLogo")
-.src =
-CONFIG.LOGO_IMAGE_URL;
-
-
-document
-.getElementById("productImage")
-.src =
-CONFIG.BOTTLE_IMAGE_URL;
-
+let selectedOrder = null;
 
 document
 .getElementById("year")
@@ -2743,9 +1552,7 @@ document
 new Date().getFullYear();
 
 
-
-/* PRODUCT IMAGE ERROR */
-
+/* IMAGE ERROR */
 
 document
 .getElementById("productImage")
@@ -2753,791 +1560,599 @@ document
 "error",
 function(){
 
-const wrap =
-document.getElementById(
-"productImageWrap"
-);
+  const wrap =
+  document.getElementById(
+    "productImageWrap"
+  );
 
-wrap.innerHTML = `
+  wrap.innerHTML = `
 
-<div class="image-error">
+  <div class="image-error">
 
-<div style="font-size:30px">
-🧴
-</div>
+  <div style="font-size:30px">
+  🧴
+  </div>
 
-<strong>
-AURAFRAG product image load नहीं हुई
-</strong>
+  <strong>
+  AURAFRAG product image load नहीं हुई
+  </strong>
 
-<div
-style="
-font-size:11px;
-margin-top:5px;
-">
+  </div>
 
-${CONFIG.BOTTLE_IMAGE_URL}
-
-</div>
-
-</div>
-
-`;
-
+  `;
 }
 
 );
 
 
-
-/* ==========================
-   NAVIGATION
-========================== */
-
+/* NAV */
 
 function showStep(id){
 
-document
-.querySelectorAll(
-".step"
-)
-.forEach(
-el =>
-el.classList.remove(
-"active"
-)
-);
+  document
+  .querySelectorAll(".step")
+  .forEach(
+    el =>
+    el.classList.remove("active")
+  );
 
+  document
+  .getElementById(id)
+  .classList.add("active");
 
-document
-.getElementById(id)
-.classList.add(
-"active"
-);
-
-
-window.scrollTo({
-
-top:0,
-
-behavior:"smooth"
-
-});
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
 }
 
 
-
-/* ==========================
-   START
-========================== */
-
+/* START QUIZ */
 
 function startQuiz(){
 
-quizIndex = 0;
+  quizIndex = 0;
 
+  score = {
+    golden:0,
+    black:0,
+    ruby:0,
+    silver:0
+  };
 
-score = {
+  trackMetaEvent(
+    "AuraQuizStart",
+    "custom"
+  );
 
-golden:0,
+  showStep("quiz");
 
-black:0,
-
-ruby:0,
-
-silver:0
-
-};
-
-
-trackMetaEvent(
-"AuraQuizStart",
-"custom"
-);
-
-
-showStep(
-"quiz"
-);
-
-
-renderQuiz();
+  renderQuiz();
 
 }
 
 
-
-/* ==========================
-   RENDER QUIZ
-========================== */
-
+/* RENDER QUIZ */
 
 function renderQuiz(){
 
-const data =
-QUIZ[quizIndex];
+  const data =
+  QUIZ[quizIndex];
 
+  document
+  .getElementById(
+    "quizCounter"
+  )
+  .textContent =
+  `सवाल ${quizIndex+1} / ${QUIZ.length}`;
 
-document
-.getElementById(
-"quizCounter"
-)
-.textContent =
-`सवाल ${quizIndex+1} / ${QUIZ.length}`;
+  document
+  .getElementById(
+    "progressBar"
+  )
+  .style.width =
+  `${((quizIndex+1)/QUIZ.length)*100}%`;
 
+  trackMetaEvent(
+    "AuraQuizStep",
+    "custom",
+    {
+      step:
+      quizIndex+1
+    }
+  );
 
-document
-.getElementById(
-"progressBar"
-)
-.style.width =
-`${((quizIndex+1)/QUIZ.length)*100}%`;
+  let html = `
 
+  <h2 class="quiz-title">
 
-trackMetaEvent(
-"AuraQuizStep",
-"custom",
-{
-step:
-quizIndex+1
-}
-);
+  ${data.question}
 
+  </h2>
 
-let html = `
+  <div class="quiz-options">
 
-<h2 class="quiz-title">
+  `;
 
-${data.question}
+  data.options.forEach(
+  option => {
 
-</h2>
+    html += `
 
-<div class="quiz-options">
+    <div
+    class="quiz-option"
+    onclick="selectQuiz('${option.aura}')">
 
-`;
+    <div class="dot">
+    </div>
 
+    <div>
+    ${option.text}
+    </div>
 
-data.options.forEach(
-option => {
+    </div>
 
-html += `
+    `;
 
-<div
-class="quiz-option"
-onclick="selectQuiz('${option.aura}')">
+  });
 
-<div class="dot">
-</div>
+  html +=
+  "</div>";
 
-<div>
-${option.text}
-</div>
-
-</div>
-
-`;
-
-}
-);
-
-
-html +=
-"</div>";
-
-
-document
-.getElementById(
-"quizArea"
-)
-.innerHTML =
-html;
+  document
+  .getElementById(
+    "quizArea"
+  )
+  .innerHTML =
+  html;
 
 }
 
 
-
-/* ==========================
-   QUIZ SELECT
-========================== */
-
+/* SELECT QUIZ */
 
 function selectQuiz(aura){
 
-if(
-score[aura] !==
-undefined
-){
+  if(
+    score[aura] !== undefined
+  ){
+    score[aura]++;
+  }
 
-score[aura]++;
+  quizIndex++;
 
-}
+  if(
+    quizIndex <
+    QUIZ.length
+  ){
 
+    renderQuiz();
 
-quizIndex++;
+  } else {
 
+    showStep(
+      "nameStep"
+    );
 
-if(
-quizIndex <
-QUIZ.length
-){
+    setTimeout(
+      () => {
 
-renderQuiz();
+        document
+        .getElementById(
+          "nameInput"
+        )
+        .focus();
 
-}
-else{
+      },
+      250
+    );
 
-showStep(
-"nameStep"
-);
-
-setTimeout(
-() => {
-
-document
-.getElementById(
-"nameInput"
-)
-.focus();
-
-},
-250
-);
-
-}
+  }
 
 }
 
 
-
-/* ==========================
-   NAME
-========================== */
-
+/* NAME */
 
 function submitName(){
 
-const value =
+  const value =
 
-document
-.getElementById(
-"nameInput"
-)
-.value
-.trim();
+  document
+  .getElementById(
+    "nameInput"
+  )
+  .value
+  .trim();
 
+  customerName =
+  value ||
+  "आपका नाम";
 
-customerName =
-value ||
-"आपका नाम";
+  showStep(
+    "loaderStep"
+  );
 
-
-showStep(
-"loaderStep"
-);
-
-
-setTimeout(
-finalResult,
-1000
-);
+  setTimeout(
+    finalResult,
+    1000
+  );
 
 }
 
 
-
-/* ==========================
-   RESULT
-========================== */
-
+/* RESULT */
 
 function finalResult(){
 
-let bestAura =
-"silver";
+  let bestAura =
+  "silver";
 
+  let highest =
+  -1;
 
-let highest =
--1;
+  Object
+  .entries(score)
+  .forEach(
+  ([key,value]) => {
 
+    if(
+      value > highest
+    ){
 
-Object
-.entries(score)
-.forEach(
-([key,value]) => {
+      highest = value;
 
-if(
-value >
-highest
-){
+      bestAura = key;
 
-highest =
-value;
+    }
 
-bestAura =
-key;
+  });
 
-}
+  activeAura =
+  AURAS[bestAura];
 
-}
-);
+  renderResult();
 
+  showStep(
+    "resultStep"
+  );
 
-activeAura =
-AURAS[
-bestAura
-];
+  trackMetaEvent(
+    "ViewContent",
+    "standard",
+    {
+      content_name:
+      activeAura.nameEnglish,
 
+      content_category:
+      "Personalized Attar",
 
-renderResult();
+      value:
+      CONFIG.SINGLE_PRICE,
 
-
-showStep(
-"resultStep"
-);
-
-
-trackMetaEvent(
-"ViewContent",
-"standard",
-{
-
-content_name:
-activeAura.nameEnglish,
-
-content_category:
-"Personalized Attar",
-
-value:
-CONFIG.SINGLE_PRICE,
-
-currency:
-CONFIG.PRODUCT_CURRENCY
-
-}
-);
+      currency:
+      CONFIG.PRODUCT_CURRENCY
+    }
+  );
 
 }
 
 
-
-/* ==========================
-   DRAW RESULT
-========================== */
-
+/* DRAW RESULT */
 
 function renderResult(){
 
-const badge =
-document
-.getElementById(
-"auraBadge"
-);
+  const badge =
+  document
+  .getElementById(
+    "auraBadge"
+  );
 
+  badge.textContent =
+  activeAura.nameHindi;
 
-badge.textContent =
-activeAura.nameHindi;
+  badge.style.color =
+  activeAura.color;
 
+  badge.style.background =
+  activeAura.bg;
 
-badge.style.color =
-activeAura.color;
+  document
+  .getElementById(
+    "resultTitle"
+  )
+  .textContent =
+  `${customerName}, आपकी पहचान ${activeAura.nameEnglish} से सबसे ज्यादा मेल खाती है।`;
 
+  document
+  .getElementById(
+    "resultCopy"
+  )
+  .textContent =
+  activeAura.copy;
 
-badge.style.background =
-activeAura.bg;
+  document
+  .getElementById(
+    "cardName"
+  )
+  .textContent =
+  customerName;
 
-
-
-document
-.getElementById(
-"resultTitle"
-)
-.textContent =
-`${customerName}, आपकी पहचान ${activeAura.nameEnglish} से सबसे ज्यादा मेल खाती है।`;
-
-
-
-document
-.getElementById(
-"resultCopy"
-)
-.textContent =
-activeAura.copy;
-
-
-
-document
-.getElementById(
-"cardName"
-)
-.textContent =
-customerName;
-
-
-
-document
-.getElementById(
-"cardTraits"
-)
-.textContent =
-activeAura.traits;
+  document
+  .getElementById(
+    "cardTraits"
+  )
+  .textContent =
+  activeAura.traits;
 
 }
 
 
-
-/* ==========================
-   ORDER SELECT
-========================== */
-
+/* ORDER SELECT */
 
 function selectOrder(option){
 
-selectedOrder =
-option;
+  selectedOrder =
+  option;
 
+  document
+  .getElementById(
+    "option1"
+  )
+  .classList
+  .toggle(
+    "selected",
+    option === "opt1"
+  );
 
-document
-.getElementById(
-"option1"
-)
-.classList
-.toggle(
-"selected",
-option ===
-"opt1"
-);
+  document
+  .getElementById(
+    "option2"
+  )
+  .classList
+  .toggle(
+    "selected",
+    option === "opt2"
+  );
 
+  document
+  .getElementById(
+    "optionBoth"
+  )
+  .classList
+  .toggle(
+    "selected",
+    option === "both"
+  );
 
-document
-.getElementById(
-"option2"
-)
-.classList
-.toggle(
-"selected",
-option ===
-"opt2"
-);
+  document
+  .getElementById(
+    "selectionWarning"
+  )
+  .style.display =
+  "none";
 
+  let name = "";
 
-document
-.getElementById(
-"optionBoth"
-)
-.classList
-.toggle(
-"selected",
-option ===
-"both"
-);
+  let price = 0;
 
+  if(
+    option === "opt1"
+  ){
 
-document
-.getElementById(
-"selectionWarning"
-)
-.style.display =
-"none";
+    name =
+    "सिग्नेचर विकल्प 01";
 
+    price =
+    CONFIG.SINGLE_PRICE;
 
-let name = "";
+  }
 
-let price = 0;
+  if(
+    option === "opt2"
+  ){
 
+    name =
+    "सिग्नेचर विकल्प 02";
 
-if(
-option ===
-"opt1"
-){
+    price =
+    CONFIG.SINGLE_PRICE;
 
-name =
-"सिग्नेचर विकल्प 01";
+  }
 
-price =
-CONFIG.SINGLE_PRICE;
+  if(
+    option === "both"
+  ){
 
-}
+    name =
+    "दोनों सिग्नेचर विकल्प";
 
+    price =
+    CONFIG.DOUBLE_PRICE;
 
-if(
-option ===
-"opt2"
-){
+  }
 
-name =
-"सिग्नेचर विकल्प 02";
+  const summary =
+  document
+  .getElementById(
+    "summary"
+  );
 
-price =
-CONFIG.SINGLE_PRICE;
+  summary.style.display =
+  "block";
 
-}
+  document
+  .getElementById(
+    "summaryOption"
+  )
+  .textContent =
+  `आपने चुना: ${name}`;
 
+  document
+  .getElementById(
+    "summaryPrice"
+  )
+  .textContent =
+  `कुल: ₹${price}`;
 
-if(
-option ===
-"both"
-){
-
-name =
-"दोनों सिग्नेचर विकल्प";
-
-price =
-CONFIG.DOUBLE_PRICE;
-
-}
-
-
-const summary =
-document
-.getElementById(
-"summary"
-);
-
-
-summary.style.display =
-"block";
-
-
-document
-.getElementById(
-"summaryOption"
-)
-.textContent =
-`आपने चुना: ${name}`;
-
-
-document
-.getElementById(
-"summaryPrice"
-)
-.textContent =
-`कुल: ₹${price}`;
-
-
-trackMetaEvent(
-"ProductOptionSelected",
-"custom",
-{
-
-selected_option:
-name,
-
-value:
-price,
-
-currency:
-CONFIG.PRODUCT_CURRENCY
-
-}
-);
+  trackMetaEvent(
+    "ProductOptionSelected",
+    "custom",
+    {
+      selected_option:name,
+      value:price,
+      currency:
+      CONFIG.PRODUCT_CURRENCY
+    }
+  );
 
 }
 
 
-
-/* ==========================
-   WHATSAPP
-========================== */
-
+/* WHATSAPP */
 
 function checkoutWhatsApp(){
 
-if(
-!selectedOrder
-){
+  if(
+    !selectedOrder
+  ){
 
-const warning =
+    const warning =
 
-document
-.getElementById(
-"selectionWarning"
-);
+    document
+    .getElementById(
+      "selectionWarning"
+    );
 
+    warning.style.display =
+    "block";
 
-warning.style.display =
-"block";
+    warning.scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
 
+    return;
 
-warning.scrollIntoView({
+  }
 
-behavior:"smooth",
+  let optionName = "";
 
-block:"center"
+  let quantity = "";
 
-});
+  let price = 0;
 
+  if(
+    selectedOrder === "opt1"
+  ){
 
-return;
+    optionName =
+    "सिग्नेचर विकल्प 01";
 
-}
+    quantity =
+    "1 Bottle — 15 ML";
 
+    price =
+    CONFIG.SINGLE_PRICE;
 
+  }
 
-let optionName = "";
+  if(
+    selectedOrder === "opt2"
+  ){
 
-let quantity = "";
+    optionName =
+    "सिग्नेचर विकल्प 02";
 
-let price = 0;
+    quantity =
+    "1 Bottle — 15 ML";
 
+    price =
+    CONFIG.SINGLE_PRICE;
 
+  }
 
-if(
-selectedOrder ===
-"opt1"
-){
+  if(
+    selectedOrder === "both"
+  ){
 
-optionName =
-"सिग्नेचर विकल्प 01";
+    optionName =
+    "दोनों सिग्नेचर विकल्प";
 
-quantity =
-"1 Bottle — 15 ML";
+    quantity =
+    "2 Bottles — 15 ML + 15 ML";
 
-price =
-CONFIG.SINGLE_PRICE;
+    price =
+    CONFIG.DOUBLE_PRICE;
 
-}
+  }
 
+  trackMetaEvent(
+    "InitiateCheckout",
+    "standard",
+    {
+      content_name:
+      optionName,
 
+      value:
+      price,
 
-if(
-selectedOrder ===
-"opt2"
-){
+      currency:
+      CONFIG.PRODUCT_CURRENCY,
 
-optionName =
-"सिग्नेचर विकल्प 02";
+      num_items:
+      selectedOrder === "both"
+      ? 2
+      : 1
+    }
+  );
 
-quantity =
-"1 Bottle — 15 ML";
+  trackMetaEvent(
+    "WhatsAppCODIntent",
+    "custom",
+    {
+      aura:
+      activeAura.nameEnglish,
 
-price =
-CONFIG.SINGLE_PRICE;
+      selected_option:
+      optionName,
 
-}
+      value:
+      price
+    }
+  );
 
 
+  const message =
 
-if(
-selectedOrder ===
-"both"
-){
+`मेरा ऑर्डर कन्फर्म कीजिए।
 
-optionName =
-"दोनों सिग्नेचर विकल्प";
+नाम: ${customerName}
 
-quantity =
-"2 Bottles — 15 ML + 15 ML";
+ऑरा: ${activeAura.nameEnglish}
 
-price =
-CONFIG.DOUBLE_PRICE;
+विकल्प: ${optionName}
 
-}
+मात्रा: ${quantity}
 
+कुल: ₹${price}
 
-
-trackMetaEvent(
-"InitiateCheckout",
-"standard",
-{
-
-content_name:
-optionName,
-
-value:
-price,
-
-currency:
-CONFIG.PRODUCT_CURRENCY,
-
-num_items:
-selectedOrder ===
-"both"
-?
-2
-:
-1
-
-}
-);
-
-
-
-trackMetaEvent(
-"WhatsAppCODIntent",
-"custom",
-{
-
-aura:
-activeAura.nameEnglish,
-
-selected_option:
-optionName,
-
-value:
-price
-
-}
-);
-
-
-
-const message =
-
-`नमस्ते AURAFRAG,
-
-मुझे Cash On Delivery पर ऑर्डर करना है।
-
-नाम:
-${customerName}
-
-ऑरा:
-${activeAura.nameEnglish}
-
-चुना गया विकल्प:
-${optionName}
-
-मात्रा:
-${quantity}
-
-कुल कीमत:
-₹${price}
-
-डिलीवरी पता:
-
-पूरा नाम: ${customerName}
-मोबाइल नंबर:
-घर / गली / सोसायटी:
-शहर:
-राज्य:
-पिनकोड:
-
---------------------
 CARD PRINT DETAILS
---------------------
 
-नाम:
-${customerName}
+नाम: ${customerName}
 
-पहचान:
-${activeAura.traits}
-
-कार्ड संख्या:
-1
-
-कृपया मेरा COD ऑर्डर कन्फर्म करें।`;
+पहचान: ${activeAura.traits}`;
 
 
+  const url =
 
-const url =
+  `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
-`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-
-
-window.open(
-url,
-"_blank"
-);
+  window.open(
+    url,
+    "_blank"
+  );
 
 }
 
