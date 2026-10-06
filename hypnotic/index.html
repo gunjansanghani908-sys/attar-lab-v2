@@ -2,1661 +2,528 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-  >
-
-  <title>AURAFRAG | Find Your Signature Attar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>औराफ्रैग | अपनी सिग्नेचर खुशबू खोजें</title>
 
   <!-- =========================================================
        META PIXEL
   ========================================================== -->
-
   <script>
     const META_PIXEL_ID = "1718140289270179";
-
     !function(f,b,e,v,n,t,s){
       if(f.fbq)return;
       n=f.fbq=function(){
-        n.callMethod ?
-          n.callMethod.apply(n,arguments) :
-          n.queue.push(arguments)
+        n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments)
       };
-
       if(!f._fbq)f._fbq=n;
-
-      n.push=n;
-      n.loaded=!0;
-      n.version='2.0';
-      n.queue=[];
-
-      t=b.createElement(e);
-      t.async=!0;
-      t.src=v;
-
+      n.push=n; n.loaded=!0; n.version='2.0'; n.queue=[];
+      t=b.createElement(e); t.async=!0; t.src=v;
       s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s);
-
-    }(
-      window,
-      document,
-      'script',
-      'https://connect.facebook.net/en_US/fbevents.js'
-    );
+    }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
 
     fbq('init', META_PIXEL_ID);
     fbq('track', 'PageView');
   </script>
-
   <noscript>
-    <img
-      height="1"
-      width="1"
-      style="display:none"
-      src="https://www.facebook.com/tr?id=1718140289270179&ev=PageView&noscript=1"
-    >
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1718140289270179&ev=PageView&noscript=1">
   </noscript>
-
 
   <!-- =========================================================
        VERCEL ANALYTICS
   ========================================================== -->
-
   <script>
-    window.va =
-      window.va ||
-      function () {
-        (window.vaq = window.vaq || []).push(arguments);
-      };
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
-
   <script defer src="/_vercel/insights/script.js"></script>
 
-
   <!-- =========================================================
-       FONTS
+       FONTS (देवनागरी + ROYAL CINZEL)
   ========================================================== -->
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
-
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=JetBrains+Mono:wght@400;600;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
-  >
-
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Noto+Sans+Devanagari:wght@400;500;600;700;800;900&family=Rozha+One&display=swap" rel="stylesheet">
 
   <!-- =========================================================
-       TAILWIND
+       TAILWIND & RAZORPAY
   ========================================================== -->
-
   <script src="https://cdn.tailwindcss.com"></script>
-
-
-  <!-- =========================================================
-       RAZORPAY
-  ========================================================== -->
-
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
 
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            deepBg: '#050308',
-            panelBg: '#100b15',
+            deepBg: '#07040a',
+            panelBg: '#120a17',
             goldPrimary: '#e4ae4c',
-            goldLight: '#ffdc83',
+            goldLight: '#ffe6a3',
+            goldDark: '#9c6f21',
             crimson: '#ef1748',
-            wine: '#62001b',
             waGreen: '#25D366'
           },
-
           fontFamily: {
             cinzel: ['Cinzel', 'serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-            hindi: ['Noto Sans Devanagari', 'sans-serif']
+            hindi: ['Noto Sans Devanagari', 'sans-serif'],
+            rozha: ['Rozha One', 'serif']
           }
         }
       }
     }
   </script>
 
-
   <!-- =========================================================
-       CUSTOM CSS
+       CUSTOM LUXURY CSS
   ========================================================== -->
-
   <style>
-
-    *{
-      box-sizing:border-box;
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    body{
-      margin:0;
-      background-color:#050308;
-
-      background-image:
-        radial-gradient(
-          circle at 50% 0%,
-          rgba(239,23,72,.18) 0%,
-          transparent 55%
-        ),
-        radial-gradient(
-          circle at 90% 100%,
-          rgba(228,174,76,.12) 0%,
-          transparent 55%
-        );
-
-      color:#f7f7f7;
-      overflow-x:hidden;
-
-      font-family:
-        "Noto Sans Devanagari",
-        sans-serif;
-
-      -webkit-tap-highlight-color:transparent;
+    body {
+      margin: 0;
+      background-color: #07040a;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(239, 23, 72, 0.22) 0%, transparent 60%),
+        radial-gradient(circle at 85% 90%, rgba(228, 174, 76, 0.16) 0%, transparent 55%),
+        radial-gradient(circle at 15% 70%, rgba(138, 28, 58, 0.14) 0%, transparent 50%);
+      color: #f8f8f8;
+      overflow-x: hidden;
+      font-family: 'Noto Sans Devanagari', sans-serif;
     }
 
-
-    .bg-grid{
-      background-size:34px 34px;
-
-      background-image:
-        linear-gradient(
-          to right,
-          rgba(228,174,76,.03) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          to bottom,
-          rgba(239,23,72,.025) 1px,
-          transparent 1px
-        );
+    /* Ambient Background Texture */
+    .bg-mesh {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(228, 174, 76, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(239, 23, 72, 0.03) 1px, transparent 1px);
     }
 
-
-    .main-panel{
-      background:
-        linear-gradient(
-          155deg,
-          rgba(22,13,29,.98),
-          rgba(8,6,12,.99)
-        );
-
-      border:
-        1px solid rgba(228,174,76,.30);
-
-      box-shadow:
-        0 30px 100px rgba(0,0,0,.9),
-        0 0 50px rgba(239,23,72,.10);
+    .main-panel {
+      background: linear-gradient(165deg, rgba(24, 13, 31, 0.96), rgba(9, 6, 14, 0.99));
+      border: 1px solid rgba(228, 174, 76, 0.35);
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9), 0 0 45px rgba(228, 174, 76, 0.12);
+      backdrop-filter: blur(12px);
     }
 
-
-    .choice-card{
-      border:
-        1px solid rgba(255,255,255,.09);
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(255,255,255,.04),
-          rgba(255,255,255,.01)
-        );
-
-      transition:
-        transform .18s ease,
-        border-color .18s ease,
-        background .18s ease,
-        box-shadow .18s ease;
-
-      cursor:pointer;
+    /* Choice Cards */
+    .choice-card {
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      overflow: hidden;
     }
 
-
-    .choice-card:hover,
-    .choice-card:active{
-      transform:translateY(-2px);
-
-      border-color:
-        rgba(239,23,72,.8);
-
-      box-shadow:
-        0 8px 28px rgba(239,23,72,.12);
+    .choice-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(228, 174, 76, 0.6);
+      box-shadow: 0 10px 30px rgba(228, 174, 76, 0.15);
     }
 
-
-    .choice-card.selected{
-      border-color:#e4ae4c;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(228,174,76,.18),
-          rgba(239,23,72,.08)
-        );
-
-      box-shadow:
-        0 0 22px rgba(228,174,76,.12);
+    .choice-card.selected {
+      border-color: #e4ae4c;
+      background: linear-gradient(180deg, rgba(228, 174, 76, 0.18) 0%, rgba(239, 23, 72, 0.09) 100%);
+      box-shadow: 0 0 25px rgba(228, 174, 76, 0.22), inset 0 0 15px rgba(228, 174, 76, 0.1);
+      transform: translateY(-2px);
     }
 
-
-    .gold-button{
-      background:
-        linear-gradient(
-          135deg,
-          #ffe295,
-          #e4ae4c
-        );
-
-      color:#160e03;
-
-      box-shadow:
-        0 8px 30px rgba(228,174,76,.22);
-
-      transition:
-        transform .15s ease,
-        opacity .15s ease;
+    .choice-card.selected::after {
+      content: '✓';
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 18px;
+      height: 18px;
+      background: linear-gradient(135deg, #ffe6a3, #e4ae4c);
+      color: #120a17;
+      font-size: 11px;
+      font-weight: 900;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-
-    .gold-button:active{
-      transform:scale(.985);
+    /* Gold CTA Button */
+    .gold-button {
+      background: linear-gradient(135deg, #fff0bf 0%, #e4ae4c 50%, #c48b28 100%);
+      color: #1a0f02;
+      box-shadow: 0 10px 30px rgba(228, 174, 76, 0.28);
+      transition: all 0.2s ease;
     }
 
-
-    .wa-button{
-      background:
-        linear-gradient(
-          135deg,
-          #25D366,
-          #128C7E
-        );
-
-      box-shadow:
-        0 8px 30px rgba(37,211,102,.18);
+    .gold-button:hover:not(:disabled) {
+      box-shadow: 0 12px 36px rgba(228, 174, 76, 0.42);
+      transform: translateY(-1px);
     }
 
-
-    .progress-line{
-      transition:width .4s ease;
+    .gold-button:active:not(:disabled) {
+      transform: scale(0.985);
     }
 
-
-    .result-glow{
-      box-shadow:
-        inset 0 0 40px rgba(228,174,76,.04),
-        0 15px 40px rgba(0,0,0,.30);
+    .wa-button {
+      background: linear-gradient(135deg, #2ae771, #1aa34e);
+      box-shadow: 0 10px 30px rgba(37, 211, 102, 0.25);
     }
 
-
-    .fade-in{
-      animation:fadeIn .35s ease forwards;
+    .progress-line {
+      transition: width 0.45s ease-in-out;
     }
 
+    .fade-in {
+      animation: fadeIn 0.35s ease-out forwards;
+    }
 
-    @keyframes fadeIn{
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-      from{
-        opacity:0;
-        transform:translateY(8px);
+    /* Luxury Scent Aura Animation */
+    .aura-ring {
+      animation: pulseAura 2s ease-in-out infinite;
+    }
+
+    @keyframes pulseAura {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(228, 174, 76, 0.2), inset 0 0 15px rgba(228, 174, 76, 0.1);
+        transform: scale(1);
       }
-
-      to{
-        opacity:1;
-        transform:translateY(0);
+      50% {
+        box-shadow: 0 0 50px rgba(228, 174, 76, 0.45), inset 0 0 25px rgba(228, 174, 76, 0.25);
+        transform: scale(1.04);
       }
-
     }
-
-
-    .blend-animation{
-      animation:pulseGlow 1.4s ease-in-out infinite;
-    }
-
-
-    @keyframes pulseGlow{
-
-      0%,100%{
-        box-shadow:
-          0 0 15px rgba(228,174,76,.12);
-      }
-
-      50%{
-        box-shadow:
-          0 0 42px rgba(228,174,76,.32);
-      }
-
-    }
-
   </style>
-
 </head>
 
+<body class="bg-mesh min-h-screen flex justify-center items-center px-3 py-6">
 
-
-<body class="bg-grid min-h-screen flex justify-center px-3 py-5">
-
-
-<div
-  class="
-    main-panel
-    w-full
-    max-w-[620px]
-    rounded-3xl
-    p-5
-    sm:p-7
-    relative
-    overflow-hidden
-  "
->
+<div class="main-panel w-full max-w-[620px] rounded-3xl p-5 sm:p-8 relative overflow-hidden">
 
   <!-- =========================================================
        HEADER
   ========================================================== -->
-
-  <header
-    class="
-      flex
-      items-center
-      justify-between
-      gap-3
-      pb-4
-      mb-5
-      border-b
-      border-goldPrimary/20
-    "
-  >
-
+  <header class="flex items-center justify-between pb-4 mb-5 border-b border-goldPrimary/25">
     <div>
-
-      <div
-        class="
-          font-cinzel
-          text-goldLight
-          font-black
-          tracking-wider
-          text-sm
-        "
-      >
-        AURAFRAG
+      <div class="font-cinzel text-goldLight font-black tracking-widest text-base sm:text-lg flex items-center gap-1.5">
+        <span>AURAFRAG</span>
+        <span class="text-[10px] text-goldPrimary bg-goldPrimary/15 px-2 py-0.5 rounded-full border border-goldPrimary/30 font-hindi font-medium">इत्रशाला</span>
       </div>
-
-      <div
-        class="
-          font-mono
-          text-[9px]
-          text-gray-500
-          tracking-widest
-          mt-0.5
-        "
-      >
-        SIGNATURE SCENT STUDIO
+      <div class="text-[10px] text-gray-400 tracking-wider mt-0.5 font-hindi">
+        सिग्नेचर रॉयल अत्तर स्टूडियो
       </div>
-
     </div>
 
-
-    <div
-      class="
-        text-[10px]
-        text-emerald-400
-        font-bold
-        text-right
-      "
-    >
-      100% ATTAR
-      <br>
-      NO ALCOHOL
+    <div class="text-right">
+      <span class="inline-flex items-center gap-1 bg-emerald-950/70 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold px-2.5 py-1 rounded-full">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        १००% शुद्ध • ०% अल्कोहल
+      </span>
     </div>
-
   </header>
 
-
-
   <!-- =========================================================
-       PROGRESS
+       PROGRESS BAR
   ========================================================== -->
-
   <div class="mb-6">
-
-    <div
-      class="
-        flex
-        justify-between
-        text-[10px]
-        text-gray-500
-        mb-2
-        font-mono
-      "
-    >
-
-      <span>SIGNATURE PROFILE</span>
-
-      <span id="progressText">
-        1 / 3
+    <div class="flex justify-between items-center text-xs text-gray-400 mb-2">
+      <span class="font-bold text-goldLight/90 tracking-wide text-[11px]">आपकी पसंद का विश्लेषण</span>
+      <span id="progressText" class="font-bold text-goldPrimary bg-goldPrimary/10 px-2 py-0.5 rounded text-[11px] border border-goldPrimary/20">
+        चरण १ / ३
       </span>
-
     </div>
 
-
-    <div
-      class="
-        h-1.5
-        rounded-full
-        bg-white/5
-        overflow-hidden
-      "
-    >
-
-      <div
-        id="progressBar"
-        class="
-          progress-line
-          h-full
-          bg-gradient-to-r
-          from-crimson
-          to-goldPrimary
-        "
-        style="width:33%"
-      ></div>
-
+    <div class="h-2 rounded-full bg-white/5 overflow-hidden p-0.5 border border-white/10">
+      <div id="progressBar" class="progress-line h-full rounded-full bg-gradient-to-r from-crimson via-goldPrimary to-goldLight" style="width: 33%"></div>
     </div>
-
   </div>
 
-
-
-
   <!-- =========================================================
-       STEP 1
-       PRESENCE
+       STEP 1: PRESENCE / व्यक्तित्व
   ========================================================== -->
-
-  <section
-    id="stepPresence"
-    class="space-y-5 fade-in"
-  >
-
+  <section id="stepPresence" class="space-y-5 fade-in">
     <div>
-
-      <div
-        class="
-          text-[10px]
-          font-mono
-          text-crimson
-          tracking-widest
-          font-bold
-          mb-2
-        "
-      >
-        // STEP 01 — YOUR PRESENCE
+      <div class="text-[11px] text-crimson font-bold tracking-wider mb-1">
+        ✦ चरण ०१ — आपका मिज़ाज और प्रभाव
       </div>
-
-
-      <h1
-        class="
-          text-xl
-          sm:text-2xl
-          font-black
-          leading-tight
-          text-white
-        "
-      >
+      <h1 class="text-xl sm:text-2xl font-black text-white leading-snug">
         आपकी मौजूदगी कैसी महसूस होनी चाहिए?
       </h1>
-
-
-      <p
-        class="
-          text-xs
-          text-gray-400
-          mt-2
-          leading-relaxed
-        "
-      >
-        उस personality को चुनिए जो आपकी signature fragrance
-        सबसे बेहतर represent करे।
+      <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">
+        उस व्यक्तित्व को चुनें, जो आपकी खुशबू के ज़रिए लोगों के दिलों पर छाप छोड़े।
       </p>
-
     </div>
 
-
-
-    <div
-      class="
-        grid
-        grid-cols-2
-        gap-3
-      "
-    >
-
-      <div
-        class="
-          choice-card
-          presence-card
-          rounded-2xl
-          p-4
-          text-center
-        "
-        onclick="app.selectPresence('MYSTERIOUS',this)"
-      >
-
-        <div class="text-2xl mb-2">
-          🌑
-        </div>
-
-        <div class="font-black text-sm">
-          Mysterious
-        </div>
-
-        <div
-          class="
-            text-[10px]
-            text-gray-500
-            mt-1
-          "
-        >
-          Deep • intriguing
-        </div>
-
+    <div class="grid grid-cols-2 gap-3 sm:gap-4">
+      <!-- Royal -->
+      <div class="choice-card presence-card rounded-2xl p-4 text-center" onclick="app.selectPresence('ROYAL', this)">
+        <div class="text-3xl mb-2">👑</div>
+        <div class="font-bold text-sm text-white">शाही और प्रभावशाली</div>
+        <div class="text-[11px] text-goldLight/70 mt-1">राजसी ठाઠ • महफ़िल की शान</div>
       </div>
 
-
-
-      <div
-        class="
-          choice-card
-          presence-card
-          rounded-2xl
-          p-4
-          text-center
-        "
-        onclick="app.selectPresence('ROYAL',this)"
-      >
-
-        <div class="text-2xl mb-2">
-          👑
-        </div>
-
-        <div class="font-black text-sm">
-          Royal
-        </div>
-
-        <div
-          class="
-            text-[10px]
-            text-gray-500
-            mt-1
-          "
-        >
-          Rich • commanding
-        </div>
-
+      <!-- Mysterious -->
+      <div class="choice-card presence-card rounded-2xl p-4 text-center" onclick="app.selectPresence('MYSTERIOUS', this)">
+        <div class="text-3xl mb-2">🌑</div>
+        <div class="font-bold text-sm text-white">रहस्यमयी और गहरा</div>
+        <div class="text-[11px] text-gray-400 mt-1">गंभीर • सम्मोहक अंदाज़</div>
       </div>
 
-
-
-      <div
-        class="
-          choice-card
-          presence-card
-          rounded-2xl
-          p-4
-          text-center
-        "
-        onclick="app.selectPresence('WARM',this)"
-      >
-
-        <div class="text-2xl mb-2">
-          🔥
-        </div>
-
-        <div class="font-black text-sm">
-          Warm
-        </div>
-
-        <div
-          class="
-            text-[10px]
-            text-gray-500
-            mt-1
-          "
-        >
-          Smooth • inviting
-        </div>
-
+      <!-- Warm -->
+      <div class="choice-card presence-card rounded-2xl p-4 text-center" onclick="app.selectPresence('WARM', this)">
+        <div class="text-3xl mb-2">🔥</div>
+        <div class="font-bold text-sm text-white">उष्ण और दिलकश</div>
+        <div class="text-[11px] text-gray-400 mt-1">मखमली • दिल छूने वाला</div>
       </div>
 
-
-
-      <div
-        class="
-          choice-card
-          presence-card
-          rounded-2xl
-          p-4
-          text-center
-        "
-        onclick="app.selectPresence('FRESH',this)"
-      >
-
-        <div class="text-2xl mb-2">
-          ✨
-        </div>
-
-        <div class="font-black text-sm">
-          Fresh
-        </div>
-
-        <div
-          class="
-            text-[10px]
-            text-gray-500
-            mt-1
-          "
-        >
-          Clean • modern
-        </div>
-
+      <!-- Fresh -->
+      <div class="choice-card presence-card rounded-2xl p-4 text-center" onclick="app.selectPresence('FRESH', this)">
+        <div class="text-3xl mb-2">🌿</div>
+        <div class="font-bold text-sm text-white">ताज़ा और ऊर्जावान</div>
+        <div class="text-[11px] text-gray-400 mt-1">स्वच्छ • आधुनिक अहसास</div>
       </div>
-
     </div>
 
-
-
-    <button
-      id="btnPresence"
-      disabled
-      onclick="app.goToOccasion()"
-      class="
-        gold-button
-        opacity-40
-        cursor-not-allowed
-        w-full
-        rounded-xl
-        py-4
-        font-black
-        text-sm
-      "
-    >
-      आगे बढ़ें ➜
+    <button id="btnPresence" disabled onclick="app.goToOccasion()" class="gold-button opacity-40 cursor-not-allowed w-full rounded-2xl py-4 font-black text-sm tracking-wide mt-2">
+      अगले चरण पर चलें ➜
     </button>
-
   </section>
 
+  <!-- =========================================================
+       STEP 2: OCCASION / अवसर
+  ========================================================== -->
+  <section id="stepOccasion" class="hidden space-y-5">
+    <div>
+      <div class="text-[11px] text-crimson font-bold tracking-wider mb-1">
+        ✦ चरण ०२ — सही मौक़ા
+      </div>
+      <h2 class="text-xl sm:text-2xl font-black text-white leading-snug">
+        आप इस अत्तर को सबसे ज़्यादा कब इस्तेमाल करेंगे?
+      </h2>
+      <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">
+        अवसर के अनुसार अत्तर की गहराई और फैलाव (Projection) का चयन किया जाएगा।
+      </p>
+    </div>
 
+    <div class="grid grid-cols-2 gap-3 sm:gap-4">
+      <!-- Daily -->
+      <div class="choice-card occasion-card rounded-2xl p-4 text-center" onclick="app.selectOccasion('DAILY', this)">
+        <div class="text-3xl mb-2">☀️</div>
+        <div class="font-bold text-sm text-white">दैनिक उपयोग</div>
+        <div class="text-[11px] text-gray-400 mt-1">दफ़्तर और रोज़मर्रा की पहचान</div>
+      </div>
 
+      <!-- Date / Special -->
+      <div class="choice-card occasion-card rounded-2xl p-4 text-center" onclick="app.selectOccasion('DATE', this)">
+        <div class="text-3xl mb-2">🌹</div>
+        <div class="font-bold text-sm text-white">खास मुलाक़ात</div>
+        <div class="text-[11px] text-gray-400 mt-1">नज़दीकी और यादगार लम्हे</div>
+      </div>
+
+      <!-- Functions -->
+      <div class="choice-card occasion-card rounded-2xl p-4 text-center" onclick="app.selectOccasion('FUNCTION', this)">
+        <div class="text-3xl mb-2">🥂</div>
+        <div class="font-bold text-sm text-white">शादी और समारोह</div>
+        <div class="text-[11px] text-gray-400 mt-1">दूर तक महकती दमदार मौजूदगी</div>
+      </div>
+
+      <!-- Evening / Spiritual -->
+      <div class="choice-card occasion-card rounded-2xl p-4 text-center" onclick="app.selectOccasion('EVENING', this)">
+        <div class="text-3xl mb-2">🌙</div>
+        <div class="font-bold text-sm text-white">शाम और सुकून</div>
+        <div class="text-[11px] text-gray-400 mt-1">रूहानी शांति और गंभीर महक</div>
+      </div>
+    </div>
+
+    <button id="btnOccasion" disabled onclick="app.goToNotes()" class="gold-button opacity-40 cursor-not-allowed w-full rounded-2xl py-4 font-black text-sm tracking-wide mt-2">
+      खुशबू के नोट्स चुनें ➜
+    </button>
+  </section>
 
   <!-- =========================================================
-       STEP 2
-       OCCASION
+       STEP 3: SCENT NOTES / पसंदीदा खुशबू
   ========================================================== -->
+  <section id="stepNotes" class="hidden space-y-5">
+    <div>
+      <div class="text-[11px] text-crimson font-bold tracking-wider mb-1">
+        ✦ चरण ०३ — आपकी पसंदीदा नोट्स
+      </div>
+      <h2 class="text-xl sm:text-2xl font-black text-white leading-snug">
+        आपको किस तरह की खुशबू सबसे अधिक भाती है?
+      </h2>
+      <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">
+        इसके आधार पर हमारी इत्रशाला आपके लिए एक आदर्श फॉर्मूला तैयार करेगी।
+      </p>
+    </div>
 
-  <section
-    id="stepOccasion"
-    class="hidden space-y-5"
-  >
+    <div class="grid grid-cols-2 gap-3 sm:gap-4">
+      <!-- Sweet -->
+      <div class="choice-card note-card rounded-2xl p-4 text-center" onclick="app.selectNote('SWEET', this)">
+        <div class="text-3xl mb-2">🍫</div>
+        <div class="font-bold text-sm text-white">मिठास और चॉकलेट</div>
+        <div class="text-[11px] text-gray-400 mt-1">डार्क चॉकलेट और मखमली गरमाहट</div>
+      </div>
+
+      <!-- Floral -->
+      <div class="choice-card note-card rounded-2xl p-4 text-center" onclick="app.selectNote('FLORAL', this)">
+        <div class="text-3xl mb-2">🌺</div>
+        <div class="font-bold text-sm text-white">शाही गुलाब व फूल</div>
+        <div class="text-[11px] text-gray-400 mt-1">दमिश्क गुलाब का नायाब संगम</div>
+      </div>
+
+      <!-- Woody -->
+      <div class="choice-card note-card rounded-2xl p-4 text-center" onclick="app.selectNote('WOODY', this)">
+        <div class="text-3xl mb-2">🪵</div>
+        <div class="font-bold text-sm text-white">शाही चंदन व काष्ठ</div>
+        <div class="text-[11px] text-gray-400 mt-1">सैंडલવુડ અને ઊંડા લક્ઝરી વૂડ્સ</div>
+      </div>
+
+      <!-- Musky -->
+      <div class="choice-card note-card rounded-2xl p-4 text-center" onclick="app.selectNote('MUSKY', this)">
+        <div class="text-3xl mb-2">⚡</div>
+        <div class="font-bold text-sm text-white">सफेद कस्तूरी (Musk)</div>
+        <div class="text-[11px] text-gray-400 mt-1">पवित्र, क्लीन और देर तक टिकने वाली</div>
+      </div>
+    </div>
+
+    <button id="btnNotes" disabled onclick="app.generateBlend()" class="gold-button opacity-40 cursor-not-allowed w-full rounded-2xl py-4 font-black text-sm tracking-wide mt-2">
+      मेरा सिग्नेचर अत्तर तैयार करें ✦
+    </button>
+  </section>
+
+  <!-- =========================================================
+       BLENDING SCREEN (ANIMATED)
+  ========================================================== -->
+  <section id="blendScreen" class="hidden py-14 text-center space-y-6">
+    <div class="aura-ring mx-auto w-24 h-24 rounded-full border-2 border-goldPrimary/60 flex items-center justify-center text-4xl bg-black/60 relative">
+      <span class="animate-spin text-goldLight">✦</span>
+    </div>
 
     <div>
-
-      <div
-        class="
-          text-[10px]
-          font-mono
-          text-crimson
-          tracking-widest
-          font-bold
-          mb-2
-        "
-      >
-        // STEP 02 — THE MOMENT
+      <div class="text-goldLight font-bold text-sm tracking-widest uppercase">
+        आपका सिग्नेचर फॉर्मूला तैयार हो रहा है...
       </div>
-
-
-      <h2
-        class="
-          text-xl
-          font-black
-          text-white
-          leading-tight
-        "
-      >
-        आप इसे सबसे ज़्यादा कब पहनेंगे?
-      </h2>
-
-
-      <p
-        class="
-          text-xs
-          text-gray-400
-          mt-2
-        "
-      >
-        Occasion के हिसाब से fragrance की intensity और character
-        अलग महसूस होती है।
-      </p>
-
+      <div id="blendStatus" class="text-xs text-gray-300 mt-2 font-medium">
+        आपकी पसंद के अनुसार प्राकृतिक अत्तर नोट्स मिलाए जा रहे हैं...
+      </div>
     </div>
-
-
-
-    <div
-      class="
-        grid
-        grid-cols-2
-        gap-3
-      "
-    >
-
-      <div
-        onclick="app.selectOccasion('DAILY',this)"
-        class="
-          occasion-card
-          choice-card
-          rounded-2xl
-          p-4
-        "
-      >
-        <div class="text-xl">
-          ☀️
-        </div>
-
-        <div
-          class="
-            text-sm
-            font-black
-            mt-2
-          "
-        >
-          Daily
-        </div>
-
-        <div
-          class="
-            text-[10px]
-            text-gray-500
-            mt-1
-          "
-        >
-          रोज़ की signature
-        </div>
-      </div>
-
-
-
-      <div
-        onclick="app.selectOccasion('DATE',this)"
-        class="
-          occasion-card
-          choice-card
-          rounded-2xl
-          p-4
-        "
-      >
-        <div class="text-xl">
-          🌹
-        </div>
-
-        <div
-          class="
-            text-sm
-            font-black
-            mt-2
-          "
-        >
-          Date / Meeting
-        </div>
-
-        <div
-          class="
-            text-[10px]
-            text-gray-500
-            mt-1
-          "
-        >
-          Close-range impression
-        </div>
-      </div>
-
-
-
-      <div
-        onclick="app.selectOccasion('FUNCTION',this)"
-        class="
-          occasion-card
-          choice-card
-          rounded-2xl
-          p-4
-        "
-      >
-        <div class="text-xl">
-          🥂
-        </div>
-
-        <div
-          class="
-            text-sm
-            font-black
-            mt-2
-          "
-        >
-          Function
-        </div>
-
-        <div
-          class="
-            text-[10px]
-            text-gray-500
-            mt-1
-          "
-        >
-          Noticeable presence
-        </div>
-      </div>
-
-
-
-      <div
-        onclick="app.selectOccasion('EVENING',this)"
-        class="
-          occasion-card
-          choice-card
-          rounded-2xl
-          p-4
-        "
-      >
-        <div class="text-xl">
-          🌙
-        </div>
-
-        <div
-          class="
-            text-sm
-            font-black
-            mt-2
-          "
-        >
-          Evening
-        </div>
-
-        <div
-          class="
-            text-[10px]
-            text-gray-500
-            mt-1
-          "
-        >
-          Deeper character
-        </div>
-      </div>
-
-    </div>
-
-
-
-    <button
-      id="btnOccasion"
-      disabled
-      onclick="app.goToNotes()"
-      class="
-        gold-button
-        opacity-40
-        cursor-not-allowed
-        w-full
-        rounded-xl
-        py-4
-        font-black
-        text-sm
-      "
-    >
-      खुशबू चुनें ➜
-    </button>
-
   </section>
 
-
-
-
   <!-- =========================================================
-       STEP 3
-       NOTE PREFERENCE
+       RESULT SCREEN
   ========================================================== -->
-
-  <section
-    id="stepNotes"
-    class="hidden space-y-5"
-  >
-
-    <div>
-
-      <div
-        class="
-          text-[10px]
-          font-mono
-          text-crimson
-          tracking-widest
-          font-bold
-          mb-2
-        "
-      >
-        // STEP 03 — SCENT CHARACTER
+  <section id="resultScreen" class="hidden space-y-5">
+    
+    <!-- Result Showcase Box -->
+    <div class="border border-goldPrimary/40 rounded-3xl p-5 sm:p-7 bg-gradient-to-b from-black/60 via-panelBg to-black/80 text-center relative overflow-hidden shadow-2xl">
+      
+      <div class="inline-block px-3 py-1 rounded-full bg-goldPrimary/15 border border-goldPrimary/40 text-goldLight text-[10px] font-bold tracking-widest uppercase">
+        ✦ आपकी विशिष्ट सिग्नेचर पहचान ✦
       </div>
 
+      <div class="text-4xl my-3 text-goldLight">🏺</div>
 
-      <h2
-        class="
-          text-xl
-          font-black
-          text-white
-        "
-      >
-        आपको किस तरह की खुशबू सबसे ज़्यादा पसंद है?
+      <h2 id="resultTitle" class="text-2xl sm:text-3xl font-black text-white font-rozha tracking-wide text-goldLight">
+        दमिश्क वेलवेट अत्तर
       </h2>
 
+      <p id="resultDescription" class="text-xs text-gray-300 mt-2 leading-relaxed max-w-md mx-auto"></p>
 
-      <p
-        class="
-          text-xs
-          text-gray-400
-          mt-2
-        "
-      >
-        आपकी पसंद के आधार पर AuraFrag आपका recommended
-        signature blend तैयार करेगा।
-      </p>
+      <!-- Profile Tags -->
+      <div id="profileTags" class="flex justify-center flex-wrap gap-2 mt-4"></div>
 
+      <!-- Scent Pyramid / Blend List -->
+      <div class="mt-6 border-t border-white/10 pt-4 text-left">
+        <div class="flex justify-between items-center mb-3">
+          <span class="text-[11px] text-goldLight font-bold tracking-wider">अत्तर संरचना (SCENT PYRAMID)</span>
+          <span class="text-[10px] text-gray-400">अनुपात</span>
+        </div>
+
+        <div id="blendList" class="space-y-2.5"></div>
+      </div>
+
+      <div class="mt-4 text-[10px] text-gray-400 border-t border-white/10 pt-3 leading-relaxed">
+        यह मिश्रण आपकी चुनी हुई प्राथमिकताओं के आधार पर तैयार किया गया है। AuraFrag १००% प्राकृतिक और सात्विक अत्तर प्रदान करता है।
+      </div>
     </div>
 
-
-
-    <div
-      class="
-        grid
-        grid-cols-2
-        gap-3
-      "
-    >
-
-      <div
-        onclick="app.selectNote('SWEET',this)"
-        class="
-          note-card
-          choice-card
-          rounded-2xl
-          p-4
-          text-center
-        "
-      >
-        <div class="text-2xl">
-          🍫
-        </div>
-
-        <div
-          class="
-            text-sm
-            font-black
-            mt-2
-          "
-        >
-          Sweet
-        </div>
-
-        <div
-          class="
-            text-[10px]
-            text-gray-500
-          "
-        >
-          Chocolate • soft warmth
-        </div>
-      </div>
-
-
-
-      <div
-        onclick="app.selectNote('FLORAL',this)"
-        class="
-          note-card
-          choice-card
-          rounded-2xl
-          p-4
-          text-center
-        "
-      >
-        <div class="text-2xl">
-          🌹
-        </div>
-
-        <div
-          class="
-            text-sm
-            font-black
-            mt-2
-          "
-        >
-          Floral
-        </div>
-
-        <div
-          class="
-            text-[10px]
-            text-gray-500
-          "
-        >
-          Rose • elegant
-        </div>
-      </div>
-
-
-
-      <div
-        onclick="app.selectNote('WOODY',this)"
-        class="
-          note-card
-          choice-card
-          rounded-2xl
-          p-4
-          text-center
-        "
-      >
-        <div class="text-2xl">
-          🪵
-        </div>
-
-        <div
-          class="
-            text-sm
-            font-black
-            mt-2
-          "
-        >
-          Woody
-        </div>
-
-        <div
-          class="
-            text-[10px]
-            text-gray-500
-          "
-        >
-          Sandal • rich woods
-        </div>
-      </div>
-
-
-
-      <div
-        onclick="app.selectNote('MUSKY',this)"
-        class="
-          note-card
-          choice-card
-          rounded-2xl
-          p-4
-          text-center
-        "
-      >
-        <div class="text-2xl">
-          ⚡
-        </div>
-
-        <div
-          class="
-            text-sm
-            font-black
-            mt-2
-          "
-        >
-          Musky
-        </div>
-
-        <div
-          class="
-            text-[10px]
-            text-gray-500
-          "
-        >
-          Musk • deep finish
-        </div>
-      </div>
-
-    </div>
-
-
-
-    <button
-      id="btnNotes"
-      disabled
-      onclick="app.generateBlend()"
-      class="
-        gold-button
-        opacity-40
-        cursor-not-allowed
-        w-full
-        rounded-xl
-        py-4
-        font-black
-        text-sm
-      "
-    >
-      मेरी Signature Fragrance खोजें ✦
-    </button>
-
-  </section>
-
-
-
-
-  <!-- =========================================================
-       BLENDING SCREEN
-  ========================================================== -->
-
-  <section
-    id="blendScreen"
-    class="
-      hidden
-      py-12
-      text-center
-      space-y-5
-    "
-  >
-
-    <div
-      class="
-        blend-animation
-        mx-auto
-        w-24
-        h-24
-        rounded-full
-        border
-        border-goldPrimary/50
-        flex
-        items-center
-        justify-center
-        text-4xl
-        bg-black/40
-      "
-    >
-      ✦
-    </div>
-
-
-    <div>
-
-      <div
-        class="
-          font-mono
-          text-goldLight
-          font-bold
-          text-sm
-          tracking-widest
-        "
-      >
-        BUILDING YOUR SCENT PROFILE...
-      </div>
-
-
-      <div
-        id="blendStatus"
-        class="
-          text-xs
-          text-gray-400
-          mt-2
-        "
-      >
-        आपकी पसंद को fragrance notes से match किया जा रहा है...
-      </div>
-
-    </div>
-
-  </section>
-
-
-
-
-  <!-- =========================================================
-       RESULT
-  ========================================================== -->
-
-  <section
-    id="resultScreen"
-    class="
-      hidden
-      space-y-4
-    "
-  >
-
-
-    <div
-      class="
-        result-glow
-        border
-        border-goldPrimary/30
-        rounded-2xl
-        p-5
-        bg-black/30
-        text-center
-      "
-    >
-
-      <div
-        class="
-          text-[10px]
-          font-mono
-          text-goldLight
-          tracking-widest
-        "
-      >
-        YOUR AURAFRAG SIGNATURE
-      </div>
-
-
-      <div
-        class="
-          text-3xl
-          mt-3
-        "
-      >
-        ✦
-      </div>
-
-
-      <h2
-        id="resultTitle"
-        class="
-          text-xl
-          sm:text-2xl
-          font-black
-          mt-3
-          text-white
-        "
-      >
-        Noir Signature
-      </h2>
-
-
-      <p
-        id="resultDescription"
-        class="
-          text-xs
-          text-gray-300
-          mt-2
-          leading-relaxed
-          max-w-md
-          mx-auto
-        "
-      ></p>
-
-
-
-      <div
-        id="profileTags"
-        class="
-          flex
-          justify-center
-          flex-wrap
-          gap-2
-          mt-4
-        "
-      ></div>
-
-
-      <div
-        class="
-          mt-5
-          border-t
-          border-white/10
-          pt-4
-          text-left
-        "
-      >
-
-        <div
-          class="
-            text-[10px]
-            text-gray-500
-            mb-3
-            font-bold
-          "
-        >
-          RECOMMENDED BLEND
-        </div>
-
-
-        <div
-          id="blendList"
-          class="space-y-2"
-        ></div>
-
-      </div>
-
-
-      <div
-        class="
-          mt-4
-          text-[10px]
-          text-gray-500
-          leading-relaxed
-          border-t
-          border-white/10
-          pt-3
-        "
-      >
-        यह recommendation आपकी चुनी हुई fragrance preferences
-        पर आधारित है। AuraFrag किसी व्यक्ति के व्यवहार या भावनाओं
-        को नियंत्रित करने का दावा नहीं करता।
-      </div>
-
-    </div>
-
-
-
-
-    <!-- =======================================================
-         OFFER
-    ======================================================== -->
-
-    <div
-      class="
-        border-2
-        border-goldPrimary/35
-        rounded-2xl
-        p-4
-        sm:p-5
-        bg-panelBg
-        space-y-4
-      "
-    >
-
-
-      <div
-        class="
-          flex
-          justify-between
-          items-center
-          gap-3
-          pb-3
-          border-b
-          border-white/10
-        "
-      >
-
+    <!-- =========================================================
+         OFFER & PAYMENT
+    ========================================================== -->
+    <div class="border-2 border-goldPrimary/40 rounded-3xl p-5 bg-panelBg space-y-4 shadow-xl">
+      
+      <!-- Price & Quantity Banner -->
+      <div class="flex justify-between items-center pb-3 border-b border-white/10">
         <div>
-
-          <div
-            class="
-              text-[10px]
-              text-goldLight
-              font-black
-              tracking-wider
-            "
-          >
-            AURAFRAG SIGNATURE ATTAR
+          <div class="text-xs font-black text-goldLight tracking-wider">
+            AURAFRAG सिग्नेचर बॉटल
           </div>
-
-
-          <div
-            class="
-              text-xs
-              text-emerald-400
-              mt-1
-            "
-          >
-            ✓ 15 ML
-            &nbsp; • &nbsp;
-            ✓ Alcohol Free
-            &nbsp; • &nbsp;
-            ✓ Free Delivery
+          <div class="text-[11px] text-emerald-400 font-bold mt-0.5">
+            ✓ 15 ML प्रीमियम ग्लास शीशी • मुफ़्त डिलीवरी
           </div>
-
         </div>
-
 
         <div class="text-right">
-
-          <div
-            class="
-              text-xs
-              text-gray-500
-              line-through
-            "
-          >
-            ₹899
-          </div>
-
-          <div
-            class="
-              text-2xl
-              text-goldLight
-              font-black
-            "
-          >
-            ₹599
-          </div>
-
+          <div class="text-xs text-gray-500 line-through">₹899</div>
+          <div class="text-2xl font-black text-goldLight">₹599</div>
         </div>
-
       </div>
 
-
-
-
-      <!-- PAYMENT MODES -->
-
-      <div class="space-y-2">
-
-        <div
-          class="
-            text-[10px]
-            text-gray-400
-            font-bold
-          "
-        >
-          PAYMENT METHOD
+      <!-- Payment Mode Selection -->
+      <div class="space-y-2.5">
+        <div class="text-[11px] text-gray-300 font-bold">
+          भुगतान का माध्यम चुनें:
         </div>
 
-
-
-        <label
-          id="onlineCard"
-          class="
-            flex
-            justify-between
-            items-center
-            gap-3
-            p-3.5
-            rounded-xl
-            border-2
-            border-goldPrimary
-            bg-goldPrimary/10
-            cursor-pointer
-          "
-        >
-
-          <div
-            class="
-              flex
-              items-center
-              gap-3
-            "
-          >
-
-            <input
-              type="radio"
-              name="payment"
-              value="ONLINE"
-              checked
-              onchange="app.setPayment('ONLINE')"
-            >
-
+        <!-- Online Payment -->
+        <label id="onlineCard" class="flex justify-between items-center gap-3 p-3.5 rounded-2xl border-2 border-goldPrimary bg-goldPrimary/10 cursor-pointer">
+          <div class="flex items-center gap-3">
+            <input type="radio" name="payment" value="ONLINE" checked onchange="app.setPayment('ONLINE')" class="accent-goldPrimary w-4 h-4">
             <div>
-
-              <div
-                class="
-                  text-sm
-                  font-black
-                "
-              >
-                Online Payment
-              </div>
-
-              <div
-                class="
-                  text-[10px]
-                  text-gray-400
-                "
-              >
-                UPI • PhonePe • GPay • Cards
-              </div>
-
+              <div class="text-sm font-black text-white">ऑनलाइन भुगतान (Online Payment)</div>
+              <div class="text-[10px] text-gray-300 mt-0.5">UPI, Google Pay, PhonePe, Paytm, Cards</div>
             </div>
-
           </div>
-
-
-          <div
-            class="
-              text-xs
-              text-emerald-400
-              font-bold
-            "
-          >
-            FAST
-          </div>
-
+          <span class="text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-500/40 font-bold px-2 py-0.5 rounded">
+            फास्ट डिलीवरी
+          </span>
         </label>
 
-
-
-        <label
-          id="codCard"
-          class="
-            flex
-            justify-between
-            items-center
-            gap-3
-            p-3.5
-            rounded-xl
-            border
-            border-white/10
-            bg-black/30
-            cursor-pointer
-          "
-        >
-
-          <div
-            class="
-              flex
-              items-center
-              gap-3
-            "
-          >
-
-            <input
-              type="radio"
-              name="payment"
-              value="COD"
-              onchange="app.setPayment('COD')"
-            >
-
+        <!-- COD -->
+        <label id="codCard" class="flex justify-between items-center gap-3 p-3.5 rounded-2xl border border-white/10 bg-black/40 cursor-pointer">
+          <div class="flex items-center gap-3">
+            <input type="radio" name="payment" value="COD" onchange="app.setPayment('COD')" class="accent-waGreen w-4 h-4">
             <div>
-
-              <div
-                class="
-                  text-sm
-                  font-black
-                "
-              >
-                Cash On Delivery
-              </div>
-
-              <div
-                class="
-                  text-[10px]
-                  text-gray-400
-                "
-              >
-                WhatsApp पर order confirm करें
-              </div>
-
+              <div class="text-sm font-black text-white">कैश ऑन डिलीवरी (COD)</div>
+              <div class="text-[10px] text-gray-400 mt-0.5">सामान मिलने पर नकद भुगतान करें</div>
             </div>
-
           </div>
-
-
-          <div
-            class="
-              text-xs
-              text-gray-400
-              font-bold
-            "
-          >
+          <span class="text-[10px] text-gray-400 font-bold border border-white/10 px-2 py-0.5 rounded">
             COD
-          </div>
-
+          </span>
         </label>
-
       </div>
 
-
-
-
-      <!-- ORDER BUTTON -->
-
-      <button
-        id="orderButton"
-        onclick="app.executeOrder()"
-        class="
-          gold-button
-          w-full
-          py-4
-          rounded-xl
-          font-black
-          text-sm
-        "
-      >
-        <span id="orderButtonText">
-          ₹599 सुरक्षित भुगतान करें ➜
-        </span>
+      <!-- CTA Button -->
+      <button id="orderButton" onclick="app.executeOrder()" class="gold-button w-full py-4 rounded-2xl font-black text-sm tracking-wide">
+        <span id="orderButtonText">₹599 सुरक्षित ऑनलाइन भुगतान करें ➜</span>
       </button>
 
-
-
-      <div
-        class="
-          text-center
-          text-[10px]
-          text-gray-500
-          leading-relaxed
-        "
-      >
-        🔒 Secure Payment
-        &nbsp; • &nbsp;
-        📦 Free Home Delivery
-        &nbsp; • &nbsp;
-        🌿 Alcohol Free Attar
+      <!-- Trust Badges -->
+      <div class="flex justify-around items-center text-center text-[10px] text-gray-400 pt-1">
+        <div>🔒 सुरक्षित पेमेंट</div>
+        <div>📦 फ्री होम डिलीवरी</div>
+        <div>🌿 100% अल्कोहल-मुक्त</div>
+        <div>⏳ २४+ घंटे महक</div>
       </div>
 
-
-
-      <div
-        id="paymentSuccessBox"
-        class="
-          hidden
-          bg-emerald-950/60
-          border
-          border-emerald-500/50
-          rounded-xl
-          p-4
-          text-center
-        "
-      ></div>
+      <div id="paymentSuccessBox" class="hidden bg-emerald-950/80 border border-emerald-500/50 rounded-2xl p-4 text-center"></div>
 
     </div>
 
@@ -1664,1159 +531,434 @@
 
 </div>
 
-
-
 <!-- ===========================================================
-     JAVASCRIPT
+     JAVASCRIPT LOGIC
 ============================================================ -->
-
 <script>
+const RAZORPAY_KEY = "rzp_live_TcnN4bgnhTNHvC";
+const WHATSAPP_NUMBER = "919327938950";
+const ORDER_AMOUNT_INR = 599;
 
-
-/* =============================================================
-   BUSINESS SETTINGS
-============================================================= */
-
-const RAZORPAY_KEY =
-  "rzp_live_TcnN4bgnhTNHvC";
-
-const WHATSAPP_NUMBER =
-  "919327938950";
-
-const ORDER_AMOUNT_INR =
-  599;
-
-
-
-
-/* =============================================================
-   ATTAR NOTES
-============================================================= */
-
+/* NOTES IN DEVANAGARI */
 const NOTES = {
-
-  chocolate:{
-    name:"Dark Chocolate Noir",
-    type:"Warm Sweet",
-    weight:50
+  chocolate: {
+    name: "डार्क चॉकलेट नोयर (Dark Chocolate)",
+    type: "बेस नोट • मीठी और गर्म महक",
+    weight: 50
   },
-
-  rose:{
-    name:"Damascus Rose",
-    type:"Floral Heart",
-    weight:30
+  rose: {
+    name: "शाही दमिश्क गुलाब (Damascus Rose)",
+    type: "हार्ट नोट • मनमोहक महक",
+    weight: 30
   },
-
-  cherish:{
-    name:"Cherish Velvet",
-    type:"Soft Finish",
-    weight:20
+  cherish: {
+    name: "मखमली चेरिश (Velvet Cherish)",
+    type: "शीर्ष नोट • कोमल एहसास",
+    weight: 20
   },
-
-  sandal:{
-    name:"Imperial Sandal",
-    type:"Royal Woody",
-    weight:50
+  sandal: {
+    name: "शाही मैसूर चंदन (Imperial Sandal)",
+    type: "बेस नोट • राजसी और पवित्र काष्ठ",
+    weight: 50
   },
-
-  copper:{
-    name:"Smoked Copper Wood",
-    type:"Deep Woods",
-    weight:30
+  copper: {
+    name: "स्मोक्ड ऊद और काष्ठ (Smoked Wood)",
+    type: "हार्ट नोट • गहरा प्रभाव",
+    weight: 30
   },
-
-  musk:{
-    name:"White Musk",
-    type:"Clean Musk",
-    weight:20
+  musk: {
+    name: "पवित्र सफेद कस्तूरी (White Musk)",
+    type: "बेस नोट • शुद्ध और टिकाऊ फिनिश",
+    weight: 20
   },
-
-  fresh:{
-    name:"Eden Fresh Mist",
-    type:"Fresh Opening",
-    weight:30
+  fresh: {
+    name: "इडेन ताज़गी अर्क (Fresh Mist)",
+    type: "शीर्ष नोट • स्फूर्तिदायक शुरुआत",
+    weight: 30
   }
-
 };
 
-
-
-
-/* =============================================================
-   APP
-============================================================= */
-
-class AuraFragApp{
-
-
-  constructor(){
-
-    this.presence=null;
-
-    this.occasion=null;
-
-    this.note=null;
-
-    this.payment="ONLINE";
-
-    this.result=null;
-
-    this.hasViewContentFired=false;
-
-    this.code=
-      "AF-" +
-      Math.floor(
-        1000 +
-        Math.random()*9000
-      );
-
+class AuraFragApp {
+  constructor() {
+    this.presence = null;
+    this.occasion = null;
+    this.note = null;
+    this.payment = "ONLINE";
+    this.result = null;
+    this.hasViewContentFired = false;
+    this.code = "AF-" + Math.floor(1000 + Math.random() * 9000);
   }
 
-
-
-
-  /* ===========================================================
-     UI HELPERS
-  =========================================================== */
-
-  markSelected(selector,element){
-
-    document
-      .querySelectorAll(selector)
-      .forEach(card=>{
-        card.classList.remove("selected");
-      });
-
+  markSelected(selector, element) {
+    document.querySelectorAll(selector).forEach(card => card.classList.remove("selected"));
     element.classList.add("selected");
-
   }
 
-
-
-  activateButton(id){
-
-    const button=
-      document.getElementById(id);
-
-    button.disabled=false;
-
-    button.classList.remove(
-      "opacity-40",
-      "cursor-not-allowed"
-    );
-
+  activateButton(id) {
+    const button = document.getElementById(id);
+    button.disabled = false;
+    button.classList.remove("opacity-40", "cursor-not-allowed");
   }
 
-
-
-  showStep(hideId,showId){
-
-    document
-      .getElementById(hideId)
-      .classList
-      .add("hidden");
-
-
-    const newSection=
-      document.getElementById(showId);
-
-    newSection
-      .classList
-      .remove("hidden");
-
-    newSection
-      .classList
-      .add("fade-in");
-
-
-    window.scrollTo({
-      top:0,
-      behavior:"smooth"
-    });
-
+  showStep(hideId, showId) {
+    document.getElementById(hideId).classList.add("hidden");
+    const newSection = document.getElementById(showId);
+    newSection.classList.remove("hidden");
+    newSection.classList.add("fade-in");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-
-
-  setProgress(step){
-
-    const percentage={
-      1:33,
-      2:66,
-      3:100
-    };
-
-    document
-      .getElementById("progressBar")
-      .style.width=
-      percentage[step]+"%";
-
-
-    document
-      .getElementById("progressText")
-      .innerText=
-      step+" / 3";
-
+  setProgress(step) {
+    const percentage = { 1: 33, 2: 66, 3: 100 };
+    document.getElementById("progressBar").style.width = percentage[step] + "%";
+    const hindiSteps = { 1: "चरण १ / ३", 2: "चरण २ / ३", 3: "चरण ३ / ३" };
+    document.getElementById("progressText").innerText = hindiSteps[step];
   }
 
-
-
-
-  /* ===========================================================
-     STEP 1
-  =========================================================== */
-
-  selectPresence(value,element){
-
-    this.presence=value;
-
-    this.markSelected(
-      ".presence-card",
-      element
-    );
-
-    this.activateButton(
-      "btnPresence"
-    );
-
+  /* STEP 1 */
+  selectPresence(value, element) {
+    this.presence = value;
+    this.markSelected(".presence-card", element);
+    this.activateButton("btnPresence");
   }
 
-
-
-  goToOccasion(){
-
-    if(!this.presence)return;
-
-
-    if(typeof fbq==="function"){
-
-      fbq(
-        "trackCustom",
-        "AttarQuizStep",
-        {
-          step:1,
-          presence:this.presence
-        }
-      );
-
+  goToOccasion() {
+    if (!this.presence) return;
+    if (typeof fbq === "function") {
+      fbq("trackCustom", "AttarQuizStep", { step: 1, presence: this.presence });
     }
-
-
-    this.showStep(
-      "stepPresence",
-      "stepOccasion"
-    );
-
+    this.showStep("stepPresence", "stepOccasion");
     this.setProgress(2);
-
   }
 
-
-
-
-  /* ===========================================================
-     STEP 2
-  =========================================================== */
-
-  selectOccasion(value,element){
-
-    this.occasion=value;
-
-    this.markSelected(
-      ".occasion-card",
-      element
-    );
-
-    this.activateButton(
-      "btnOccasion"
-    );
-
+  /* STEP 2 */
+  selectOccasion(value, element) {
+    this.occasion = value;
+    this.markSelected(".occasion-card", element);
+    this.activateButton("btnOccasion");
   }
 
-
-
-  goToNotes(){
-
-    if(!this.occasion)return;
-
-
-    if(typeof fbq==="function"){
-
-      fbq(
-        "trackCustom",
-        "AttarQuizStep",
-        {
-          step:2,
-          occasion:this.occasion
-        }
-      );
-
+  goToNotes() {
+    if (!this.occasion) return;
+    if (typeof fbq === "function") {
+      fbq("trackCustom", "AttarQuizStep", { step: 2, occasion: this.occasion });
     }
-
-
-    this.showStep(
-      "stepOccasion",
-      "stepNotes"
-    );
-
+    this.showStep("stepOccasion", "stepNotes");
     this.setProgress(3);
-
   }
 
-
-
-
-  /* ===========================================================
-     STEP 3
-  =========================================================== */
-
-  selectNote(value,element){
-
-    this.note=value;
-
-    this.markSelected(
-      ".note-card",
-      element
-    );
-
-    this.activateButton(
-      "btnNotes"
-    );
-
+  /* STEP 3 */
+  selectNote(value, element) {
+    this.note = value;
+    this.markSelected(".note-card", element);
+    this.activateButton("btnNotes");
   }
 
+  /* BLEND GENERATION */
+  generateBlend() {
+    if (!this.note) return;
 
-
-
-  /* ===========================================================
-     GENERATE RESULT
-  =========================================================== */
-
-  generateBlend(){
-
-    if(!this.note)return;
-
-
-    if(typeof fbq==="function"){
-
-      fbq(
-        "trackCustom",
-        "AttarQuizCompleted",
-        {
-          presence:this.presence,
-          occasion:this.occasion,
-          note:this.note
-        }
-      );
-
+    if (typeof fbq === "function") {
+      fbq("trackCustom", "AttarQuizCompleted", {
+        presence: this.presence,
+        occasion: this.occasion,
+        note: this.note
+      });
     }
 
+    document.getElementById("stepNotes").classList.add("hidden");
+    document.getElementById("blendScreen").classList.remove("hidden");
 
-    document
-      .getElementById("stepNotes")
-      .classList
-      .add("hidden");
+    setTimeout(() => {
+      document.getElementById("blendStatus").innerText = "शीर्ष, हृदय और आधार (Base) नोट्स का अनुपात संतुलित किया जा रहा है...";
+    }, 700);
 
+    setTimeout(() => {
+      document.getElementById("blendStatus").innerText = "आपका व्यक्तिगत अत्तर प्रोफाइल तैयार है!";
+    }, 1400);
 
-    document
-      .getElementById("blendScreen")
-      .classList
-      .remove("hidden");
-
-
-    setTimeout(()=>{
-
-      document
-        .getElementById("blendStatus")
-        .innerText=
-        "Base और heart notes चुने जा रहे हैं...";
-
-    },700);
-
-
-    setTimeout(()=>{
-
-      document
-        .getElementById("blendStatus")
-        .innerText=
-        "आपका signature profile तैयार है।";
-
-    },1400);
-
-
-    setTimeout(()=>{
-
+    setTimeout(() => {
       this.calculateResult();
-
       this.renderResult();
-
-    },2100);
-
+    }, 2000);
   }
 
+  /* RESULT LOGIC */
+  calculateResult() {
+    let blend = [];
+    let title = "";
+    let description = "";
 
-
-
-  /* ===========================================================
-     RESULT LOGIC
-  =========================================================== */
-
-  calculateResult(){
-
-    let blend=[];
-
-    let title="";
-
-    let description="";
-
-
-    /* SWEET */
-
-    if(this.note==="SWEET"){
-
-      blend=[
-        NOTES.chocolate,
-        NOTES.rose,
-        NOTES.musk
-      ];
-
-      title=
-        "NOIR CHOCOLATE SIGNATURE";
-
-      description=
-        "एक warm और deep profile जिसमें dark chocolate की richness, rose की softness और musk की clean finishing मिलती है।";
-
+    if (this.note === "SWEET") {
+      blend = [NOTES.chocolate, NOTES.rose, NOTES.musk];
+      title = "नोयर चॉकलेट सिग्नेचर (Noir Chocolate)";
+      description = "एक बेहद दिलकश और गहरा अत्तर, जिसमें डार्क चॉकलेट की मिठास, दमिश्क गुलाब की नज़ाकत और शुद्ध कस्तूरी का मखमली ठहराव मिलता है।";
+    } else if (this.note === "FLORAL") {
+      blend = [NOTES.rose, NOTES.chocolate, NOTES.cherish];
+      title = "दमिश्क वेलवेट रोज़ (Damascus Velvet)";
+      description = "शाही गुलाब के दीवानों के लिए एक नफ़ीस खुशबू, जिसमें फूलों की ताज़गी के साथ हल्की मिठास का नायाब मेल है।";
+    } else if (this.note === "WOODY") {
+      blend = [NOTES.sandal, NOTES.copper, NOTES.musk];
+      title = "इम्पीरियल मैसूर वुड (Imperial Sandal)";
+      description = "शुद्ध चंदन और कीमती ऊद की काष्ठ-प्रधान गहराई। एक गंभीर, राजसी और परिपक्व व्यक्तित्व का प्रतीक।";
+    } else {
+      blend = [NOTES.musk, NOTES.sandal, NOTES.fresh];
+      title = "व्हाइट मस्क रिज़र्व (White Musk Reserve)";
+      description = "सफेद कस्तूरी और चंदन का संतुलित व सौम्य संगम। एक ऐसी खुशबू जो बहुत हल्की होने के बावजूद हर किसी का ध्यान खींचती है।";
     }
 
-
-
-    /* FLORAL */
-
-    else if(this.note==="FLORAL"){
-
-      blend=[
-        NOTES.rose,
-        NOTES.chocolate,
-        NOTES.cherish
-      ];
-
-      title=
-        "DAMASCUS VELVET";
-
-      description=
-        "Floral character पसंद करने वालों के लिए rose-forward profile, जिसमें warm और soft notes इसे साधारण floral fragrance से अलग बनाते हैं।";
-
-    }
-
-
-
-    /* WOODY */
-
-    else if(this.note==="WOODY"){
-
-      blend=[
-        NOTES.sandal,
-        NOTES.copper,
-        NOTES.musk
-      ];
-
-      title=
-        "IMPERIAL WOOD";
-
-      description=
-        "Sandalwood और darker woods पर आधारित rich profile। Royal, grounded और mature fragrance पसंद करने वालों के लिए।";
-
-    }
-
-
-
-    /* MUSKY */
-
-    else{
-
-      blend=[
-        NOTES.musk,
-        NOTES.sandal,
-        NOTES.fresh
-      ];
-
-      title=
-        "WHITE MUSK RESERVE";
-
-      description=
-        "Clean musk, sandal और fresh opening का balanced combination। Subtle लेकिन distinctly recognizable profile।";
-
-    }
-
-
-
-    /* Presence can slightly modify text */
-
-    const presenceText={
-
-      MYSTERIOUS:
-        "आपने Mysterious presence चुनी है, इसलिए profile को deeper character की ओर रखा गया है।",
-
-      ROYAL:
-        "आपने Royal presence चुनी है, इसलिए blend में rich और refined character रखा गया है।",
-
-      WARM:
-        "आपने Warm presence चुनी है, इसलिए blend को smooth और comfortable direction दी गई है।",
-
-      FRESH:
-        "आपने Fresh presence चुनी है, इसलिए profile को clean और modern feel दिया गया है।"
-
+    const presenceMap = {
+      MYSTERIOUS: "आपने रहस्यमयी व्यक्तित्व चुना है, इसलिए इस मिश्रण में गहरे बेस नोट्स को प्राथमिकता दी गई है।",
+      ROYAL: "आपने शाही व्यक्तित्व चुना है, इसलिए इसमें राजसी और परिष्कृत नोट्स का अनुपात बढ़ाया गया है।",
+      WARM: "आपने उष्ण और दिलकश मिज़ाज चुना है, इसलिए खुशबू में कोमलता और नज़ाकत का विशेष ध्यान रखा गया है।",
+      FRESH: "आपने ताज़ा व ऊर्जावान मिज़ाज चुना है, इसलिए इसमें स्फूर्तिदायक और स्वच्छ नोट्स जोड़े गए हैं।"
     };
 
+    description += " " + presenceMap[this.presence];
 
-    description +=
-      " " +
-      presenceText[this.presence];
-
-
-    this.result={
-      title,
-      description,
-      blend
-    };
-
+    this.result = { title, description, blend };
   }
 
+  /* RENDER RESULT */
+  renderResult() {
+    document.getElementById("blendScreen").classList.add("hidden");
+    const resultScreen = document.getElementById("resultScreen");
+    resultScreen.classList.remove("hidden");
+    resultScreen.classList.add("fade-in");
 
+    document.getElementById("resultTitle").innerText = this.result.title;
+    document.getElementById("resultDescription").innerText = this.result.description;
 
+    /* Tags in Devanagari */
+    const tags = document.getElementById("profileTags");
+    tags.innerHTML = "";
 
-  /* ===========================================================
-     RENDER RESULT
-  =========================================================== */
+    const tagHindi = {
+      MYSTERIOUS: "रहस्यमयी",
+      ROYAL: "शाही",
+      WARM: "उष्ण",
+      FRESH: "ताज़ा",
+      DAILY: "दैनिक उपयोग",
+      DATE: "खास मुलाक़ात",
+      FUNCTION: "समारोह",
+      EVENING: "शाम व सुकून",
+      SWEET: "चॉकलेट / स्वीट",
+      FLORAL: "गुलाब / फ्लोरल",
+      WOODY: "चंदन / वूडी",
+      MUSKY: "कस्तूरी / मस्क"
+    };
 
-  renderResult(){
-
-    document
-      .getElementById("blendScreen")
-      .classList
-      .add("hidden");
-
-
-    const resultScreen=
-      document.getElementById(
-        "resultScreen"
-      );
-
-    resultScreen
-      .classList
-      .remove("hidden");
-
-    resultScreen
-      .classList
-      .add("fade-in");
-
-
-
-    document
-      .getElementById("resultTitle")
-      .innerText=
-      this.result.title;
-
-
-
-    document
-      .getElementById(
-        "resultDescription"
-      )
-      .innerText=
-      this.result.description;
-
-
-
-    /* Tags */
-
-    const tags=
-      document.getElementById(
-        "profileTags"
-      );
-
-
-    tags.innerHTML="";
-
-
-    [
-      this.presence,
-      this.occasion,
-      this.note
-    ].forEach(item=>{
-
-      const span=
-        document.createElement("span");
-
-      span.className=
-        "text-[10px] px-3 py-1.5 rounded-full border border-goldPrimary/30 bg-goldPrimary/5 text-goldLight font-bold";
-
-      span.innerText=item;
-
+    [this.presence, this.occasion, this.note].forEach(item => {
+      const span = document.createElement("span");
+      span.className = "text-[11px] px-3 py-1 rounded-full border border-goldPrimary/40 bg-goldPrimary/10 text-goldLight font-bold";
+      span.innerText = tagHindi[item] || item;
       tags.appendChild(span);
-
     });
 
+    /* Blend List */
+    const list = document.getElementById("blendList");
+    list.innerHTML = "";
 
-
-    /* Blend list */
-
-    const list=
-      document.getElementById(
-        "blendList"
-      );
-
-
-    list.innerHTML="";
-
-
-    this.result.blend.forEach(
-      (item,index)=>{
-
-        const percentages=[
-          50,
-          30,
-          20
-        ];
-
-        const row=
-          document.createElement("div");
-
-
-        row.className=
-          "flex items-center justify-between gap-3 p-3 rounded-xl bg-black/40 border border-white/10";
-
-
-        row.innerHTML=`
-
-          <div>
-
-            <div class="text-xs font-black text-white">
-              ${item.name}
-            </div>
-
-            <div class="text-[10px] text-gray-500">
-              ${item.type}
-            </div>
-
-          </div>
-
-
-          <div class="text-xs font-mono text-goldLight font-bold">
-            ${percentages[index]}%
-          </div>
-
-        `;
-
-
-        list.appendChild(row);
-
-      }
-    );
-
-
-
-    /* Meta ViewContent */
-
-    if(
-      !this.hasViewContentFired &&
-      typeof fbq==="function"
-    ){
-
-      fbq(
-        "track",
-        "ViewContent",
-        {
-
-          content_name:
-            this.result.title,
-
-          content_category:
-            "Signature Attar",
-
-          content_ids:[
-            this.code
-          ],
-
-          content_type:
-            "product",
-
-          value:
-            ORDER_AMOUNT_INR,
-
-          currency:
-            "INR"
-
-        }
-      );
-
-
-      this.hasViewContentFired=true;
-
-    }
-
-
-
-    window.scrollTo({
-      top:0,
-      behavior:"smooth"
+    const percentages = [50, 30, 20];
+    this.result.blend.forEach((item, index) => {
+      const row = document.createElement("div");
+      row.className = "flex items-center justify-between gap-3 p-3 rounded-2xl bg-black/50 border border-white/10";
+      row.innerHTML = `
+        <div>
+          <div class="text-xs font-bold text-white">${item.name}</div>
+          <div class="text-[10px] text-gray-400 mt-0.5">${item.type}</div>
+        </div>
+        <div class="text-xs font-mono text-goldLight font-black bg-goldPrimary/15 px-2.5 py-1 rounded-lg border border-goldPrimary/20">
+          ${percentages[index]}%
+        </div>
+      `;
+      list.appendChild(row);
     });
 
+    /* Meta Pixel ViewContent */
+    if (!this.hasViewContentFired && typeof fbq === "function") {
+      fbq("track", "ViewContent", {
+        content_name: this.result.title,
+        content_category: "Signature Attar",
+        content_ids: [this.code],
+        content_type: "product",
+        value: ORDER_AMOUNT_INR,
+        currency: "INR"
+      });
+      this.hasViewContentFired = true;
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  /* PAYMENT SWITCH */
+  setPayment(mode) {
+    this.payment = mode;
+    const online = document.getElementById("onlineCard");
+    const cod = document.getElementById("codCard");
+    const button = document.getElementById("orderButton");
+    const text = document.getElementById("orderButtonText");
 
-
-
-  /* ===========================================================
-     PAYMENT MODE
-  =========================================================== */
-
-  setPayment(mode){
-
-    this.payment=mode;
-
-
-    const online=
-      document.getElementById(
-        "onlineCard"
-      );
-
-    const cod=
-      document.getElementById(
-        "codCard"
-      );
-
-    const button=
-      document.getElementById(
-        "orderButton"
-      );
-
-    const text=
-      document.getElementById(
-        "orderButtonText"
-      );
-
-
-
-    if(mode==="ONLINE"){
-
-      online.className=
-        "flex justify-between items-center gap-3 p-3.5 rounded-xl border-2 border-goldPrimary bg-goldPrimary/10 cursor-pointer";
-
-      cod.className=
-        "flex justify-between items-center gap-3 p-3.5 rounded-xl border border-white/10 bg-black/30 cursor-pointer";
-
-      button.className=
-        "gold-button w-full py-4 rounded-xl font-black text-sm";
-
-      text.innerText=
-        "₹599 सुरक्षित भुगतान करें ➜";
-
+    if (mode === "ONLINE") {
+      online.className = "flex justify-between items-center gap-3 p-3.5 rounded-2xl border-2 border-goldPrimary bg-goldPrimary/10 cursor-pointer";
+      cod.className = "flex justify-between items-center gap-3 p-3.5 rounded-2xl border border-white/10 bg-black/40 cursor-pointer";
+      button.className = "gold-button w-full py-4 rounded-2xl font-black text-sm tracking-wide";
+      text.innerText = "₹599 सुरक्षित ऑनलाइन भुगतान करें ➜";
+    } else {
+      cod.className = "flex justify-between items-center gap-3 p-3.5 rounded-2xl border-2 border-waGreen bg-emerald-950/40 cursor-pointer";
+      online.className = "flex justify-between items-center gap-3 p-3.5 rounded-2xl border border-white/10 bg-black/40 cursor-pointer";
+      button.className = "wa-button w-full py-4 rounded-2xl font-black text-sm tracking-wide text-white";
+      text.innerText = "व्हाट्सएप पर COD ऑर्डर कन्फर्म करें ➜";
     }
-
-
-
-    else{
-
-      cod.className=
-        "flex justify-between items-center gap-3 p-3.5 rounded-xl border-2 border-waGreen bg-emerald-950/30 cursor-pointer";
-
-      online.className=
-        "flex justify-between items-center gap-3 p-3.5 rounded-xl border border-white/10 bg-black/30 cursor-pointer";
-
-      button.className=
-        "wa-button w-full py-4 rounded-xl font-black text-sm text-white";
-
-      text.innerText=
-        "WhatsApp पर COD Order करें ➜";
-
-    }
-
   }
 
-
-
-
-  /* ===========================================================
-     EXECUTE ORDER
-  =========================================================== */
-
-  executeOrder(){
-
-
-    if(typeof fbq==="function"){
-
-      fbq(
-        "track",
-        "InitiateCheckout",
-        {
-
-          content_name:
-            this.result.title,
-
-          content_category:
-            "Signature Attar",
-
-          content_ids:[
-            this.code
-          ],
-
-          content_type:
-            "product",
-
-          value:
-            ORDER_AMOUNT_INR,
-
-          currency:
-            "INR",
-
-          num_items:1,
-
-          payment_method:
-            this.payment
-
-        }
-      );
-
+  /* ORDER EXECUTION */
+  executeOrder() {
+    if (typeof fbq === "function") {
+      fbq("track", "InitiateCheckout", {
+        content_name: this.result.title,
+        content_category: "Signature Attar",
+        content_ids: [this.code],
+        content_type: "product",
+        value: ORDER_AMOUNT_INR,
+        currency: "INR",
+        num_items: 1,
+        payment_method: this.payment
+      });
     }
 
-
-
-    if(
-      this.payment==="ONLINE"
-    ){
-
+    if (this.payment === "ONLINE") {
       this.startRazorpay();
-
-    }
-
-    else{
-
+    } else {
       this.startCOD();
-
     }
-
   }
 
-
-
-
-  /* ===========================================================
-     RAZORPAY
-  =========================================================== */
-
-  startRazorpay(){
-
-
-    const options={
-
-      key:
-        RAZORPAY_KEY,
-
-      amount:
-        ORDER_AMOUNT_INR*100,
-
-      currency:
-        "INR",
-
-      name:
-        "AURAFRAG",
-
-      description:
-        this.result.title +
-        " | 15 ML Attar",
-
-      theme:{
-
-        color:
-          "#e4ae4c"
-
-      },
-
-
-
-      handler:(response)=>{
-
-
-        /*
-          IMPORTANT:
-
-          Production environmentમાં
-          Razorpay payment signature backend પરથી
-          verify કરવી સૌથી સારી રીત છે.
-
-          હાલમાં આ client success callback છે.
-        */
-
-
-        if(
-          typeof fbq==="function"
-        ){
-
-          fbq(
-            "trackCustom",
-            "RazorpayClientSuccess",
-            {
-
-              value:
-                ORDER_AMOUNT_INR,
-
-              currency:
-                "INR",
-
-              payment_id:
-                response
-                  .razorpay_payment_id
-
-            }
-          );
-
+  /* RAZORPAY INTEGRATION */
+  startRazorpay() {
+    const options = {
+      key: RAZORPAY_KEY,
+      amount: ORDER_AMOUNT_INR * 100,
+      currency: "INR",
+      name: "AURAFRAG",
+      description: this.result.title + " | 15 ML अत्तर",
+      theme: { color: "#e4ae4c" },
+      handler: (response) => {
+        if (typeof fbq === "function") {
+          fbq("trackCustom", "RazorpayClientSuccess", {
+            value: ORDER_AMOUNT_INR,
+            currency: "INR",
+            payment_id: response.razorpay_payment_id
+          });
         }
 
+        const message = 
+`नमस्ते AURAFRAG टीम 🙏
 
+मैंने अपनी सिग्नेचर अत्तर बॉटल के लिए ₹${ORDER_AMOUNT_INR} का ऑनलाइन भुगतान कर दिया है।
 
-        const message=
-`नमस्ते AURAFRAG 👋
-
-मैंने अपने Signature Attar के लिए ₹${ORDER_AMOUNT_INR} का ऑनलाइन भुगतान कर दिया है।
-
-✅ Payment ID:
+✅ पेमेंट आईडी (Payment ID):
 ${response.razorpay_payment_id}
 
-✦ Signature Profile:
+✦ अत्तर प्रोफाइल:
 ${this.result.title}
 
-✦ Profile Code:
+✦ प्रोफाइल कोड:
 ${this.code}
 
-💰 Amount:
+💰 राशि:
 ₹${ORDER_AMOUNT_INR}
 
-📦 Delivery Details:
+📦 मेरा डिलीवरी पता (Address):
 
-पूरा नाम:
+नाम:
 मोबाइल नंबर:
-घर / गली / सोसायटी:
-शहर / गाँव:
+मकान / फ्लैट नंबर व गली:
+शहर / कस्बा:
 राज्य:
 पिनकोड:
 
-कृपया मेरा order confirm कर दें।`;
+कृपया मेरा ऑर्डर कन्फर्म करें। धन्यवाद!`;
 
+        const redirect = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
 
-
-        const redirect=
-          "https://wa.me/" +
-          WHATSAPP_NUMBER +
-          "?text=" +
-          encodeURIComponent(
-            message
-          );
-
-
-
-        document
-          .getElementById(
-            "orderButton"
-          )
-          .classList
-          .add("hidden");
-
-
-
-        const successBox=
-          document.getElementById(
-            "paymentSuccessBox"
-          );
-
-
-        successBox
-          .classList
-          .remove("hidden");
-
-
-        successBox.innerHTML=`
-
-          <div class="text-2xl mb-2">
-            ✓
-          </div>
-
-          <div class="font-black text-white">
-            Payment received
-          </div>
-
-          <div class="text-xs text-gray-300 mt-1">
-            अब अपना delivery address भेजें।
-          </div>
-
-          <a
-            href="${redirect}"
-            class="
-              wa-button
-              block
-              mt-4
-              py-3
-              rounded-xl
-              font-black
-              text-sm
-              text-white
-            "
-          >
-            WhatsApp पर Address भेजें ➜
+        document.getElementById("orderButton").classList.add("hidden");
+        const successBox = document.getElementById("paymentSuccessBox");
+        successBox.classList.remove("hidden");
+        successBox.innerHTML = `
+          <div class="text-3xl mb-1">🎉</div>
+          <div class="font-black text-white text-base">भुगतान सफल रहा!</div>
+          <div class="text-xs text-gray-300 mt-1">अब केवल अपना डिलीवरी पता व्हाट्सएप पर साझा करें।</div>
+          <a href="${redirect}" class="wa-button block mt-3 py-3 rounded-xl font-black text-xs text-white">
+            व्हाट्सएप पर पता भेजें ➜
           </a>
-
         `;
 
-
-        setTimeout(()=>{
-
-          window.location.href=
-            redirect;
-
-        },1500);
-
+        setTimeout(() => {
+          window.location.href = redirect;
+        }, 1500);
       }
-
     };
 
-
-
-    const razorpay=
-      new Razorpay(options);
-
-
-
-    razorpay.on(
-      "payment.failed",
-      function(response){
-
-        alert(
-          "Payment complete नहीं हुआ। कृपया दोबारा कोशिश करें।"
-        );
-
-      }
-    );
-
-
-
+    const razorpay = new Razorpay(options);
+    razorpay.on("payment.failed", () => {
+      alert("भुगतान पूरा नहीं हो सका। कृपया पुनः प्रयास करें।");
+    });
     razorpay.open();
-
   }
 
-
-
-
-  /* ===========================================================
-     COD
-  =========================================================== */
-
-  startCOD(){
-
-
-    if(
-      typeof fbq==="function"
-    ){
-
-      fbq(
-        "track",
-        "Lead",
-        {
-
-          content_name:
-            this.result.title,
-
-          content_category:
-            "WhatsApp COD",
-
-          content_ids:[
-            this.code
-          ],
-
-          value:
-            ORDER_AMOUNT_INR,
-
-          currency:
-            "INR"
-
-        }
-      );
-
+  /* COD INTEGRATION */
+  startCOD() {
+    if (typeof fbq === "function") {
+      fbq("track", "Lead", {
+        content_name: this.result.title,
+        content_category: "WhatsApp COD",
+        content_ids: [this.code],
+        value: ORDER_AMOUNT_INR,
+        currency: "INR"
+      });
     }
 
+    const blendText = this.result.blend.map(item => "• " + item.name).join("\n");
 
+    const message = 
+`नमस्ते AURAFRAG टीम 🙏
 
-    const blendText=
-      this.result.blend
-      .map(
-        item=>"• "+item.name
-      )
-      .join("\n");
+मुझे अपना सिग्नेचर अत्तर कैश ऑन डिलीवरी (COD) पर ऑर्डर करना है।
 
-
-
-    const message=
-`नमस्ते AURAFRAG 👋
-
-मुझे अपना Signature Attar Cash On Delivery पर order करना है।
-
-✦ Signature Profile:
+✦ अत्तर प्रोफाइल:
 ${this.result.title}
 
-✦ Profile Code:
+✦ प्रोफाइल कोड:
 ${this.code}
 
-Fragrance Notes:
+अत्तर की बनावट:
 ${blendText}
 
-💰 Price:
+💰 कुल कीमत:
 ₹${ORDER_AMOUNT_INR}
 
-🚚 Delivery:
-FREE
+🚚 डिलीवरी:
+मुफ़्त (FREE)
 
-📦 मेरा Address:
+📦 मेरा डिलीवरी पता (Address):
 
-पूरा नाम:
+नाम:
 मोबाइल नंबर:
-घर / गली / सोसायटी:
-शहर / गाँव:
+मकान / फ्लैट नंबर व गली:
+शहर / कस्बा:
 राज्य:
 पिनकोड:
 
-कृपया मेरा COD order confirm करें।`;
+कृपया मेरा COD ऑर्डर कन्फर्म करें।`;
 
-
-
-    const url=
-      "https://wa.me/" +
-      WHATSAPP_NUMBER +
-      "?text=" +
-      encodeURIComponent(
-        message
-      );
-
-
-
-    window.location.href=
-      url;
-
+    const url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
+    window.location.href = url;
   }
-
 }
 
-
-
-
-/* =============================================================
-   START
-============================================================= */
-
-const app=
-  new AuraFragApp();
-
-
+const app = new AuraFragApp();
 </script>
-
 
 </body>
 </html>
